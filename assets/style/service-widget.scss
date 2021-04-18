@@ -1,0 +1,611 @@
+.service-widget {
+  position: relative;
+  top: 170px;
+  @media (max-width: 425px) {
+    top: 180px;
+  }
+}
+
+.service-widget-card {
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  background: #ffffff;
+  box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+  border-radius: 20px;
+  position: relative;
+  @media (max-width: 600px) {
+    height: auto;
+    min-height: 200px;
+  }
+}
+
+.Container {
+  max-width: 1440px;
+  display: block !important;
+  padding: 0 32px;
+  margin: auto !important;
+}
+
+.back-to-top {
+  position: fixed;
+  left: 30px;
+  top: 500px;
+  width: 35px;
+  cursor: pointer;
+  z-index: 999;
+  @media (max-width: 960px) {
+    left: 10px !important;
+  }
+  @media (max-width: 425px) {
+    top: 350px;
+  }
+}
+
+.service-widget-title {
+  font-weight: bold !important;
+  font-size: 35px !important;
+  font-family: "Poppins Bold" !important;
+  @media (max-width: 600px) {
+    text-align: center !important;
+    font-size: 5.5vw !important;
+  }
+}
+
+.widget-main-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  height: auto;
+  max-height: 500px;
+  overflow-y: auto !important;
+  &::-webkit-scrollbar {
+    width: 3px;
+    cursor: pointer;
+  }
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #999;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+}
+
+.device-item-container {
+  width: 17%;
+  margin: 1%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden !important;
+  &:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+  @media (max-width: 500px) {
+    width: 30%;
+  }
+}
+
+.device-model-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  align-self: flex-start;
+  > img {
+    max-width: 100%;
+    position: absolute;
+    top: 40%;
+  }
+}
+
+.device-brand-subtitle {
+  margin-top: 7px;
+  font-weight: bold;
+  padding: 0 10px;
+  font-size: 20px;
+  @media (max-width: 1600px) {
+    margin-top: 0.8vw;
+    font-size: 1vw;
+  }
+  @media (max-width: 960px) {
+    font-size: 2vw;
+    margin-top: 1vw;
+  }
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
+}
+
+.repair-another-device {
+  display: flex;
+  width: 300px;
+  margin: auto;
+  padding: 20px 0;
+  @media (max-width: 500px) {
+    display: block;
+    > button {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.device-service-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  > p {
+    font-weight: bold;
+    padding: 0 10px;
+    font-size: 13.5px;
+  }
+  @media (max-width: 960px) {
+    > p {
+      font-size: 2.1vw;
+    }
+  }
+  @media (max-width: 500px) {
+    > p {
+      font-size: 3vw;
+    }
+  }
+}
+
+.service-card-button {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.35);
+  p {
+    margin-left: 15px;
+  }
+  @media (max-width: 960px) {
+    p {
+      display: none;
+    }
+  }
+  @media (max-width: 600px) {
+    position: inherit;
+    padding: 50px 20px 0;
+    left: 0;
+    .button {
+      margin: inherit;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .customized-card-height {
+    height: auto !important;
+    min-height: 200px !important;
+  }
+  .service-summary-card {
+    height: auto !important;
+  }
+  .booking-card {
+    height: 600px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .booking-card {
+    height: auto !important;
+  }
+}
+
+.service-choose-device-container {
+  padding: 30px 20px;
+  @media (max-width: 500px) {
+    padding: 20px;
+  }
+}
+
+.topic-title {
+  font-weight: bold !important;
+  font-size: 20px !important;
+  font-style: normal !important;
+  margin-bottom: 20px !important;
+  font-family: "Poppins Bold" !important;
+  @media (max-width: 768px) {
+    font-size: 18px !important;
+  }
+  @media (max-width: 500px) {
+    font-size: 15px !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+.topic-content {
+  font-weight: normal !important;
+  font-size: 17px !important;
+  margin-bottom: 20px !important;
+  @media (max-width: 768px) {
+    font-size: 15px !important;
+  }
+  @media (max-width: 500px) {
+    font-size: 12px !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+.service-summary-content-div {
+  display: block;
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+  height: 500px;
+  &::-webkit-scrollbar {
+    width: 3px;
+    cursor: pointer;
+  }
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #999;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+  @media (max-width: 960px) {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden !important;
+    height: auto;
+  }
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.estimate-times-div {
+  margin-bottom: 20px;
+  @media (max-width: 500px) {
+    margin-bottom: 10px;
+  }
+}
+
+.estimate-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 17px;
+  @media (max-width: 500px) {
+    font-size: 13px;
+  }
+}
+
+.estimate-content {
+  font-size: 17px;
+  @media (max-width: 500px) {
+    font-size: 13px;
+  }
+}
+
+.service-summary-title {
+  font-weight: bold !important;
+  font-size: 17px !important;
+  margin-bottom: 10px !important;
+  @media (max-width: 600px) {
+    text-align: left !important;
+    font-size: 3.5vw !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+.select-mail-in-radio {
+  margin-top: 10px;
+  font-size: 16px;
+  @media (max-width: 600px) {
+    margin-top: 5px;
+    font-size: 3vw;
+  }
+}
+
+.select-mail-in-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 350px;
+  margin: 10px 0 0;
+  @media (max-width: 600px) {
+    width: 85%;
+    margin: 10px auto 0;
+  }
+}
+
+.select-mail-in-text {
+  font-size: 16px;
+  @media (max-width: 600px) {
+    font-size: 3vw;
+    margin: 5px 0;
+  }
+}
+
+.useful-textarea-div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  @media (max-width: 960px) {
+    height: 40vw;
+  }
+  @media (max-width: 600px) {
+    height: 300px;
+  }
+}
+
+.useful-textarea {
+  border: none;
+  margin: 20px;
+  font-size: 15px;
+  width: 87%;
+  outline: none;
+  height: 250px;
+  @media (max-width: 960px) {
+    font-size: 2vw;
+    height: 35vw;
+  }
+  @media (max-width: 600px) {
+    font-size: 3vw;
+    height: 250px;
+  }
+}
+
+.repair-service-summary-card {
+  height: auto !important;
+}
+
+.repair-service-summary-title {
+  text-align: center;
+  font-size: 25px !important;
+  font-weight: bold !important;
+  margin-bottom: 5px !important;
+  font-family: "Poppins Bold" !important;
+  @media (max-width: 600px) {
+    font-size: 4.3vw !important;
+    margin-bottom: 15px !important;
+  }
+}
+
+.repair-service-summary-detail-container {
+  width: 100% !important;
+  margin: 20px 0 !important;
+  .every-container .topic {
+    font-weight: 900 !important;
+    margin-bottom: 15px !important;
+    font-size: 17px !important;
+  }
+  .every-container .details {
+    font-weight: lighter !important;
+    margin-bottom: 5px;
+    font-size: 17px !important;
+  }
+  .every-container .bolder {
+    font-weight: 600 !important;
+  }
+  .bordered {
+    border-bottom: 1px solid #bdbfc3;
+    border-top: 1px solid #bdbfc3;
+    margin-bottom: 15px;
+  }
+  @media (max-width: 600px) {
+    .every-container .topic,
+    .every-container .details {
+      text-align: center;
+      font-size: 3.5vw !important;
+    }
+  }
+}
+
+.repair-service-summary-flex-container {
+  display: flex;
+  padding: 0 10px;
+  .topic {
+    padding: 3px 0;
+    font-weight: bold;
+    font-size: 17px;
+    width: 50%;
+  }
+  .details {
+    padding: 3px 0;
+    font-weight: normal;
+    font-size: 17px;
+    width: 50%;
+  }
+  @media (max-width: 600px) {
+    .topic,
+    .details {
+      font-size: 3.5vw;
+    }
+  }
+}
+
+.quote-container {
+  padding: 150px 30px;
+}
+
+.quote-image {
+  margin: 0px auto 30px;
+  text-align: center;
+  img {
+    width: 100px;
+  }
+}
+
+.quote-component-content {
+  text-align: center;
+  font-size: 18px !important;
+  font-weight: normal !important;
+  @media (max-width: 600px) {
+    font-size: 3.3vw !important;
+  }
+}
+
+.service-summary-div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  position: relative;
+  @media (max-width: 960px) {
+    width: 43%;
+    margin-right: 2%;
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-right: 2%;
+  }
+}
+
+.service-trash-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.service-summary-img {
+  margin-right: 10px;
+  width: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > img {
+    width: 100%;
+  }
+}
+
+.service-summary-service-child {
+  font-size: 14px !important;
+  @media (max-width: 500px) {
+    font-size: 13px !important;
+  }
+}
+
+.service-summary-service {
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  margin-bottom: 5px !important;
+  @media (max-width: 500px) {
+    font-size: 13px !important;
+  }
+}
+
+.custom-book-time {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  height: 300px;
+  width: 100%;
+  position: relative;
+  > p {
+    margin: 5px 15px 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.booking-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center;
+  height: auto;
+  max-height: 230px;
+  overflow-y: auto !important;
+  &::-webkit-scrollbar {
+    width: 3px;
+    cursor: pointer;
+  }
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #999;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+}
+
+.booking-item {
+  border-radius: 30px;
+  height: 28px;
+  width: 30%;
+  justify-content: center;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  margin: 1%;
+  cursor: pointer;
+}
+
+.booking-select-timezone {
+  outline: none;
+  border: none;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 12px;
+  @media (max-width: 1100px) {
+    font-size: 10px;
+  }
+  @media (max-width: 960px) {
+    font-size: 11px;
+  }
+  @media (max-width: 600px) {
+    font-size: 9.5px;
+  }
+}
+
+.plus-svg {
+  max-width: 80%;
+  cursor: pointer;
+  &:hover {
+    fill: rgba(153, 145, 145, 0.4);
+  }
+}
+
+.back-path:hover {
+  fill: rgba(15, 15, 15, 0.4);
+}
+
+.arrow-container {
+  display: flex;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.non-products-text {
+  text-align: center;
+  padding: 40px 20px;
+  color: gray;
+  font-size: 17px;
+  > span {
+    cursor: pointer;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  @media (max-width: 400px) {
+    font-size: 15px;
+  }
+}
