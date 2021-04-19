@@ -4,7 +4,7 @@ import Shape from "./Shape"
 import Section1 from "./Section1"
 import Section2 from "./Section2"
 import { MetaParams } from "../../model/meta-params"
-import { Helmet } from "react-helmet"
+import Head from "next/head"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -31,12 +31,12 @@ const Covid = ({ handleStatus }: Props) => {
 
   return (
     <div>
-      <Helmet>
+      <Head>
         <title>{pageTitle}</title>
         {metaList.map((item: MetaParams, index: number) => {
           return <meta name={item.name} content={item.content} key={index} />
         })}
-      </Helmet>
+      </Head>
       <Shape />
       <Section1 handleStatus={handleStatus} />
       <Section2 />

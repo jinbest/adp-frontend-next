@@ -17,7 +17,7 @@ import {
   getQuotesByLocAppointmentID,
 } from "./RepairWidgetCallAPI"
 import { storesDetails } from "../../store"
-import { Helmet } from "react-helmet"
+import Head from "next/head"
 import { useQuery } from "../../services/helper"
 
 const stepList: string[] = [
@@ -211,10 +211,10 @@ const RepairWidget = inject("repairWidgetStore")(
 
     return (
       <>
-        <Helmet>
+        <Head>
           <title>{pageTitle}</title>
           <meta name="description" content={""} />
-        </Helmet>
+        </Head>
         {loading && (
           <FeatureToggles features={feats}>
             <Feature

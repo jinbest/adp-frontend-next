@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 // import { SectionMap, ContactForm } from "."
 import SectionMap from "./Section-map"
 import ContactForm from "./ContactForm"
-import { Helmet } from "react-helmet"
+import Head from "next/head"
 import { inject } from "mobx-react"
 import { observer } from "mobx-react-lite"
 import { StoresDetails } from "../../store/StoresDetails"
@@ -58,14 +58,14 @@ const Contact = ({ handleStatus, storesDetailsStore, features }: Props) => {
 
   return (
     <div>
-      <Helmet>
+      <Head>
         <title>{pageTitle}</title>
         {metaList.map((item: MetaParams, index: number) => {
           return <meta name={item.name} content={item.content} key={index} />
         })}
         <link rel="icon" id="favicon" href={mainData.homepage.headData.fav.img} />
         <link rel="apple-touch-icon" href={mainData.homepage.headData.fav.img} />
-      </Helmet>
+      </Head>
       {locations.length && locationID && (
         <SectionMap
           storesDetailsStore={storesDetailsStore}

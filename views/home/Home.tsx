@@ -6,7 +6,7 @@ import Section2 from "./Section2"
 import SectionWave from "./SectionWave"
 import Section6 from "./Section6"
 import { storesDetails } from "../../store"
-import { Helmet } from "react-helmet"
+import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
 
 type Props = {
@@ -35,14 +35,14 @@ const Home = ({ features, handleStatus }: Props) => {
 
   return (
     <div>
-      <Helmet>
+      <Head>
         <title>{pageTitle}</title>
         <link rel="icon" id="favicon" href={mainData.headData.fav.img} />
         <link rel="apple-touch-icon" href={mainData.headData.fav.img} />
         {metaList.map((item: MetaParams, index: number) => {
           return <meta name={item.name} content={item.content} key={index} />
         })}
-      </Helmet>
+      </Head>
 
       <Shape />
       <Section1 features={features} handleStatus={handleStatus} />

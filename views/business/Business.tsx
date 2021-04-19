@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { storesDetails } from "../../store"
-import { Helmet } from "react-helmet"
+import Head from "next/head"
 import Shape from "./Shape"
 import ContactModal from "./ContactModal"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
@@ -44,14 +44,14 @@ const Business = ({ handleStatus }: Props) => {
 
   return (
     <div>
-      <Helmet>
+      <Head>
         <title>{pageTitle}</title>
         {metaList.map((item: MetaParams, index: number) => {
           return <meta name={item.name} content={item.content} key={index} />
         })}
         <link rel="icon" id="favicon" href={data.homepage.headData.fav.img} />
         <link rel="apple-touch-icon" href={data.homepage.headData.fav.img} />
-      </Helmet>
+      </Head>
 
       <Shape />
       <div className={classes.root}>
