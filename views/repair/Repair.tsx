@@ -6,7 +6,7 @@ import Section4 from "./Section4"
 import { Error } from "../error"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { repairWidgetStore, storesDetails } from "../../store"
-import { Helmet } from "react-helmet"
+import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
 
 type Props = {
@@ -45,12 +45,12 @@ const Repair = ({ handleStatus, features }: Props) => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{pageTitle}</title>
         {metaList.map((item: MetaParams, index: number) => {
           return <meta name={item.name} content={item.content} key={index} />
         })}
-      </Helmet>
+      </Head>
       <FeatureToggles features={feats}>
         <Feature
           name="FRONTEND_REPAIR"

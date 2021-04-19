@@ -1172,7 +1172,7 @@ p {
 }
 
 .container-header > a > img {
-  height: 40px;
+  height: 40px !important;
 }
 
 .container-header .text-1 {
@@ -1579,7 +1579,7 @@ p {
 
 @media (max-width: 380px) {
   .container-header > a > img {
-    height: 30px;
+    height: 30px !important;
   }
   .avatar-div > img {
     height: 20px;

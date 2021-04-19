@@ -99,7 +99,7 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.0",
     "@types/react-geocode": "^0.2.0",
-    "@types/react-helmet": "^6.1.0",
+    "@types/react-helmet": "^6.1.1",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.7",

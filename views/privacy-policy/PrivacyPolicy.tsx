@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
-import { Helmet } from "react-helmet"
+import Head from "next/head"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../store"
 import axios from "axios"
@@ -60,9 +60,9 @@ const PrivacyPolicy = ({ handleStatus }: Props) => {
 
   return (
     <div>
-      <Helmet>
+      <Head>
         <title>{pageTitle}</title>
-      </Helmet>
+      </Head>
       <div className={`${classes.root} privacy-policy`}>
         {loading && (
           <React.Fragment>
