@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react"
 import { Typography, Grid } from "@material-ui/core"
-import { Card } from "./"
-import { Button } from "../../../components"
+import Card from "./Card"
+import Button from "../../../components/Button"
+import Loading from "../../../components/Loading"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { repairWidgetStore, storesDetails } from "../../../store"
@@ -10,7 +11,6 @@ import { PostAppointParams } from "../../../model/post-appointment-params"
 import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
-import Loading from "../../../components/Loading"
 // import { RevertTimeTZ } from "../../../services/helper"
 
 type Props = {

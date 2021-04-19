@@ -456,66 +456,66 @@
 
 .react-tel-input .form-control {
   position: relative;
-  font-size: 14px;
-  letter-spacing: 0.01rem;
+  font-size: 14px !important;
+  letter-spacing: 0.01rem !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-  padding-left: 70px;
+  padding-left: 70px !important;
   margin-left: 0;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 40px;
-  line-height: 25px;
-  height: 40px;
-  width: 100%;
+  border-radius: 40px !important;
+  line-height: 25px !important;
+  height: 40px !important;
+  width: 100% !important;
   outline: none;
 }
 
 .react-tel-input .form-control:hover {
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25) !important;
 }
 
 .react-tel-input .flag-dropdown {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 40px 0 0 40px;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  padding: 0 !important;
+  background-color: #f5f5f5 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 40px 0 0 40px !important;
 }
 
 .react-tel-input .flag-dropdown.open,
 .react-tel-input .flag-dropdown.open .selected-flag {
-  border-radius: 40px 0 0 40px;
+  border-radius: 40px 0 0 40px !important;
 }
 
 .react-tel-input .selected-flag {
-  outline: none;
-  position: relative;
-  width: 60px;
-  height: 100%;
-  padding: 0 0 0 20px;
-  border-radius: 40px 0 0 40px;
+  outline: none !important;
+  position: relative !important;
+  width: 60px !important;
+  height: 100% !important;
+  padding: 0 0 0 20px !important;
+  border-radius: 40px 0 0 40px !important;
 }
 
 .react-tel-input .flag {
-  width: 16px;
-  height: 11px;
+  width: 16px !important;
+  height: 11px !important;
 }
 
 .react-tel-input .country-list::-webkit-scrollbar {
-  width: 3px;
-  cursor: pointer;
+  width: 3px !important;
+  cursor: pointer !important;
 }
 .react-tel-input .country-list::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #ffffff !important;
 }
 .react-tel-input .country-list::-webkit-scrollbar-thumb {
-  background: #999;
+  background: #999 !important;
 }
 .react-tel-input .country-list::-webkit-scrollbar-thumb:hover {
-  background: #666;
+  background: #666 !important;
 }
 
 .search-container {

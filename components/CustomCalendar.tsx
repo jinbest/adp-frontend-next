@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
 import styled, { css } from "styled-components"
-import { CustomNumeric } from "../components"
+import CustomNumeric from "../components/CustomNumeric"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../store"
 
