@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { storesDetails } from "../../store"
 import { Helmet } from "react-helmet"
-import { Shape, ContactModal } from "./"
+import Shape from "./Shape"
+import ContactModal from "./ContactModal"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { Grid, Typography } from "@material-ui/core"
-import { Button } from "../../components"
+import Button from "../../components/Button"
 import { useTranslation } from "react-i18next"
-import { Card } from "../repair/widget-component"
-import {
-  ShippingLabel,
-  CustomerService,
-  FreeShipping,
-  Pay,
-  QuickTurnaround,
-  Soldering,
-} from "./SVGs"
+import Card from "../repair/widget-component/Card"
+import ShippingLabel from "./SVGs/ShippingLabel"
+import CustomerService from "./SVGs/CustomerService"
+import FreeShipping from "./SVGs/FreeShipping"
+import Pay from "./SVGs/Pay"
+import QuickTurnaround from "./SVGs/QuickTurnaround"
+import Soldering from "./SVGs/Soldering"
 import { MetaParams } from "../../model/meta-params"
 
 type Props = {

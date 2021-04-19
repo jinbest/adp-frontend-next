@@ -1,15 +1,14 @@
 import React from "react"
 import { Route } from "react-router-dom"
-// import { repairWidgetStore, storesDetails } from "../store/";
-import { storesDetails } from "../store/"
+import { repairWidgetStore, storesDetails } from "../store/"
 import Home from "../views/home/Home"
-// import Business from "../views/business/Business";
-// import Locations from "../views/locations/Locations";
-// import Contact from "../views/contact/Contact";
-// import Covid from "../views/covid/Covid";
+import Business from "../views/business/Business"
+import Locations from "../views/locations/Locations"
+import Contact from "../views/contact/Contact"
+import Covid from "../views/covid/Covid"
 import Repair from "../views/repair/Repair"
-// import RepairWidget from "../views/repair/RepairWidget";
-// import PrivacyPolicy from "../views/privacy-policy/PrivacyPolicy";
+import RepairWidget from "../views/repair/RepairWidget"
+import PrivacyPolicy from "../views/privacy-policy/PrivacyPolicy"
 import { FeaturesParam } from "../model/feature-toggle"
 
 type Props = {
@@ -32,7 +31,7 @@ export default function DynamicPages({ features, handleStatus }: Props) {
         path={routes.repairPage}
         component={() => <Repair handleStatus={handleStatus} features={features} />}
       />
-      {/* <Route
+      <Route
         path={routes.contactPage}
         component={() => (
           <Contact
@@ -41,8 +40,8 @@ export default function DynamicPages({ features, handleStatus }: Props) {
             features={features}
           />
         )}
-      /> */}
-      {/* <Route
+      />
+      <Route
         path={routes.repairWidgetPage}
         component={() => (
           <RepairWidget
@@ -51,25 +50,22 @@ export default function DynamicPages({ features, handleStatus }: Props) {
             repairWidgetStore={repairWidgetStore}
           />
         )}
-      /> */}
-      {/* <Route
+      />
+      <Route
         path={routes.businessPage}
         component={() => <Business handleStatus={handleStatus} />}
-      /> */}
-      {/* <Route
+      />
+      <Route
         path={routes.locationsPage}
         component={() => <Locations handleStatus={handleStatus} />}
-      /> */}
-      {/* <Route
-        path={routes.covidPage}
-        component={() => <Covid handleStatus={handleStatus} />}
-      /> */}
-      {/* {data.homepage.footer.bottomLinks.privacyPolicy.externalLink && (
+      />
+      <Route path={routes.covidPage} component={() => <Covid handleStatus={handleStatus} />} />
+      {data.homepage.footer.bottomLinks.privacyPolicy.externalLink && (
         <Route
           path={routes.privacyPolicy}
           component={() => <PrivacyPolicy handleStatus={handleStatus} />}
         />
-      )} */}
+      )}
     </>
   )
 }

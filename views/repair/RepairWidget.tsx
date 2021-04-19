@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react"
-import {
-  ChooseDevice,
-  BackSVG,
-  ContactDetails,
-  BookTime,
-  UsefulInfo,
-  RepairServiceSummary,
-  QuoteComponent,
-} from "./widget-component"
+import ChooseDevice from "./widget-component/ChooseDevice"
+import BackSVG from "./widget-component/BackSVG"
+import ContactDetails from "./widget-component/ContactDetails"
+import BookTime from "./widget-component/BookTime"
+import UsefulInfo from "./widget-component/UsefulInfo"
+import RepairServiceSummary from "./widget-component/RepairServiceSummary"
+import QuoteComponent from "./widget-component/QuoteComponent"
 import { inject, observer } from "mobx-react"
 import { RepairWidgetStore } from "../../store/RepairWidgetStore"
-import { Error } from "../error"
+import Error from "../error/Error"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import {
   getRepairLookupAPI,

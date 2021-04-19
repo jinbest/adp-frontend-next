@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
-import { Card, PlusSVG, LazyImg } from "./"
+import Card from "./Card"
+import PlusSVG from "./PlusSVG"
+import LazyImg from "./LazyImg"
 import { Grid, Typography } from "@material-ui/core"
-import { Search, Button } from "../../../components"
+import Search from "../../../components/Search"
+import Button from "../../../components/Button"
 import RepairSummary from "./RepairSummary"
 import { useTranslation } from "react-i18next"
 import { repairWidData, storesDetails, repairWidgetStore } from "../../../store/"
@@ -13,7 +16,7 @@ import {
   getRepairsOfferedDeviceAPI,
   addMoreRepairsOfferedDeviceAPI,
 } from "../RepairWidgetCallAPI"
-import { ContactModal } from "../../business"
+import ContactModal from "../../business/ContactModal"
 import { ConvertWarrantyUnit } from "../../../services/helper"
 
 type Props = {

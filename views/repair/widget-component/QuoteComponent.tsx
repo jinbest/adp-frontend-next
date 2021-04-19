@@ -1,6 +1,6 @@
 import React from "react"
 import { Typography } from "@material-ui/core"
-import { Card } from "."
+import Card from "./Card"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../../store"
 

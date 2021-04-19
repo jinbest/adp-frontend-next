@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
 import { Grid, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core"
 import { useTranslation } from "react-i18next"
 import { repairWidgetStore } from "../../store"
-import CustomMap from "../../components/CustomMap"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { inject } from "mobx-react"
 import { observer } from "mobx-react-lite"
@@ -20,6 +19,9 @@ import {
   makeLocations,
   phoneFormatString,
 } from "../../services/helper"
+import dynamic from "next/dynamic"
+
+const DynamicCustomMap = dynamic(() => import("../../components/CustomMap"), { ssr: false })
 
 const DAYS_OF_THE_WEEK: string[] = [
   "Sunday",
@@ -322,7 +324,7 @@ const SectionMap = inject("storesDetailsStore")(
               ))}
             </Grid>
             <Grid item lg={6} md={12} sm={12} xs={12} className={classes.item2}>
-              <CustomMap
+              <DynamicCustomMap
                 selectedLocation={selectedLocation}
                 locations={locations}
                 isDetail={isExpanded}

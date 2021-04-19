@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { SectionMap, ContactForm } from "."
+// import { SectionMap, ContactForm } from "."
+import SectionMap from "./Section-map"
+import ContactForm from "./ContactForm"
 import { Helmet } from "react-helmet"
 import { inject } from "mobx-react"
 import { observer } from "mobx-react-lite"

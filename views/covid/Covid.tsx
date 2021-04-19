@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { storesDetails } from "../../store"
-import { Shape, Section1, Section2 } from "."
+import Shape from "./Shape"
+import Section1 from "./Section1"
+import Section2 from "./Section2"
 import { MetaParams } from "../../model/meta-params"
 import { Helmet } from "react-helmet"
 

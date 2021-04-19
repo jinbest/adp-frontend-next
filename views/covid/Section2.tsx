@@ -4,7 +4,7 @@ import { storesDetails } from "../../store"
 import { Typography, Grid } from "@material-ui/core"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
-import { Card } from "../repair/widget-component"
+import Card from "../repair/widget-component/Card"
 import _ from "lodash"
 
 const Section2 = () => {
