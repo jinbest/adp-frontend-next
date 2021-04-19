@@ -37,6 +37,7 @@ const App = ({
   locations,
   storeCnts,
   commonCnts,
+  subDomainID,
 }: // subDomainID,
 DataProps) => {
   const [footerStatus, setFooterStatus] = useState(false)
@@ -74,15 +75,15 @@ DataProps) => {
     setFavIcon(homepage.headData.fav.img)
 
     /* This is for local work */
-    // const prodLink = "https://prod.pcmtx.com/api/store-service/"
-    // if (subDomainID > 0) {
-    //   setTheme(`${prodLink}dc/store/${subDomainID}/theme/theme.min.css/asset`)
-    // } else {
-    //   setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
-    // }
+    const prodLink = "https://prod.pcmtx.com/api/store-service/"
+    if (subDomainID > 0) {
+      setTheme(`${prodLink}dc/store/${subDomainID}/theme/theme.min.css/asset`)
+    } else {
+      setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
+    }
 
     /* This is for production */
-    setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
+    // setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
 
     homepage.bodyData.tags.forEach((item: TagParams) => {
       loadBodyTag(item.content)
@@ -164,25 +165,27 @@ DataProps) => {
 }
 
 App.getInitialProps = async ({ ctx }: Record<string, any>) => {
-  const domainMatch = ctx.req.headers.host.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
-  const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
-  const subDomainID = -1
+  // const domainMatch = ctx.req.headers.host.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
+  // const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
+  console.log(ctx)
+  const apexDomain = "dccmtx.com"
+  // const subDomainID = -1
 
-  // const devicelist = [
-  //   { name: "bananaservices", domain: "bananaservices.ca", storeID: 1 },
-  //   { name: "geebodevicerepair", domain: "geebodevicerepair.ca", storeID: 3 },
-  //   { name: "mobiletechlab", domain: "mobiletechlab.ca", storeID: 4 },
-  //   { name: "nanotechmobile", domain: "nanotechmobile.ca", storeID: 2 },
-  //   { name: "northtechcellsolutions", domain: "northtechcellsolutions.ca", storeID: 5 },
-  //   { name: "phonephix", domain: "phonephix.ca", storeID: 9 },
-  //   { name: "pradowireless", domain: "pradowireless.com", storeID: 10 },
-  //   { name: "reparationcellulairebsl", domain: "reparationcellulairebsl.ca", storeID: 7 },
-  //   { name: "wirelessrevottawa", domain: "wirelessrevottawa.ca", storeID: 8 },
-  //   { name: "dccmtx", domain: "https://dev.mtlcmtx.com/", storeID: 1 },
-  //   { name: "mtlcmtx", domain: "https://dev.mtlcmtx.com/", storeID: 2 },
-  // ]
-  // const siteNum = 2,
-  //   subDomainID = devicelist[siteNum].storeID
+  const devicelist = [
+    { name: "bananaservices", domain: "bananaservices.ca", storeID: 1 },
+    { name: "geebodevicerepair", domain: "geebodevicerepair.ca", storeID: 3 },
+    { name: "mobiletechlab", domain: "mobiletechlab.ca", storeID: 4 },
+    { name: "nanotechmobile", domain: "nanotechmobile.ca", storeID: 2 },
+    { name: "northtechcellsolutions", domain: "northtechcellsolutions.ca", storeID: 5 },
+    { name: "phonephix", domain: "phonephix.ca", storeID: 9 },
+    { name: "pradowireless", domain: "pradowireless.com", storeID: 10 },
+    { name: "reparationcellulairebsl", domain: "reparationcellulairebsl.ca", storeID: 7 },
+    { name: "wirelessrevottawa", domain: "wirelessrevottawa.ca", storeID: 8 },
+    { name: "dccmtx", domain: "https://dev.mtlcmtx.com/", storeID: 1 },
+    { name: "mtlcmtx", domain: "https://dev.mtlcmtx.com/", storeID: 2 },
+  ]
+  const siteNum = 2,
+    subDomainID = devicelist[siteNum].storeID
 
   const storeData = await appLoadAPI
     .getStoresDetail(apexDomain, false)
