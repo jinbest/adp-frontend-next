@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adp-frontend
+  labels:
+    env: development
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: adp-frontend
+  template:
+    spec: 
+      containers:
+        - name: adp-frontend
+          image: gcr.io/${DEV_PROJECT_ID}/adp-frontend
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80

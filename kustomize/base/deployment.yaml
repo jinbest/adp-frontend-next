@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adp-frontend
+  labels:
+    app: adp-frontend
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: adp-frontend
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: adp-frontend
+      annotations:
+        sidecar.istio.io/inject: "true"        
+    spec:
+      containers:
+        - name: adp-frontend
+          image: gcr.io/${DEV_PROJECT_ID}/adp-frontend
+          ports:
+            - containerPort: 80
+          imagePullPolicy: IfNotPresent
+          resources:
+              requests:
+                cpu: 200m
+                memory: 180Mi
+              limits:
+                cpu: 300m
+                memory: 300Mi
