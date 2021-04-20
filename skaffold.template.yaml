@@ -1,0 +1,57 @@
+apiVersion: skaffold/v2beta9
+kind: Config
+metadata:
+  name: adp-frontend
+build:
+  artifacts:
+    - image: gcr.io/${DEV_PROJECT_ID}/adp-frontend
+      context: ./
+      docker:
+        dockerfile: Dockerfile
+deploy:
+  kubeContext: docker-desktop
+  kustomize:
+    paths:
+      - tmpkustomize/base
+
+profiles:
+  - name: development
+    build:
+      tagPolicy:
+        sha256: {}
+      artifacts:
+        - image: gcr.io/${DEV_PROJECT_ID}/adp-frontend
+          docker:
+            dockerfile: Dockerfile
+    deploy:
+      kubeContext: gke_${DEV_PROJECT_ID}_us-central1_dev-env-cluster
+      kustomize:
+        paths:
+          - tmpkustomize/development
+  - name: production
+    build:
+      tagPolicy:
+        sha256: {}
+      artifacts:
+        - image: "gcr.io/${PROD_PROJECT_ID}/adp-frontend"
+          docker:
+            dockerfile: Dockerfile
+    deploy:
+      kubeContext: gke_${PROD_PROJECT_ID}_us-central1_prod-env-cluster
+      kustomize:
+        paths:
+          - tmpkustomize/production
+
+  - name: staging
+    build:
+      tagPolicy:
+        sha256: {}
+      artifacts:
+        - image: "gcr.io/${STG_PROJECT_ID}/adp-frontend"
+          docker:
+            dockerfile: Dockerfile
+    deploy:
+      kubeContext: gke_${STG_PROJECT_ID}_us-central1_stg-env-cluster
+      kustomize:
+        paths:
+          - tmpkustomize/staging

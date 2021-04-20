@@ -1,0 +1,173 @@
+version: 2.1
+
+jobs:
+  lint:
+    executor:
+      name: node/default
+      tag: "14.15.1"
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run lint
+  test:
+    executor:
+      name: node/default
+      tag: "14.15.1"
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run test
+  push-dev-image:
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: DEV_GCLOUD_SERVICE_KEY
+          google-compute-zone: DEV_COMPUTE_ZONE
+          google-project-id: DEV_PROJECT_ID
+      - kubernetes/install-kubectl
+      - run:
+          name: Push Image to GCR
+          command: |
+            sudo rm -f /etc/boto.cfg &&
+
+            gcloud --quiet container clusters get-credentials $DEV_CLUSTER_NAME --region $DEV_REGION &&
+
+            curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin &&
+
+            gsutil cp gs://adp-dev/config/frontend/config.ts ./config/ &&
+
+            chmod u+x ./templater.sh &&
+
+            ./templater.sh -s linux -p development -c "skaffold build -p development"
+  deploy-dev-image:
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: DEV_GCLOUD_SERVICE_KEY
+          google-compute-zone: DEV_COMPUTE_ZONE
+          google-project-id: DEV_PROJECT_ID
+      - kubernetes/install-kubectl
+      - run:
+          name: Deploy to GKE
+          command: |
+            gcloud --quiet beta compute ssh $DEV_BASTION_CLUSTER --ssh-key-expire-after=5m --tunnel-through-iap --project $DEV_PROJECT_ID  --zone $DEV_COMPUTE_ZONE --command='
+            rm -rf adp-frontend-v2 &&
+            curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin &&
+
+            export BITBUCKET_NAME=$(gcloud secrets versions access latest --secret=BITBUCKET_NAME) &&
+            export BITBUCKET_PASS=$(gcloud secrets versions access latest --secret=BITBUCKET_PASS) &&
+            export DEV_REGION=$(gcloud secrets versions access latest --secret=DEV_REGION) &&
+            export DEV_CLUSTER_NAME=$(gcloud secrets versions access latest --secret=DEV_CLUSTER_NAME) &&
+            export DEV_PROJECT_ID=$(gcloud secrets versions access latest --secret=DEV_PROJECT_ID) &&
+
+
+            git clone https://${BITBUCKET_NAME}:${BITBUCKET_PASS}@bitbucket.org/device_commerce/adp-frontend-v2.git &&
+            gcloud --quiet container clusters get-credentials $DEV_CLUSTER_NAME --region $DEV_REGION &&
+            cd adp-frontend-v2 &&
+            chmod u+x ./templater.sh &&
+            ./templater.sh -s linux -p development -c "skaffold deploy -p development -t latest" &&
+            rm -rf adp-frontend' -- -L${DEV_BASTION_PORT}:%INSTANCE%:${DEV_BASTION_PORT}
+
+  #_______________________________________________________________PRODUCTION_STEPS______________________________________________________________________________________________________________________________
+  push-prod-image:
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: PROD_GCLOUD_SERVICE_KEY
+          google-compute-zone: PROD_COMPUTE_ZONE
+          google-project-id: PROD_PROJECT_ID
+      - kubernetes/install-kubectl
+      - run:
+          name: Push Image to GCR
+          command: |
+            sudo rm -f /etc/boto.cfg &&
+
+            gcloud --quiet container clusters get-credentials $PROD_CLUSTER_NAME --region $PROD_REGION &&
+
+            curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin &&
+
+            gsutil cp gs://adp_prod/config/frontend/config.ts ./config/ &&
+
+            chmod u+x ./templater.sh &&
+
+            ./templater.sh -s linux -p production -c "skaffold build -p production"
+  deploy-prod-image:
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: PROD_GCLOUD_SERVICE_KEY
+          google-compute-zone: PROD_COMPUTE_ZONE
+          google-project-id: PROD_PROJECT_ID
+      - kubernetes/install-kubectl
+      - run:
+          name: Deploy to GKE
+          command: |
+            gcloud --quiet beta compute ssh $PROD_BASTION_CLUSTER --ssh-key-expire-after=5m --tunnel-through-iap --project $PROD_PROJECT_ID  --zone $PROD_COMPUTE_ZONE --command='
+            rm -rf adp-frontend-v2 &&
+            curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin &&
+
+            export BITBUCKET_NAME=$(gcloud secrets versions access latest --secret=BITBUCKET_NAME) &&
+            export BITBUCKET_PASS=$(gcloud secrets versions access latest --secret=BITBUCKET_PASS) &&
+            export PROD_REGION=$(gcloud secrets versions access latest --secret=PROD_REGION) &&
+            export PROD_CLUSTER_NAME=$(gcloud secrets versions access latest --secret=PROD_CLUSTER_NAME) &&
+            export PROD_PROJECT_ID=$(gcloud secrets versions access latest --secret=PROD_PROJECT_ID) &&
+
+
+            git clone -b production https://${BITBUCKET_NAME}:${BITBUCKET_PASS}@bitbucket.org/device_commerce/adp-frontend-v2.git &&
+            gcloud --quiet container clusters get-credentials $PROD_CLUSTER_NAME --region $PROD_REGION &&
+            cd adp-frontend-v2 &&
+            chmod u+x ./templater.sh &&
+            ./templater.sh -s linux -p production -c "skaffold deploy -p production -t latest" &&
+            rm -rf adp-frontend' -- -L${PROD_BASTION_PORT}:%INSTANCE%:${PROD_BASTION_PORT}
+#____________________________________________________________________________________________________________________________________________________________________________________________________________
+orbs:
+  node: circleci/node@4.1.0
+  gcp-gcr: circleci/gcp-gcr@0.11.0
+  kubernetes: circleci/kubernetes@0.11.2
+
+workflows:
+  test:
+    jobs:
+      - lint:
+          context: dc
+      - test:
+          context: dc
+          requires:
+            - lint
+      - push-dev-image:
+          context: dc
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - test
+      - deploy-dev-image:
+          context: dc
+          requires:
+            - push-dev-image
+      - prod-deploy-hold:
+          type: approval
+          filters:
+            branches:
+              only:
+                - production
+      - push-prod-image:
+          context: dc_prod
+          requires:
+            - prod-deploy-hold
+            - test
+          filters:
+            branches:
+              only:
+                - production
+      - deploy-prod-image:
+          context: dc_prod
+          requires:
+            - push-prod-image

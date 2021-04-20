@@ -168,7 +168,7 @@ DataProps) => {
 }
 
 App.getInitialProps = async ({ ctx }: Record<string, any>) => {
-  const domainMatch = ctx.req.headers.host.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
+  const domainMatch = ctx.req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
   const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
   const subDomainID = -1
 
