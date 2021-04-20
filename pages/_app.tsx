@@ -19,7 +19,6 @@ import { StoreToggle } from "../model/store-toggle"
 import { GetManyResponse } from "../model/get-many-response"
 import ApiClient from "../services/api-client"
 // import Head from "next/head"
-
 import "../index.css"
 import "../assets/style/index.scss"
 import "../assets/style/theme.css"
@@ -45,14 +44,14 @@ const App = ({
   commonCnts,
 }: // subDomainID,
 DataProps) => {
-  const [footerStatus, setFooterStatus] = useState(false)
-  const [features, setFeatures] = useState<FeaturesParam[]>([])
-  const [pageTitle, setPageTitle] = useState("Store")
-  const [favIcon, setFavIcon] = useState("")
-  const [metaList, setMetaList] = useState<MetaParams[]>([])
-  const [scriptList, setScriptList] = useState<ScriptParams[]>([])
   const [theme, setTheme] = useState("")
+  const [favIcon, setFavIcon] = useState("")
+  const [pageTitle, setPageTitle] = useState("")
+  const [metaList, setMetaList] = useState<MetaParams[]>([])
+  const [features, setFeatures] = useState<FeaturesParam[]>([])
+  const [scriptList, setScriptList] = useState<ScriptParams[]>([])
   const [loadStatus, setLoadStatus] = useState(false)
+  const [footerStatus, setFooterStatus] = useState(false)
 
   const handleFooterStatus = (status: boolean) => {
     setFooterStatus(status)
@@ -145,23 +144,27 @@ DataProps) => {
         {metaList.map((item: MetaParams, index: number) => {
           return <meta name={item.name} content={item.content} key={index} />
         })}
-        {storeCnts.general.condition.googleVerification.status && (
-          <meta
-            name={storeCnts.general.condition.googleVerification.metaData.name}
-            content={storeCnts.general.condition.googleVerification.metaData.content}
-          />
-        )}
         {scriptList.map((item: ScriptParams, index: number) => {
           return <script key={index}>{item.content}</script>
         })}
       </Helmet>
       {loadStatus && (
-        <Router>
-          <Header handleStatus={handleFooterStatus} features={features} />
-          <Component {...pageProps} handleStatus={handleFooterStatus} features={features} />
-          <Badge />
-          {footerStatus && <Footer features={features} storesDetailsStore={storesDetails} />}
-        </Router>
+        <React.Fragment>
+          <Helmet>
+            {storeCnts.general.condition.googleVerification.status && (
+              <meta
+                name={storeCnts.general.condition.googleVerification.metaData.name}
+                content={storeCnts.general.condition.googleVerification.metaData.content}
+              />
+            )}
+          </Helmet>
+          <Router>
+            <Header handleStatus={handleFooterStatus} features={features} />
+            <Component {...pageProps} handleStatus={handleFooterStatus} features={features} />
+            <Badge />
+            {footerStatus && <Footer />}
+          </Router>
+        </React.Fragment>
       )}
     </Provider>
   )
@@ -185,7 +188,7 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
   //   { name: "dccmtx", domain: "https://dev.mtlcmtx.com/", storeID: 1 },
   //   { name: "mtlcmtx", domain: "https://dev.mtlcmtx.com/", storeID: 2 },
   // ]
-  // const siteNum = 0,
+  // const siteNum = 2,
   //   subDomainID = devicelist[siteNum].storeID
 
   const storeData = await apiClient.get<Store>(
@@ -217,6 +220,12 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
   const locURL = `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/locations?page=1&per_page=10000&include_voided=false`
   const response = await apiClient.get<GetManyResponse>(locURL)
   const locations = response.data
+
+  if (isEmpty(storeData) || isEmpty(features) || isEmpty(locations) || isEmpty(contents)) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     storeData: storeData,

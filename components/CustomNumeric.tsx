@@ -1,6 +1,6 @@
-import React from "react";
-import { ArrowUP, ArrowDown } from "../views/repair/widget-component";
-import styled from "styled-components";
+import React from "react"
+import { ArrowUP, ArrowDown } from "../views/repair/widget-component"
+import styled from "styled-components"
 
 const Parentdiv = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const Parentdiv = styled.div`
   height: 30px;
   width: 100%;
   align-items: center;
-`;
+`
 
 const Contentdiv = styled.div`
   outline: none;
@@ -17,32 +17,28 @@ const Contentdiv = styled.div`
   height: 30px;
   width: 100%;
   align-items: center;
-`;
+`
 
 const ContentP = styled.p`
   font-size: 14px;
   margin-left: 15px;
   font-weight: normal;
-`;
+`
 
 const ArrowDiv = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
   right: 5px;
-`;
+`
 
 type Props = {
-  content: string;
-  handlePrevState: () => void;
-  handleNextState: () => void;
-};
+  content: string
+  handlePrevState: () => void
+  handleNextState: () => void
+}
 
-const CustomNumeric = ({
-  content,
-  handlePrevState,
-  handleNextState,
-}: Props) => {
+const CustomNumeric = ({ content, handlePrevState, handleNextState }: Props) => {
   return (
     <Parentdiv>
       <Contentdiv>
@@ -57,7 +53,7 @@ const CustomNumeric = ({
         </div>
       </ArrowDiv>
     </Parentdiv>
-  );
-};
+  )
+}
 
-export default CustomNumeric;
+export default CustomNumeric

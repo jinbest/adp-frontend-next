@@ -1,10 +1,10 @@
-import React from "react";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { storesDetails } from "../store";
-import { observer } from "mobx-react";
+import React from "react"
+import { createStyles, makeStyles } from "@material-ui/core/styles"
+import { storesDetails } from "../store"
+import { observer } from "mobx-react"
 
 const Badge = () => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
@@ -18,10 +18,10 @@ const Badge = () => {
         />
       </a>
     </div>
-  );
-};
+  )
+}
 
-export default observer(Badge);
+export default observer(Badge)
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -59,4 +59,4 @@ const useStyles = makeStyles(() =>
       animationIterationCount: "infinite",
     },
   })
-);
+)

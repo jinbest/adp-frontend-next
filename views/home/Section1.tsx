@@ -1,55 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 // import { CardMobile } from "../../components"
-import { Grid, Box } from "@material-ui/core";
-// import { Search, Button } from "../../components"
-import Search from "../../components/Search";
-import Button from "../../components/Button";
-import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles";
-import { Link } from "react-router-dom";
-import { repairWidgetStore, storesDetails } from "../../store";
-import { useTranslation } from "react-i18next";
-import { isExternal } from "../../services/helper";
-import { observer } from "mobx-react";
+import { Grid, Box } from "@material-ui/core"
+import Search from "../../components/Search"
+import Button from "../../components/Button"
+import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
+import { Link } from "react-router-dom"
+import { repairWidgetStore, storesDetails } from "../../store"
+import { useTranslation } from "react-i18next"
+import { isExternal } from "../../services/helper"
+import { observer } from "mobx-react"
 
 type Props = {
-  features: any[];
-  handleStatus: (status: boolean) => void;
-};
+  features: any[]
+  handleStatus: (status: boolean) => void
+}
 
 const Section1 = ({ features, handleStatus }: Props) => {
-  const data = storesDetails.storeCnts;
-  const thisPage = data.homepage.section1;
-  const [t] = useTranslation();
+  const data = storesDetails.storeCnts
+  const thisPage = data.homepage.section1
+  const [t] = useTranslation()
 
   // const [feats, setFeatures] = useState<any[]>([])
-  const [featSearch, setFeatSearch] = useState<any[]>([]);
+  const [featSearch, setFeatSearch] = useState<any[]>([])
   // const [gridMD, setGridMD] = useState(data.cardMobileData.gridMD)
 
   useEffect(() => {
     // const cntCardMobileData: any = data.cardMobileData.data
     const cntFeature: any[] = [],
-      cntFeatSearch: any[] = [];
+      cntFeatSearch: any[] = []
     for (let j = 0; j < features.length; j++) {
       if (features[j].flag === "SEARCH" && features[j].isActive) {
-        cntFeatSearch.push(features[j].flag);
+        cntFeatSearch.push(features[j].flag)
       }
       if (features[j].isActive) {
-        cntFeature.push(features[j].flag);
+        cntFeature.push(features[j].flag)
       }
     }
     // const cntGridMD = Math.round(12 / cntFeature.length)
     // setFeatures(cntFeature)
-    setFeatSearch(cntFeatSearch);
+    setFeatSearch(cntFeatSearch)
     // setGridMD(cntGridMD)
-  }, [data, features, t]);
+  }, [data, features, t])
 
   const handleGetQuote = (link: string) => {
-    if (link !== data.general.routes.repairWidgetPage) return;
-    const cntAppointment: any = repairWidgetStore.appointResponse;
-    repairWidgetStore.init();
-    repairWidgetStore.changeAppointResponse(cntAppointment);
-    handleStatus(false);
-  };
+    if (link !== data.general.routes.repairWidgetPage) return
+    repairWidgetStore.init()
+    handleStatus(false)
+  }
 
   return (
     <section className="Container">
@@ -61,10 +58,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
             return (
               <React.Fragment key={index}>
                 {item.visible ? (
-                  <Box
-                    className="service-section-button"
-                    style={{ margin: "initial" }}
-                  >
+                  <Box className="service-section-button" style={{ margin: "initial" }}>
                     {isExternal(item.link) ? (
                       <a href={item.link} target="_blank" rel="noreferrer">
                         <Button
@@ -75,10 +69,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
                         />
                       </a>
                     ) : (
-                      <Link
-                        to={item.link}
-                        onClick={() => handleGetQuote(item.link)}
-                      >
+                      <Link to={item.link} onClick={() => handleGetQuote(item.link)}>
                         <Button
                           title={t(item.title)}
                           bgcolor={data.general.colorPalle.repairButtonCol}
@@ -92,7 +83,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
                   <></>
                 )}
               </React.Fragment>
-            );
+            )
           })}
         </div>
 
@@ -105,9 +96,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
                 <Search
                   placeholder={thisPage.searchPlaceholder}
                   color="white"
-                  bgcolor={
-                    storesDetails.storeCnts.general.colorPalle.themeColor
-                  }
+                  bgcolor={storesDetails.storeCnts.general.colorPalle.themeColor}
                   height="60px"
                   handleChange={() => {}}
                   handleIconClick={() => {}}
@@ -155,7 +144,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
         })}
       </Grid> */}
     </section>
-  );
-};
+  )
+}
 
-export default observer(Section1);
+export default observer(Section1)

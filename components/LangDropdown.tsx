@@ -1,65 +1,55 @@
-import React, { useEffect, useState } from "react";
-import FormControl from "@material-ui/core/FormControl";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import i18n from "../i18-next/i18n";
-import { useTranslation } from "react-i18next";
-import { storesDetails } from "../store";
+import React, { useEffect, useState } from "react"
+import FormControl from "@material-ui/core/FormControl"
+import { createStyles, makeStyles } from "@material-ui/core/styles"
+import NativeSelect from "@material-ui/core/NativeSelect"
+import i18n from "../i18-next/i18n"
+import { useTranslation } from "react-i18next"
+import { storesDetails } from "../store"
 
 type Props = {
-  color?: string;
-};
+  color?: string
+}
 
 const LangDropdown = ({ color }: Props) => {
-  const data = storesDetails.storeCnts;
-  const themeCol = data.general.colorPalle.themeColor;
-  const classes = useStyles();
-  const [t] = useTranslation();
+  const data = storesDetails.storeCnts
+  const themeCol = data.general.colorPalle.themeColor
+  const classes = useStyles()
+  const [t] = useTranslation()
 
-  const options = ["English", "French"];
+  const options = ["English", "French"]
 
-  const [state, setState] = useState("English");
+  const [state, setState] = useState("English")
 
   const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
-    const la = event.target.value;
-    let cntLang = "en";
-    setState(la);
-    cntLang = la === "English" ? "en" : "fr";
-    i18n.changeLanguage(la === "English" ? "en" : "fr");
-    if (typeof window !== "undefined")
-      window.localStorage.setItem("cntLang", cntLang);
-  };
+    const la = event.target.value
+    let cntLang = "en"
+    setState(la)
+    cntLang = la === "English" ? "en" : "fr"
+    i18n.changeLanguage(la === "English" ? "en" : "fr")
+    if (typeof window !== "undefined") window.localStorage.setItem("cntLang", cntLang)
+  }
 
   useEffect(() => {
     if (data.general.condition.defaultLang === "fr") {
-      setState(options[1]);
-      i18n.changeLanguage("fr");
-      if (typeof window !== "undefined")
-        window.localStorage.setItem("cntLang", "fr");
-      return;
+      setState(options[1])
+      i18n.changeLanguage("fr")
+      if (typeof window !== "undefined") window.localStorage.setItem("cntLang", "fr")
+      return
     }
     const cntLang =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem("cntLang") || "en"
-        : "en";
-    cntLang === "en" ? setState(options[0]) : setState(options[1]);
-    i18n.changeLanguage(cntLang);
-  }, []);
+      typeof window !== "undefined" ? window.localStorage.getItem("cntLang") || "en" : "en"
+    cntLang === "en" ? setState(options[0]) : setState(options[1])
+    i18n.changeLanguage(cntLang)
+  }, [])
 
   return (
     <div>
       <FormControl
         className={
-          color === "black"
-            ? `${classes.formControl} ${classes.blackSVG}`
-            : classes.formControl
+          color === "black" ? `${classes.formControl} ${classes.blackSVG}` : classes.formControl
         }
       >
-        <NativeSelect
-          value={state}
-          onChange={handleChange}
-          style={{ color: color }}
-        >
+        <NativeSelect value={state} onChange={handleChange} style={{ color: color }}>
           {options.map((item: any, index: number) => {
             return (
               <option
@@ -70,28 +60,24 @@ const LangDropdown = ({ color }: Props) => {
               >
                 {t(item).toUpperCase()}
               </option>
-            );
+            )
           })}
         </NativeSelect>
       </FormControl>
-      <select
-        className={classes.mobileSelector}
-        value={state}
-        onChange={handleChange}
-      >
+      <select className={classes.mobileSelector} value={state} onChange={handleChange}>
         {options.map((item: any, index: number) => {
           return (
             <option value={item} key={index}>
               {t(item)}
             </option>
-          );
+          )
         })}
       </select>
     </div>
-  );
-};
+  )
+}
 
-export default LangDropdown;
+export default LangDropdown
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -127,4 +113,4 @@ const useStyles = makeStyles(() =>
       },
     },
   })
-);
+)

@@ -52,7 +52,7 @@ const findGeoLoc = (geoPos: any) => {
   findLocationAPI
     .findGeoLocation(storesDetails.store_id, geoData)
     .then((res: any) => {
-      storesDetails.changeFindAddLocation(res.data)
+      storesDetails.changeFindAddLocation(res)
     })
     .catch((error) => {
       console.log("Error to find location with GeoCode", error)

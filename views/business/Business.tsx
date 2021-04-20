@@ -130,11 +130,7 @@ const Business = ({ handleStatus }: Props) => {
               })}
             </Grid>
           </Card>
-          <ContactModal
-            openModal={openModal}
-            handleModal={setOpenModal}
-            storesDetailsStore={storesDetails}
-          />
+          <ContactModal openModal={openModal} handleModal={setOpenModal} />
         </div>
       </div>
     </div>

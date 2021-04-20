@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-// import { Shape, Section1, Section2, SectionWave, Section6 } from "./index";
 import Shape from "./Shape"
 import Section1 from "./Section1"
 import Section2 from "./Section2"

@@ -46,9 +46,7 @@ const Locations = ({ handleStatus }: Props) => {
   }, [])
 
   const handleGetQuote = () => {
-    const cntAppointment: any = repairWidgetStore.appointResponse
     repairWidgetStore.init()
-    repairWidgetStore.changeAppointResponse(cntAppointment)
     handleStatus(false)
   }
 

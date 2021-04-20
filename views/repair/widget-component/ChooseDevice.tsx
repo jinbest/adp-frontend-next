@@ -7,7 +7,7 @@ import Search from "../../../components/Search"
 import Button from "../../../components/Button"
 import RepairSummary from "./RepairSummary"
 import { useTranslation } from "react-i18next"
-import { repairWidData, storesDetails, repairWidgetStore } from "../../../store/"
+import { repairWidData, storesDetails } from "../../../store/"
 import {
   getDeviceBrandsAPI,
   addMoreDeviceBrandsAPI,
@@ -728,20 +728,12 @@ const ChooseDevice = ({
             )}
 
             {(stepName === "dropOffDevicce" || stepName === "receiveQuote") && (
-              <RepairSummary
-                step={step}
-                themeCol={themeCol}
-                repairWidgetStore={repairWidgetStore}
-              />
+              <RepairSummary themeCol={themeCol} />
             )}
           </Card>
         </Grid>
       </Grid>
-      <ContactModal
-        openModal={openContactModal}
-        handleModal={setOpenContactModal}
-        storesDetailsStore={storesDetails}
-      />
+      <ContactModal openModal={openContactModal} handleModal={setOpenContactModal} />
     </div>
   )
 }

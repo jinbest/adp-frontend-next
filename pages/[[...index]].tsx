@@ -1,6 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { repairWidgetStore, storesDetails } from "../store/"
+import { storesDetails } from "../store/"
 import Home from "../views/home/Home"
 import Business from "../views/business/Business"
 import Locations from "../views/locations/Locations"
@@ -25,7 +25,7 @@ export default function DynamicPages({ features, handleStatus }: Props) {
       <Route
         path="/"
         exact
-        component={() => <Home features={features} handleStatus={handleStatus} />}
+        component={() => <Home handleStatus={handleStatus} features={features} />}
       />
       <Route
         path={routes.repairPage}
@@ -33,23 +33,11 @@ export default function DynamicPages({ features, handleStatus }: Props) {
       />
       <Route
         path={routes.contactPage}
-        component={() => (
-          <Contact
-            storesDetailsStore={storesDetails}
-            handleStatus={handleStatus}
-            features={features}
-          />
-        )}
+        component={() => <Contact handleStatus={handleStatus} features={features} />}
       />
       <Route
         path={routes.repairWidgetPage}
-        component={() => (
-          <RepairWidget
-            handleStatus={handleStatus}
-            features={features}
-            repairWidgetStore={repairWidgetStore}
-          />
-        )}
+        component={() => <RepairWidget handleStatus={handleStatus} features={features} />}
       />
       <Route
         path={routes.businessPage}
