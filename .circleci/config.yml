@@ -55,7 +55,7 @@ jobs:
           name: Deploy to GKE
           command: |
             gcloud --quiet beta compute ssh $DEV_BASTION_CLUSTER --ssh-key-expire-after=5m --tunnel-through-iap --project $DEV_PROJECT_ID  --zone $DEV_COMPUTE_ZONE --command='
-            rm -rf adp-frontend &&
+            rm -rf adp-frontend-v2 &&
             curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin &&
 
             export BITBUCKET_NAME=$(gcloud secrets versions access latest --secret=BITBUCKET_NAME) &&
@@ -67,7 +67,7 @@ jobs:
 
             git clone https://${BITBUCKET_NAME}:${BITBUCKET_PASS}@bitbucket.org/device_commerce/adp-frontend-v2.git &&
             gcloud --quiet container clusters get-credentials $DEV_CLUSTER_NAME --region $DEV_REGION &&
-            cd adp-frontend &&
+            cd adp-frontend-v2 &&
             chmod u+x ./templater.sh &&
             ./templater.sh -s linux -p development -c "skaffold deploy -p development -t latest" &&
             rm -rf adp-frontend' -- -L${DEV_BASTION_PORT}:%INSTANCE%:${DEV_BASTION_PORT}
@@ -109,7 +109,7 @@ jobs:
           name: Deploy to GKE
           command: |
             gcloud --quiet beta compute ssh $PROD_BASTION_CLUSTER --ssh-key-expire-after=5m --tunnel-through-iap --project $PROD_PROJECT_ID  --zone $PROD_COMPUTE_ZONE --command='
-            rm -rf adp-frontend &&
+            rm -rf adp-frontend-v2 &&
             curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin &&
 
             export BITBUCKET_NAME=$(gcloud secrets versions access latest --secret=BITBUCKET_NAME) &&
@@ -121,7 +121,7 @@ jobs:
 
             git clone -b production https://${BITBUCKET_NAME}:${BITBUCKET_PASS}@bitbucket.org/device_commerce/adp-frontend-v2.git &&
             gcloud --quiet container clusters get-credentials $PROD_CLUSTER_NAME --region $PROD_REGION &&
-            cd adp-frontend &&
+            cd adp-frontend-v2 &&
             chmod u+x ./templater.sh &&
             ./templater.sh -s linux -p production -c "skaffold deploy -p production -t latest" &&
             rm -rf adp-frontend' -- -L${PROD_BASTION_PORT}:%INSTANCE%:${PROD_BASTION_PORT}
