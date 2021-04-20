@@ -5,7 +5,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Badge from "../components/Badge"
 import { storesDetails, repairWidgetStore, repairWidData } from "../store/"
-import { appLoadAPI, findLocationAPI } from "../services/"
+import { appLoadAPI } from "../services/"
 import { FeaturesParam } from "../model/feature-toggle"
 import { MetaParams } from "../model/meta-params"
 import { ScriptParams } from "../model/script-params"
@@ -14,11 +14,17 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { TagParams } from "../model/tag-params"
 import _, { isEmpty } from "lodash"
 import { Helmet } from "react-helmet"
+import { Store } from "../model/store"
+import { StoreToggle } from "../model/store-toggle"
+import { GetManyResponse } from "../model/get-many-response"
+import ApiClient from "../services/api-client"
 // import Head from "next/head"
 
 import "../index.css"
 import "../assets/style/index.scss"
 import "../assets/style/theme.css"
+
+const apiClient = ApiClient.getInstance()
 
 interface DataProps extends AppProps {
   storeData: any
@@ -37,7 +43,6 @@ const App = ({
   locations,
   storeCnts,
   commonCnts,
-  subDomainID,
 }: // subDomainID,
 DataProps) => {
   const [footerStatus, setFooterStatus] = useState(false)
@@ -75,15 +80,15 @@ DataProps) => {
     setFavIcon(homepage.headData.fav.img)
 
     /* This is for local work */
-    const prodLink = "https://prod.pcmtx.com/api/store-service/"
-    if (subDomainID > 0) {
-      setTheme(`${prodLink}dc/store/${subDomainID}/theme/theme.min.css/asset`)
-    } else {
-      setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
-    }
+    // const prodLink = "https://prod.pcmtx.com/api/store-service/"
+    // if (subDomainID > 0) {
+    //   setTheme(`${prodLink}dc/store/${subDomainID}/theme/theme.min.css/asset`)
+    // } else {
+    //   setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
+    // }
 
     /* This is for production */
-    // setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
+    setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
 
     homepage.bodyData.tags.forEach((item: TagParams) => {
       loadBodyTag(item.content)
@@ -121,8 +126,6 @@ DataProps) => {
       if (storeCnts.general.condition.hasShopLink) {
         cntFeats.push({ flag: "FRONTEND_BUY", isActive: true })
       }
-      cntFeats.push({ flag: "ALWAYS_TRUE", isActive: true })
-      cntFeats.push({ flag: "FRONTEND_INSURE", isActive: false })
       setFeatures([...cntFeats])
       setLoadStatus(true)
     }
@@ -165,55 +168,42 @@ DataProps) => {
 }
 
 App.getInitialProps = async ({ ctx }: Record<string, any>) => {
-  // const domainMatch = ctx.req.headers.host.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
-  // const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
-  console.log(ctx)
-  const apexDomain = "dccmtx.com"
-  // const subDomainID = -1
+  const domainMatch = ctx.req.headers.host.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
+  const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
+  const subDomainID = -1
 
-  const devicelist = [
-    { name: "bananaservices", domain: "bananaservices.ca", storeID: 1 },
-    { name: "geebodevicerepair", domain: "geebodevicerepair.ca", storeID: 3 },
-    { name: "mobiletechlab", domain: "mobiletechlab.ca", storeID: 4 },
-    { name: "nanotechmobile", domain: "nanotechmobile.ca", storeID: 2 },
-    { name: "northtechcellsolutions", domain: "northtechcellsolutions.ca", storeID: 5 },
-    { name: "phonephix", domain: "phonephix.ca", storeID: 9 },
-    { name: "pradowireless", domain: "pradowireless.com", storeID: 10 },
-    { name: "reparationcellulairebsl", domain: "reparationcellulairebsl.ca", storeID: 7 },
-    { name: "wirelessrevottawa", domain: "wirelessrevottawa.ca", storeID: 8 },
-    { name: "dccmtx", domain: "https://dev.mtlcmtx.com/", storeID: 1 },
-    { name: "mtlcmtx", domain: "https://dev.mtlcmtx.com/", storeID: 2 },
+  // const devicelist = [
+  //   { name: "bananaservices", domain: "bananaservices.ca", storeID: 1 },
+  //   { name: "geebodevicerepair", domain: "geebodevicerepair.ca", storeID: 3 },
+  //   { name: "mobiletechlab", domain: "mobiletechlab.ca", storeID: 4 },
+  //   { name: "nanotechmobile", domain: "nanotechmobile.ca", storeID: 2 },
+  //   { name: "northtechcellsolutions", domain: "northtechcellsolutions.ca", storeID: 5 },
+  //   { name: "phonephix", domain: "phonephix.ca", storeID: 9 },
+  //   { name: "pradowireless", domain: "pradowireless.com", storeID: 10 },
+  //   { name: "reparationcellulairebsl", domain: "reparationcellulairebsl.ca", storeID: 7 },
+  //   { name: "wirelessrevottawa", domain: "wirelessrevottawa.ca", storeID: 8 },
+  //   { name: "dccmtx", domain: "https://dev.mtlcmtx.com/", storeID: 1 },
+  //   { name: "mtlcmtx", domain: "https://dev.mtlcmtx.com/", storeID: 2 },
+  // ]
+  // const siteNum = 0,
+  //   subDomainID = devicelist[siteNum].storeID
+
+  const storeData = await apiClient.get<Store>(
+    `${Config.STORE_SERVICE_API_URL}dc/store/domain/${apexDomain}?include_children=false`
+  )
+
+  const url = `${Config.ADMIN_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/features/toggle?types=FRONTEND`
+  const storeToggles = await apiClient.get<StoreToggle[]>(url)
+  const features: FeaturesParam[] = [
+    { flag: "ALWAYS_TRUE", isActive: true },
+    { flag: "FRONTEND_INSURE", isActive: false },
   ]
-  const siteNum = 2,
-    subDomainID = devicelist[siteNum].storeID
-
-  const storeData = await appLoadAPI
-    .getStoresDetail(apexDomain, false)
-    .then((res: any) => {
-      return res.data
+  storeToggles.forEach((item: StoreToggle) => {
+    features.push({
+      flag: item.feature_id,
+      isActive: item.is_enabled,
     })
-    .catch((error) => {
-      console.log("Error in get Store Details", error)
-    })
-
-  const features = await appLoadAPI
-    .getFeatures(storeData.settings.store_id)
-    .then((res: any) => {
-      const feats: FeaturesParam[] = [
-        { flag: "ALWAYS_TRUE", isActive: true },
-        { flag: "FRONTEND_INSURE", isActive: false },
-      ]
-      for (let i = 0; i < res.data.length; i++) {
-        feats.push({
-          flag: res.data[i].feature_id,
-          isActive: res.data[i].is_enabled,
-        })
-      }
-      return feats
-    })
-    .catch((error) => {
-      console.log("Error in get Features", error)
-    })
+  })
 
   const contents = await appLoadAPI
     .getStoreConfig(storeData.settings.store_id, subDomainID)
@@ -224,14 +214,10 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
       console.log("Error in get Store Config", err)
     })
 
-  const locations = await findLocationAPI
-    .findAllLocation(storeData.settings.store_id)
-    .then((res: any) => {
-      return res.data
-    })
-    .catch((error) => {
-      console.log("Error in get Features", error)
-    })
+  const locURL = `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/locations?page=1&per_page=10000&include_voided=false`
+  const response = await apiClient.get<GetManyResponse>(locURL)
+  const locations = response.data
+
   return {
     storeData: storeData,
     feats: features,
