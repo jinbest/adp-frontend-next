@@ -16,17 +16,19 @@ FROM nginx:1.17-alpine
 
 WORKDIR /app
 
-COPY package.json ./
-
 RUN apk --update add nodejs-current npm supervisor
 
 RUN mkdir -p /var/log/supervisor && mkdir -p /etc/supervisor/conf.d
 
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN rm -rf /usr/share/nginx/html/*
+# RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=build /app/.next ./.next
+
+COPY --from=build /app/package*.json ./
+
+RUN npm install --quiet --production
 
 # supervisor base configuration
 ADD supervisor.conf /etc/supervisor.conf
