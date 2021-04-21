@@ -132,7 +132,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
                       btnTitle={item.btnTitle}
                       color={data.colorPalle.orange}
                       key={index}
-                      heart={index === 0 ? require('../../assets/_common/img/heart.png').default : ""}
+                      heart={index === 0 ? require('../../static/_common/img/heart.png').default : ""}
                       heartCol={data.colorPalle.heartCol}
                       href={item.href}
                     />

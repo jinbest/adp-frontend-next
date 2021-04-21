@@ -6,8 +6,16 @@ export default class CustomDocument extends Document {
     return (
       <Html>
         <Head>
-          <link href="../index.css?family=Poppins+Bold" rel="preload stylesheet" as="style" />
-          <link href="../index.css?family=Poppins+Regular" rel="preload stylesheet" as="style" />
+          <link
+            href="/static/style/font.css?family=Poppins+Bold"
+            rel="preload stylesheet"
+            as="style"
+          />
+          <link
+            href="/static/style/font.css?family=Poppins+Regular"
+            rel="preload stylesheet"
+            as="style"
+          />
         </Head>
 
         <body>

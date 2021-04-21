@@ -19,9 +19,8 @@ import { StoreToggle } from "../model/store-toggle"
 import { GetManyResponse } from "../model/get-many-response"
 import ApiClient from "../services/api-client"
 // import Head from "next/head"
-import "../index.css"
-import "../assets/style/index.scss"
-import "../assets/style/theme.css"
+import "../static/style/index.scss"
+import "../static/style/theme.css"
 
 const apiClient = ApiClient.getInstance()
 

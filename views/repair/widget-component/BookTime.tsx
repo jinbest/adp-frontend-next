@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next"
 import { repairWidgetStore, storesDetails } from "../../../store"
 import { makeLocations } from "../../../services/helper"
 import { observer } from "mobx-react"
+import { timeZoneList, defaultTimezone } from "../../../static/timezoneList"
 
 const DAYS_OF_THE_WEEK: string[] = [
   "Sunday",
@@ -45,8 +46,6 @@ type Props = {
 
 const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Props) => {
   const mainData = storesDetails.storeCnts
-  const timezoneData = require(`../../../assets/timezoneList`)
-  const timeZoneList = timezoneData.timezoneOptions
   const themeCol = mainData.general.colorPalle.themeColor
   const repairBooktimeCol = mainData.general.colorPalle.repairBooktimeCol
   const brandThemeCol = mainData.homepage.header.brandData.brandThemeCol
@@ -388,7 +387,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                         title={t(DAYS_OF_THE_WEEK[week]) + ", " + t(MONTHS[month]) + " " + day}
                         timezoneIndex={tzIndex}
                         timeZoneList={timeZoneList}
-                        defaultTimezone={timezoneData.defaultTimezone}
+                        defaultTimezone={defaultTimezone}
                         changeTimezone={setTZIndex}
                         changeBooktime={setTime}
                         selectYear={year}
