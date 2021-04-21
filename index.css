@@ -58,3 +58,23 @@ button {
     border-radius: 0 !important;
   }
 }
+
+@font-face {
+  font-family: "Poppins Bold";
+  src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  advance-override: 10;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Poppins Regular";
+  src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  advance-override: 10;
+  font-display: fallback;
+}

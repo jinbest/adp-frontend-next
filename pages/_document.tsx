@@ -6,18 +6,8 @@ export default class CustomDocument extends Document {
     return (
       <Html>
         <Head>
-          <link
-            rel="preload"
-            href="https://storage.googleapis.com/adp_assets/fonts/Poppins-Bold.ttf?family=Poppins+Bold&display=swap"
-            as="font"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="https://storage.googleapis.com/adp_assets/fonts/Poppins-Regular.ttf?family=Poppins+Regular&display=swap"
-            as="font"
-            crossOrigin="anonymous"
-          />
+          <link href="../index.css?family=Poppins+Bold" rel="preload stylesheet" as="style" />
+          <link href="../index.css?family=Poppins+Regular" rel="preload stylesheet" as="style" />
         </Head>
 
         <body>
