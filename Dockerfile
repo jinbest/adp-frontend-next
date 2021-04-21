@@ -85,7 +85,7 @@ COPY --from=builder /app/package.json ./package.json
 # supervisor base configuration
 ADD supervisor.conf /etc/supervisor.conf
 
-EXPOSE 4001
+EXPOSE 4001 3000
 
 # start supervisord (run nextjs and nginx)
 CMD supervisord -c /etc/supervisor.conf
