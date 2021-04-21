@@ -19,6 +19,7 @@ import { StoreToggle } from "../model/store-toggle"
 import { GetManyResponse } from "../model/get-many-response"
 import ApiClient from "../services/api-client"
 import BaseRouter from "../views/BaseRouter"
+
 const apiClient = ApiClient.getInstance()
 
 function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -154,7 +155,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // const domainMatch = ctx.req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
   // const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
   console.log(ctx)
-  const apexDomain = "dccmtx"
+  const apexDomain = "dccmtx.com"
   const subDomainID = -1
 
   // const devicelist = [
