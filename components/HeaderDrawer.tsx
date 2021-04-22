@@ -254,7 +254,7 @@ const HeaderDrawer = (props: Props) => {
   return (
     <React.Fragment>
       <div onClick={toggleDrawer("left", true)}>{children}</div>
-      <Drawer anchor={"left"} open={state["left"]} onClose={toggleDrawer("left", false)}>
+      <Drawer anchor="left" open={state["left"]} onClose={toggleDrawer("left", false)}>
         <div className={classes.root}>
           <div className={classes.drawerLogo}>
             <img src={data.logoData.logoHeaderImg} alt="drawer-logo" width="1" height="auto" />
@@ -447,15 +447,15 @@ const HeaderDrawer = (props: Props) => {
                             {item.days.map((it: any, index: number) => {
                               return (
                                 <div key={index}>
-                                  <p className={"block-title"} style={{ fontSize: "14px" }}>
+                                  <p className="block-title" style={{ fontSize: "14px" }}>
                                     {t("Hours")}
                                   </p>
-                                  <div className={"hours-div"}>
+                                  <div className="hours-div">
                                     <div>
                                       {it.wkDys.map((itm: any, idx: number) => {
                                         return (
                                           <p
-                                            className={"block-content"}
+                                            className="block-content"
                                             style={{
                                               textDecoration: "none",
                                               opacity: 1,
@@ -473,7 +473,7 @@ const HeaderDrawer = (props: Props) => {
                                       {item.hours[index].hrs.map((itm: any, idx: number) => {
                                         return (
                                           <p
-                                            className={"block-content"}
+                                            className="block-content"
                                             style={{
                                               textDecoration: "none",
                                               opacity: 1,
@@ -496,10 +496,10 @@ const HeaderDrawer = (props: Props) => {
                       })}
                     </React.Fragment>
                   )}
-                  <div className={"content-block"}>
+                  <div className="content-block">
                     {locSelStatus && (
                       <a
-                        className={"link"}
+                        className="link"
                         style={{ color: themeCol, fontSize: "12px" }}
                         href={
                           storesDetails.cntUserLocation[0] &&
@@ -515,7 +515,7 @@ const HeaderDrawer = (props: Props) => {
                     )}
                     {storesDetails.findAddLocation.length > 1 && (
                       <a
-                        className={"link"}
+                        className="link"
                         style={{ color: themeCol, fontSize: "12px" }}
                         onClick={viewMoreStores}
                       >
@@ -524,7 +524,7 @@ const HeaderDrawer = (props: Props) => {
                     )}
                     {locSelStatus && (
                       <a
-                        className={"link"}
+                        className="link"
                         style={{ color: themeCol, fontSize: "12px" }}
                         href={`${
                           storesDetails.cntUserLocation[0] &&

@@ -10,12 +10,12 @@ const Section5 = () => {
   const [t] = useTranslation()
 
   return (
-    <section className={"sec5-Back"} style={{ display: "none" }}>
-      <Box className={"Container sec5-container"}>
+    <section className="sec5-Back" style={{ display: "none" }}>
+      <Box className="Container sec5-container">
         <Typography className="f40 bold mg-t-1">{t(thisPage.title)}</Typography>
         <Typography className="f18">{t(thisPage.content)}</Typography>
         <img
-          className={"mg-t-1 section5-img"}
+          className="mg-t-1 section5-img"
           src={storesDetails.commonCnts.bounceImg}
           width="1"
           height="auto"
@@ -24,10 +24,10 @@ const Section5 = () => {
         <Typography className="f24 bold">{t(thisPage.subtitle)}</Typography>
         <Box className="col_center">
           <ul>
-            <Typography className={"protect-content"}>{t(thisPage.subcontent)}</Typography>
+            <Typography className="protect-content">{t(thisPage.subcontent)}</Typography>
             {thisPage.subcontentData.map((item: string, index: number) => {
               return (
-                <li key={index} className={"protect-content"}>
+                <li key={index} className="protect-content">
                   <span className="dot">&nbsp;&bull;&nbsp;</span>
                   {t(item)}
                 </li>
@@ -35,7 +35,7 @@ const Section5 = () => {
             })}
           </ul>
         </Box>
-        <Box className={"sec5-button"}>
+        <Box className="sec5-button">
           <Button
             title={t(thisPage.btnTitle)}
             bgcolor={data.general.colorPalle.themeColor}

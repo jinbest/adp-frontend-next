@@ -31,20 +31,20 @@ const Section3 = ({ features }: Props) => {
   return (
     <FeatureToggles features={feats}>
       <Feature
-        name={"FRONTEND_ONLINE_PURCHASE"}
+        name="FRONTEND_ONLINE_PURCHASE"
         inactiveComponent={() => <></>}
         activeComponent={() => (
-          <section className={"sec3-container-parent"}>
-            <div className={"Container"}>
-              <Typography className={"section-title"}>{t(thisPage.title)}</Typography>
+          <section className="sec3-container-parent">
+            <div className="Container">
+              <Typography className="section-title">{t(thisPage.title)}</Typography>
             </div>
             <div
-              className={"section3-back"}
+              className="section3-back"
               style={{
                 backgroundImage: "url(" + thisPage.bgImg + ")",
               }}
             >
-              <div className={"Container"}>
+              <div className="Container">
                 <Grid container item xs={12} spacing={2}>
                   {commonData.popularCardData.map((item: any, index: number) => {
                     return (
@@ -64,10 +64,7 @@ const Section3 = ({ features }: Props) => {
                 <Box className="pd-t-5">
                   <Grid container item xs={12} spacing={2}>
                     <Grid item sm={12} md={7}>
-                      <Typography
-                        className={"section-title white"}
-                        style={{ color: thisPage.color }}
-                      >
+                      <Typography className="section-title white" style={{ color: thisPage.color }}>
                         {thisPage.subtitle.map((item: string, index: number) => {
                           return (
                             <React.Fragment key={index}>
@@ -84,7 +81,7 @@ const Section3 = ({ features }: Props) => {
                       <img
                         src={deviceCard.img}
                         alt="device-list"
-                        className={"card-img"}
+                        className="card-img"
                         width="1"
                         height="auto"
                       />

@@ -32,7 +32,7 @@ const PhoneInput = ({ placeholder, handleSetPhone, errorText }: Props) => {
           name: "phone",
           required: true,
         }}
-        country={"ca"}
+        country="ca"
         onlyCountries={["ca", "us"]}
         // enableAreaCodes={true}
         placeholder={placeholder}

@@ -42,18 +42,18 @@ const Search = ({
 
   return (
     <Box
-      className={"search-container"}
+      className="search-container"
       style={{ background: bgcolor, border: `1px solid ${border}`, height: height }}
     >
       <InputBase
-        className={"search-input"}
+        className="search-input"
         style={{ color: color }}
         placeholder={tPlaceholder}
         value={value ?? ""}
         onChange={handleChange}
       />
       <div onClick={handleIconClick} className={classes.searchIconDiv}>
-        <SearchIcon className={"search-icon"} style={{ color: color }} />
+        <SearchIcon className="search-icon" style={{ color: color }} />
       </div>
     </Box>
   )

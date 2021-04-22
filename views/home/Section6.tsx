@@ -16,7 +16,7 @@ const Section6 = () => {
   const overAllRating = thisPage.overAllRating
 
   return (
-    <section className={"Container center sec6-container"}>
+    <section className="Container center sec6-container">
       <Typography className="section-review-title">{t(thisPage.title)}</Typography>
       {overAllRating.visible && (
         <>
@@ -69,13 +69,13 @@ const Section6 = () => {
         item
         xs={12}
         spacing={2}
-        className={"sec6-card"}
+        className="sec6-card"
         style={{ maxWidth: "inherit" }}
       >
         {thisPage.reviews.map((item: any, index: number) => {
           return (
             <Grid item xs={12} md={4} key={index}>
-              <Box className={"sec6-card"}>
+              <Box className="sec6-card">
                 <CardWhyCustomer
                   key={index}
                   score={item.score}

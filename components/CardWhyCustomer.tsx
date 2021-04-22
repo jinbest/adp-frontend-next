@@ -10,15 +10,15 @@ type Props = {
 
 const CardWhyCustomer = ({ score, content, reviewer }: Props) => {
   return (
-    <div className={"card-why-customer"}>
-      <div className={"score-div"}>
-        <div className={"rating"}>
+    <div className="card-why-customer">
+      <div className="score-div">
+        <div className="rating">
           <Rating name="read-only" value={score} max={score} readOnly />
         </div>
         {/* <p>{days}</p> */}
       </div>
-      <p className={"content"}>{content}</p>
-      <p className={"reviewer"}>{reviewer}</p>
+      <p className="content">{content}</p>
+      <p className="reviewer">{reviewer}</p>
     </div>
   )
 }

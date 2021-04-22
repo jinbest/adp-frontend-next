@@ -9,6 +9,7 @@ import { repairWidgetStore, storesDetails } from "../../store"
 import { useTranslation } from "react-i18next"
 import { isExternal } from "../../services/helper"
 import { observer } from "mobx-react"
+import _ from "lodash"
 
 type Props = {
   features: any[]
@@ -18,6 +19,7 @@ type Props = {
 const Section1 = ({ features, handleStatus }: Props) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section1
+  const buttons = _.sortBy(thisPage.buttons, (o) => o.order)
   const [t] = useTranslation()
 
   // const [feats, setFeatures] = useState<any[]>([])
@@ -51,10 +53,10 @@ const Section1 = ({ features, handleStatus }: Props) => {
   return (
     <section className="Container">
       <Grid item xs={12} sm={12} className="section1-top">
-        <h1 className={"section1-title align-center"}>{t(thisPage.title)}</h1>
+        <h1 className="section1-title align-center">{t(thisPage.title)}</h1>
         <p className="section1-subtitle align-center">{t(thisPage.subtitle)}</p>
         <div className="align-center d-flex">
-          {thisPage.buttons.map((item: any, index: number) => {
+          {buttons.map((item: any, index: number) => {
             return (
               <React.Fragment key={index}>
                 {item.visible ? (
@@ -89,10 +91,10 @@ const Section1 = ({ features, handleStatus }: Props) => {
 
         <FeatureToggles features={featSearch}>
           <Feature
-            name={"FRONTEND_GLOBAL_SEARCH"}
+            name="FRONTEND_GLOBAL_SEARCH"
             inactiveComponent={() => <></>}
             activeComponent={() => (
-              <Box className={"sec1-search_input"}>
+              <Box className="sec1-search_input">
                 <Search
                   placeholder={thisPage.searchPlaceholder}
                   color="white"
@@ -107,7 +109,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
         </FeatureToggles>
       </Grid>
 
-      {/* <Grid container item xs={12} spacing={3} className={"sec1-card-mobile-data"}>
+      {/* <Grid container item xs={12} spacing={3} className="sec1-card-mobile-data">
         {thisPage.cards.data.map((item: any, index: number) => {
           return (
             <FeatureToggles features={feats} key={index}>

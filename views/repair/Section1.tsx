@@ -6,6 +6,8 @@ import { observer } from "mobx-react"
 import { useTranslation } from "react-i18next"
 import { storesDetails, repairWidgetStore } from "../../store"
 import { isExternal } from "../../services/helper"
+import _ from "lodash"
+
 interface Props {
   handleStatus: (status: boolean) => void
 }
@@ -13,6 +15,7 @@ interface Props {
 const Section1 = ({ handleStatus }: Props) => {
   const data = storesDetails.storeCnts
   const repair = data.repairPage.section1
+  const buttons = _.sortBy(repair.buttons, (o) => o.order)
   const [t] = useTranslation()
 
   const handleRepairWidget = () => {
@@ -42,7 +45,7 @@ const Section1 = ({ handleStatus }: Props) => {
               {t(repair.subtitle)}
             </Typography>
             <div style={{ display: "flex" }}>
-              {repair.buttons.map((item: any, index: number) => {
+              {buttons.map((item: any, index: number) => {
                 return (
                   <React.Fragment key={index}>
                     {item.visible ? (

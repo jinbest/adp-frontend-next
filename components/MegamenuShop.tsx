@@ -38,7 +38,7 @@ const MegamenuShop = ({ text, disableMenu }: Props) => {
         aria-haspopup="true"
         onClick={handleClick}
         // onMouseOver={handleClick}
-        className={"nav-link"}
+        className="nav-link"
         style={{ cursor: "pointer" }}
       >
         {t(text)}
@@ -52,9 +52,9 @@ const MegamenuShop = ({ text, disableMenu }: Props) => {
         // MenuListProps={{ onMouseLeave: handleClose }}
       >
         <div className="triangle"></div>
-        <div className={"menu-content-div"} style={{ height: "100%" }}>
-          <div className={"left-content " + classes.megaMenuContainer}>
-            <div className={"content-block"}>
+        <div className="menu-content-div" style={{ height: "100%" }}>
+          <div className={`left-content ${classes.megaMenuContainer}`}>
+            <div className="content-block">
               {megaShopData.mainList.map((item: any, index: number) => {
                 return (
                   <div
@@ -67,7 +67,7 @@ const MegamenuShop = ({ text, disableMenu }: Props) => {
                     key={index}
                   >
                     <p
-                      className={"block-content"}
+                      className="block-content"
                       style={{
                         color: shopSelect === index ? textThemeCol : "",
                       }}
@@ -95,11 +95,11 @@ const MegamenuShop = ({ text, disableMenu }: Props) => {
                 )
               })}
             </div>
-            <div className={"content-block"}>
+            <div className="content-block">
               {megaShopData.otherList.map((item: any, index: number) => {
                 return (
                   <p
-                    className={"block-content"}
+                    className="block-content"
                     key={index}
                     style={{
                       color: otherListSel === index ? textThemeCol : "",
@@ -118,12 +118,12 @@ const MegamenuShop = ({ text, disableMenu }: Props) => {
               margin: "30px 10px",
             }}
           ></div>
-          <div className={"left-content"}>
-            <div className={"content-block"}>
+          <div className="left-content">
+            <div className="content-block">
               {megaShopData.mainList[shopSelect].list.map((item: any, index: number) => {
                 return (
                   index < Math.round(megaShopData.mainList[shopSelect].list.length / 2) && (
-                    <p className={"block-content"} key={index}>
+                    <p className="block-content" key={index}>
                       {item}
                     </p>
                   )
@@ -131,12 +131,12 @@ const MegamenuShop = ({ text, disableMenu }: Props) => {
               })}
             </div>
           </div>
-          <div className={"left-content"}>
-            <div className={"content-block"}>
+          <div className="left-content">
+            <div className="content-block">
               {megaShopData.mainList[shopSelect].list.map((item: any, index: number) => {
                 return (
                   index >= Math.round(megaShopData.mainList[shopSelect].list.length / 2) && (
-                    <p className={"block-content"} key={index}>
+                    <p className="block-content" key={index}>
                       {item}
                     </p>
                   )

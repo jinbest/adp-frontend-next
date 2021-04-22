@@ -117,7 +117,7 @@ const SectionMap = ({
   }, [storesDetails.cntUserLocation])
 
   return (
-    <section className={"Container " + classes.root}>
+    <section className={`Container ${classes.root}`}>
       <Grid container style={{ paddingTop: "180px", paddingBottom: "100px" }}>
         <Grid item lg={6} md={12} sm={12} xs={12} className={classes.item1}>
           {locations.map((element, index) => (
@@ -228,7 +228,7 @@ const SectionMap = ({
                       </Grid>
                       <FeatureToggles features={feats}>
                         <Feature
-                          name={"FRONTEND_REPAIR_APPOINTMENT"}
+                          name="FRONTEND_REPAIR_APPOINTMENT"
                           inactiveComponent={() => <></>}
                           activeComponent={() => (
                             <Grid
@@ -273,10 +273,10 @@ const SectionMap = ({
                     md={8}
                     sm={12}
                     xs={12}
-                    className={"hours-div " + classes.timePanelWrapp}
+                    className={`hours-div ${classes.timePanelWrapp}`}
                   >
                     <div>
-                      <p className={"block-title"} style={{ textAlign: "start" }}>
+                      <p className="block-title" style={{ textAlign: "start" }}>
                         {t("Hours")}
                       </p>
                     </div>
@@ -284,12 +284,12 @@ const SectionMap = ({
                     {getRegularHours(element.location_hours).map((item, index) => (
                       <Grid key={index} item container md={12} sm={12} xs={12}>
                         <Grid item md={6} sm={6} xs={6}>
-                          <p className={"block-content " + classes.nonHoverEffect}>
+                          <p className={`block-content ${classes.nonHoverEffect}`}>
                             {t(DAYS_OF_THE_WEEK[item.day])}
                           </p>
                         </Grid>
                         <Grid item md={6} sm={6} xs={6}>
-                          <p className={"block-content " + classes.nonHoverEffect}>
+                          <p className={`block-content ${classes.nonHoverEffect}`}>
                             {!item.open || !item.close
                               ? item.by_appointment_only
                                 ? t("Call to book appointment")

@@ -276,16 +276,16 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         onClose={handleClose}
       >
         <div className="triangle" style={{ right: "65px" }}></div>
-        <div className={"menu-content-div"}>
+        <div className="menu-content-div">
           <div
-            className={"left-content"}
+            className="left-content"
             style={{
               width: locSelStatus || !locations.length ? "215px" : "500px",
             }}
           >
-            <div className={"content-block"}>
+            <div className="content-block">
               {storesDetails.cntUserLocation.length || !requireUserInfo ? (
-                <p className={"block-title"}>{myStore}</p>
+                <p className="block-title">{myStore}</p>
               ) : (
                 <div style={{ textAlign: "center" }}>
                   <InputComponent
@@ -334,10 +334,10 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                 })}
               </div>
             </div>
-            <div className={"content-block"}>
+            <div className="content-block">
               {locSelStatus && (
                 <a
-                  className={"link"}
+                  className="link"
                   style={{ color: underLineCol }}
                   href={
                     storesDetails.cntUserLocation[0] &&
@@ -353,13 +353,13 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
               )}
               {storesDetails.findAddLocation.length > 1 &&
                 locations.length < storesDetails.findAddLocation.length && (
-                  <a className={"link"} style={{ color: underLineCol }} onClick={viewMoreStores}>
+                  <a className="link" style={{ color: underLineCol }} onClick={viewMoreStores}>
                     {t("View More Stores")}
                   </a>
                 )}
               {locSelStatus && (
                 <a
-                  className={"link"}
+                  className="link"
                   style={{ color: underLineCol }}
                   href={`${
                     storesDetails.cntUserLocation[0] &&
@@ -381,7 +381,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
             {locSelStatus && (
               <FeatureToggles features={features}>
                 <Feature
-                  name={"FRONTEND_REPAIR_APPOINTMENT"}
+                  name="FRONTEND_REPAIR_APPOINTMENT"
                   inactiveComponent={() => <></>}
                   activeComponent={() => (
                     <>
@@ -424,13 +424,13 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                       {item.days.map((it: any, index: number) => {
                         return (
                           <div key={index}>
-                            <p className={"block-title"}>{t("Hours")}</p>
-                            <div className={"hours-div"}>
+                            <p className="block-title">{t("Hours")}</p>
+                            <div className="hours-div">
                               <div>
                                 {it.wkDys.map((itm: any, idx: number) => {
                                   return (
                                     <p
-                                      className={"block-content"}
+                                      className="block-content"
                                       style={{
                                         textDecoration: "none",
                                         opacity: 1,
@@ -447,7 +447,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                 {item.hours[index].hrs.map((itm: any, idx: number) => {
                                   return (
                                     <p
-                                      className={"block-content"}
+                                      className="block-content"
                                       style={{
                                         textDecoration: "none",
                                         opacity: 1,

@@ -18,10 +18,10 @@ const CardMobile = ({ title, img, btnTitle, color, heart, heartCol, href }: Prop
   const [t] = useTranslation()
 
   return (
-    <div className={"card-mobile"}>
+    <div className="card-mobile">
       <p style={{ color: color }}>{title.toLocaleUpperCase()}</p>
       {heart && (
-        <div className={"card-mobile-heart"} style={{ background: heartCol }}>
+        <div className="card-mobile-heart" style={{ background: heartCol }}>
           <img src={heart} alt="heart" width="1" height="auto" />
         </div>
       )}

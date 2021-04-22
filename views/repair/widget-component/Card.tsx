@@ -8,7 +8,7 @@ type Props = {
 
 const Card = ({ children, className, height }: Props) => {
   return (
-    <div className={"service-widget-card " + className} style={{ height: height }}>
+    <div className={`service-widget-card ${className}`} style={{ height: height }}>
       {children}
     </div>
   )

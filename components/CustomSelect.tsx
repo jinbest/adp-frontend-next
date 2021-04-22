@@ -58,11 +58,11 @@ const CustomSelect = ({ options, value, handleSetValue, variant }: Props) => {
           inputProps={{
             name: "code",
           }}
-          className={"custom-select"}
+          className="custom-select"
         >
           {options.map((item: any, index: number) => {
             return (
-              <MenuItem className={"custom-select"} value={item.code} key={index}>
+              <MenuItem className="custom-select" value={item.code} key={index}>
                 {item.name}
               </MenuItem>
             )

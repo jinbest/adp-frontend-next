@@ -13,14 +13,12 @@ const Section4 = () => {
   const [t] = useTranslation()
 
   return (
-    <div className={"sec4-background"}>
-      <section className={"Container"}>
-        <Box className={"sec4-container-box"}>
+    <div className="sec4-background">
+      <section className="Container">
+        <Box className="sec4-container-box">
           <Grid container item xs={12}>
             <Grid item xs={12} sm={12} md={6}>
-              <Typography className={"f40 bold " + "section4-title"}>
-                {t(thisPage.title)}
-              </Typography>
+              <Typography className="f40 bold section4-title">{t(thisPage.title)}</Typography>
               {/* <Box className={'section4-button mobile'}>
                 <Button 
                   title={t(thisPage.btnTitle)} 
@@ -34,7 +32,7 @@ const Section4 = () => {
                 {imageData.slice(0, 2).map((item: any, index: number) => {
                   return (
                     <Grid item xs={12} sm={6} key={index}>
-                      <Box className={"cart-device-list"}>
+                      <Box className="cart-device-list">
                         <DeviceListComponent
                           img={item.img}
                           title={t(item.title)}
@@ -63,7 +61,7 @@ const Section4 = () => {
                 {imageData.slice(2, 5).map((item: any, index: number) => {
                   return (
                     <Grid item xs={12} sm={4} key={index}>
-                      <Box className={"cart-device-list"}>
+                      <Box className="cart-device-list">
                         <DeviceListComponent
                           img={item.img}
                           title={t(item.title)}
@@ -82,15 +80,15 @@ const Section4 = () => {
           </Grid>
         </Box>
 
-        <Box className={"sec4-container-special-box"}>
+        <Box className="sec4-container-special-box">
           <Grid container item xs={12}>
-            <Typography className={"f40 bold " + "section-title"}>{t(thisPage.title)}</Typography>
+            <Typography className="f40 bold section-title">{t(thisPage.title)}</Typography>
           </Grid>
           <Grid container item xs={12}>
             <div style={{ display: "flex", margin: "auto" }}>
               {imageData.map((item: any, index: number) => {
                 return (
-                  <Box className={"cart-device-list"} key={index}>
+                  <Box className="cart-device-list" key={index}>
                     <DeviceListComponent
                       img={item.img}
                       title={t(item.title)}
