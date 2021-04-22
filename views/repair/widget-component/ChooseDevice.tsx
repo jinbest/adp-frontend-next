@@ -490,7 +490,7 @@ const ChooseDevice = ({
         <Grid item xs={12} md={7}>
           <Card>
             <div className="service-choose-device-container">
-              {step < 3 && (
+              {stepName !== "deviceBrand" && step < 3 && (
                 <div style={{ width: "95%" }}>
                   {features.includes("SEARCH") && (
                     <Search
