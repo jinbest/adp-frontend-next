@@ -4,16 +4,17 @@ import Head from "next/head"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../store"
 import ReactToPrint from "react-to-print"
+import { observer } from "mobx-react"
 
 type Props = {
   handleStatus: (status: boolean) => void
-  privacyTemplate: string
 }
 
-const PrivacyPolicy = ({ handleStatus, privacyTemplate }: Props) => {
+const PrivacyPolicy = ({ handleStatus }: Props) => {
   const classes = useStyles()
   const [t] = useTranslation()
   const data = storesDetails.storeCnts
+  const privacyTemplate = storesDetails.privacyTemplate
 
   const [pageTitle, setPageTitle] = useState("Privacy Statement")
 
@@ -70,7 +71,7 @@ const PrivacyPolicy = ({ handleStatus, privacyTemplate }: Props) => {
   )
 }
 
-export default PrivacyPolicy
+export default observer(PrivacyPolicy)
 
 const useStyles = makeStyles(() =>
   createStyles({

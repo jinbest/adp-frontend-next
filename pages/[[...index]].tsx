@@ -109,6 +109,7 @@ function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
       setFeatures([...cntFeats])
       setLoadStatus(true)
     }
+    storesDetails.changePrivacyPolicy(privacyTemplate)
   }, [])
 
   return (
@@ -141,11 +142,7 @@ function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
           </Helmet>
           <Router>
             <Header handleStatus={handleFooterStatus} features={features} />
-            <BaseRouter
-              handleStatus={handleFooterStatus}
-              features={features}
-              privacyTemplate={privacyTemplate}
-            />
+            <BaseRouter handleStatus={handleFooterStatus} features={features} />
             <Badge />
             {footerStatus && <Footer />}
           </Router>

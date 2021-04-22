@@ -17,6 +17,7 @@ export class StoresDetails {
   @observable allLocations: any[] = []
   @observable storeCnts: any = {}
   @observable commonCnts: any = {}
+  @observable privacyTemplate = ""
 
   constructor() {
     this.load()
@@ -40,7 +41,8 @@ export class StoresDetails {
           type: this.type,
           allLocations: this.allLocations,
           storeCnts: this.storeCnts,
-          commonCnts: this.commonCnts
+          commonCnts: this.commonCnts,
+          privacyTemplate: this.privacyTemplate
         })
       )
     }
@@ -146,6 +148,12 @@ export class StoresDetails {
   @action
   changeType = (type: string) => {
     this.type = type
+    this.save()
+  }
+
+  @action
+  changePrivacyPolicy = (privacyTemplate: string) => {
+    this.privacyTemplate = privacyTemplate
     this.save()
   }
 }
