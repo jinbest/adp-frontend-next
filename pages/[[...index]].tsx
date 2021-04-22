@@ -23,7 +23,7 @@ import BaseRouter from "../views/BaseRouter"
 const apiClient = ApiClient.getInstance()
 
 function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { storeData, feats, locations, storeCnts, commonCnts, privacyTemplate } = data
+  const { storeData, feats, locations, storeCnts, commonCnts } = data
 
   const [theme, setTheme] = useState("")
   const [favIcon, setFavIcon] = useState("")
@@ -141,11 +141,7 @@ function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
           </Helmet>
           <Router>
             <Header handleStatus={handleFooterStatus} features={features} />
-            <BaseRouter
-              handleStatus={handleFooterStatus}
-              features={features}
-              privacyTemplate={privacyTemplate}
-            />
+            <BaseRouter handleStatus={handleFooterStatus} features={features} />
             <Badge />
             {footerStatus && <Footer />}
           </Router>
@@ -212,15 +208,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  let privacyTemplate = ""
-  if (
-    !isEmpty(contents) &&
-    contents[0].data.homepage.footer.bottomLinks.privacyPolicy.externalLink
-  ) {
-    const htmlLink = contents[0].data.homepage.footer.bottomLinks.privacyPolicy.externalLink
-    privacyTemplate = await apiClient.get<string>(htmlLink)
-  }
-
   const data = {
     storeData: storeData,
     feats: features,
@@ -228,7 +215,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     storeCnts: contents[0].data,
     commonCnts: contents[1].data,
     subDomainID: subDomainID,
-    privacyTemplate: privacyTemplate,
   }
 
   return {

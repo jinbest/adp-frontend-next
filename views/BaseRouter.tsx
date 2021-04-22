@@ -14,10 +14,9 @@ import { FeaturesParam } from "../model/feature-toggle"
 type Props = {
   features: FeaturesParam[]
   handleStatus: (status: boolean) => void
-  privacyTemplate: string
 }
 
-export default function BaseRouter({ features, handleStatus, privacyTemplate }: Props) {
+export default function BaseRouter({ features, handleStatus }: Props) {
   const data = storesDetails.storeCnts
   const routes = data.general.routes
 
@@ -49,12 +48,10 @@ export default function BaseRouter({ features, handleStatus, privacyTemplate }: 
         component={() => <Locations handleStatus={handleStatus} />}
       />
       <Route path={routes.covidPage} component={() => <Covid handleStatus={handleStatus} />} />
-      {privacyTemplate && (
+      {data.homepage.footer.bottomLinks.privacyPolicy.externalLink && (
         <Route
           path={routes.privacyPolicy}
-          component={() => (
-            <PrivacyPolicy handleStatus={handleStatus} privacyTemplate={privacyTemplate} />
-          )}
+          component={() => <PrivacyPolicy handleStatus={handleStatus} />}
         />
       )}
     </>

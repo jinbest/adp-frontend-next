@@ -3,19 +3,22 @@ import { createStyles, makeStyles } from "@material-ui/core/styles"
 import Head from "next/head"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../store"
+import axios from "axios"
 import ReactToPrint from "react-to-print"
 
 type Props = {
   handleStatus: (status: boolean) => void
-  privacyTemplate: string
 }
 
-const PrivacyPolicy = ({ handleStatus, privacyTemplate }: Props) => {
+const PrivacyPolicy = ({ handleStatus }: Props) => {
   const classes = useStyles()
   const [t] = useTranslation()
   const data = storesDetails.storeCnts
+  const htmlLink = data.homepage.footer.bottomLinks.privacyPolicy.externalLink
 
   const [pageTitle, setPageTitle] = useState("Privacy Statement")
+  const [loading, setLoading] = useState(false)
+  const [template, setTemplate] = useState("")
 
   useEffect(() => {
     handleStatus(true)
@@ -29,7 +32,19 @@ const PrivacyPolicy = ({ handleStatus, privacyTemplate }: Props) => {
   }, [])
 
   useEffect(() => {
-    if (privacyTemplate) {
+    axios
+      .get(htmlLink)
+      .then((res) => {
+        setTemplate(res.data)
+        setLoading(true)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
+  useEffect(() => {
+    if (loading) {
       const contents = document.getElementsByClassName("content"),
         fillDots = document.getElementsByClassName("fill-dot")
       for (let i = 0; i < contents.length; i++) {
@@ -41,7 +56,7 @@ const PrivacyPolicy = ({ handleStatus, privacyTemplate }: Props) => {
         fillDot.style.marginBottom = "-40px"
       }
     }
-  }, [privacyTemplate])
+  }, [loading])
 
   return (
     <div>
@@ -49,11 +64,11 @@ const PrivacyPolicy = ({ handleStatus, privacyTemplate }: Props) => {
         <title>{pageTitle}</title>
       </Head>
       <div className={`${classes.root} privacy-policy`}>
-        {privacyTemplate && (
+        {loading && (
           <React.Fragment>
             <div
               style={{ scrollBehavior: "smooth" }}
-              dangerouslySetInnerHTML={{ __html: privacyTemplate }}
+              dangerouslySetInnerHTML={{ __html: template }}
             ></div>
             <div className={classes.download}>
               <ReactToPrint
