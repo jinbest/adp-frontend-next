@@ -3,8 +3,8 @@ import { createStyles, makeStyles } from "@material-ui/core/styles"
 import Head from "next/head"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../store"
-import axios from "axios"
 import ReactToPrint from "react-to-print"
+import { observer } from "mobx-react"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -14,11 +14,9 @@ const PrivacyPolicy = ({ handleStatus }: Props) => {
   const classes = useStyles()
   const [t] = useTranslation()
   const data = storesDetails.storeCnts
-  const htmlLink = data.homepage.footer.bottomLinks.privacyPolicy.externalLink
+  const privacyTemplate = storesDetails.privacyTemplate
 
   const [pageTitle, setPageTitle] = useState("Privacy Statement")
-  const [loading, setLoading] = useState(false)
-  const [template, setTemplate] = useState("")
 
   useEffect(() => {
     handleStatus(true)
@@ -32,19 +30,7 @@ const PrivacyPolicy = ({ handleStatus }: Props) => {
   }, [])
 
   useEffect(() => {
-    axios
-      .get(htmlLink)
-      .then((res) => {
-        setTemplate(res.data)
-        setLoading(true)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-
-  useEffect(() => {
-    if (loading) {
+    if (privacyTemplate) {
       const contents = document.getElementsByClassName("content"),
         fillDots = document.getElementsByClassName("fill-dot")
       for (let i = 0; i < contents.length; i++) {
@@ -56,7 +42,7 @@ const PrivacyPolicy = ({ handleStatus }: Props) => {
         fillDot.style.marginBottom = "-40px"
       }
     }
-  }, [loading])
+  }, [privacyTemplate])
 
   return (
     <div>
@@ -64,11 +50,11 @@ const PrivacyPolicy = ({ handleStatus }: Props) => {
         <title>{pageTitle}</title>
       </Head>
       <div className={`${classes.root} privacy-policy`}>
-        {loading && (
+        {privacyTemplate && (
           <React.Fragment>
             <div
               style={{ scrollBehavior: "smooth" }}
-              dangerouslySetInnerHTML={{ __html: template }}
+              dangerouslySetInnerHTML={{ __html: privacyTemplate }}
             ></div>
             <div className={classes.download}>
               <ReactToPrint
@@ -85,7 +71,7 @@ const PrivacyPolicy = ({ handleStatus }: Props) => {
   )
 }
 
-export default PrivacyPolicy
+export default observer(PrivacyPolicy)
 
 const useStyles = makeStyles(() =>
   createStyles({
