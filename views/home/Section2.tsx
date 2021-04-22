@@ -1,39 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { Grid, Box } from "@material-ui/core";
-// import { CardFix, ContentFix } from "../../components"
-import CardFix from "../../components/CardFix";
-import ContentFix from "../../components/ContentFix";
-import { useTranslation } from "react-i18next";
-import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles";
-import { Link } from "react-router-dom";
-import { repairWidgetStore, storesDetails } from "../../store";
+import React, { useState, useEffect } from "react"
+import { Grid, Box } from "@material-ui/core"
+import CardFix from "../../components/CardFix"
+import ContentFix from "../../components/ContentFix"
+import { useTranslation } from "react-i18next"
+import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
+import { Link } from "react-router-dom"
+import { repairWidgetStore, storesDetails } from "../../store"
 
 type Props = {
-  features: any[];
-};
+  features: any[]
+}
 
 const Section2 = ({ features }: Props) => {
-  const data = storesDetails.storeCnts;
-  const thisPage = data.homepage.section2;
-  const [t] = useTranslation();
+  const data = storesDetails.storeCnts
+  const thisPage = data.homepage.section2
+  const [t] = useTranslation()
 
-  const [feats, setFeatures] = useState<any[]>([]);
+  const [feats, setFeatures] = useState<any[]>([])
 
   useEffect(() => {
-    const cntFeatures: any[] = [];
+    const cntFeatures: any[] = []
     for (let i = 0; i < features.length; i++) {
       if (features[i].isActive) {
-        cntFeatures.push(features[i].flag);
+        cntFeatures.push(features[i].flag)
       }
     }
-    setFeatures(cntFeatures);
-  }, [features, data]);
+    setFeatures(cntFeatures)
+  }, [features, data])
 
   const handleRepairWidget = () => {
-    const cntAppointment: any = repairWidgetStore.appointResponse;
-    repairWidgetStore.init();
-    repairWidgetStore.changeAppointResponse(cntAppointment);
-  };
+    const cntAppointment: any = repairWidgetStore.appointResponse
+    repairWidgetStore.init()
+    repairWidgetStore.changeAppointResponse(cntAppointment)
+  }
 
   return (
     <FeatureToggles features={feats}>
@@ -54,7 +53,7 @@ const Section2 = ({ features }: Props) => {
                   >
                     <CardFix title={t(item.title)} img={item.img} key={index} />
                   </Link>
-                );
+                )
               })}
             </div>
             <div className="card-customized-container-mobile">
@@ -68,7 +67,7 @@ const Section2 = ({ features }: Props) => {
                   >
                     <CardFix title={t(item.title)} img={item.img} key={index} />
                   </Link>
-                );
+                )
               })}
             </div>
             <div className="card-customized-container-mobile">
@@ -82,7 +81,7 @@ const Section2 = ({ features }: Props) => {
                   >
                     <CardFix title={t(item.title)} img={item.img} key={index} />
                   </Link>
-                );
+                )
               })}
             </div>
             <Grid container item xs={12} spacing={2}>
@@ -98,14 +97,14 @@ const Section2 = ({ features }: Props) => {
                       />
                     </Box>
                   </Grid>
-                );
+                )
               })}
             </Grid>
           </section>
         )}
       />
     </FeatureToggles>
-  );
-};
+  )
+}
 
-export default Section2;
+export default Section2

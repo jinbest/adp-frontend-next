@@ -14,9 +14,8 @@ import PhoneInput from "../../components/PhoneInput"
 import CustomSelect from "../../components/CustomSelect"
 import { ContactSubmitParams } from "../../model/contact-submit-param"
 import { contactAPI } from "../../services"
-import { StoresDetails } from "../../store/StoresDetails"
-import { inject } from "mobx-react"
-import { observer } from "mobx-react-lite"
+import { storesDetails } from "../../store"
+import { observer } from "mobx-react"
 import { Close } from "@material-ui/icons"
 import { isEmpty } from "lodash"
 import { makeLocations, ValidateEmail } from "../../services/helper"
@@ -96,11 +95,10 @@ type OptionProps = {
 type Props = {
   openModal: boolean
   handleModal: (val: boolean) => void
-  storesDetailsStore: StoresDetails
 }
 
-const ContactModal = ({ openModal, handleModal, storesDetailsStore }: Props) => {
-  const mainData = storesDetailsStore.storeCnts
+const ContactModal = ({ openModal, handleModal }: Props) => {
+  const mainData = storesDetails.storeCnts
   const thisPage = mainData.contactPage.contactForm
   const [t] = useTranslation()
   const classes = useStyles()
@@ -124,7 +122,7 @@ const ContactModal = ({ openModal, handleModal, storesDetailsStore }: Props) => 
   const [contacted, setContacted] = useState(false)
 
   useEffect(() => {
-    setLocations(storesDetailsStore.allLocations)
+    setLocations(storesDetails.allLocations)
   }, [])
 
   useEffect(() => {
@@ -135,18 +133,18 @@ const ContactModal = ({ openModal, handleModal, storesDetailsStore }: Props) => 
       }
       setOption(cntOptions)
     }
-    if (storesDetailsStore.cntUserLocationSelected && locations.length) {
+    if (storesDetails.cntUserLocationSelected && locations.length) {
       for (let i = 0; i < locations.length; i++) {
         if (
-          !isEmpty(storesDetailsStore.cntUserLocation) &&
-          storesDetailsStore.cntUserLocation[0].location_id === locations[i].id
+          !isEmpty(storesDetails.cntUserLocation) &&
+          storesDetails.cntUserLocation[0].location_id === locations[i].id
         ) {
           setLoc({ name: locations[i].address_1, code: i })
         }
       }
       return
     }
-  }, [locations, storesDetailsStore.cntUserLocation])
+  }, [locations, storesDetails.cntUserLocation])
 
   useEffect(() => {
     if (firstName && lastName && email && loc && message) {
@@ -280,8 +278,8 @@ const ContactModal = ({ openModal, handleModal, storesDetailsStore }: Props) => 
   }
 
   const handleChangeSelect = (locVal: any) => {
-    if (storesDetailsStore.cntUserLocationSelected) {
-      storesDetailsStore.changeCntUserLocation(makeLocations([locations[locVal.code]]))
+    if (storesDetails.cntUserLocationSelected) {
+      storesDetails.changeCntUserLocation(makeLocations([locations[locVal.code]]))
     }
     setLoc({ name: locations[locVal.code].address_1, code: locVal.code })
   }
@@ -422,7 +420,7 @@ const ContactModal = ({ openModal, handleModal, storesDetailsStore }: Props) => 
                 <Close />
               </IconButton>
               <Typography className={classes.title}>
-                {`${t(thisPage.tracing.titlePrefix)} ${storesDetailsStore.storesDetails.name}`}
+                {`${t(thisPage.tracing.titlePrefix)} ${storesDetails.storesDetails.name}`}
               </Typography>
               <Typography className={classes.content} id="contact-tracking-modal">
                 {t(thisPage.tracing.content)}
@@ -436,4 +434,4 @@ const ContactModal = ({ openModal, handleModal, storesDetailsStore }: Props) => 
   )
 }
 
-export default inject("storesDetailsStore")(observer(ContactModal))
+export default observer(ContactModal)

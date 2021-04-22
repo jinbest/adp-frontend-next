@@ -4,7 +4,7 @@ import Card from "./Card"
 import Button from "../../../components/Button"
 import RepairSummary from "./RepairSummary"
 import { useTranslation } from "react-i18next"
-import { repairWidgetStore, storesDetails } from "../../../store"
+import { storesDetails } from "../../../store"
 
 type Props = {
   data: any
@@ -94,12 +94,7 @@ const UsefulInfo = ({
         </Grid>
         <Grid item xs={12} md={5}>
           <Card className="service-summary-card">
-            <RepairSummary
-              step={step}
-              themeCol={themeCol}
-              showInfo={true}
-              repairWidgetStore={repairWidgetStore}
-            />
+            <RepairSummary themeCol={themeCol} showInfo={true} />
           </Card>
         </Grid>
       </Grid>

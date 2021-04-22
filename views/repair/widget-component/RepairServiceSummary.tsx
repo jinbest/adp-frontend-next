@@ -91,7 +91,7 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     repairWidgetAPI
       .postAppointmentQuote(params)
       .then((res: any) => {
-        repairWidgetStore.changeAppointResponse(res.data)
+        repairWidgetStore.changeAppointResponse(res)
         if (code === "MAIL_IN" && features.includes("FRONTEND_REPAIR_QUOTE")) {
           handleStep(11)
         } else if (code !== "MAIL_IN" && features.includes("FRONTEND_REPAIR_APPOINTMENT")) {

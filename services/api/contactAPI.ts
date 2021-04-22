@@ -1,29 +1,15 @@
-import axios from "axios"
 import Config from "../../config/config"
 import { ContactSubmitParams } from "../../model/contact-submit-param"
+import ApiClient from "../api-client"
+
+const apiClient = ApiClient.getInstance()
 
 class ContactUsAPI {
 
-  postContactForm = (data: ContactSubmitParams) => {
+  postContactForm = async (data: ContactSubmitParams) => {
     const apiURL = `${Config.STORE_SERVICE_API_URL}dc/store/${data.store_id}/contact-us`
-
-    return new Promise((resolve, reject) => {
-      axios
-        .post(`${apiURL}`, data)
-        .then((response) => {
-          if (response) {
-            resolve(response)
-          } else {
-            reject(response)
-          }
-        })
-        .catch((error) => {
-          if (error) {
-            reject(error)
-          }
-        })
-    })
-}
+    return await apiClient.post(apiURL, data)
+  }
 }
 
 const instance = new ContactUsAPI()

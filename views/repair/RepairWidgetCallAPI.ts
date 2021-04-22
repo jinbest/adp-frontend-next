@@ -9,14 +9,14 @@ function getRepairLookupAPI() {
   repairWidgetAPI
     .getRepairLookup(locale, lookupTypes)
     .then((res: any) => {
-      repairWidData.changeRepairWidgetLookup(res.data)
+      repairWidData.changeRepairWidgetLookup(res)
 
       /* repair_delivery_method */
       const repair_types: any[] = []
-      for (let i = 0; i < res.data.repair_delivery_method.length; i++) {
+      for (let i = 0; i < res.repair_delivery_method.length; i++) {
         repair_types.push({
-          name: res.data.repair_delivery_method[i].code_text,
-          code: res.data.repair_delivery_method[i].code,
+          name: res.repair_delivery_method[i].code_text,
+          code: res.repair_delivery_method[i].code,
           bg: "white",
           col: "black",
           selected: false,
@@ -30,10 +30,10 @@ function getRepairLookupAPI() {
 
       /* repair_receive_quote_method */
       const repair_contact_types: any[] = []
-      for (let i = 0; i < res.data.repair_contact_method.length; i++) {
+      for (let i = 0; i < res.repair_contact_method.length; i++) {
         repair_contact_types.push({
-          name: res.data.repair_contact_method[i].code_text,
-          code: res.data.repair_contact_method[i].code,
+          name: res.repair_contact_method[i].code_text,
+          code: res.repair_contact_method[i].code,
           bg: "white",
           col: "black",
           selected: false,
@@ -57,7 +57,7 @@ function getDeliveryMethodsAPI() {
   repairWidgetAPI
     .getDeliveryMethods(store_id, include_disabled)
     .then((res: any) => {
-      repairWidData.changeRepairWidDeliveryMethod(res.data)
+      repairWidData.changeRepairWidDeliveryMethod(res)
     })
     .catch((error) => {
       console.log("Error in get Repair Delivery Method", error)
@@ -70,7 +70,7 @@ function getContactMethodsAPI() {
   repairWidgetAPI
     .getContactMethods(store_id)
     .then((res: any) => {
-      repairWidData.changeRepairContactMethod(res.data)
+      repairWidData.changeRepairContactMethod(res)
     })
     .catch((error) => {
       console.log("Error in get Repair Contact Method", error)
@@ -84,7 +84,7 @@ async function getDeviceBrandsAPI(searchText: string, page: number, per_page: nu
   await repairWidgetAPI
     .getDeviceBrands(store_id, per_page, page, is_enabled, searchText)
     .then(async (res: any) => {
-      repairWidData.changeRepairDeviceBrands(res.data)
+      repairWidData.changeRepairDeviceBrands(res)
     })
     .catch((error) => {
       console.log("Error in get Repair Device Brands", error)
@@ -99,8 +99,8 @@ async function addMoreDeviceBrandsAPI(searchText: string, page: number, per_page
     .getDeviceBrands(store_id, per_page, page, is_enabled, searchText)
     .then(async (res: any) => {
       const cntDeviceBrands = repairWidData.repairDeviceBrands
-      for (let i = 0; i < res.data.data.length; i++) {
-        cntDeviceBrands.data.push(res.data.data[i])
+      for (let i = 0; i < res.data.length; i++) {
+        cntDeviceBrands.data.push(res.data[i])
       }
       repairWidData.changeRepairDeviceBrands(cntDeviceBrands)
     })
@@ -121,7 +121,7 @@ async function getBrandProductsAPI(
   await repairWidgetAPI
     .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText)
     .then(async (res: any) => {
-      repairWidData.changeRepairBrandProducts(res.data)
+      repairWidData.changeRepairBrandProducts(res)
     })
     .catch((error) => {
       console.log("Error in get Repair Brand Products", error)
@@ -141,8 +141,8 @@ async function addMoreBrandProductsAPI(
     .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText)
     .then(async (res: any) => {
       const cntDeviceProducts = repairWidData.repairBrandProducts
-      for (let i = 0; i < res.data.data.length; i++) {
-        cntDeviceProducts.data.push(res.data.data[i])
+      for (let i = 0; i < res.data.length; i++) {
+        cntDeviceProducts.data.push(res.data[i])
       }
       repairWidData.changeRepairBrandProducts(cntDeviceProducts)
     })
@@ -176,7 +176,7 @@ async function getRepairsOfferedDeviceAPI(
       text
     )
     .then(async (res: any) => {
-      repairWidData.changeRepairsOfferedDevice(res.data)
+      repairWidData.changeRepairsOfferedDevice(res)
     })
     .catch((error) => {
       console.log("Error in get Repair Offered Device", error)
@@ -209,8 +209,8 @@ async function addMoreRepairsOfferedDeviceAPI(
     )
     .then(async (res: any) => {
       const cntOfferedRepairs = repairWidData.repairsOfferedDevices
-      for (let i = 0; i < res.data.data.length; i++) {
-        cntOfferedRepairs.data.push(res.data.data[i])
+      for (let i = 0; i < res.data.length; i++) {
+        cntOfferedRepairs.data.push(res.data[i])
       }
       repairWidData.changeRepairsOfferedDevice(cntOfferedRepairs)
     })
@@ -225,7 +225,7 @@ async function getQuotesByLocAppointmentID(location_id: number, appointment_id: 
   await repairWidgetAPI
     .getQuotesByID(store_id, location_id, appointment_id)
     .then(async (res: any) => {
-      await setQuotesStore(res.data)
+      await setQuotesStore(res)
     })
     .catch((error) => {
       console.log("Error in get Quotes", error)

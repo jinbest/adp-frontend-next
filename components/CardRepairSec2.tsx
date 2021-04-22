@@ -1,24 +1,20 @@
-import React from "react";
-import {
-  GetDeviceUs,
-  SelectRepair,
-  ReceiveDevice,
-} from "../views/repair/Sec2-SVG";
-import { storesDetails } from "../store";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
+import React from "react"
+import { GetDeviceUs, SelectRepair, ReceiveDevice } from "../views/repair/Sec2-SVG"
+import { storesDetails } from "../store"
+import { createStyles, makeStyles } from "@material-ui/core/styles"
 
 type Props = {
-  subtitle: string;
-  content?: string;
-  type?: string;
-  children?: any;
-};
+  subtitle: string
+  content?: string
+  type?: string
+  children?: any
+}
 
 const CardRepairSec2 = ({ subtitle, content, type, children }: Props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const data = storesDetails.storeCnts;
-  const sec2SvgCol = data.general.colorPalle.sec2SvgCol;
+  const data = storesDetails.storeCnts
+  const sec2SvgCol = data.general.colorPalle.sec2SvgCol
 
   return (
     <div className={classes.container}>
@@ -32,16 +28,16 @@ const CardRepairSec2 = ({ subtitle, content, type, children }: Props) => {
         <p className={classes.content}>{children ? children : content}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
 CardRepairSec2.defaultProps = {
   subtitle: "Select a repair category",
   content: "Make an account with us and indicate what needs to be repaired.",
   img: "",
-};
+}
 
-export default CardRepairSec2;
+export default CardRepairSec2
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -94,4 +90,4 @@ const useStyles = makeStyles(() =>
       },
     },
   })
-);
+)

@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next"
 import { ToastMsgParams } from "../../components/toast/toast-msg-params"
 import Toast from "../../components/toast/toast"
 import Loading from "../../components/Loading"
-// import { InputComponent, Button, PhoneInput, CustomSelect } from "../../components"
 import InputComponent from "../../components/InputComponent"
 import Button from "../../components/Button"
 import PhoneInput from "../../components/PhoneInput"
@@ -13,7 +12,8 @@ import CustomSelect from "../../components/CustomSelect"
 import { ContactSubmitParams } from "../../model/contact-submit-param"
 import Card from "../repair/widget-component/Card"
 import { contactAPI } from "../../services"
-import { StoresDetails } from "../../store/StoresDetails"
+import { storesDetails } from "../../store"
+import { observer } from "mobx-react"
 import { makeLocations, ValidateEmail } from "../../services/helper"
 import { Close } from "@material-ui/icons"
 
@@ -26,11 +26,10 @@ type Props = {
   locations: any[]
   locationID: number
   handleLocationID: (id: number) => void
-  storesDetailsStore: StoresDetails
 }
 
-const ContactForm = ({ locations, locationID, handleLocationID, storesDetailsStore }: Props) => {
-  const mainData = storesDetailsStore.storeCnts
+const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
+  const mainData = storesDetails.storeCnts
   const thisPage = mainData.contactPage.contactForm
   const [t] = useTranslation()
   const classes = useStyles()
@@ -70,8 +69,8 @@ const ContactForm = ({ locations, locationID, handleLocationID, storesDetailsSto
 
   const handleStoreCntLoc = (index: number) => {
     if (!locations.length) return
-    storesDetailsStore.changeCntUserLocation(makeLocations([locations[index]]))
-    storesDetailsStore.changeLocationID(locations[index].id)
+    storesDetails.changeCntUserLocation(makeLocations([locations[index]]))
+    storesDetails.changeLocationID(locations[index].id)
   }
 
   useEffect(() => {
@@ -200,7 +199,7 @@ const ContactForm = ({ locations, locationID, handleLocationID, storesDetailsSto
   }
 
   const handleChangeSelect = (loc: any) => {
-    if (storesDetailsStore.cntUserLocationSelected) {
+    if (storesDetails.cntUserLocationSelected) {
       handleStoreCntLoc(loc.code)
     }
     handleLocationID(locations[loc.code].id)
@@ -320,7 +319,7 @@ const ContactForm = ({ locations, locationID, handleLocationID, storesDetailsSto
               <Close />
             </IconButton>
             <Typography className={classes.title}>
-              {`${t(thisPage.tracing.titlePrefix)} ${storesDetailsStore.storesDetails.name}`}
+              {`${t(thisPage.tracing.titlePrefix)} ${storesDetails.storesDetails.name}`}
             </Typography>
             <Typography className={classes.content} id="contact-tracking-form">
               {t(thisPage.tracing.content)}
@@ -333,7 +332,7 @@ const ContactForm = ({ locations, locationID, handleLocationID, storesDetailsSto
   )
 }
 
-export default ContactForm
+export default observer(ContactForm)
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

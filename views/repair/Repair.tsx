@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
-// import { Section1, Section2, Section4 } from "./";
 import Section1 from "./Section1"
 import Section2 from "./Section2"
 import Section4 from "./Section4"
 import { Error } from "../error"
+import { observer } from "mobx-react"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
-import { repairWidgetStore, storesDetails } from "../../store"
+import { storesDetails } from "../../store"
 import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
 
@@ -57,13 +57,8 @@ const Repair = ({ handleStatus, features }: Props) => {
           inactiveComponent={() => <Error />}
           activeComponent={() => (
             <div>
-              <Section1
-                handleStatus={handleStatus}
-                repairWidgetStore={repairWidgetStore}
-                features={feats}
-              />
+              <Section1 handleStatus={handleStatus} />
               <Section2 />
-              {/* <Section3 /> */}
               <Section4 handleStatus={handleStatus} />
             </div>
           )}
@@ -73,4 +68,4 @@ const Repair = ({ handleStatus, features }: Props) => {
   )
 }
 
-export default Repair
+export default observer(Repair)

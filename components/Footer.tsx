@@ -3,8 +3,8 @@ import { Grid, Box, Typography, Popover } from "@material-ui/core"
 import Logo from "./Logo"
 import { useTranslation } from "react-i18next"
 import { getAddress, phoneFormatString, getWidth } from "../services/helper"
-import { inject, observer } from "mobx-react"
-import { StoresDetails } from "../store/StoresDetails"
+import { observer } from "mobx-react"
+import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import { GridMDInterface } from "../model/grid-params"
@@ -117,92 +117,82 @@ const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponent
   )
 }
 
-type StoreProps = {
-  storesDetailsStore: StoresDetails
-}
-interface Props extends StoreProps {
-  features: any[]
-}
+const Footer = () => {
+  const classes = useStyles()
+  const data = storesDetails.storeCnts
+  const thisPage = data.homepage.footer
+  const [t] = useTranslation()
 
-const Footer = inject("storesDetailsStore")(
-  observer((props: Props) => {
-    const classes = useStyles()
-    const { storesDetailsStore } = props
-    const data = storesDetailsStore.storeCnts
-    const thisPage = data.homepage.footer
-    const [t] = useTranslation()
+  const [mobile, setMobile] = useState(false)
 
-    const [mobile, setMobile] = useState(false)
-
-    useEffect(() => {
-      handleResize()
-      window.addEventListener("resize", handleResize)
-      return () => {
-        window.removeEventListener("resize", handleResize)
-      }
-    }, [])
-
-    const handleResize = () => {
-      if (getWidth() < 960) {
-        setMobile(true)
-      } else {
-        setMobile(false)
-      }
+  useEffect(() => {
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
     }
+  }, [])
 
-    return (
-      <footer
-        className="footer"
-        style={{
-          backgroundImage: mobile
-            ? "url(" + thisPage.images.mobile + ")"
-            : "url(" + thisPage.images.desktop + ")",
-        }}
-      >
-        <Typography className="footer-title" style={{ color: thisPage.title.color }}>
-          {t(thisPage.title.text)}
-        </Typography>
-        <Box className={classes.footerContainer}>
-          <Logo
-            type="footer"
-            handleStatus={() => {
-              console.log("logo clicked")
-            }}
-          />
-          <Grid item container>
-            {[true, false].map((item: any, index: number) => {
-              return (
-                <FooterLinksComponent
-                  key={index}
-                  data={storesDetailsStore.allLocations}
-                  isMain={item}
-                  initGridMD={4}
-                />
-              )
-            })}
-          </Grid>
-          <p className={"device-list-grid copyright"} style={{ color: "grey" }}>
-            {t(thisPage.copyRight)}
-          </p>
-          <div className={classes.bottomLink}>
-            {thisPage.bottomLinks.privacyPolicy.externalLink && (
-              <Link to={thisPage.bottomLinks.privacyPolicy.href}>
-                {t(thisPage.bottomLinks.privacyPolicy.text)}
-              </Link>
-            )}
-            {thisPage.bottomLinks.covidPage.visible && (
-              <Link to={thisPage.bottomLinks.covidPage.link} style={{ marginLeft: "15px" }}>
-                {t(thisPage.bottomLinks.covidPage.text)}
-              </Link>
-            )}
-          </div>
-        </Box>
-      </footer>
-    )
-  })
-)
+  const handleResize = () => {
+    if (getWidth() < 960) {
+      setMobile(true)
+    } else {
+      setMobile(false)
+    }
+  }
 
-export default Footer
+  return (
+    <footer
+      className="footer"
+      style={{
+        backgroundImage: mobile
+          ? "url(" + thisPage.images.mobile + ")"
+          : "url(" + thisPage.images.desktop + ")",
+      }}
+    >
+      <Typography className="footer-title" style={{ color: thisPage.title.color }}>
+        {t(thisPage.title.text)}
+      </Typography>
+      <Box className={classes.footerContainer}>
+        <Logo
+          type="footer"
+          handleStatus={() => {
+            console.log("logo clicked")
+          }}
+        />
+        <Grid item container>
+          {[true, false].map((item: any, index: number) => {
+            return (
+              <FooterLinksComponent
+                key={index}
+                data={storesDetails.allLocations}
+                isMain={item}
+                initGridMD={4}
+              />
+            )
+          })}
+        </Grid>
+        <p className={"device-list-grid copyright"} style={{ color: "grey" }}>
+          {t(thisPage.copyRight)}
+        </p>
+        <div className={classes.bottomLink}>
+          {thisPage.bottomLinks.privacyPolicy.externalLink && (
+            <Link to={thisPage.bottomLinks.privacyPolicy.href}>
+              {t(thisPage.bottomLinks.privacyPolicy.text)}
+            </Link>
+          )}
+          {thisPage.bottomLinks.covidPage.visible && (
+            <Link to={thisPage.bottomLinks.covidPage.link} style={{ marginLeft: "15px" }}>
+              {t(thisPage.bottomLinks.covidPage.text)}
+            </Link>
+          )}
+        </div>
+      </Box>
+    </footer>
+  )
+}
+
+export default observer(Footer)
 
 const useStyles = makeStyles(() =>
   createStyles({

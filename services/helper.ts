@@ -296,7 +296,7 @@ export async function setQuotesStore(data: GetQuotesParams) {
   await repairWidgetAPI
     .getBrandsProducts(data.store_id, uniqueProdsID)
     .then(async (res: any) => {
-      setRepairWidgetStore(res.data.data, data)
+      setRepairWidgetStore(res.data, data)
     })
     .catch((error) => {
       console.log("Error in get Brands and Products", error)

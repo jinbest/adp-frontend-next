@@ -333,7 +333,6 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               inactiveComponent={() => <></>}
               activeComponent={() => (
                 <CustomizedMenus
-                  storesDetailsStore={storesDetails}
                   btnTitle={thisPage.button.title}
                   width={thisPage.button.width}
                   features={feats}
@@ -359,7 +358,6 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             handleStatus={handleStatus}
             features={feats}
             themeCol={data.general.colorPalle.repairButtonCol}
-            storesDetailsStore={storesDetails}
           >
             {!menuStatus ? (
               <img

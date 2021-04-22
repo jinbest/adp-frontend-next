@@ -349,7 +349,7 @@ const aryIannaTimeZones = [
   'Africa/Johannesburg'
 ];
 
-let timezoneOptions = [
+let timeZoneList = [
   {title: 'CST - Central Standard Time (UTC -6:00)', timezone: 'America/Regina', offset: -6},
   {title: 'PST – Pacific Standard Time (UTC -8:00)', timezone: 'America/Vancouver', offset: -8},
   {title: 'EST – Eastern Standard Time (UTC -5:00)', timezone: 'America/Toronto', offset: -5},
@@ -363,6 +363,6 @@ let defaultTimezone = {
 
 export {
   aryIannaTimeZones,
-  timezoneOptions,
+  timeZoneList,
   defaultTimezone
 }

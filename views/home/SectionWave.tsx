@@ -1,31 +1,29 @@
-import React from "react";
-import { Grid, Typography, Box } from "@material-ui/core";
-import { useTranslation } from "react-i18next";
-import { storesDetails, repairWidgetStore } from "../../store";
-import Button from "../../components/Button";
-import { isExternal } from "../../services/helper";
-import { Link } from "react-router-dom";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import _ from "lodash";
+import React from "react"
+import { Grid, Typography, Box } from "@material-ui/core"
+import { useTranslation } from "react-i18next"
+import { storesDetails, repairWidgetStore } from "../../store"
+import Button from "../../components/Button"
+import { isExternal } from "../../services/helper"
+import { Link } from "react-router-dom"
+import { createStyles, makeStyles } from "@material-ui/core/styles"
+import _ from "lodash"
 
 type Props = {
-  handleStatus: (status: boolean) => void;
-};
+  handleStatus: (status: boolean) => void
+}
 
 const SectionWave = ({ handleStatus }: Props) => {
-  const data = storesDetails.storeCnts;
-  const thisPage = data.homepage.sectionWave;
-  const [t] = useTranslation();
-  const classes = useStyles();
-  const childData = _.sortBy(thisPage.data, (o) => o.order);
+  const data = storesDetails.storeCnts
+  const thisPage = data.homepage.sectionWave
+  const [t] = useTranslation()
+  const classes = useStyles()
+  const childData = _.sortBy(thisPage.data, (o) => o.order)
 
   const handleGetQuote = (link: string) => {
-    if (link !== data.general.routes.repairWidgetPage) return;
-    const cntAppointment: any = repairWidgetStore.appointResponse;
-    repairWidgetStore.init();
-    repairWidgetStore.changeAppointResponse(cntAppointment);
-    handleStatus(false);
-  };
+    if (link !== data.general.routes.repairWidgetPage) return
+    repairWidgetStore.init()
+    handleStatus(false)
+  }
 
   return (
     <div className={classes.root}>
@@ -34,10 +32,7 @@ const SectionWave = ({ handleStatus }: Props) => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} style={{ display: "flex" }}>
             <div style={{ margin: "auto" }}>
-              <h2
-                className={classes.mainTitle}
-                style={{ marginTop: "0px !important" }}
-              >
+              <h2 className={classes.mainTitle} style={{ marginTop: "0px !important" }}>
                 {t(thisPage.title)}
               </h2>
               <div className={classes.buttonContainer}>
@@ -45,10 +40,7 @@ const SectionWave = ({ handleStatus }: Props) => {
                   return (
                     <React.Fragment key={index}>
                       {item.visible && item.link && item.link !== "#" ? (
-                        <Box
-                          className={"service-section-button"}
-                          style={{ margin: "initial" }}
-                        >
+                        <Box className={"service-section-button"} style={{ margin: "initial" }}>
                           {isExternal(item.link) ? (
                             <a
                               href={item.link}
@@ -58,9 +50,7 @@ const SectionWave = ({ handleStatus }: Props) => {
                             >
                               <Button
                                 title={t(item.title)}
-                                bgcolor={
-                                  data.general.colorPalle.repairButtonCol
-                                }
+                                bgcolor={data.general.colorPalle.repairButtonCol}
                                 borderR="20px"
                                 width="95%"
                               />
@@ -73,9 +63,7 @@ const SectionWave = ({ handleStatus }: Props) => {
                             >
                               <Button
                                 title={t(item.title)}
-                                bgcolor={
-                                  data.general.colorPalle.repairButtonCol
-                                }
+                                bgcolor={data.general.colorPalle.repairButtonCol}
                                 borderR="20px"
                                 width="95%"
                               />
@@ -86,7 +74,7 @@ const SectionWave = ({ handleStatus }: Props) => {
                         <></>
                       )}
                     </React.Fragment>
-                  );
+                  )
                 })}
               </div>
             </div>
@@ -103,25 +91,21 @@ const SectionWave = ({ handleStatus }: Props) => {
                         width="1"
                         height="auto"
                       />
-                      <Typography className={classes.subTitle}>
-                        {t(item.title)}
-                      </Typography>
-                      <Typography className={classes.subContent}>
-                        {t(item.content)}
-                      </Typography>
+                      <Typography className={classes.subTitle}>{t(item.title)}</Typography>
+                      <Typography className={classes.subContent}>{t(item.content)}</Typography>
                     </div>
                   )}
                 </Grid>
-              );
+              )
             })}
           </Grid>
         </Grid>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionWave;
+export default SectionWave
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -255,4 +239,4 @@ const useStyles = makeStyles(() =>
       },
     },
   })
-);
+)

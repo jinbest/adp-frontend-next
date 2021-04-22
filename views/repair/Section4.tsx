@@ -1,36 +1,30 @@
-import React from "react";
-import { Grid, Box, Typography } from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Button from "../../components/Button";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { isExternal } from "../../services/helper";
-import { storesDetails } from "../../store";
+import React from "react"
+import { Grid, Box, Typography } from "@material-ui/core"
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles"
+import Button from "../../components/Button"
+import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import { isExternal } from "../../services/helper"
+import { storesDetails } from "../../store"
 
 type Props = {
-  handleStatus: (status: boolean) => void;
-};
+  handleStatus: (status: boolean) => void
+}
 
 const Section4 = ({ handleStatus }: Props) => {
-  const data = storesDetails.storeCnts;
-  const repair = data.repairPage.section4;
-  const [t] = useTranslation();
-  const classes = useStyles();
+  const data = storesDetails.storeCnts
+  const repair = data.repairPage.section4
+  const [t] = useTranslation()
+  const classes = useStyles()
 
   return (
     <section className={"Container"}>
       <Grid container className={"repair-sec4-grid-root"} spacing={2}>
         <Grid item xs={12} md={6} className={classes.item1}>
-          <Typography
-            className={"service-section-title-1"}
-            style={{ color: repair.themeCol }}
-          >
+          <Typography className={"service-section-title-1"} style={{ color: repair.themeCol }}>
             {t(repair.title)}
           </Typography>
-          <Typography
-            className={"service-section-content"}
-            style={{ color: repair.themeCol }}
-          >
+          <Typography className={"service-section-content"} style={{ color: repair.themeCol }}>
             {t(repair.subtitle)}
           </Typography>
           <Box className={"service-section-button"}>
@@ -52,7 +46,7 @@ const Section4 = ({ handleStatus }: Props) => {
                 to={repair.link}
                 style={{ textDecoration: "none" }}
                 onClick={() => {
-                  handleStatus(true);
+                  handleStatus(true)
                 }}
               >
                 <Button
@@ -64,12 +58,7 @@ const Section4 = ({ handleStatus }: Props) => {
             )}
           </Box>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          className={`${classes.item2} repair-sec4-img`}
-        >
+        <Grid item xs={12} md={6} className={`${classes.item2} repair-sec4-img`}>
           <img
             src={storesDetails.commonCnts.repairSec4Img}
             alt="repair-sec4-img"
@@ -80,10 +69,10 @@ const Section4 = ({ handleStatus }: Props) => {
         </Grid>
       </Grid>
     </section>
-  );
-};
+  )
+}
 
-export default Section4;
+export default Section4
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -108,4 +97,4 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
   })
-);
+)

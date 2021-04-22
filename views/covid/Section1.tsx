@@ -18,9 +18,7 @@ const Section1 = ({ handleStatus }: Props) => {
   const [t] = useTranslation()
 
   const handleGetQuote = () => {
-    const cntAppointment: any = repairWidgetStore.appointResponse
     repairWidgetStore.init()
-    repairWidgetStore.changeAppointResponse(cntAppointment)
     handleStatus(false)
   }
 

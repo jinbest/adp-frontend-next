@@ -121,7 +121,7 @@ const ContactDetails = ({
             city: city,
             postalCode: postalCode,
           })
-          repairWidgetStore.changeAppointResponse(res.data)
+          repairWidgetStore.changeAppointResponse(res)
           handleStep(11)
         })
         .catch(() => {
@@ -255,10 +255,10 @@ const ContactDetails = ({
           country: country.code,
         })
         .then((res: any) => {
-          if (res.data.length && res.data[0].location_hours.length) {
-            storesDetails.changeFindAddLocation(res.data)
-            storesDetails.changeLocationID(res.data[0].id)
-            storesDetails.changeCntUserLocation(makeLocations(res.data))
+          if (res.length && res[0].location_hours.length) {
+            storesDetails.changeFindAddLocation(res)
+            storesDetails.changeLocationID(res[0].id)
+            storesDetails.changeCntUserLocation(makeLocations(res))
             handleSubmit(param)
           } else {
             setToastParams({
@@ -542,7 +542,7 @@ const ContactDetails = ({
         </Grid>
         <Grid item xs={12} md={5}>
           <Card className="service-summary-card">
-            <RepairSummary step={step} themeCol={themeCol} repairWidgetStore={repairWidgetStore} />
+            <RepairSummary themeCol={themeCol} />
           </Card>
         </Grid>
       </Grid>

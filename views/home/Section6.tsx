@@ -1,25 +1,23 @@
-import React from "react";
-import CardWhyCustomer from "../../components/CardWhyCustomer";
-import { Typography, Grid, Box } from "@material-ui/core";
-import { useTranslation } from "react-i18next";
-import { storesDetails } from "../../store";
-import Rating from "@material-ui/lab/Rating";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { getBusinessLink } from "../../services/helper";
+import React from "react"
+import CardWhyCustomer from "../../components/CardWhyCustomer"
+import { Typography, Grid, Box } from "@material-ui/core"
+import { useTranslation } from "react-i18next"
+import { storesDetails } from "../../store"
+import Rating from "@material-ui/lab/Rating"
+import { createStyles, makeStyles } from "@material-ui/core/styles"
+import { getBusinessLink } from "../../services/helper"
 
 const Section6 = () => {
-  const data = storesDetails.storeCnts;
-  const thisPage = data.homepage.section6;
-  const businessLink = getBusinessLink(storesDetails.allLocations);
-  const [t] = useTranslation();
-  const classes = useStyles();
-  const overAllRating = thisPage.overAllRating;
+  const data = storesDetails.storeCnts
+  const thisPage = data.homepage.section6
+  const businessLink = getBusinessLink(storesDetails.allLocations)
+  const [t] = useTranslation()
+  const classes = useStyles()
+  const overAllRating = thisPage.overAllRating
 
   return (
     <section className={"Container center sec6-container"}>
-      <Typography className="section-review-title">
-        {t(thisPage.title)}
-      </Typography>
+      <Typography className="section-review-title">{t(thisPage.title)}</Typography>
       {overAllRating.visible && (
         <>
           {businessLink ? (
@@ -40,9 +38,9 @@ const Section6 = () => {
                 readOnly
                 style={{ transform: "scale(1.2)" }}
               />
-              <Typography className={classes.subTitle}>{`${
-                overAllRating.averScore
-              } ${t("of")} ${overAllRating.score} ${t("stars")}`}</Typography>
+              <Typography className={classes.subTitle}>{`${overAllRating.averScore} ${t("of")} ${
+                overAllRating.score
+              } ${t("stars")}`}</Typography>
               <Typography className={classes.subContent}>{`${t("Based on")} ${
                 overAllRating.totalReviews
               }+ ${t("Reviews")}`}</Typography>
@@ -56,9 +54,9 @@ const Section6 = () => {
                 readOnly
                 style={{ transform: "scale(1.2)" }}
               />
-              <Typography className={classes.subTitle}>{`${
-                overAllRating.averScore
-              } ${t("of")} ${overAllRating.score} ${t("stars")}`}</Typography>
+              <Typography className={classes.subTitle}>{`${overAllRating.averScore} ${t("of")} ${
+                overAllRating.score
+              } ${t("stars")}`}</Typography>
               <Typography className={classes.subContent}>{`${t("Based on")} ${
                 overAllRating.totalReviews
               }+ ${t("Reviews")}`}</Typography>
@@ -87,14 +85,14 @@ const Section6 = () => {
                 />
               </Box>
             </Grid>
-          );
+          )
         })}
       </Grid>
     </section>
-  );
-};
+  )
+}
 
-export default Section6;
+export default Section6
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -112,4 +110,4 @@ const useStyles = makeStyles(() =>
       },
     },
   })
-);
+)
