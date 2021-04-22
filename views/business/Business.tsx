@@ -15,6 +15,7 @@ import Pay from "./SVGs/Pay"
 import QuickTurnaround from "./SVGs/QuickTurnaround"
 import Soldering from "./SVGs/Soldering"
 import { MetaParams } from "../../model/meta-params"
+import _ from "lodash"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -24,6 +25,7 @@ const Business = ({ handleStatus }: Props) => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
   const thisPage = data.businessPage
+  const services = _.sortBy(thisPage.section2.services, (o) => o.order)
   const [t] = useTranslation()
 
   const [pageTitle, setPageTitle] = useState("Business Solutions | ")
@@ -69,7 +71,7 @@ const Business = ({ handleStatus }: Props) => {
           <Card className={classes.card}>
             <Typography className={classes.subTitle}>{t(thisPage.section2.title)}</Typography>
             <Grid container spacing={5}>
-              {thisPage.section2.services.map((item: any, index: number) => {
+              {services.map((item: any, index: number) => {
                 return (
                   <React.Fragment key={index}>
                     {item.visible ? (

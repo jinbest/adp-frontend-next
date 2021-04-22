@@ -206,7 +206,7 @@ const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
   }
 
   return (
-    <section className={"Container contact-form"}>
+    <section className="Container contact-form">
       <div className={classes.root}>
         {!contacted ? (
           <Card className={classes.card}>

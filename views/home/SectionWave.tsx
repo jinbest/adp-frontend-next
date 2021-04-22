@@ -15,6 +15,7 @@ type Props = {
 const SectionWave = ({ handleStatus }: Props) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.sectionWave
+  const buttons = _.sortBy(thisPage.buttons, (o) => o.order)
   const [t] = useTranslation()
   const classes = useStyles()
   const childData = _.sortBy(thisPage.data, (o) => o.order)
@@ -36,11 +37,11 @@ const SectionWave = ({ handleStatus }: Props) => {
                 {t(thisPage.title)}
               </h2>
               <div className={classes.buttonContainer}>
-                {thisPage.buttons.map((item: any, index: number) => {
+                {buttons.map((item: any, index: number) => {
                   return (
                     <React.Fragment key={index}>
                       {item.visible && item.link && item.link !== "#" ? (
-                        <Box className={"service-section-button"} style={{ margin: "initial" }}>
+                        <Box className="service-section-button" style={{ margin: "initial" }}>
                           {isExternal(item.link) ? (
                             <a
                               href={item.link}

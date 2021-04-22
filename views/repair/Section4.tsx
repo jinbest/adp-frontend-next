@@ -18,16 +18,16 @@ const Section4 = ({ handleStatus }: Props) => {
   const classes = useStyles()
 
   return (
-    <section className={"Container"}>
-      <Grid container className={"repair-sec4-grid-root"} spacing={2}>
+    <section className="Container">
+      <Grid container className="repair-sec4-grid-root" spacing={2}>
         <Grid item xs={12} md={6} className={classes.item1}>
-          <Typography className={"service-section-title-1"} style={{ color: repair.themeCol }}>
+          <Typography className="service-section-title-1" style={{ color: repair.themeCol }}>
             {t(repair.title)}
           </Typography>
-          <Typography className={"service-section-content"} style={{ color: repair.themeCol }}>
+          <Typography className="service-section-content" style={{ color: repair.themeCol }}>
             {t(repair.subtitle)}
           </Typography>
-          <Box className={"service-section-button"}>
+          <Box className="service-section-button">
             {isExternal(repair.link) ? (
               <a
                 href={repair.link}

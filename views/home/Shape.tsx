@@ -6,7 +6,7 @@ const Shape = () => {
 
   return (
     <div>
-      <div className={"corner-shape"}>
+      <div className="corner-shape">
         <img
           src={data.homepage.section1.bannerImg}
           alt="Home Page Banner"

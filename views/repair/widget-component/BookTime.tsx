@@ -332,7 +332,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                         <div key={index} className="select-mail-in-radio">
                           <input
                             type="radio"
-                            id={"radio" + index}
+                            id={`radio ${index}`}
                             name="region"
                             value={item.name}
                             onChange={() => {
@@ -340,7 +340,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                             }}
                             checked={index === mailInChecked}
                           />
-                          <label htmlFor={"radio" + index}>{item.name}</label>
+                          <label htmlFor={`radio ${index}`}>{item.name}</label>
                         </div>
                       )
                     })}

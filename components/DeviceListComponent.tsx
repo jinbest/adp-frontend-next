@@ -10,12 +10,12 @@ type Props = {
 
 const DeviceListComponent = ({ img, content, children, contentVisible }: Props) => {
   return (
-    <div className={"device-list-component"}>
+    <div className="device-list-component">
       <img src={img} width="1" height="auto" alt="device-list-img" />
-      <p className={"title"} style={{ fontWeight: "bold" }}>
+      <p className="title" style={{ fontWeight: "bold" }}>
         {children}
       </p>
-      {contentVisible && <p className={"content"}>{content}</p>}
+      {contentVisible && <p className="content">{content}</p>}
     </div>
   )
 }

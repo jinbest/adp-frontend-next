@@ -33,9 +33,9 @@ const NavItemLink = ({ item: { href, text }, handleStatus, feats }: PropsNavItem
   }
 
   return (
-    <li className={"nav-item"} style={{ whiteSpace: "nowrap" }}>
+    <li className="nav-item" style={{ whiteSpace: "nowrap" }}>
       {isExternal(href) ? (
-        <a className={"nav-link"} href={href} target="_blank" rel="noreferrer">
+        <a className="nav-link" href={href} target="_blank" rel="noreferrer">
           {text === "SHOP" ? (
             <MegamenuShop text={text} disableMenu={feats.includes("FRONTEND_MEGA_MENU")} />
           ) : (
@@ -43,7 +43,7 @@ const NavItemLink = ({ item: { href, text }, handleStatus, feats }: PropsNavItem
           )}
         </a>
       ) : (
-        <Link to={href} className={"nav-link"} onClick={handle}>
+        <Link to={href} className="nav-link" onClick={handle}>
           {text === "SHOP" ? (
             <MegamenuShop text={text} disableMenu={feats.includes("FRONTEND_MEGA_MENU")} />
           ) : (
@@ -237,11 +237,11 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             )}
             <FeatureToggles features={feats}>
               <Feature
-                name={"FRONTEND_USER_ACCOUNT"}
+                name="FRONTEND_USER_ACCOUNT"
                 inactiveComponent={() => <></>}
                 activeComponent={() => (
                   <Feature
-                    name={"FRONTEND_USER_LOGIN"}
+                    name="FRONTEND_USER_LOGIN"
                     inactiveComponent={() => <></>}
                     activeComponent={() => (
                       <BrandItemLink item={t("LOG_IN")} color={brandData.brandCol} href="#" />
@@ -282,14 +282,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
 
         <FeatureToggles features={feats}>
           <Feature
-            name={"SEARCH"}
+            name="SEARCH"
             inactiveComponent={() => <></>}
             activeComponent={() => (
               <Feature
-                name={"FRONTEND_GLOBAL_SEARCH"}
+                name="FRONTEND_GLOBAL_SEARCH"
                 inactiveComponent={() => <></>}
                 activeComponent={() => (
-                  <div className={"search-div"} id="header-search">
+                  <div className="search-div" id="header-search">
                     <Search
                       placeholder={searchPlaceholder}
                       color="rgba(0,0,0,0.8)"
@@ -531,11 +531,11 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                 })}
                 <FeatureToggles features={feats}>
                   <Feature
-                    name={"FRONTEND_USER_ACCOUNT"}
+                    name="FRONTEND_USER_ACCOUNT"
                     inactiveComponent={() => <></>}
                     activeComponent={() => (
                       <Feature
-                        name={"FRONTEND_USER_SIGNUP"}
+                        name="FRONTEND_USER_SIGNUP"
                         inactiveComponent={() => <></>}
                         activeComponent={() => (
                           <a href="#" style={{ color: data.general.colorPalle.textThemeCol }}>

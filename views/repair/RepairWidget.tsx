@@ -204,7 +204,6 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={""} />
       </Head>
       {loading && (
         <FeatureToggles features={feats}>

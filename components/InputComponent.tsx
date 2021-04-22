@@ -25,7 +25,7 @@ const InputComponent = ({
   return (
     <React.Fragment>
       <InputBase
-        className={"input-component"}
+        className="input-component"
         style={{
           color: color,
           background: bgcolor,

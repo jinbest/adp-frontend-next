@@ -172,7 +172,7 @@ const Footer = () => {
             )
           })}
         </Grid>
-        <p className={"device-list-grid copyright"} style={{ color: "grey" }}>
+        <p className="device-list-grid copyright" style={{ color: "grey" }}>
           {t(thisPage.copyRight)}
         </p>
         <div className={classes.bottomLink}>
