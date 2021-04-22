@@ -7,6 +7,11 @@ export default class CustomDocument extends Document {
       <Html>
         <Head>
           <link href="/static/style/font.css" rel="preload stylesheet" as="style" />
+          <link
+            rel="preload stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            as="style"
+          />
         </Head>
 
         <body>
