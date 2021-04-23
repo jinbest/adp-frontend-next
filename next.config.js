@@ -1,4 +1,10 @@
-// next.config.js
 module.exports = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
+      },
+    ]
+  },
 }
