@@ -3,6 +3,12 @@ import { Typography } from "@material-ui/core"
 import Card from "./Card"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../../store"
+import Image from "next/image"
+
+const imgSize = [
+  { width: 126, height: 155 },
+  { width: 147, height: 140 },
+]
 
 type Props = {
   data: any
@@ -20,7 +26,13 @@ const QuoteComponent = ({ data, quoteKey, repairWidgetData }: Props) => {
       <Card className="repair-service-summary-card">
         <div className="quote-container">
           <div className="quote-image">
-            <img src={data[quoteKey].img} alt="quote-img" width="1" height="auto" />
+            <Image
+              src={data[quoteKey].img}
+              alt="quote-img"
+              width={imgSize[quoteKey].width}
+              height={imgSize[quoteKey].height}
+              layout="responsive"
+            />
           </div>
           <Typography className="repair-service-summary-title">
             {`${t(data[quoteKey].title)} ${storeName}`}

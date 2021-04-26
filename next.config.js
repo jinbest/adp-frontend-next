@@ -1,4 +1,13 @@
-// next.config.js
 module.exports = {
-  /* config options here */
+  images: {
+    domains: ['storage.googleapis.com'],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
+      },
+    ]
+  },  
 }
