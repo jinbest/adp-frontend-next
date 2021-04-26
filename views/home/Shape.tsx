@@ -1,5 +1,6 @@
 import React from "react"
 import { storesDetails } from "../../store"
+import Image from "next/image"
 
 const Shape = () => {
   const data = storesDetails.storeCnts
@@ -7,11 +8,12 @@ const Shape = () => {
   return (
     <div>
       <div className="corner-shape">
-        <img
+        <Image
           src={data.homepage.section1.bannerImg}
           alt="Home Page Banner"
-          width="1"
-          height="auto"
+          width="2000"
+          height="1200"
+          layout="responsive"
         />
       </div>
     </div>

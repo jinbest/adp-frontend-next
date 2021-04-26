@@ -2,6 +2,7 @@ import React from "react"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { storesDetails } from "../store"
 import { observer } from "mobx-react"
+import Image from "next/image"
 
 const Badge = () => {
   const classes = useStyles()
@@ -9,12 +10,13 @@ const Badge = () => {
   return (
     <div className={classes.root}>
       <a href="https://www.devicelist.ca/" target="_blank" rel="noreferrer">
-        <img
+        <Image
           src={storesDetails.commonCnts.badgeImg}
           alt="badge-img"
           className={classes.badgeImg}
-          width="1"
-          height="auto"
+          layout="responsive"
+          width="300"
+          height="400"
         />
       </a>
     </div>

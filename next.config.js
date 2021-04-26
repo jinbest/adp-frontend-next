@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    domains: ['storage.googleapis.com'],
+  },
   async rewrites() {
     return [
       {
@@ -6,5 +9,5 @@ module.exports = {
         destination: "/api/sitemap",
       },
     ]
-  },
+  },  
 }

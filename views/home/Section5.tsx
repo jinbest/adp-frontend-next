@@ -3,6 +3,7 @@ import { Button } from "../../components"
 import { Typography, Box } from "@material-ui/core"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../store"
+import Image from "next/image"
 
 const Section5 = () => {
   const data = storesDetails.storeCnts
@@ -14,12 +15,13 @@ const Section5 = () => {
       <Box className="Container sec5-container">
         <Typography className="f40 bold mg-t-1">{t(thisPage.title)}</Typography>
         <Typography className="f18">{t(thisPage.content)}</Typography>
-        <img
+        <Image
           className="mg-t-1 section5-img"
           src={storesDetails.commonCnts.bounceImg}
-          width="1"
-          height="auto"
+          width="100"
+          height="100"
           alt="bounce-img"
+          layout="responsive"
         />
         <Typography className="f24 bold">{t(thisPage.subtitle)}</Typography>
         <Box className="col_center">

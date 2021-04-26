@@ -1,6 +1,7 @@
 import React from "react"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { storesDetails } from "../../store"
+import Image from "next/image"
 
 const Shape = () => {
   const data = storesDetails.storeCnts
@@ -10,27 +11,30 @@ const Shape = () => {
   return (
     <div>
       <div className={classes.corner}>
-        <img
+        <Image
           src={shapeData.businessCornerShape}
-          width="1"
-          height="auto"
+          width="775"
+          height="569"
           alt="business-corner-shape"
+          layout="responsive"
         />
       </div>
       <div className={classes.leftDesktop}>
-        <img
+        <Image
           src={shapeData.shapeLeftDesktop}
-          width="1"
-          height="auto"
+          width="236"
+          height="957"
           alt="business-left-shape-desktop"
+          layout="responsive"
         />
       </div>
       <div className={classes.leftMobile}>
-        <img
+        <Image
           src={shapeData.shapeLeftMobile}
-          width="1"
-          height="auto"
+          width="104"
+          height="301"
           alt="business-left-shape-mobile"
+          layout="responsive"
         />
       </div>
     </div>
