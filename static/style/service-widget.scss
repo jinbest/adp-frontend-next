@@ -441,7 +441,9 @@
 .quote-image {
   margin: 0px auto 30px;
   text-align: center;
-  width: 120px;
+  img {
+    width: 100px;
+  }
 }
 
 .quote-component-content {

@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 
 type Props = {
   img: string
@@ -12,7 +11,7 @@ type Props = {
 const DeviceListComponent = ({ img, content, children, contentVisible }: Props) => {
   return (
     <div className="device-list-component">
-      <Image src={img} width="100" height="100" alt="device-list-img" layout="responsive" />
+      <img src={img} width="1" height="auto" alt="device-list-img" />
       <p className="title" style={{ fontWeight: "bold" }}>
         {children}
       </p>
