@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 
 type Props = {
   img: string
@@ -12,13 +11,7 @@ type Props = {
 const CardPopular = ({ title, img, price, subtitle, priceCol }: Props) => {
   return (
     <div className="card-popular">
-      <Image
-        src={img}
-        width="100"
-        height="100"
-        alt={`${title}-card-popular-img`}
-        layout="responsive"
-      />
+      <img src={img} width="1" height="auto" alt={`${title}-card-popular-img`} />
       <p className="title">{title}</p>
       <div className="price-div">
         <p className="subtitle">{subtitle + " /"}</p>

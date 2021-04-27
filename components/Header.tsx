@@ -11,7 +11,6 @@ import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails, repairWidgetStore } from "../store"
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
 import { phoneFormatString, isExternal, getBusinessLink, getWidth } from "../services/helper"
-import Image from "next/image"
 import _ from "lodash"
 
 type PropsNavItemLink = {
@@ -361,20 +360,16 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             themeCol={data.general.colorPalle.repairButtonCol}
           >
             {!menuStatus ? (
-              <Image
+              <img
                 src={thisPage.mobileNavData.avatarData.menu}
                 onClick={toggleMenuStatus}
                 alt="menu-img"
-                width="100"
-                height="100"
               />
             ) : (
-              <Image
+              <img
                 src={thisPage.mobileNavData.avatarData.cancel}
                 onClick={toggleMenuStatus}
                 alt="cancel-img"
-                width="100"
-                height="100"
               />
             )}
           </HeaderDrawer>

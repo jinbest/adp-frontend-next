@@ -16,7 +16,7 @@ spec:
       labels:
         app: adp-frontend
       annotations:
-        sidecar.istio.io/inject: "true"        
+        sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: adp-frontend
@@ -25,9 +25,9 @@ spec:
             - containerPort: 80
           imagePullPolicy: IfNotPresent
           resources:
-              requests:
-                cpu: 200m
-                memory: 180Mi
-              limits:
-                cpu: 300m
-                memory: 300Mi
+            requests:
+              cpu: 300m
+              memory: 300Mi
+            limits:
+              cpu: 400m
+              memory: 400Mi
