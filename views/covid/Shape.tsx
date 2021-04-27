@@ -1,7 +1,6 @@
 import React from "react"
 import { storesDetails } from "../../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
-import Image from "next/image"
 
 const Shape = () => {
   const classes = useStyles()
@@ -10,11 +9,11 @@ const Shape = () => {
   return (
     <div>
       <div className={classes.shape}>
-        <Image
+        <img
+          className={classes.shapeImg}
           src={data.covidBannerImg}
-          layout="responsive"
-          width="2000"
-          height="1200"
+          width="1"
+          height="auto"
           alt="covid-banner"
         />
       </div>
@@ -35,10 +34,21 @@ const useStyles = makeStyles(() =>
       zIndex: -2,
       ["@media (max-width:768px)"]: {
         height: "510px",
-        top: "100px",
+      },
+    },
+    shapeImg: {
+      width: "100%",
+      minWidth: "1000px",
+      minHeight: "650px",
+      ["@media (max-width:1024px)"]: {
+        minHeight: "600px",
+      },
+      ["@media (max-width:768px)"]: {
+        minHeight: "500px",
       },
       ["@media (max-width:425px)"]: {
-        top: "150px",
+        minHeight: "380px",
+        minWidth: "700px",
       },
     },
   })

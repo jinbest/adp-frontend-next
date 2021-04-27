@@ -4,7 +4,6 @@ import { CardPopular } from "../../components"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails } from "../../store"
-import Image from "next/image"
 
 type Props = {
   features: any[]
@@ -79,13 +78,12 @@ const Section3 = ({ features }: Props) => {
                       </Typography>
                     </Grid>
                     <Grid item sm={12} md={5}>
-                      <Image
+                      <img
                         src={deviceCard.img}
                         alt="device-list"
                         className="card-img"
-                        width="200"
-                        height="100"
-                        layout="responsive"
+                        width="1"
+                        height="auto"
                       />
                     </Grid>
                   </Grid>

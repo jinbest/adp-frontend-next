@@ -441,7 +441,9 @@
 .quote-image {
   margin: 0px auto 30px;
   text-align: center;
-  width: 120px;
+  img {
+    width: 100px;
+  }
 }
 
 .quote-component-content {
@@ -606,4 +608,10 @@
   @media (max-width: 400px) {
     font-size: 15px;
   }
+}
+
+.error-tooltip {
+  margin-left: auto;
+  font-size: 12px;
+  padding: 5px 0;
 }

@@ -19,6 +19,7 @@ import { observer } from "mobx-react"
 import { Close } from "@material-ui/icons"
 import { isEmpty } from "lodash"
 import { makeLocations, ValidateEmail } from "../../services/helper"
+import ReactTooltip from "react-tooltip"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -115,6 +116,8 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
   const [loc, setLoc] = useState<OptionProps>({ name: "", code: 0 })
   const [message, setMessage] = useState("")
   const [msgErrTxt, setMsgErrTxt] = useState("")
+  const [msgCount, setMsgCount] = useState(0)
+  const [errTip, setErrTip] = useState(false)
   const [disableStatus, setDisableStatus] = useState(true)
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
   const [isSubmit, setIsSubmit] = useState(false)
@@ -147,6 +150,12 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
   }, [locations, storesDetails.cntUserLocation])
 
   useEffect(() => {
+    setMsgCount(message ? message.length : 0)
+    if (message && message.length > 1000) {
+      setErrTip(true)
+    } else {
+      setErrTip(false)
+    }
     if (firstName && lastName && email && loc && message) {
       setDisableStatus(false)
     } else {
@@ -370,16 +379,27 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                         setMessage(e.target.value)
                       }}
                       minLength={5}
-                      maxLength={1000}
+                      maxLength={1001}
                       placeholder={`${t(thisPage.placeHolder.message)}*`}
                       className={classes.textArea}
                     />
                   </div>
-                  {msgErrTxt && (
-                    <span style={{ color: "red", fontSize: "13px", marginLeft: "30px" }}>
-                      {msgErrTxt}
-                    </span>
-                  )}
+                  <div className="d-flex">
+                    {msgErrTxt && (
+                      <span style={{ color: "red", fontSize: "13px", marginLeft: "30px" }}>
+                        {msgErrTxt}
+                      </span>
+                    )}
+                    {errTip && (
+                      <ReactTooltip id="error-tip" place="top" effect="solid">
+                        {t("You can only enter 1000 characters")}
+                      </ReactTooltip>
+                    )}
+                    <div className="error-tooltip" data-tip data-for="error-tip">
+                      <span style={{ color: msgCount > 1000 ? "red" : "black" }}>{msgCount}</span>
+                      <span> / 1000</span>
+                    </div>
+                  </div>
                 </Grid>
               </Grid>
               <div style={{ display: "flex" }}>
@@ -392,7 +412,7 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                   margin="20px 0 0 auto"
                   fontSize="17px"
                   onClick={handleSubmit}
-                  disable={disableStatus}
+                  disable={disableStatus || errTip}
                 >
                   {isSubmit && <Loading />}
                 </Button>

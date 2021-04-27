@@ -16,6 +16,7 @@ import { storesDetails } from "../../store"
 import { observer } from "mobx-react"
 import { makeLocations, ValidateEmail } from "../../services/helper"
 import { Close } from "@material-ui/icons"
+import ReactTooltip from "react-tooltip"
 
 type OptionProps = {
   name: string
@@ -46,6 +47,8 @@ const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
   const [loc, setLoc] = useState<OptionProps>({ name: "", code: 0 })
   const [message, setMessage] = useState("")
   const [msgErrTxt, setMsgErrTxt] = useState("")
+  const [msgCount, setMsgCount] = useState(0)
+  const [errTip, setErrTip] = useState(false)
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
   const [isSubmit, setIsSubmit] = useState(false)
   const [disableStatus, setDisableStatus] = useState(true)
@@ -95,6 +98,12 @@ const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
   }, [locations])
 
   useEffect(() => {
+    setMsgCount(message ? message.length : 0)
+    if (message && message.length > 1000) {
+      setErrTip(true)
+    } else {
+      setErrTip(false)
+    }
     if (firstName && lastName && email && loc.name && message) {
       setDisableStatus(false)
     } else {
@@ -281,16 +290,27 @@ const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
                       setMessage(e.target.value)
                     }}
                     minLength={5}
-                    maxLength={1000}
+                    maxLength={1001}
                     placeholder={`${t(thisPage.placeHolder.message)}*`}
                     className={classes.textArea}
                   />
                 </div>
-                {msgErrTxt && (
-                  <span style={{ color: "red", fontSize: "13px", marginLeft: "20px" }}>
-                    {msgErrTxt}
-                  </span>
-                )}
+                <div className="d-flex">
+                  {msgErrTxt && (
+                    <span style={{ color: "red", fontSize: "13px", marginLeft: "20px" }}>
+                      {msgErrTxt}
+                    </span>
+                  )}
+                  {errTip && (
+                    <ReactTooltip id="error-tip" place="top" effect="solid">
+                      {t("You can only enter 1000 characters")}
+                    </ReactTooltip>
+                  )}
+                  <div className="error-tooltip" data-tip data-for="error-tip">
+                    <span style={{ color: msgCount > 1000 ? "red" : "black" }}>{msgCount}</span>
+                    <span> / 1000</span>
+                  </div>
+                </div>
               </Grid>
             </Grid>
             <Button
@@ -302,7 +322,7 @@ const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
               margin="20px 0 0"
               fontSize="17px"
               onClick={handleSubmit}
-              disable={disableStatus}
+              disable={disableStatus || errTip}
             >
               {isSubmit && <Loading />}
             </Button>
