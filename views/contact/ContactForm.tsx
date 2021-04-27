@@ -290,7 +290,6 @@ const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
                       setMessage(e.target.value)
                     }}
                     minLength={5}
-                    maxLength={1001}
                     placeholder={`${t(thisPage.placeHolder.message)}*`}
                     className={classes.textArea}
                   />
