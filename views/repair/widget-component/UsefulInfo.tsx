@@ -25,9 +25,11 @@ const UsefulInfo = ({
   const themeCol = mainData.general.colorPalle.themeColor
 
   const [message, setMessage] = useState("")
+  const [error, setError] = useState(false)
   const [t] = useTranslation()
 
   const ChooseNextStep = () => {
+    if (error) return
     handleChangeChooseData(8, message)
     handleStep(step + 1)
   }
@@ -46,7 +48,7 @@ const UsefulInfo = ({
         }
       }
     },
-    [step, message]
+    [step, message, error]
   )
 
   useEffect(() => {
@@ -54,7 +56,15 @@ const UsefulInfo = ({
     return () => {
       document.removeEventListener("keydown", onKeyPress, false)
     }
-  }, [step, message])
+  }, [step, message, error])
+
+  useEffect(() => {
+    if (message && message.length >= 501) {
+      setError(true)
+    } else {
+      setError(false)
+    }
+  }, [message])
 
   return (
     <div>
@@ -75,9 +85,12 @@ const UsefulInfo = ({
                   }}
                   placeholder={t(data.placeholder)}
                   className="useful-textarea"
-                  maxLength={500}
+                  maxLength={501}
                 />
               </div>
+              {error && (
+                <span className="error-message">{t("You can only enter 500 characters")}</span>
+              )}
             </div>
             <div className="service-card-button">
               <Button
@@ -88,6 +101,7 @@ const UsefulInfo = ({
                 height="30px"
                 fontSize="17px"
                 onClick={ChooseNextStep}
+                disable={error}
               />
               <p>{t("or press ENTER")}</p>
             </div>
