@@ -75,6 +75,7 @@ const UsefulInfo = ({
                   }}
                   placeholder={t(data.placeholder)}
                   className="useful-textarea"
+                  maxLength={500}
                 />
               </div>
             </div>
