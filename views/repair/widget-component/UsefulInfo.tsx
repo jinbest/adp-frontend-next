@@ -5,6 +5,7 @@ import Button from "../../../components/Button"
 import RepairSummary from "./RepairSummary"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../../store"
+import ReactTooltip from "react-tooltip"
 
 type Props = {
   data: any
@@ -26,6 +27,7 @@ const UsefulInfo = ({
 
   const [message, setMessage] = useState("")
   const [error, setError] = useState(false)
+  const [count, setCount] = useState(0)
   const [t] = useTranslation()
 
   const ChooseNextStep = () => {
@@ -59,6 +61,7 @@ const UsefulInfo = ({
   }, [step, message, error])
 
   useEffect(() => {
+    setCount(message ? message.length : 0)
     if (message && message.length >= 501) {
       setError(true)
     } else {
@@ -88,9 +91,17 @@ const UsefulInfo = ({
                   maxLength={501}
                 />
               </div>
-              {error && (
-                <span className="error-message">{t("You can only enter 500 characters")}</span>
-              )}
+              <div className="d-flex">
+                {error && (
+                  <ReactTooltip id="error-tip" place="top" effect="solid">
+                    {t("You can only enter 500 characters")}
+                  </ReactTooltip>
+                )}
+                <div className="error-tooltip" data-tip data-for="error-tip">
+                  <span style={{ color: count > 500 ? "red" : "black" }}>{count}</span>
+                  <span> / 500</span>
+                </div>
+              </div>
             </div>
             <div className="service-card-button">
               <Button
