@@ -32,9 +32,7 @@ const Section2 = ({ features }: Props) => {
   }, [features, data])
 
   const handleRepairWidget = () => {
-    const cntAppointment: any = repairWidgetStore.appointResponse
     repairWidgetStore.init()
-    repairWidgetStore.changeAppointResponse(cntAppointment)
   }
 
   return (

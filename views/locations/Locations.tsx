@@ -7,18 +7,10 @@ import Button from "../../components/Button"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { repairWidgetStore, storesDetails } from "../../store"
-import { getRegularHours, getHourType, getAddress, phoneFormatString } from "../../services/helper"
 import { MetaParams } from "../../model/meta-params"
-
-const DAYS_OF_THE_WEEK: string[] = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
+import CustomButtons from "../specific-location/component/custom-buttons"
+import HoursViewer from "../specific-location/component/hours-viewer"
+import AddressViewer from "../specific-location/component/address-viewer"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -108,106 +100,15 @@ const Locations = ({ handleStatus }: Props) => {
                           <Typography className={classes.cardTitle}>
                             {item.location_name}
                           </Typography>
-                          <Typography className={classes.cardText}>
-                            {`${item.address_1},`}
-                          </Typography>
-                          <Typography className={classes.cardText}>
-                            {`${item.address_2 ? item.address_2 + ", " : ""}${
-                              item.city ? item.city + ", " : ""
-                            } ${item.state ? item.state + " " : ""} ${
-                              item.postcode
-                                ? item.postcode.substring(0, 3) +
-                                  " " +
-                                  item.postcode.substring(3, item.postcode.length)
-                                : ""
-                            }`}
-                          </Typography>
-                          <a
-                            href={`tel:${item.phone}`}
-                            style={{
-                              textDecoration: "none",
-                              display: "inline-block",
-                            }}
-                          >
-                            <Typography className={classes.cardText}>
-                              {phoneFormatString(item.phone)}
-                            </Typography>
-                          </a>
+                          <AddressViewer location={item} />
                         </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            margin: "0 0 10px",
-                            flexWrap: "wrap",
-                          }}
-                        >
-                          <a
-                            href={`${
-                              item.business_page_link != null
-                                ? item.business_page_link
-                                : `https://www.google.com/maps/search/?api=1&query=${getAddress(
-                                    item
-                                  )
-                                    .split(" ")
-                                    .join("+")}`
-                            }`}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{
-                              textDecoration: "none",
-                              color: "black",
-                            }}
-                          >
-                            <Button
-                              title={t("Get Directions")}
-                              bgcolor={data.general.colorPalle.repairButtonCol}
-                              borderR="20px"
-                              width="auto"
-                              margin="10px 10px 0 0"
-                              fontSize="12px"
-                              height="25px"
-                            />
-                          </a>
-                          <a href={`tel:${item.phone}`} style={{ textDecoration: "none" }}>
-                            <Button
-                              title={t("Call Now")}
-                              bgcolor={data.general.colorPalle.repairButtonCol}
-                              borderR="20px"
-                              width="auto"
-                              margin="10px 10px 0 0"
-                              fontSize="12px"
-                              height="25px"
-                            />
-                          </a>
-                        </div>
+                        <CustomButtons
+                          location={item}
+                          color={data.general.colorPalle.repairButtonCol}
+                        />
                       </Grid>
                       <Grid item xs={12} sm={6}>
-                        <Typography className={classes.cardTitle}>{t("Hours")}</Typography>
-                        {getRegularHours(item.location_hours).map((it, index) => (
-                          <div
-                            key={index}
-                            style={{
-                              display: "flex",
-                              width: "100%",
-                              marginBottom: "5px",
-                            }}
-                          >
-                            <div style={{ width: "40%", margin: 0, padding: 0 }}>
-                              <Typography className={classes.cardText}>
-                                {t(DAYS_OF_THE_WEEK[it.day])}
-                              </Typography>
-                            </div>
-                            <div style={{ width: "60%", margin: 0, padding: 0 }}>
-                              <Typography className={classes.cardText}>
-                                {!it.open || !it.close
-                                  ? it.by_appointment_only
-                                    ? t("Call to book appointment")
-                                    : t("Closed")
-                                  : getHourType(it.open) + "-" + getHourType(it.close)}
-                              </Typography>
-                            </div>
-                          </div>
-                        ))}
+                        <HoursViewer location={item} />
                       </Grid>
                     </Grid>
                   </div>
@@ -245,7 +146,6 @@ const useStyles = makeStyles(() =>
       color: "black",
       fontSize: "55px !important",
       lineHeight: "70px !important",
-      // textShadow: "1px 0 black",
       fontWeight: "bold",
       fontFamily: "Poppins Bold",
       justifyContent: "center",
@@ -308,7 +208,6 @@ const useStyles = makeStyles(() =>
       color: "black",
       fontSize: "40px !important",
       lineHeight: "1 !important",
-      // textShadow: "1px 0 black",
       fontFamily: "Poppins Bold !important",
       fontWeight: "bold",
       justifyContent: "center",
@@ -351,25 +250,6 @@ const useStyles = makeStyles(() =>
       },
       ["@media (max-width:400px)"]: {
         fontSize: "14px",
-      },
-    },
-    cardText: {
-      fontSize: "15px",
-      marginBottom: "5px",
-      color: "black",
-      ["@media (max-width:1400px)"]: {
-        fontSize: "13px",
-      },
-      ["@media (max-width:960px)"]: {
-        fontSize: "15px",
-      },
-      ["@media (max-width:700px)"]: {
-        fontSize: "13px",
-        marginBottom: "3px",
-      },
-      ["@media (max-width:400px)"]: {
-        fontSize: "12px",
-        marginBottom: "2px",
       },
     },
   })

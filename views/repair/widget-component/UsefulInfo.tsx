@@ -62,7 +62,7 @@ const UsefulInfo = ({
 
   useEffect(() => {
     setCount(message ? message.length : 0)
-    if (message && message.length >= 501) {
+    if (message && message.length > 500) {
       setError(true)
     } else {
       setError(false)
@@ -88,7 +88,6 @@ const UsefulInfo = ({
                   }}
                   placeholder={t(data.placeholder)}
                   className="useful-textarea"
-                  maxLength={501}
                 />
               </div>
               <div className="d-flex">

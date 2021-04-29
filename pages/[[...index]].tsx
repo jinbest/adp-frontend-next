@@ -9,6 +9,7 @@ import { appLoadAPI } from "../services/"
 import { FeaturesParam } from "../model/feature-toggle"
 import { MetaParams } from "../model/meta-params"
 import { ScriptParams } from "../model/script-params"
+import { SpecificConfigArray, SpecificConfigParams } from "../model/specific-config-param"
 import Config from "../config/config"
 import { BrowserRouter as Router } from "react-router-dom"
 import { TagParams } from "../model/tag-params"
@@ -23,7 +24,15 @@ import BaseRouter from "../views/BaseRouter"
 const apiClient = ApiClient.getInstance()
 
 function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { storeData, feats, locations, storeCnts, commonCnts, privacyTemplate } = data
+  const {
+    storeData,
+    feats,
+    locations,
+    storeCnts,
+    commonCnts,
+    privacyTemplate,
+    specConfArray,
+  } = data
 
   const [theme, setTheme] = useState("")
   const [favIcon, setFavIcon] = useState("")
@@ -110,6 +119,7 @@ function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
       setLoadStatus(true)
     }
     storesDetails.changePrivacyPolicy(privacyTemplate)
+    storesDetails.changeSpecConfArray(specConfArray)
   }, [])
 
   return (
@@ -218,6 +228,19 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     privacyTemplate = await apiClient.get<string>(htmlLink)
   }
 
+  const specConfArray: SpecificConfigArray[] = []
+  for (let i = 0; i < contents[0].data.locations.length; i++) {
+    if (contents[0].data.locations[i].slug) {
+      const conf = await apiClient.get<SpecificConfigParams>(
+        `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/location/${contents[0].data.locations[i].id}/config`
+      )
+      specConfArray.push({
+        id: contents[0].data.locations[i].id,
+        config: conf,
+      })
+    }
+  }
+
   const data = {
     storeData: storeData,
     feats: features,
@@ -226,6 +249,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     commonCnts: contents[1].data,
     subDomainID: subDomainID,
     privacyTemplate: privacyTemplate,
+    specConfArray: specConfArray,
   }
 
   return {

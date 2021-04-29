@@ -379,7 +379,6 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                         setMessage(e.target.value)
                       }}
                       minLength={5}
-                      maxLength={1001}
                       placeholder={`${t(thisPage.placeHolder.message)}*`}
                       className={classes.textArea}
                     />
