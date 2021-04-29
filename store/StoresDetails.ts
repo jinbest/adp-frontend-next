@@ -1,5 +1,6 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { GetCurrentLocParams } from "../model/get-current-location"
+import { SpecificConfigArray } from "../model/specific-config-param"
 
 configure({ enforceActions: "always" })
 
@@ -18,6 +19,7 @@ export class StoresDetails {
   @observable storeCnts: any = {}
   @observable commonCnts: any = {}
   @observable privacyTemplate = ""
+  @observable specConfigArray: SpecificConfigArray[] = []
 
   constructor() {
     this.load()
@@ -42,7 +44,8 @@ export class StoresDetails {
           allLocations: this.allLocations,
           storeCnts: this.storeCnts,
           commonCnts: this.commonCnts,
-          privacyTemplate: this.privacyTemplate
+          privacyTemplate: this.privacyTemplate,
+          specConfigArray: this.specConfigArray
         })
       )
     }
@@ -154,6 +157,20 @@ export class StoresDetails {
   @action
   changePrivacyPolicy = (privacyTemplate: string) => {
     this.privacyTemplate = privacyTemplate
+    this.save()
+  }
+
+  @action
+  changeSpecConfArray = (config: SpecificConfigArray[]) => {
+    this.specConfigArray = config
+    this.save()
+  }
+
+  @action
+  addSpecConfArray = (config: SpecificConfigArray) => {
+    const cntSpecConf: SpecificConfigArray[] = this.specConfigArray
+    cntSpecConf.push(config)
+    this.specConfigArray = cntSpecConf
     this.save()
   }
 }
