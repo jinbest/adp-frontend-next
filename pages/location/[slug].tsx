@@ -224,17 +224,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     privacyTemplate = await apiClient.get<string>(htmlLink)
   }
 
-  const specConfArray: SpecificConfigArray[] = []
-  for (let i = 0; i < contents[0].data.locations.length; i++) {
-    if (contents[0].data.locations[i].slug) {
-      const conf = await apiClient.get<SpecificConfigParams>(
-        `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/location/${contents[0].data.locations[i].id}/config`
-      )
-      specConfArray.push({
-        id: contents[0].data.locations[i].id,
-        config: conf,
-      })
-    }
+  const specConfArray: SpecificConfigArray[] = [],
+    slugIndex = findIndex(contents[0].data.locations, { slug: slug })
+  if (slugIndex > -1) {
+    const conf = await apiClient.get<SpecificConfigParams>(
+      `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/location/${contents[0].data.locations[slugIndex].id}/config`
+    )
+    specConfArray.push({
+      id: contents[0].data.locations[slugIndex].id,
+      config: conf,
+    })
   }
 
   const data = {
