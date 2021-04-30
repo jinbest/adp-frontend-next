@@ -5,9 +5,6 @@ import { useTranslation } from "react-i18next"
 import { Section2 } from "../../model/specific-config-param"
 import _ from "lodash"
 import CardFix from "../../components/CardFix"
-import { Link } from "react-router-dom"
-import { repairWidgetStore, storesDetails } from "../../store"
-import { observer } from "mobx-react"
 
 type Props = {
   config: Section2
@@ -15,13 +12,8 @@ type Props = {
 
 const SpecSection2 = ({ config }: Props) => {
   const classes = useStyles()
-  const data = storesDetails.storeCnts
   const [t] = useTranslation()
   const categories = _.sortBy(config.categories, (o) => o.order)
-
-  const handleRepairWidget = () => {
-    repairWidgetStore.init()
-  }
 
   return (
     <div className="Container">
@@ -32,13 +24,9 @@ const SpecSection2 = ({ config }: Props) => {
           return (
             <React.Fragment key={index}>
               {item.isVisible && (
-                <Link
-                  to={data.general.routes.repairWidgetPage}
-                  className="card-customized-item"
-                  onClick={handleRepairWidget}
-                >
+                <div className="card-customized-item">
                   <CardFix title={t(item.title)} img={item.img} key={index} />
-                </Link>
+                </div>
               )}
             </React.Fragment>
           )
@@ -49,13 +37,9 @@ const SpecSection2 = ({ config }: Props) => {
           return (
             <React.Fragment key={index}>
               {item.isVisible && (
-                <Link
-                  to={data.general.routes.repairWidgetPage}
-                  className="card-customized-item"
-                  onClick={handleRepairWidget}
-                >
+                <div className="card-customized-item">
                   <CardFix title={t(item.title)} img={item.img} key={index} />
-                </Link>
+                </div>
               )}
             </React.Fragment>
           )
@@ -66,13 +50,9 @@ const SpecSection2 = ({ config }: Props) => {
           return (
             <React.Fragment key={index}>
               {item.isVisible && (
-                <Link
-                  to={data.general.routes.repairWidgetPage}
-                  className="card-customized-item"
-                  onClick={handleRepairWidget}
-                >
+                <div className="card-customized-item">
                   <CardFix title={t(item.title)} img={item.img} key={index} />
-                </Link>
+                </div>
               )}
             </React.Fragment>
           )
@@ -82,7 +62,7 @@ const SpecSection2 = ({ config }: Props) => {
   )
 }
 
-export default observer(SpecSection2)
+export default SpecSection2
 
 const useStyles = makeStyles(() =>
   createStyles({
