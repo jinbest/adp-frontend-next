@@ -10,6 +10,7 @@ import Repair from "./repair/Repair"
 import RepairWidget from "./repair/RepairWidget"
 import PrivacyPolicy from "./privacy-policy/PrivacyPolicy"
 import { FeaturesParam } from "../model/feature-toggle"
+import SpecificLocation from "./specific-location/SpecificLocation"
 
 type Props = {
   features: FeaturesParam[]
@@ -54,6 +55,24 @@ export default function BaseRouter({ features, handleStatus }: Props) {
           component={() => <PrivacyPolicy handleStatus={handleStatus} />}
         />
       )}
+      {storesDetails.storeCnts.locations.map((item: any, index: number) => {
+        return (
+          <React.Fragment key={index}>
+            {item.slug && (
+              <Route
+                path={`/location/${item.slug}`}
+                component={() => (
+                  <SpecificLocation
+                    handleStatus={handleStatus}
+                    storeID={storesDetails.store_id}
+                    locID={item.id}
+                  />
+                )}
+              />
+            )}
+          </React.Fragment>
+        )
+      })}
     </>
   )
 }

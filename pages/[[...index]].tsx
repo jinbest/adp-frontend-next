@@ -239,9 +239,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 
   if (!urlStatus) {
+    console.log("Can't find resolvedUrl: ", ctx.resolvedUrl)
     return {
       redirect: {
-        destination: "/",
+        destination: contents[0].data.general.routes.homePage,
         permanent: false,
       },
     }

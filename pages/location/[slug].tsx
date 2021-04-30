@@ -3,9 +3,13 @@ import { InferGetServerSidePropsType, GetServerSideProps } from "next"
 import { Provider, observer } from "mobx-react"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
-import { storesDetails } from "../../store"
+import Badge from "../../components/Badge"
+import { storesDetails, repairWidgetStore, repairWidData } from "../../store"
 import { appLoadAPI } from "../../services"
 import { FeaturesParam } from "../../model/feature-toggle"
+import { MetaParams } from "../../model/meta-params"
+import { ScriptParams } from "../../model/script-params"
+import { TagParams } from "../../model/tag-params"
 import { SpecificConfigArray, SpecificConfigParams } from "../../model/specific-config-param"
 import Config from "../../config/config"
 import _, { isEmpty } from "lodash"
@@ -14,32 +18,88 @@ import { Store } from "../../model/store"
 import { StoreToggle } from "../../model/store-toggle"
 import { GetManyResponse } from "../../model/get-many-response"
 import ApiClient from "../../services/api-client"
-import { useRouter } from "next/router"
 import { BrowserRouter as Router } from "react-router-dom"
-import SpecificLocation from "../../views/specific-location/SpecificLocation"
+import BaseRouter from "../../views/BaseRouter"
 import { findIndex } from "lodash"
 
 const apiClient = ApiClient.getInstance()
 
 function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { storeData, feats, locations, storeCnts, commonCnts, specConfArray } = data
-  const router = useRouter()
+  const {
+    storeData,
+    feats,
+    locations,
+    storeCnts,
+    commonCnts,
+    specConfArray,
+    privacyTemplate,
+  } = data
 
   const [theme, setTheme] = useState("")
   const [favIcon, setFavIcon] = useState("")
+  const [pageTitle, setPageTitle] = useState("")
+  const [metaList, setMetaList] = useState<MetaParams[]>([])
   const [features, setFeatures] = useState<FeaturesParam[]>([])
+  const [scriptList, setScriptList] = useState<ScriptParams[]>([])
   const [loadStatus, setLoadStatus] = useState(false)
   const [footerStatus, setFooterStatus] = useState(false)
-  const [locID, setLocID] = useState(-1)
 
   const handleFooterStatus = (status: boolean) => {
     setFooterStatus(status)
   }
 
+  const loadBodyTag = (tag: string) => {
+    if (tag != null) {
+      const parser = new DOMParser()
+      const noScript = document.createElement("noscript")
+      const htmlDoc = parser.parseFromString(tag, "text/html")
+      const iframeNode = htmlDoc.getElementsByTagName("iframe")[0]
+      if (iframeNode != null) {
+        noScript.prepend(iframeNode)
+        document.body.prepend(noScript)
+      }
+    }
+  }
+
   const handleTabData = (mainData: any, store_id: number) => {
-    const homepage = mainData.homepage
+    const homepage = mainData.homepage,
+      scripts: ScriptParams[] = []
+
+    setPageTitle(homepage.headData.title)
+    setMetaList(homepage.headData.metaList)
     setFavIcon(homepage.headData.fav.img)
+
+    /* This is for local work */
+    // const prodLink = "https://prod.pcmtx.com/api/store-service/"
+    // if (subDomainID > 0) {
+    //   setTheme(`${prodLink}dc/store/${subDomainID}/theme/theme.min.css/asset`)
+    // } else {
+    //   setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
+    // }
+
+    /* This is for production */
     setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
+
+    homepage.bodyData.tags.forEach((item: TagParams) => {
+      loadBodyTag(item.content)
+    })
+
+    homepage.headData.scripts.forEach((item: ScriptParams) => {
+      if (item.type === "reamaze" && item.content) {
+        const script = document.createElement("script")
+        script.type = "text/javascript"
+        script.append(item.content)
+        document.body.appendChild(script)
+        const scriptReamaze = document.createElement("script")
+        scriptReamaze.type = "text/javascript"
+        scriptReamaze.src = "https://cdn.reamaze.com/assets/reamaze.js"
+        scriptReamaze.async = true
+        document.body.appendChild(scriptReamaze)
+      } else if (item.type !== "reamaze") {
+        scripts.push(item)
+      }
+    })
+    setScriptList(scripts)
   }
 
   useEffect(() => {
@@ -59,35 +119,45 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
       setFeatures([...cntFeats])
       setLoadStatus(true)
     }
+    storesDetails.changePrivacyPolicy(privacyTemplate)
     storesDetails.changeSpecConfArray(specConfArray)
   }, [])
 
-  useEffect(() => {
-    const slugIndex = findIndex(storeCnts.locations, { slug: router.query.slug })
-    if (slugIndex > -1) {
-      setLocID(storeCnts.locations[slugIndex].id)
-    }
-  }, [router])
-
   return (
-    <Provider storesDetailsStore={storesDetails}>
+    <Provider
+      storesDetailsStore={storesDetails}
+      repairWidgetStore={repairWidgetStore}
+      repairWidDataStore={repairWidData}
+    >
       <Helmet>
-        <link rel="stylesheet" href={theme} />
+        <title>{pageTitle}</title>
         <link rel="icon" id="favicon" href={favIcon} />
         <link rel="apple-touch-icon" href={favIcon} />
+        <link rel="stylesheet" href={theme} />
+        {metaList.map((item: MetaParams, index: number) => {
+          return <meta name={item.name} content={item.content} key={index} />
+        })}
+        {scriptList.map((item: ScriptParams, index: number) => {
+          return <script key={index}>{item.content}</script>
+        })}
       </Helmet>
       {loadStatus && (
-        <Router>
-          <Header handleStatus={handleFooterStatus} features={features} />
-          {locID > -1 && (
-            <SpecificLocation
-              handleStatus={handleFooterStatus}
-              locID={locID}
-              storeID={storeData.settings.store_id}
-            />
-          )}
-          {footerStatus && <Footer />}
-        </Router>
+        <React.Fragment>
+          <Helmet>
+            {storeCnts.general.condition.googleVerification.status && (
+              <meta
+                name={storeCnts.general.condition.googleVerification.metaData.name}
+                content={storeCnts.general.condition.googleVerification.metaData.content}
+              />
+            )}
+          </Helmet>
+          <Router>
+            <Header handleStatus={handleFooterStatus} features={features} />
+            <BaseRouter handleStatus={handleFooterStatus} features={features} />
+            <Badge />
+            {footerStatus && <Footer />}
+          </Router>
+        </React.Fragment>
       )}
     </Provider>
   )
@@ -126,9 +196,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     })
 
   if (findIndex(contents[0].data.locations, { slug: slug }) === -1) {
+    console.log("Can't find slug: ", slug)
     return {
       redirect: {
-        destination: "/locations",
+        destination: contents[0].data.general.routes.locationsPage,
         permanent: false,
       },
     }
@@ -142,6 +213,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       notFound: true,
     }
+  }
+
+  let privacyTemplate = ""
+  if (
+    !isEmpty(contents) &&
+    contents[0].data.homepage.footer.bottomLinks.privacyPolicy.externalLink
+  ) {
+    const htmlLink = contents[0].data.homepage.footer.bottomLinks.privacyPolicy.externalLink
+    privacyTemplate = await apiClient.get<string>(htmlLink)
   }
 
   const specConfArray: SpecificConfigArray[] = []
@@ -165,6 +245,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     commonCnts: contents[1].data,
     subDomainID: subDomainID,
     specConfArray: specConfArray,
+    privacyTemplate: privacyTemplate,
   }
 
   return {
