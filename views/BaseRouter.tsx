@@ -9,8 +9,8 @@ import Covid from "./covid/Covid"
 import Repair from "./repair/Repair"
 import RepairWidget from "./repair/RepairWidget"
 import PrivacyPolicy from "./privacy-policy/PrivacyPolicy"
-import SpecificLocation from "./specific-location/SpecificLocation"
 import { FeaturesParam } from "../model/feature-toggle"
+import SpecificLocation from "./specific-location/SpecificLocation"
 
 type Props = {
   features: FeaturesParam[]
