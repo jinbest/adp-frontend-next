@@ -228,6 +228,25 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     privacyTemplate: privacyTemplate,
   }
 
+  const routes = contents[0].data.general.routes,
+    routeKeys = Object.keys(routes)
+  let urlStatus = false
+  for (let i = 0; i < routeKeys.length; i++) {
+    if (routes[routeKeys[i]] === ctx.resolvedUrl) {
+      urlStatus = true
+      break
+    }
+  }
+
+  if (!urlStatus) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    }
+  }
+
   return {
     props: {
       data,

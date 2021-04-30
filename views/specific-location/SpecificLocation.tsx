@@ -10,9 +10,6 @@ import { ToastMsgParams } from "../../components/toast/toast-msg-params"
 import Toast from "../../components/toast/toast"
 import { storesDetails } from "../../store"
 import { observer } from "mobx-react"
-// import ApiClient from "../../services/api-client"
-// import { useTranslation } from "react-i18next"
-// import Config from "../../config/config"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -21,8 +18,6 @@ type Props = {
 }
 
 const SpecificLocation = ({ handleStatus, locID }: Props) => {
-  // const apiClient = ApiClient.getInstance()
-  // const [t] = useTranslation()
   const specConfArray: SpecificConfigArray[] = storesDetails.specConfigArray
   const confIndex = findIndex(specConfArray, { id: locID })
   const specConfig: SpecificConfigParams = specConfArray[confIndex].config
@@ -30,10 +25,8 @@ const SpecificLocation = ({ handleStatus, locID }: Props) => {
   const [pageTitle, setPageTitle] = useState("Store")
   const [metaList, setMetaList] = useState<MetaParams[]>([])
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
-  // const [specConfig, setSpecConfig] = useState<SpecificConfigParams>({} as SpecificConfigParams)
 
   useEffect(() => {
-    // loadData()
     handleStatus(true)
     if (typeof window !== "undefined") {
       window.scrollTo({
@@ -42,20 +35,6 @@ const SpecificLocation = ({ handleStatus, locID }: Props) => {
       })
     }
   }, [])
-
-  // const loadData = async () => {
-  //   try {
-  //     const specificConfig = await apiClient.get<SpecificConfigParams>(
-  //       `${Config.STORE_SERVICE_API_URL}dc/store/${storeID}/location/${locID}/config`
-  //     )
-  //     setSpecConfig(specificConfig)
-  //   } catch (error) {
-  //     setToastParams({
-  //       msg: t("There is an error to get data."),
-  //       isError: true,
-  //     })
-  //   }
-  // }
 
   useEffect(() => {
     if (!isEmpty(specConfig)) {

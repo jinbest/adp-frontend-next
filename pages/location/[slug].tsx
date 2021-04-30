@@ -3,7 +3,7 @@ import { InferGetServerSidePropsType, GetServerSideProps } from "next"
 import { Provider, observer } from "mobx-react"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
-import { storesDetails, repairWidgetStore, repairWidData } from "../../store"
+import { storesDetails } from "../../store"
 import { appLoadAPI } from "../../services"
 import { FeaturesParam } from "../../model/feature-toggle"
 import { SpecificConfigArray, SpecificConfigParams } from "../../model/specific-config-param"
@@ -17,7 +17,7 @@ import ApiClient from "../../services/api-client"
 import { useRouter } from "next/router"
 import { BrowserRouter as Router } from "react-router-dom"
 import SpecificLocation from "../../views/specific-location/SpecificLocation"
-import BaseRouter from "../../views/BaseRouter"
+import { findIndex } from "lodash"
 
 const apiClient = ApiClient.getInstance()
 
@@ -30,6 +30,7 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
   const [features, setFeatures] = useState<FeaturesParam[]>([])
   const [loadStatus, setLoadStatus] = useState(false)
   const [footerStatus, setFooterStatus] = useState(false)
+  const [locID, setLocID] = useState(-1)
 
   const handleFooterStatus = (status: boolean) => {
     setFooterStatus(status)
@@ -59,15 +60,17 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
       setLoadStatus(true)
     }
     storesDetails.changeSpecConfArray(specConfArray)
-    console.log("router.query.slug", router.query.slug)
   }, [])
 
+  useEffect(() => {
+    const slugIndex = findIndex(storeCnts.locations, { slug: router.query.slug })
+    if (slugIndex > -1) {
+      setLocID(storeCnts.locations[slugIndex].id)
+    }
+  }, [router])
+
   return (
-    <Provider
-      storesDetailsStore={storesDetails}
-      repairWidgetStore={repairWidgetStore}
-      repairWidDataStore={repairWidData}
-    >
+    <Provider storesDetailsStore={storesDetails}>
       <Helmet>
         <link rel="stylesheet" href={theme} />
         <link rel="icon" id="favicon" href={favIcon} />
@@ -76,12 +79,10 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
       {loadStatus && (
         <Router>
           <Header handleStatus={handleFooterStatus} features={features} />
-          {!router.query.slug ? (
-            <BaseRouter handleStatus={handleFooterStatus} features={features} />
-          ) : (
+          {locID > -1 && (
             <SpecificLocation
               handleStatus={handleFooterStatus}
-              locID={1}
+              locID={locID}
               storeID={storeData.settings.store_id}
             />
           )}
@@ -96,6 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const domainMatch = ctx.req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
   const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
   const subDomainID = -1
+  const slug = ctx.params?.slug
 
   const storeData = await apiClient.get<Store>(
     `${Config.STORE_SERVICE_API_URL}dc/store/domain/${apexDomain}?include_children=false`
@@ -122,6 +124,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     .catch((err) => {
       console.log("Error in get Store Config", err)
     })
+
+  if (findIndex(contents[0].data.locations, { slug: slug }) === -1) {
+    return {
+      redirect: {
+        destination: "/locations",
+        permanent: false,
+      },
+    }
+  }
 
   const locURL = `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/locations?page=1&per_page=10000&include_voided=false`
   const response = await apiClient.get<GetManyResponse>(locURL)

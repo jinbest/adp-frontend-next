@@ -32,7 +32,7 @@ const SpecSection1 = ({ config, locID }: Props) => {
       <h1 className={classes.mainTitle}>{t(config.title)}</h1>
       <Typography className={classes.mainContent}>{t(config.subTitle)}</Typography>
       <Grid container spacing={2} className={classes.locationsContainer}>
-        <Grid xs={12} md={4} className={classes.order1}>
+        <Grid item xs={12} md={4} className={classes.order1}>
           {!isEmpty(location) && (
             <>
               <div className={classes.details}>
@@ -56,7 +56,7 @@ const SpecSection1 = ({ config, locID }: Props) => {
             </>
           )}
         </Grid>
-        <Grid xs={12} md={8} className={classes.order2}>
+        <Grid item xs={12} md={8} className={classes.order2}>
           {config.displayMap && !isEmpty(location) && (
             <div className={classes.mapDetails}>
               <DynamicCustomMap
