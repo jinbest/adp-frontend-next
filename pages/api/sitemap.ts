@@ -43,6 +43,7 @@ const getDynamicSiteMap = async (
   storeConfig: Record<string, any>
 ): Promise<string> => {
   const routes = storeConfig.general.routes
+  const locations = storeConfig.locations
 
   const hostname = `https://${host}`
   const smStream = new SitemapStream({ hostname })
@@ -70,6 +71,16 @@ const getDynamicSiteMap = async (
   smStream.write({
     url: routes.covidPage,
   })
+
+  if (!isEmpty(locations)) {
+    locations.forEach((location: Record<string, any>) => {
+      if (!isEmpty(location.slug)) {
+        smStream.write({
+          url: `location/${location.slug}`,
+        })
+      }
+    })
+  }
 
   smStream.end()
   const sitemap = await streamToPromise(smStream)
