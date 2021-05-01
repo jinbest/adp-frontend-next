@@ -33,6 +33,7 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
     commonCnts,
     specConfArray,
     privacyTemplate,
+    // subDomainID,
   } = data
 
   const [theme, setTheme] = useState("")
@@ -169,6 +170,22 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const subDomainID = -1
   const slug = ctx.params?.slug
 
+  // const devicelist = [
+  //   { name: "bananaservices", domain: "bananaservices.ca", storeID: 1 },
+  //   { name: "geebodevicerepair", domain: "geebodevicerepair.ca", storeID: 3 },
+  //   { name: "mobiletechlab", domain: "mobiletechlab.ca", storeID: 4 },
+  //   { name: "nanotechmobile", domain: "nanotechmobile.ca", storeID: 2 },
+  //   { name: "northtechcellsolutions", domain: "northtechcellsolutions.ca", storeID: 5 },
+  //   { name: "phonephix", domain: "phonephix.ca", storeID: 9 },
+  //   { name: "pradowireless", domain: "pradowireless.com", storeID: 10 },
+  //   { name: "reparationcellulairebsl", domain: "reparationcellulairebsl.ca", storeID: 7 },
+  //   { name: "wirelessrevottawa", domain: "wirelessrevottawa.ca", storeID: 8 },
+  //   { name: "dccmtx", domain: "https://dev.mtlcmtx.com/", storeID: 1 },
+  //   { name: "mtlcmtx", domain: "https://dev.mtlcmtx.com/", storeID: 2 },
+  // ]
+  // const siteNum = 2,
+  //   subDomainID = devicelist[siteNum].storeID
+
   const storeData = await apiClient.get<Store>(
     `${Config.STORE_SERVICE_API_URL}dc/store/domain/${apexDomain}?include_children=false`
   )
@@ -224,17 +241,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     privacyTemplate = await apiClient.get<string>(htmlLink)
   }
 
-  const specConfArray: SpecificConfigArray[] = []
-  for (let i = 0; i < contents[0].data.locations.length; i++) {
-    if (contents[0].data.locations[i].slug) {
-      const conf = await apiClient.get<SpecificConfigParams>(
-        `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/location/${contents[0].data.locations[i].id}/config`
-      )
-      specConfArray.push({
-        id: contents[0].data.locations[i].id,
-        config: conf,
-      })
-    }
+  const specConfArray: SpecificConfigArray[] = [],
+    slugIndex = findIndex(contents[0].data.locations, { slug: slug })
+  if (slugIndex > -1) {
+    const conf = await apiClient.get<SpecificConfigParams>(
+      `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/location/${contents[0].data.locations[slugIndex].id}/config`
+    )
+    specConfArray.push({
+      id: contents[0].data.locations[slugIndex].id,
+      config: conf,
+    })
   }
 
   const data = {

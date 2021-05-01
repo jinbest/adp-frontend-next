@@ -69,13 +69,13 @@ const Section6 = () => {
         item
         xs={12}
         spacing={2}
-        className="sec6-card"
+        className={`sec6-card ${classes.reviewCard}`}
         style={{ maxWidth: "inherit" }}
       >
         {thisPage.reviews.map((item: any, index: number) => {
           return (
             <Grid item xs={12} md={4} key={index}>
-              <Box className="sec6-card">
+              <Box className={`sec6-card ${classes.reviewCard}`}>
                 <CardWhyCustomer
                   key={index}
                   score={item.score}
@@ -107,6 +107,11 @@ const useStyles = makeStyles(() =>
       fontSize: "18px",
       ["@media (max-width:425px)"]: {
         fontSize: "3vw !important",
+      },
+    },
+    reviewCard: {
+      ["@media (max-width:960px)"]: {
+        margin: "auto !important",
       },
     },
   })

@@ -6,6 +6,9 @@ import { isEmpty, findIndex } from "lodash"
 import Shape from "./Shape"
 import SpecSection1 from "./Section1"
 import SpecSection2 from "./Section2"
+import SpecSection3 from "./Section3"
+import SpecSection4 from "./Section4"
+import SpecSection5 from "./Section5"
 import { ToastMsgParams } from "../../components/toast/toast-msg-params"
 import Toast from "../../components/toast/toast"
 import { storesDetails } from "../../store"
@@ -66,6 +69,9 @@ const SpecificLocation = ({ handleStatus, locID }: Props) => {
         <>
           <SpecSection1 config={specConfig.section1} locID={locID} />
           {specConfig.section2.isVisible && <SpecSection2 config={specConfig.section2} />}
+          {specConfig.section3.isVisible && <SpecSection3 config={specConfig.section3} />}
+          {specConfig.section4.isVisible && <SpecSection4 config={specConfig.section4} />}
+          <SpecSection5 config={specConfig.section5} />
         </>
       )}
       <Toast params={toastParams} resetStatuses={resetStatuses} />
