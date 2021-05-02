@@ -6,7 +6,7 @@ import { getAddress } from "../services/helper"
 import "leaflet/dist/leaflet.css"
 
 type Props = {
-  locations: any[]
+  locations?: any[]
   selectedLocation: any
   isDetail: boolean
 }

@@ -9,6 +9,7 @@ import SpecSection2 from "./Section2"
 import SpecSection3 from "./Section3"
 import SpecSection4 from "./Section4"
 import SpecSection5 from "./Section5"
+import SpecCommingSoon from "./CommingSoon"
 import { ToastMsgParams } from "../../components/toast/toast-msg-params"
 import Toast from "../../components/toast/toast"
 import { storesDetails } from "../../store"
@@ -17,7 +18,6 @@ import { observer } from "mobx-react"
 type Props = {
   handleStatus: (status: boolean) => void
   locID: number
-  storeID: number
 }
 
 const SpecificLocation = ({ handleStatus, locID }: Props) => {
@@ -66,13 +66,19 @@ const SpecificLocation = ({ handleStatus, locID }: Props) => {
       </Head>
       <Shape />
       {!isEmpty(specConfig) && (
-        <>
-          <SpecSection1 config={specConfig.section1} locID={locID} />
-          {specConfig.section2.isVisible && <SpecSection2 config={specConfig.section2} />}
-          {specConfig.section3.isVisible && <SpecSection3 config={specConfig.section3} />}
-          {specConfig.section4.isVisible && <SpecSection4 config={specConfig.section4} />}
-          <SpecSection5 config={specConfig.section5} />
-        </>
+        <React.Fragment>
+          {!specConfig.commingsoon.flag ? (
+            <>
+              <SpecSection1 config={specConfig.section1} locID={locID} />
+              {specConfig.section2.isVisible && <SpecSection2 config={specConfig.section2} />}
+              {specConfig.section3.isVisible && <SpecSection3 config={specConfig.section3} />}
+              {specConfig.section4.isVisible && <SpecSection4 config={specConfig.section4} />}
+              <SpecSection5 config={specConfig.section5} />
+            </>
+          ) : (
+            <SpecCommingSoon config={specConfig.commingsoon} locID={locID} />
+          )}
+        </React.Fragment>
       )}
       <Toast params={toastParams} resetStatuses={resetStatuses} />
     </div>

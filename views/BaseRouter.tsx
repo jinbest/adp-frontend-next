@@ -61,13 +61,7 @@ export default function BaseRouter({ features, handleStatus }: Props) {
             {item.slug && (
               <Route
                 path={`/location/${item.slug}`}
-                component={() => (
-                  <SpecificLocation
-                    handleStatus={handleStatus}
-                    storeID={storesDetails.store_id}
-                    locID={item.id}
-                  />
-                )}
+                component={() => <SpecificLocation handleStatus={handleStatus} locID={item.id} />}
               />
             )}
           </React.Fragment>

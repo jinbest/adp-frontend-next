@@ -58,16 +58,6 @@ function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
     setPageTitle(homepage.headData.title)
     setMetaList(homepage.headData.metaList)
     setFavIcon(homepage.headData.fav.img)
-
-    /* This is for local work */
-    // const prodLink = "https://prod.pcmtx.com/api/store-service/"
-    // if (subDomainID > 0) {
-    //   setTheme(`${prodLink}dc/store/${subDomainID}/theme/theme.min.css/asset`)
-    // } else {
-    //   setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
-    // }
-
-    /* This is for production */
     setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
 
     homepage.bodyData.tags.forEach((item: TagParams) => {
@@ -154,24 +144,22 @@ function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const domainMatch = ctx.req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
-  const apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
-  const subDomainID = -1
 
-  // const devicelist = [
-  //   { name: "bananaservices", domain: "bananaservices.ca", storeID: 1 },
-  //   { name: "geebodevicerepair", domain: "geebodevicerepair.ca", storeID: 3 },
-  //   { name: "mobiletechlab", domain: "mobiletechlab.ca", storeID: 4 },
-  //   { name: "nanotechmobile", domain: "nanotechmobile.ca", storeID: 2 },
-  //   { name: "northtechcellsolutions", domain: "northtechcellsolutions.ca", storeID: 5 },
-  //   { name: "phonephix", domain: "phonephix.ca", storeID: 9 },
-  //   { name: "pradowireless", domain: "pradowireless.com", storeID: 10 },
-  //   { name: "reparationcellulairebsl", domain: "reparationcellulairebsl.ca", storeID: 7 },
-  //   { name: "wirelessrevottawa", domain: "wirelessrevottawa.ca", storeID: 8 },
-  //   { name: "dccmtx", domain: "https://dev.mtlcmtx.com/", storeID: 1 },
-  //   { name: "mtlcmtx", domain: "https://dev.mtlcmtx.com/", storeID: 2 },
-  // ]
+  /* Local Dev Mode */
+  const siteNum = -1,
+    subDomainID = -1
+
+  /* Local Prod Mode */
+  /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), prado(6), repar(7), wireless(8)] */
   // const siteNum = 2,
-  //   subDomainID = devicelist[siteNum].storeID
+  //   subDomainID = Config.DEVICE_ADP_LISTS[siteNum].storeID
+
+  let apexDomain = ""
+  if (subDomainID > 0) {
+    apexDomain = Config.DEVICE_ADP_LISTS[siteNum].domain
+  } else {
+    apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
+  }
 
   const storeData = await apiClient.get<Store>(
     `${Config.STORE_SERVICE_API_URL}dc/store/domain/${apexDomain}?include_children=false`
@@ -191,7 +179,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   })
 
   const contents = await appLoadAPI
-    .getStoreConfig(storeData.settings.store_id, subDomainID)
+    .getStoreConfig(storeData.settings.store_id)
     .then((res: any) => {
       return res
     })
@@ -224,7 +212,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     locations: locations,
     storeCnts: contents[0].data,
     commonCnts: contents[1].data,
-    subDomainID: subDomainID,
     privacyTemplate: privacyTemplate,
   }
 
