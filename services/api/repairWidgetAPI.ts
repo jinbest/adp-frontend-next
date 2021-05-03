@@ -3,6 +3,8 @@ import { PostAppointParams } from "../../model/post-appointment-params"
 import ApiClient from "../api-client"
 import { GetManyResponse } from "../../model/get-many-response"
 import { FilterParams } from "../../model/select-dropdown-param"
+import { GetProductsParam } from "../../model/get-products-params"
+import { GetBrandsParam } from "../../model/get-brands-params"
 
 const apiClient = ApiClient.getInstance()
 class RepairWidgetAPI {
@@ -14,11 +16,19 @@ class RepairWidgetAPI {
     is_enabled: boolean,
     searchText: string
   ) => {
-    let apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/brands?per_page=${per_page}&page=${page}&is_enabled=${is_enabled}&has_products=true&include_voided=false&display_sort_order=asc`
+    const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/brands`
+    const params: GetBrandsParam = {
+      per_page: per_page,
+      page: page,
+      is_enabled: is_enabled,
+      has_products: true,
+      include_voided: false,
+      display_sort_order: "asc"
+    }
     if (searchText) {
-      apiURL += `&name=${searchText}`
+      params.name = searchText
     }    
-    return await apiClient.get<GetManyResponse>(apiURL)
+    return await apiClient.get<GetManyResponse>(apiURL, params)
   }
 
   getBrandProducts = async (
@@ -27,13 +37,25 @@ class RepairWidgetAPI {
     page: number,
     included_voided: boolean,
     brand_id: number,
-    searchText: string
+    searchText: string,
+    category_id: number
   ) => {
-    let apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/products?per_page=${per_page}&page=${page}&include_voided=${included_voided}&brand_id=${brand_id}&status=PUBLISHED&display_sort_order=asc`
-    if (searchText) {
-      apiURL += `&name=${searchText}`
+    const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/products`
+    const params: GetProductsParam = {
+      per_page: per_page,
+      page: page,
+      include_voided: included_voided,
+      brand_id: brand_id,
+      status: "PUBLISHED",
+      display_sort_order: "asc"
     }
-    return await apiClient.get<GetManyResponse>(apiURL)
+    if (searchText) {
+      params.name = searchText
+    }
+    if (category_id) {
+      params.category_id = category_id
+    }
+    return await apiClient.get<GetManyResponse>(apiURL, params)
   }
 
   getRepairLookup = async (locale: string, types: any[]) => {

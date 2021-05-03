@@ -113,13 +113,14 @@ async function getBrandProductsAPI(
   brand_id: number,
   searchText: string,
   page: number,
-  per_page: number
+  per_page: number,
+  category_id: number
 ) {
   const store_id: number = storesDetails.store_id
   const included_voided = false
 
   await repairWidgetAPI
-    .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText)
+    .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText, category_id)
     .then(async (res: any) => {
       repairWidData.changeRepairBrandProducts(res)
     })
@@ -132,13 +133,14 @@ async function addMoreBrandProductsAPI(
   brand_id: number,
   searchText: string,
   page: number,
-  per_page: number
+  per_page: number,
+  category_id: number
 ) {
   const store_id: number = storesDetails.store_id
   const included_voided = false
 
   await repairWidgetAPI
-    .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText)
+    .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText, category_id)
     .then(async (res: any) => {
       const cntDeviceProducts = repairWidData.repairBrandProducts
       for (let i = 0; i < res.data.length; i++) {

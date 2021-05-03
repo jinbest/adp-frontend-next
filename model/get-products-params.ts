@@ -18,4 +18,5 @@ export interface GetProductsParam {
   product_ids?: number[]
   brand_name?: string
   category?: string
+  display_sort_order?: string
 }
