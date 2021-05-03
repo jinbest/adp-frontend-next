@@ -2,6 +2,7 @@ import Config from "../../config/config"
 import { PostAppointParams } from "../../model/post-appointment-params"
 import ApiClient from "../api-client"
 import { GetManyResponse } from "../../model/get-many-response"
+import { FilterParams } from "../../model/select-dropdown-param"
 
 const apiClient = ApiClient.getInstance()
 class RepairWidgetAPI {
@@ -87,6 +88,11 @@ class RepairWidgetAPI {
     prodsID += prod_ids[prod_ids.length - 1]
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/products?product_ids=${prodsID}&include_voided=false&include_children=true&status=PUBLISHED&display_sort_order=asc`
     return await apiClient.get<any>(apiURL)
+  }
+
+  filterCategories = async (store_id: number, params: FilterParams) => {
+    const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/categories`
+    return await apiClient.get<any>(apiURL, params)
   }
 }
 
