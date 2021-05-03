@@ -12,6 +12,7 @@ import { ScriptParams } from "../../model/script-params"
 import { TagParams } from "../../model/tag-params"
 import { SpecificConfigArray, SpecificConfigParams } from "../../model/specific-config-param"
 import Config from "../../config/config"
+import SubDomains from "../../const/subDomains"
 import _, { isEmpty } from "lodash"
 import { Helmet } from "react-helmet"
 import { Store } from "../../model/store"
@@ -164,11 +165,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   /* Local Prod Mode */
   /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), prado(6), repar(7), wireless(8)] */
   // const siteNum = 2,
-  //   subDomainID = Config.DEVICE_ADP_LISTS[siteNum].storeID
+  //   subDomainID = SubDomains.DEVICE_ADP_LISTS[siteNum].storeID
 
   let apexDomain = ""
   if (subDomainID > 0) {
-    apexDomain = Config.DEVICE_ADP_LISTS[siteNum].domain
+    apexDomain = SubDomains.DEVICE_ADP_LISTS[siteNum].domain
   } else {
     apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
   }
