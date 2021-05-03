@@ -20,9 +20,11 @@ const SpecSection3 = ({ config }: Props) => {
           <h1 className={`section-title ${classes.title}`}>{t(config.title)}</h1>
           <Typography className={classes.content}>{t(config.content)}</Typography>
         </Grid>
-        <Grid item xs={12} md={6} className={classes.item}>
-          <img src={config.imgLink} alt="specific-section3-img" className={classes.img} />
-        </Grid>
+        {config.imgVisible && (
+          <Grid item xs={12} md={6} className={classes.item}>
+            <img src={config.imgLink} alt="specific-section3-img" className={classes.img} />
+          </Grid>
+        )}
       </Grid>
     </div>
   )

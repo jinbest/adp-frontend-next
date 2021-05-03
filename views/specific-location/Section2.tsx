@@ -27,57 +27,63 @@ const SpecSection2 = ({ config }: Props) => {
     <div className="Container">
       <h1 className={`section-title ${classes.title}`}>{t(config.title)}</h1>
       <Typography className={classes.content}>{t(config.content)}</Typography>
-      <div className="card-customized-container-desktop">
-        {categories.map((item: any, index: number) => {
-          return (
-            <React.Fragment key={index}>
-              {item.isVisible && (
-                <Link
-                  to={data.general.routes.repairWidgetPage}
-                  className="card-customized-item"
-                  onClick={handleRepairWidget}
-                >
-                  <CardFix title={t(item.title)} img={item.img} key={index} />
-                </Link>
-              )}
-            </React.Fragment>
-          )
-        })}
-      </div>
-      <div className="card-customized-container-mobile">
-        {categories.slice(0, 3).map((item: any, index: number) => {
-          return (
-            <React.Fragment key={index}>
-              {item.isVisible && (
-                <Link
-                  to={data.general.routes.repairWidgetPage}
-                  className="card-customized-item"
-                  onClick={handleRepairWidget}
-                >
-                  <CardFix title={t(item.title)} img={item.img} key={index} />
-                </Link>
-              )}
-            </React.Fragment>
-          )
-        })}
-      </div>
-      <div className="card-customized-container-mobile">
-        {categories.slice(3, 5).map((item: any, index: number) => {
-          return (
-            <React.Fragment key={index}>
-              {item.isVisible && (
-                <Link
-                  to={data.general.routes.repairWidgetPage}
-                  className="card-customized-item"
-                  onClick={handleRepairWidget}
-                >
-                  <CardFix title={t(item.title)} img={item.img} key={index} />
-                </Link>
-              )}
-            </React.Fragment>
-          )
-        })}
-      </div>
+      {config.imgVisible && (
+        <div className="card-customized-container-desktop">
+          {categories.map((item: any, index: number) => {
+            return (
+              <React.Fragment key={index}>
+                {item.isVisible && (
+                  <Link
+                    to={data.general.routes.repairWidgetPage}
+                    className="card-customized-item"
+                    onClick={handleRepairWidget}
+                  >
+                    <CardFix title={t(item.title)} img={item.img} key={index} />
+                  </Link>
+                )}
+              </React.Fragment>
+            )
+          })}
+        </div>
+      )}
+      {config.imgVisible && (
+        <div className="card-customized-container-mobile">
+          {categories.slice(0, 3).map((item: any, index: number) => {
+            return (
+              <React.Fragment key={index}>
+                {item.isVisible && (
+                  <Link
+                    to={data.general.routes.repairWidgetPage}
+                    className="card-customized-item"
+                    onClick={handleRepairWidget}
+                  >
+                    <CardFix title={t(item.title)} img={item.img} key={index} />
+                  </Link>
+                )}
+              </React.Fragment>
+            )
+          })}
+        </div>
+      )}
+      {config.imgVisible && (
+        <div className="card-customized-container-mobile">
+          {categories.slice(3, 5).map((item: any, index: number) => {
+            return (
+              <React.Fragment key={index}>
+                {item.isVisible && (
+                  <Link
+                    to={data.general.routes.repairWidgetPage}
+                    className="card-customized-item"
+                    onClick={handleRepairWidget}
+                  >
+                    <CardFix title={t(item.title)} img={item.img} key={index} />
+                  </Link>
+                )}
+              </React.Fragment>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
