@@ -36,7 +36,7 @@ const SpecCommingSoon = ({ config, locID }: Props) => {
   }, [locID])
 
   const loadSpecLocation = async (id: number) => {
-    const url = `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/locations?ids=${id}`
+    const url = `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/locations?ids=${id}&include_voided=true`
     const response = await apiClient.get<GetManyResponse>(url)
 
     setLocation(response.data[0])
