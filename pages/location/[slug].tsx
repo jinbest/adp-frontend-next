@@ -55,6 +55,7 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
       const noScript = document.createElement("noscript")
       const htmlDoc = parser.parseFromString(tag, "text/html")
       const iframeNode = htmlDoc.getElementsByTagName("iframe")[0]
+
       if (iframeNode != null) {
         noScript.prepend(iframeNode)
         document.body.prepend(noScript)
@@ -78,6 +79,7 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
     homepage.headData.scripts.forEach((item: ScriptParams) => {
       if (item.type === "reamaze" && item.content) {
         const script = document.createElement("script")
+
         script.type = "text/javascript"
         script.append(item.content)
         document.body.appendChild(script)
@@ -85,6 +87,7 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
         scriptReamaze.type = "text/javascript"
         scriptReamaze.src = "https://cdn.reamaze.com/assets/reamaze.js"
         scriptReamaze.async = true
+
         document.body.appendChild(scriptReamaze)
       } else if (item.type !== "reamaze") {
         scripts.push(item)
@@ -96,20 +99,24 @@ function SlugPage({ data }: InferGetServerSidePropsType<typeof getServerSideProp
   useEffect(() => {
     if (!isEmpty(storeData) && !isEmpty(storeCnts) && !isEmpty(commonCnts) && !isEmpty(locations)) {
       handleTabData(storeCnts, storeData.settings.store_id)
+
       storesDetails.changeStoreID(storeData.settings.store_id)
       storesDetails.changeIsVoided(storeData.is_voided)
       storesDetails.changestoresDetails(storeData)
       storesDetails.changeStoreCnts(storeCnts)
       storesDetails.changeCommonCnts(commonCnts)
       storesDetails.changeAddLocations(locations)
+
       setFooterStatus(true)
       const cntFeats = _.cloneDeep(feats)
+
       if (storeCnts.general.condition.hasShopLink) {
         cntFeats.push({ flag: "FRONTEND_BUY", isActive: true })
       }
       setFeatures([...cntFeats])
       setLoadStatus(true)
     }
+
     storesDetails.changePrivacyPolicy(privacyTemplate)
     storesDetails.changeSpecConfArray(specConfArray)
   }, [])
@@ -184,6 +191,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     { flag: "ALWAYS_TRUE", isActive: true },
     { flag: "FRONTEND_INSURE", isActive: false },
   ]
+
   storeToggles.forEach((item: StoreToggle) => {
     features.push({
       flag: item.feature_id,
@@ -231,6 +239,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const specConfArray: SpecificConfigArray[] = [],
     slugIndex = findIndex(contents[0].data.locations, { slug: slug })
+
   if (slugIndex > -1) {
     const conf = await apiClient.get<SpecificConfigParams>(
       `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/location/${contents[0].data.locations[slugIndex].id}/config`
