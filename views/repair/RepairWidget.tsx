@@ -277,6 +277,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
                     data={mockData.repairWidget[stepList[step]]}
                     repairWidgetData={repairWidgetStore}
                     quoteKey={1}
+                    code={repairWidgetStore.deliveryMethod.code}
                   />
                 )}
                 {step === 11 && (
@@ -284,6 +285,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
                     data={mockData.repairWidget[stepList[10]]}
                     repairWidgetData={repairWidgetStore}
                     quoteKey={0}
+                    code={repairWidgetStore.deliveryMethod.code}
                   />
                 )}
               </div>

@@ -163,7 +163,8 @@ async function getRepairsOfferedDeviceAPI(
   const store_id: number = storesDetails.store_id
   const included_voided = false
   const is_active = true
-  const include_cost = storesDetails.storesDetails.settings.display_repair_cost
+  // const include_cost = storesDetails.storesDetails.settings.display_repair_cost
+  const include_cost = true
 
   await repairWidgetAPI
     .getRepairsOfferedDevice(
@@ -195,7 +196,8 @@ async function addMoreRepairsOfferedDeviceAPI(
   const store_id: number = storesDetails.store_id
   const included_voided = false
   const is_active = true
-  const include_cost = storesDetails.storesDetails.settings.display_repair_cost
+  // const include_cost = storesDetails.storesDetails.settings.display_repair_cost
+  const include_cost = true
 
   await repairWidgetAPI
     .getRepairsOfferedDevice(

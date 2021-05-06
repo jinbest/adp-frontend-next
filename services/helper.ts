@@ -452,3 +452,8 @@ export function getWidth() {
   }
   return 0  
 }
+
+export const currencyFormater = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
