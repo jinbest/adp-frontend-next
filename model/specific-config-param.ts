@@ -32,6 +32,7 @@ export interface Section2 {
   content: string
   categories: Section2Category[]
   isVisible: boolean
+  imgVisible: boolean
 }
 
 export interface Section3 {
@@ -39,6 +40,7 @@ export interface Section3 {
   content: string
   isVisible: boolean
   imgLink: string
+  imgVisible: boolean
 }
 
 export interface Section4Card {
@@ -55,6 +57,7 @@ export interface Section4 {
   content: string
   isVisible: boolean
   cards: Section4Card[]
+  imgVisible: boolean
 }
 
 export interface Review {

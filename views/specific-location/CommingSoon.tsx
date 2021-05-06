@@ -10,6 +10,7 @@ import { findIndex, isEmpty } from "lodash"
 import { StoreLocation } from "../../model/store-location"
 import ApiClient from "../../services/api-client"
 import Config from "../../config/config"
+import { GetManyResponse } from "../../model/get-many-response"
 
 const DynamicCustomMap = dynamic(() => import("../../components/CustomMap"), { ssr: false })
 
@@ -35,9 +36,10 @@ const SpecCommingSoon = ({ config, locID }: Props) => {
   }, [locID])
 
   const loadSpecLocation = async (id: number) => {
-    const url = `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/locations/${id}?include_staff=false&include_location_hours=true`
-    const specLoc = await apiClient.get<StoreLocation>(url)
-    setLocation(specLoc)
+    const url = `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/locations?ids=${id}&include_voided=true`
+    const response = await apiClient.get<GetManyResponse>(url)
+
+    setLocation(response.data[0])
     return () => {
       setLocation({} as StoreLocation)
     }

@@ -22,27 +22,29 @@ const SpecSection4 = ({ config }: Props) => {
     <div
       className={classes.container}
       style={{
-        backgroundImage: "url('/img/wave-bg.svg')",
+        backgroundImage: config.imgVisible ? "url('/img/wave-bg.svg')" : "none",
       }}
     >
       <div className="Container">
         <h1 className={`section-title ${classes.title}`}>{t(config.title)}</h1>
         <Typography className={classes.content}>{t(config.content)}</Typography>
-        <Grid container spacing={2} className="card-customized-container-desktop">
-          {cards.map((item: any, index: number) => {
-            return (
-              <Grid item xs={6} sm={6} md={3} style={{ paddingTop: "0px" }} key={index}>
-                <CardPopular
-                  title={item.title}
-                  subtitle={t(item.subtitle)}
-                  price={item.price}
-                  priceCol={data.general.colorPalle.priceCol}
-                  img={item.img}
-                />
-              </Grid>
-            )
-          })}
-        </Grid>
+        {config.imgVisible && (
+          <Grid container spacing={2} className="card-customized-container-desktop">
+            {cards.map((item: any, index: number) => {
+              return (
+                <Grid item xs={6} sm={6} md={3} style={{ paddingTop: "0px" }} key={index}>
+                  <CardPopular
+                    title={item.title}
+                    subtitle={t(item.subtitle)}
+                    price={item.price}
+                    priceCol={data.general.colorPalle.priceCol}
+                    img={item.img}
+                  />
+                </Grid>
+              )
+            })}
+          </Grid>
+        )}
       </div>
     </div>
   )
