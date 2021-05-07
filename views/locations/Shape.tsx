@@ -3,19 +3,12 @@ import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { storesDetails } from "../../store"
 
 const Shape = () => {
-  const data = storesDetails.storeCnts
-  const shapeData = data.businessPage.shapeData
   const classes = useStyles()
 
   return (
     <div>
-      <div className={classes.corner}>
-        <img
-          src={shapeData.businessCornerShape}
-          width="1"
-          height="auto"
-          alt="location-corner-shape"
-        />
+      <div className={classes.waveBg}>
+        <img src="/img/location-wave-bg.png" alt="location wave bg" />
       </div>
       <div className={classes.skitImg}>
         <img
@@ -33,28 +26,47 @@ export default Shape
 
 const useStyles = makeStyles(() =>
   createStyles({
-    corner: {
+    waveBg: {
       position: "absolute",
       top: 0,
-      right: 0,
-      width: "35vw",
-      minWidth: "400px",
-      zIndex: -2,
+      left: 0,
+      width: "100%",
+      overflow: "hidden !important",
       "& > img": {
         width: "100%",
+        minWidth: "1700px",
       },
-      ["@media (max-width:768px)"]: {
-        top: 30,
-        minWidth: "350px",
+      zIndex: -2,
+      ["@media (max-width:1000px)"]: {
+        "& > img": {
+          minWidth: "1500px",
+        },
+      },
+      ["@media (max-width:600px)"]: {
+        "& > img": {
+          minWidth: "180vw",
+        },
       },
       ["@media (max-width:500px)"]: {
-        display: "none",
+        "& > img": {
+          minWidth: "200vw",
+        },
+      },
+      ["@media (max-width:425px)"]: {
+        "& > img": {
+          minWidth: "1000px",
+        },
+      },
+      ["@media (max-width:375px)"]: {
+        "& > img": {
+          minWidth: "950px",
+        },
       },
     },
     skitImg: {
       position: "absolute",
       right: "15vw",
-      top: "350px",
+      top: "300px",
       width: "450px",
       zIndex: -1,
       "& img": {

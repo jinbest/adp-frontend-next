@@ -311,15 +311,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               return (
                 <React.Fragment key={index}>
                   {item.visible ? (
-                    <FeatureToggles features={feats}>
-                      <Feature
-                        name={item.flag}
-                        inactiveComponent={() => <></>}
-                        activeComponent={() => (
-                          <NavItemLink item={item} handleStatus={handleStatus} feats={feats} />
-                        )}
-                      />
-                    </FeatureToggles>
+                    <NavItemLink item={item} handleStatus={handleStatus} feats={feats} />
                   ) : (
                     <></>
                   )}

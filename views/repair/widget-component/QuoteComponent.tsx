@@ -34,11 +34,9 @@ const QuoteComponent = ({ data, quoteKey, repairWidgetData, code }: Props) => {
         </div>
         <div className="service-choose-device-container">
           <div className="repair-service-summary-flex-container bordered">
-            <Typography className="topic">{t("Device")}</Typography>
-            <Typography className="topic">{t("Repair Service")}</Typography>
-            <Typography className="topic" style={{ width: "130px" }}>
-              {t("Quoted Cost")}
-            </Typography>
+            <Typography className="summary-topic">{t("Device")}</Typography>
+            <Typography className="summary-topic">{t("Repair Service")}</Typography>
+            <Typography className="summary-topic quote-cost">{t("Quoted Cost")}</Typography>
           </div>
           {repairWidgetData.deviceBrand &&
             repairWidgetData.deviceBrand.map((item: any, index: number) => {
@@ -48,15 +46,15 @@ const QuoteComponent = ({ data, quoteKey, repairWidgetData, code }: Props) => {
                     (chooseItem: any, chooseIndex: number) => {
                       return (
                         <div className="repair-service-summary-flex-container" key={chooseIndex}>
-                          <Typography className="details">
+                          <Typography className="summary-details">
                             {repairWidgetData.deviceModel[index].name
                               .toString()
                               .includes(item.name.toString())
                               ? repairWidgetData.deviceModel[index].name
                               : item.name + " " + repairWidgetData.deviceModel[index].name}
                           </Typography>
-                          <Typography className="details">{t(chooseItem.name)}</Typography>
-                          <Typography className="details" style={{ width: "130px" }}>
+                          <Typography className="summary-details">{t(chooseItem.name)}</Typography>
+                          <Typography className="summary-details quote-cost">
                             {currencyFormater.format(chooseItem.cost)}
                           </Typography>
                         </div>
