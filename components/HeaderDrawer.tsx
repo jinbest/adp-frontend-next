@@ -263,42 +263,33 @@ const HeaderDrawer = (props: Props) => {
             return (
               <React.Fragment key={index}>
                 {item.visible ? (
-                  <FeatureToggles features={features}>
-                    <Feature
-                      key={index}
-                      name={item.flag}
-                      inactiveComponent={() => <></>}
-                      activeComponent={() => (
-                        <React.Fragment>
-                          {item.href && item.href !== "#" && (
-                            <div
-                              className={classes.itemDiv}
-                              onClick={() => {
-                                setState({ ...state, ["left"]: false })
-                                toggleMenuStatus(false)
-                                handleStatus(true)
-                              }}
-                            >
-                              {isExternal(item.href) ? (
-                                <a
-                                  href={item.href}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  style={{ display: "flex" }}
-                                >
-                                  {t(item.text)}
-                                </a>
-                              ) : (
-                                <Link to={item.href} style={{ display: "flex" }}>
-                                  {t(item.text)}
-                                </Link>
-                              )}
-                            </div>
-                          )}
-                        </React.Fragment>
-                      )}
-                    />
-                  </FeatureToggles>
+                  <React.Fragment>
+                    {item.href && item.href !== "#" && (
+                      <div
+                        className={classes.itemDiv}
+                        onClick={() => {
+                          setState({ ...state, ["left"]: false })
+                          toggleMenuStatus(false)
+                          handleStatus(true)
+                        }}
+                      >
+                        {isExternal(item.href) ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{ display: "flex" }}
+                          >
+                            {t(item.text)}
+                          </a>
+                        ) : (
+                          <Link to={item.href} style={{ display: "flex" }}>
+                            {t(item.text)}
+                          </Link>
+                        )}
+                      </div>
+                    )}
+                  </React.Fragment>
                 ) : (
                   <></>
                 )}

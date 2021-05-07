@@ -384,7 +384,7 @@
 
 .repair-service-summary-detail-container {
   width: 100% !important;
-  margin: 20px 0 !important;
+  margin: 10px 0 !important;
   .every-container .topic {
     font-weight: 900 !important;
     margin-bottom: 15px !important;
@@ -623,4 +623,41 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.quote-cost {
+  width: 150px !important;
+  @media (max-width: 600px) {
+    width: 125px !important;
+  }
+  @media (max-width: 400px) {
+    width: 70px !important;
+  }
+}
+
+.summary-topic {
+  padding: 3px 0;
+  font-weight: bold !important;
+  font-size: 17px !important;
+  width: 48%;
+  margin-right: 2% !important;
+  @media (max-width: 600px) {
+    font-size: 2.5vw !important;
+  }
+  @media (max-width: 425px) {
+    font-size: 3vw !important;
+  }
+}
+
+.summary-details {
+  padding: 3px 0;
+  font-size: 17px !important;
+  width: 48%;
+  margin-right: 2% !important;
+  @media (max-width: 600px) {
+    font-size: 2.5vw !important;
+  }
+  @media (max-width: 425px) {
+    font-size: 3vw !important;
+  }
 }
