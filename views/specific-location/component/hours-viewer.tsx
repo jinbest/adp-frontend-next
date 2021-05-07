@@ -26,7 +26,7 @@ const HoursViewer = ({ location }: Props) => {
   return (
     <>
       <Typography className={classes.cardTitle}>{t("Hours")}</Typography>
-      {location.location_hours?.length && (
+      {location.location_hours?.length ? (
         <>
           {getRegularHours(location.location_hours).map((it, index) => (
             <div key={index} className={classes.container}>
@@ -45,6 +45,8 @@ const HoursViewer = ({ location }: Props) => {
             </div>
           ))}
         </>
+      ) : (
+        <></>
       )}
     </>
   )

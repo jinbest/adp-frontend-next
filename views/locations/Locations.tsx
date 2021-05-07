@@ -11,6 +11,8 @@ import { MetaParams } from "../../model/meta-params"
 import CustomButtons from "../specific-location/component/custom-buttons"
 import HoursViewer from "../specific-location/component/hours-viewer"
 import AddressViewer from "../specific-location/component/address-viewer"
+import { groupLocations } from "../../services/helper"
+import _, { capitalize } from "lodash"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -24,6 +26,14 @@ const Locations = ({ handleStatus }: Props) => {
 
   const [pageTitle, setPageTitle] = useState("Locations")
   const [metaList, setMetaList] = useState<MetaParams[]>([])
+
+  const cityNames: string[] = []
+  storesDetails.allLocations.forEach((item: any) => {
+    cityNames.push(item.city)
+  })
+  const groupNames = _.uniqBy(cityNames, (item) => item)
+  const groupBy = thisPage.section1.group
+  const groupByLocations: any = groupBy ? groupLocations(storesDetails.allLocations) : ({} as any)
 
   useEffect(() => {
     setPageTitle(thisPage.headData.title)
@@ -80,42 +90,110 @@ const Locations = ({ handleStatus }: Props) => {
           <Typography className={classes.subTitle}>
             {`${t("All")} ${storesDetails.storesDetails.name} ${t("Locations")}`}
           </Typography>
-          <Grid container spacing={5}>
-            {storesDetails.allLocations.map((item: any, index: number) => {
-              return (
-                <Grid item xs={12} md={6} key={index}>
-                  <div className={classes.item}>
-                    <Grid container spacing={1}>
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <div>
-                          <Typography className={classes.cardTitle}>
-                            {item.location_name}
-                          </Typography>
-                          <AddressViewer location={item} />
-                        </div>
-                        <CustomButtons
-                          location={item}
-                          color={data.general.colorPalle.repairButtonCol}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <HoursViewer location={item} />
-                      </Grid>
+          {groupBy ? (
+            <>
+              {groupNames.map((it: string, idx: number) => {
+                return (
+                  <React.Fragment key={idx}>
+                    <p className={classes.groupName}>{`${capitalize(it)}, ${
+                      groupByLocations[it][0].state
+                    }`}</p>
+                    <Grid container spacing={5}>
+                      {groupByLocations[it].map((item: any, index: number) => {
+                        return (
+                          <Grid item xs={12} md={6} key={index}>
+                            <div className={classes.item}>
+                              <Grid container spacing={1}>
+                                <Grid
+                                  item
+                                  xs={12}
+                                  sm={6}
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    flexDirection: "column",
+                                  }}
+                                >
+                                  {item.image_url ? (
+                                    <img
+                                      src={item.image_url}
+                                      alt={`${index}-location`}
+                                      className={classes.location}
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div>
+                                    <Typography className={classes.cardTitle}>
+                                      {item.location_name}
+                                    </Typography>
+                                    <AddressViewer location={item} />
+                                  </div>
+                                  <CustomButtons
+                                    location={item}
+                                    color={data.general.colorPalle.repairButtonCol}
+                                  />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                  <HoursViewer location={item} />
+                                </Grid>
+                              </Grid>
+                            </div>
+                          </Grid>
+                        )
+                      })}
                     </Grid>
-                  </div>
-                </Grid>
-              )
-            })}
-          </Grid>
+                  </React.Fragment>
+                )
+              })}
+            </>
+          ) : (
+            <Grid container spacing={5}>
+              {storesDetails.allLocations.map((item: any, index: number) => {
+                return (
+                  <Grid item xs={12} md={6} key={index}>
+                    <div className={classes.item}>
+                      <Grid container spacing={1}>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={6}
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            flexDirection: "column",
+                          }}
+                        >
+                          {item.image_url ? (
+                            <img
+                              src={item.image_url}
+                              alt={`${index}-location`}
+                              className={classes.location}
+                            />
+                          ) : (
+                            <></>
+                          )}
+                          <div>
+                            <Typography className={classes.cardTitle}>
+                              {item.location_name}
+                            </Typography>
+                            <AddressViewer location={item} />
+                          </div>
+                          <CustomButtons
+                            location={item}
+                            color={data.general.colorPalle.repairButtonCol}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <HoursViewer location={item} />
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </Grid>
+                )
+              })}
+            </Grid>
+          )}
         </div>
       </div>
     </div>
@@ -128,18 +206,18 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       maxWidth: "1440px",
-      padding: "250px 30px 0 !important",
+      padding: "200px 30px 0 !important",
       margin: "auto",
       display: "block",
       textAlign: "left",
       ["@media (max-width:1200px)"]: {
         paddingTop: "210px !important",
       },
-      ["@media (max-width:500px)"]: {
-        padding: "180px 30px 0 !important",
+      ["@media (max-width:600px)"]: {
+        paddingTop: "150px !important",
       },
       ["@media (max-width:425px)"]: {
-        padding: "200px 30px 0 !important",
+        paddingTop: "200px !important",
       },
     },
     mainTitle: {
@@ -162,7 +240,7 @@ const useStyles = makeStyles(() =>
         width: "85vw",
         lineHeight: "6vw !important",
       },
-      ["@media (max-width:500px)"]: {
+      ["@media (max-width:600px)"]: {
         fontSize: "4.5vw !important",
         width: "100%",
         textAlign: "center",
@@ -181,27 +259,30 @@ const useStyles = makeStyles(() =>
       ["@media (max-width:768px)"]: {
         fontSize: "3vw !important",
       },
-      ["@media (max-width:500px)"]: {
+      ["@media (max-width:600px)"]: {
         fontSize: "3.5vw !important",
         width: "100%",
         textAlign: "center",
-        marginTop: "30px !important",
+        margin: "10px 0 30px !important",
       },
     },
     buttonDiv: {
       maxWidth: "250px",
       width: "100%",
       margin: "initial",
-      ["@media (max-width:500px)"]: {
+      ["@media (max-width:600px)"]: {
         margin: "auto",
         maxWidth: "180px",
       },
     },
     locationsContainer: {
-      margin: "100px auto",
-      padding: "20px",
+      margin: "0 auto",
+      padding: "250px 20px 100px",
       ["@media (max-width:1000px)"]: {
-        margin: "0px auto 50px",
+        padding: "150px 20px 100px",
+      },
+      ["@media (max-width:600px)"]: {
+        padding: "50px 20px 100px",
       },
     },
     subTitle: {
@@ -218,7 +299,10 @@ const useStyles = makeStyles(() =>
       },
       ["@media (max-width:768px)"]: {
         fontSize: "4vw !important",
+      },
+      ["@media (max-width:600px)"]: {
         textAlign: "center",
+        marginBottom: "20px !important",
       },
       ["@media (max-width:500px)"]: {
         fontSize: "4.5vw !important",
@@ -232,6 +316,11 @@ const useStyles = makeStyles(() =>
       borderRadius: "10px",
       "& > div": {
         padding: "25px",
+      },
+      ["@media (max-width:500px)"]: {
+        "& > div": {
+          padding: "10px",
+        },
       },
     },
     cardTitle: {
@@ -250,6 +339,31 @@ const useStyles = makeStyles(() =>
       },
       ["@media (max-width:400px)"]: {
         fontSize: "14px",
+      },
+    },
+    location: {
+      width: "95%",
+      marginBottom: "20px",
+      ["@media (max-width:600px)"]: {
+        width: "100%",
+      },
+    },
+    groupName: {
+      margin: "40px 10px 20px",
+      fontSize: "25px !important",
+      fontFamily: "Poppins Bold !important",
+      ["@media (max-width:1400px)"]: {
+        fontSize: "2.5vw !important",
+      },
+      ["@media (max-width:768px)"]: {
+        fontSize: "3vw !important",
+      },
+      ["@media (max-width:600px)"]: {
+        fontSize: "3.5vw !important",
+        textAlign: "center",
+      },
+      ["@media (max-width:500px)"]: {
+        fontSize: "4vw !important",
       },
     },
   })
