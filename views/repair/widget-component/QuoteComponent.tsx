@@ -126,7 +126,7 @@ const QuoteComponent = ({ data, quoteKey, repairWidgetData, code }: Props) => {
                   {repairWidgetData.contactDetails.address1.name}
                 </Typography>
               )}
-              {code !== "MAIL_IN" && (
+              {code !== "MAIL_IN" && quoteKey === 1 && (
                 <Typography className="details">
                   {repairWidgetData.bookData[code].week +
                     ", " +
