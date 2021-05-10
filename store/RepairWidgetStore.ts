@@ -117,11 +117,39 @@ export class RepairWidgetStore {
     this.save()
   }
 
+  @action initContactDetails = () => {
+    this.contactDetails = { 
+      firstName: '', 
+      lastName: '', 
+      email: '', 
+      phone: '',
+      address1: { code: '', name: '' },
+      address2: { code: '', name: '' },
+      country: { code: '', name: '' },
+      city: '',
+      province: { code: '', name: '' },
+      postalCode: ''
+    }
+    this.save()
+  }
+
   @action
   changeBookData = (bookData: any) => {
     const code = bookData.code, cntBookData = this.bookData
     cntBookData[code] = bookData.data
     this.bookData = cntBookData
+    this.save()
+  }
+
+  @action
+  initBookData = () => {
+    this.bookData = {
+      'MAIL_IN': { sendTo: '' },
+      'WALK_IN': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
+      'PICK_UP': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
+      'CURBSIDE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
+      'ONSITE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
+    }
     this.save()
   }
 

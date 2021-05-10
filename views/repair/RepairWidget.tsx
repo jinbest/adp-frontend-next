@@ -111,30 +111,22 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
         repairWidgetStore.changeChooseRepair(cntChooseRepair)
         break
       case 4:
-        repairWidgetStore.changeDeliveryMethod({})
+        repairWidgetStore.changeDeliveryMethod({ method: "", code: "" })
         break
       case 5:
-        repairWidgetStore.changeDeliveryMethod({})
-        repairWidgetStore.changeReceiveQuote({})
+        repairWidgetStore.changeDeliveryMethod({ method: "", code: "" })
+        repairWidgetStore.changeReceiveQuote({ method: "", code: "" })
         break
       case 6:
-        repairWidgetStore.changeReceiveQuote({})
-        repairWidgetStore.changeContactDetails({})
+        repairWidgetStore.changeReceiveQuote({ method: "", code: "" })
+        repairWidgetStore.initContactDetails()
         break
       case 7:
-        repairWidgetStore.changeContactDetails({})
-        repairWidgetStore.changeBookData({ code: "MAIL_IN", data: {} })
-        repairWidgetStore.changeBookData({ code: "WALK_IN", data: {} })
-        repairWidgetStore.changeBookData({ code: "PICK_UP", data: {} })
-        repairWidgetStore.changeBookData({ code: "CURBSIDE", data: {} })
-        repairWidgetStore.changeBookData({ code: "ONSITE", data: {} })
+        repairWidgetStore.initContactDetails()
+        repairWidgetStore.initBookData()
         break
       case 8:
-        repairWidgetStore.changeBookData({ code: "MAIL_IN", data: {} })
-        repairWidgetStore.changeBookData({ code: "WALK_IN", data: {} })
-        repairWidgetStore.changeBookData({ code: "PICK_UP", data: {} })
-        repairWidgetStore.changeBookData({ code: "CURBSIDE", data: {} })
-        repairWidgetStore.changeBookData({ code: "ONSITE", data: {} })
+        repairWidgetStore.initBookData()
         repairWidgetStore.changeMessage("")
         break
       case 9:
@@ -148,7 +140,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
         repairWidgetStore.changeCntStep(9)
         setStep(9)
       } else {
-        repairWidgetStore.changeContactDetails({})
+        repairWidgetStore.initContactDetails()
         repairWidgetStore.changeCntStep(6)
         setStep(6)
       }
