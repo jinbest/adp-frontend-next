@@ -55,7 +55,9 @@ const QuoteComponent = ({ data, quoteKey, repairWidgetData, code }: Props) => {
                           </Typography>
                           <Typography className="summary-details">{t(chooseItem.name)}</Typography>
                           <Typography className="summary-details quote-cost">
-                            {currencyFormater.format(chooseItem.cost)}
+                            {chooseItem.cost
+                              ? currencyFormater.format(chooseItem.cost)
+                              : t("Call For Quote")}
                           </Typography>
                         </div>
                       )
