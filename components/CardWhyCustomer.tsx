@@ -13,7 +13,7 @@ const CardWhyCustomer = ({ score, content, reviewer }: Props) => {
     <div className="card-why-customer">
       <div className="score-div">
         <div className="rating">
-          <Rating name="read-only" value={score} max={score} readOnly />
+          <Rating name="read-only" value={Math.round(score)} max={5} readOnly />
         </div>
         {/* <p>{days}</p> */}
       </div>
