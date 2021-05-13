@@ -250,16 +250,24 @@ const useStyles = makeStyles(() =>
       },
     },
     bottomLink: {
-      textAlign: "right",
-      paddingRight: "30px",
+      textAlign: "left",
+      padding: "10px 0",
       marginLeft: "auto",
+      fontWeight: "bold",
       "& a": {
         textDecoration: "none",
-        color: "gray",
-        fontSize: "13px",
+        color: "dimgray",
+        fontSize: "15px",
         "&:hover": {
           opacity: 0.7,
         },
+      },
+      ["@media (max-width:1600px)"]: {
+        paddingLeft: "60px",
+      },
+      ["@media (max-width:600px)"]: {
+        textAlign: "center",
+        paddingLeft: "0px",
       },
     },
     footerContainer: {

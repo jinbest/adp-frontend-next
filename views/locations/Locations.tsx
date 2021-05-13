@@ -7,18 +7,12 @@ import Button from "../../components/Button"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { repairWidgetStore, storesDetails } from "../../store"
-import { getRegularHours, getHourType, getAddress, phoneFormatString } from "../../services/helper"
 import { MetaParams } from "../../model/meta-params"
-
-const DAYS_OF_THE_WEEK: string[] = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
+import CustomButtons from "../specific-location/component/custom-buttons"
+import HoursViewer from "../specific-location/component/hours-viewer"
+import AddressViewer from "../specific-location/component/address-viewer"
+import { groupLocations } from "../../services/helper"
+import _, { capitalize } from "lodash"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -32,6 +26,14 @@ const Locations = ({ handleStatus }: Props) => {
 
   const [pageTitle, setPageTitle] = useState("Locations")
   const [metaList, setMetaList] = useState<MetaParams[]>([])
+
+  const cityNames: string[] = []
+  storesDetails.allLocations.forEach((item: any) => {
+    cityNames.push(item.city)
+  })
+  const groupNames = _.uniqBy(cityNames, (item) => item)
+  const groupBy = thisPage.section1.group
+  const groupByLocations: any = groupBy ? groupLocations(storesDetails.allLocations) : ({} as any)
 
   useEffect(() => {
     setPageTitle(thisPage.headData.title)
@@ -88,133 +90,110 @@ const Locations = ({ handleStatus }: Props) => {
           <Typography className={classes.subTitle}>
             {`${t("All")} ${storesDetails.storesDetails.name} ${t("Locations")}`}
           </Typography>
-          <Grid container spacing={5}>
-            {storesDetails.allLocations.map((item: any, index: number) => {
-              return (
-                <Grid item xs={12} md={6} key={index}>
-                  <div className={classes.item}>
-                    <Grid container spacing={1}>
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <div>
-                          <Typography className={classes.cardTitle}>
-                            {item.location_name}
-                          </Typography>
-                          <Typography className={classes.cardText}>
-                            {`${item.address_1},`}
-                          </Typography>
-                          <Typography className={classes.cardText}>
-                            {`${item.address_2 ? item.address_2 + ", " : ""}${
-                              item.city ? item.city + ", " : ""
-                            } ${item.state ? item.state + " " : ""} ${
-                              item.postcode
-                                ? item.postcode.substring(0, 3) +
-                                  " " +
-                                  item.postcode.substring(3, item.postcode.length)
-                                : ""
-                            }`}
-                          </Typography>
-                          <a
-                            href={`tel:${item.phone}`}
-                            style={{
-                              textDecoration: "none",
-                              display: "inline-block",
-                            }}
-                          >
-                            <Typography className={classes.cardText}>
-                              {phoneFormatString(item.phone)}
-                            </Typography>
-                          </a>
-                        </div>
-                        <div
+          {groupBy ? (
+            <>
+              {groupNames.map((it: string, idx: number) => {
+                return (
+                  <React.Fragment key={idx}>
+                    <p className={classes.groupName}>{`${capitalize(it)}, ${
+                      groupByLocations[it][0].state
+                    }`}</p>
+                    <Grid container spacing={5}>
+                      {groupByLocations[it].map((item: any, index: number) => {
+                        return (
+                          <Grid item xs={12} md={6} key={index}>
+                            <div className={classes.item}>
+                              <Grid container spacing={1}>
+                                <Grid
+                                  item
+                                  xs={12}
+                                  sm={6}
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    flexDirection: "column",
+                                  }}
+                                >
+                                  {item.image_url ? (
+                                    <img
+                                      src={item.image_url}
+                                      alt={`${index}-location`}
+                                      className={classes.location}
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                  <div>
+                                    <Typography className={classes.cardTitle}>
+                                      {item.location_name}
+                                    </Typography>
+                                    <AddressViewer location={item} />
+                                  </div>
+                                  <CustomButtons
+                                    location={item}
+                                    color={data.general.colorPalle.repairButtonCol}
+                                  />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                  <HoursViewer location={item} />
+                                </Grid>
+                              </Grid>
+                            </div>
+                          </Grid>
+                        )
+                      })}
+                    </Grid>
+                  </React.Fragment>
+                )
+              })}
+            </>
+          ) : (
+            <Grid container spacing={5}>
+              {storesDetails.allLocations.map((item: any, index: number) => {
+                return (
+                  <Grid item xs={12} md={6} key={index}>
+                    <div className={classes.item}>
+                      <Grid container spacing={1}>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={6}
                           style={{
                             display: "flex",
-                            margin: "0 0 10px",
-                            flexWrap: "wrap",
+                            justifyContent: "space-between",
+                            flexDirection: "column",
                           }}
                         >
-                          <a
-                            href={`${
-                              item.business_page_link != null
-                                ? item.business_page_link
-                                : `https://www.google.com/maps/search/?api=1&query=${getAddress(
-                                    item
-                                  )
-                                    .split(" ")
-                                    .join("+")}`
-                            }`}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{
-                              textDecoration: "none",
-                              color: "black",
-                            }}
-                          >
-                            <Button
-                              title={t("Get Directions")}
-                              bgcolor={data.general.colorPalle.repairButtonCol}
-                              borderR="20px"
-                              width="auto"
-                              margin="10px 10px 0 0"
-                              fontSize="12px"
-                              height="25px"
+                          {item.image_url ? (
+                            <img
+                              src={item.image_url}
+                              alt={`${index}-location`}
+                              className={classes.location}
                             />
-                          </a>
-                          <a href={`tel:${item.phone}`} style={{ textDecoration: "none" }}>
-                            <Button
-                              title={t("Call Now")}
-                              bgcolor={data.general.colorPalle.repairButtonCol}
-                              borderR="20px"
-                              width="auto"
-                              margin="10px 10px 0 0"
-                              fontSize="12px"
-                              height="25px"
-                            />
-                          </a>
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Typography className={classes.cardTitle}>{t("Hours")}</Typography>
-                        {getRegularHours(item.location_hours).map((it, index) => (
-                          <div
-                            key={index}
-                            style={{
-                              display: "flex",
-                              width: "100%",
-                              marginBottom: "5px",
-                            }}
-                          >
-                            <div style={{ width: "40%", margin: 0, padding: 0 }}>
-                              <Typography className={classes.cardText}>
-                                {t(DAYS_OF_THE_WEEK[it.day])}
-                              </Typography>
-                            </div>
-                            <div style={{ width: "60%", margin: 0, padding: 0 }}>
-                              <Typography className={classes.cardText}>
-                                {!it.open || !it.close
-                                  ? it.by_appointment_only
-                                    ? t("Call to book appointment")
-                                    : t("Closed")
-                                  : getHourType(it.open) + "-" + getHourType(it.close)}
-                              </Typography>
-                            </div>
+                          ) : (
+                            <></>
+                          )}
+                          <div>
+                            <Typography className={classes.cardTitle}>
+                              {item.location_name}
+                            </Typography>
+                            <AddressViewer location={item} />
                           </div>
-                        ))}
+                          <CustomButtons
+                            location={item}
+                            color={data.general.colorPalle.repairButtonCol}
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <HoursViewer location={item} />
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </div>
-                </Grid>
-              )
-            })}
-          </Grid>
+                    </div>
+                  </Grid>
+                )
+              })}
+            </Grid>
+          )}
         </div>
       </div>
     </div>
@@ -227,25 +206,24 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       maxWidth: "1440px",
-      padding: "250px 30px 0 !important",
+      padding: "200px 30px 0 !important",
       margin: "auto",
       display: "block",
       textAlign: "left",
       ["@media (max-width:1200px)"]: {
         paddingTop: "210px !important",
       },
-      ["@media (max-width:500px)"]: {
-        padding: "180px 30px 0 !important",
+      ["@media (max-width:600px)"]: {
+        paddingTop: "150px !important",
       },
       ["@media (max-width:425px)"]: {
-        padding: "200px 30px 0 !important",
+        paddingTop: "200px !important",
       },
     },
     mainTitle: {
       color: "black",
       fontSize: "55px !important",
       lineHeight: "70px !important",
-      // textShadow: "1px 0 black",
       fontWeight: "bold",
       fontFamily: "Poppins Bold",
       justifyContent: "center",
@@ -262,7 +240,7 @@ const useStyles = makeStyles(() =>
         width: "85vw",
         lineHeight: "6vw !important",
       },
-      ["@media (max-width:500px)"]: {
+      ["@media (max-width:600px)"]: {
         fontSize: "4.5vw !important",
         width: "100%",
         textAlign: "center",
@@ -281,34 +259,36 @@ const useStyles = makeStyles(() =>
       ["@media (max-width:768px)"]: {
         fontSize: "3vw !important",
       },
-      ["@media (max-width:500px)"]: {
+      ["@media (max-width:600px)"]: {
         fontSize: "3.5vw !important",
         width: "100%",
         textAlign: "center",
-        marginTop: "30px !important",
+        margin: "10px 0 30px !important",
       },
     },
     buttonDiv: {
       maxWidth: "250px",
       width: "100%",
       margin: "initial",
-      ["@media (max-width:500px)"]: {
+      ["@media (max-width:600px)"]: {
         margin: "auto",
         maxWidth: "180px",
       },
     },
     locationsContainer: {
-      margin: "100px auto",
-      padding: "20px",
+      margin: "0 auto",
+      padding: "250px 20px 100px",
       ["@media (max-width:1000px)"]: {
-        margin: "0px auto 50px",
+        padding: "150px 20px 100px",
+      },
+      ["@media (max-width:600px)"]: {
+        padding: "50px 20px 100px",
       },
     },
     subTitle: {
       color: "black",
       fontSize: "40px !important",
       lineHeight: "1 !important",
-      // textShadow: "1px 0 black",
       fontFamily: "Poppins Bold !important",
       fontWeight: "bold",
       justifyContent: "center",
@@ -319,7 +299,10 @@ const useStyles = makeStyles(() =>
       },
       ["@media (max-width:768px)"]: {
         fontSize: "4vw !important",
+      },
+      ["@media (max-width:600px)"]: {
         textAlign: "center",
+        marginBottom: "20px !important",
       },
       ["@media (max-width:500px)"]: {
         fontSize: "4.5vw !important",
@@ -333,6 +316,11 @@ const useStyles = makeStyles(() =>
       borderRadius: "10px",
       "& > div": {
         padding: "25px",
+      },
+      ["@media (max-width:500px)"]: {
+        "& > div": {
+          padding: "10px",
+        },
       },
     },
     cardTitle: {
@@ -353,23 +341,29 @@ const useStyles = makeStyles(() =>
         fontSize: "14px",
       },
     },
-    cardText: {
-      fontSize: "15px",
-      marginBottom: "5px",
-      color: "black",
+    location: {
+      width: "95%",
+      marginBottom: "20px",
+      ["@media (max-width:600px)"]: {
+        width: "100%",
+      },
+    },
+    groupName: {
+      margin: "40px 10px 20px",
+      fontSize: "25px !important",
+      fontFamily: "Poppins Bold !important",
       ["@media (max-width:1400px)"]: {
-        fontSize: "13px",
+        fontSize: "2.5vw !important",
       },
-      ["@media (max-width:960px)"]: {
-        fontSize: "15px",
+      ["@media (max-width:768px)"]: {
+        fontSize: "3vw !important",
       },
-      ["@media (max-width:700px)"]: {
-        fontSize: "13px",
-        marginBottom: "3px",
+      ["@media (max-width:600px)"]: {
+        fontSize: "3.5vw !important",
+        textAlign: "center",
       },
-      ["@media (max-width:400px)"]: {
-        fontSize: "12px",
-        marginBottom: "2px",
+      ["@media (max-width:500px)"]: {
+        fontSize: "4vw !important",
       },
     },
   })

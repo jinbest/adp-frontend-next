@@ -18,6 +18,12 @@ import {
 } from "../RepairWidgetCallAPI"
 import ContactModal from "../../business/ContactModal"
 import { ConvertWarrantyUnit } from "../../../services/helper"
+import CustomSelect from "../../../components/CustomSelect"
+import { SelectParams, FilterParams } from "../../../model/select-dropdown-param"
+import Config from "../../../config/config"
+import ApiClient from "../../../services/api-client"
+
+const apiClient = ApiClient.getInstance()
 
 type Props = {
   data: any
@@ -58,6 +64,33 @@ const ChooseDevice = ({
   const [perPage, setPerPage] = useState(10)
   const [openContactModal, setOpenContactModal] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [filter, setFilter] = useState<SelectParams>({ name: "All", code: "0" } as SelectParams)
+  const [filterList, setFileterList] = useState<SelectParams[]>([] as SelectParams[])
+
+  useEffect(() => {
+    if (stepName === "deviceModel") {
+      getFilterList()
+    }
+  }, [stepName])
+
+  const getFilterList = async () => {
+    const params: FilterParams = {
+      page: 1,
+      per_page: 100,
+      include_voided: false,
+      display_sort_order: "asc",
+    }
+    const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/categories`
+    const filterData = await apiClient.get<any>(apiURL, params)
+    const tmpFilterList: SelectParams[] = [{ name: "All", code: "0" }] as SelectParams[]
+    filterData.data.forEach((item: any) => {
+      tmpFilterList.push({
+        name: item.name,
+        code: item.id.toString(),
+      })
+    })
+    setFileterList([...tmpFilterList])
+  }
 
   const [t] = useTranslation()
 
@@ -86,7 +119,13 @@ const ChooseDevice = ({
         }
         break
       case "deviceModel":
-        await addMoreBrandProductsAPI(repairWidData.cntBrandID, searchText, page + 1, perPage)
+        await addMoreBrandProductsAPI(
+          repairWidData.cntBrandID,
+          searchText,
+          page + 1,
+          perPage,
+          Number(filter.code)
+        )
         if (
           repairWidData.repairBrandProducts.data &&
           repairWidData.repairBrandProducts.data.length
@@ -160,6 +199,7 @@ const ChooseDevice = ({
       return () => clearTimeout(timer)
     }
     setSelected(i)
+    setSearchText("")
     handleChangeChooseData(step, imageData[i])
     switch (stepName) {
       case "deviceBrand":
@@ -221,7 +261,7 @@ const ChooseDevice = ({
         }
         break
       case "deviceModel":
-        await getBrandProductsAPI(repairWidData.cntBrandID, text, pg, perpg)
+        await getBrandProductsAPI(repairWidData.cntBrandID, text, pg, perpg, Number(filter.code))
         if (
           repairWidData.repairBrandProducts.data &&
           repairWidData.repairBrandProducts.data.length
@@ -297,8 +337,8 @@ const ChooseDevice = ({
       initPerPage = 10
     setPage(initPage)
     setPerPage(initPerPage)
-    loadStepData(stepName, "", initPage, initPerPage)
-  }, [data, stepName, repairWidData])
+    loadStepData(stepName, searchText, initPage, initPerPage)
+  }, [data, stepName, repairWidData, filter])
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false)
@@ -491,7 +531,18 @@ const ChooseDevice = ({
           <Card>
             <div className="service-choose-device-container">
               {stepName !== "deviceBrand" && step < 3 && (
-                <div style={{ width: "95%" }}>
+                <div className="search-bar-container">
+                  {stepName === "deviceModel" && (
+                    <div style={{ marginRight: "5px", minWidth: "120px" }}>
+                      <CustomSelect
+                        value={filter}
+                        handleSetValue={(value: SelectParams) => {
+                          setFilter({ name: value.name, code: value.code })
+                        }}
+                        options={filterList}
+                      />
+                    </div>
+                  )}
                   {features.includes("SEARCH") && (
                     <Search
                       color="rgba(0,0,0,0.8)"

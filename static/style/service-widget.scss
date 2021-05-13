@@ -367,13 +367,14 @@
 
 .repair-service-summary-card {
   height: auto !important;
+  margin-bottom: 30px;
 }
 
 .repair-service-summary-title {
   text-align: center;
   font-size: 25px !important;
   font-weight: bold !important;
-  margin-bottom: 5px !important;
+  margin-bottom: 10px !important;
   font-family: "Poppins Bold" !important;
   @media (max-width: 600px) {
     font-size: 4.3vw !important;
@@ -383,7 +384,7 @@
 
 .repair-service-summary-detail-container {
   width: 100% !important;
-  margin: 20px 0 !important;
+  margin: 10px 0 !important;
   .every-container .topic {
     font-weight: 900 !important;
     margin-bottom: 15px !important;
@@ -397,11 +398,6 @@
   .every-container .bolder {
     font-weight: 600 !important;
   }
-  .bordered {
-    border-bottom: 1px solid #bdbfc3;
-    border-top: 1px solid #bdbfc3;
-    margin-bottom: 15px;
-  }
   @media (max-width: 600px) {
     .every-container .topic,
     .every-container .details {
@@ -409,6 +405,12 @@
       font-size: 3.5vw !important;
     }
   }
+}
+
+.bordered {
+  border-bottom: 1px solid #bdbfc3;
+  border-top: 1px solid #bdbfc3;
+  margin-bottom: 15px;
 }
 
 .repair-service-summary-flex-container {
@@ -435,7 +437,7 @@
 }
 
 .quote-container {
-  padding: 150px 30px;
+  padding: 20px 30px;
 }
 
 .quote-image {
@@ -607,5 +609,55 @@
   }
   @media (max-width: 400px) {
     font-size: 15px;
+  }
+}
+
+.error-tooltip {
+  margin-left: auto;
+  font-size: 12px;
+  padding: 5px 0;
+}
+
+.search-bar-container {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quote-cost {
+  width: 150px !important;
+  @media (max-width: 600px) {
+    width: 125px !important;
+  }
+  @media (max-width: 400px) {
+    width: 70px !important;
+  }
+}
+
+.summary-topic {
+  padding: 3px 0;
+  font-weight: bold !important;
+  font-size: 17px !important;
+  width: 48%;
+  margin-right: 2% !important;
+  @media (max-width: 600px) {
+    font-size: 2.5vw !important;
+  }
+  @media (max-width: 425px) {
+    font-size: 3vw !important;
+  }
+}
+
+.summary-details {
+  padding: 3px 0;
+  font-size: 17px !important;
+  width: 48%;
+  margin-right: 2% !important;
+  @media (max-width: 600px) {
+    font-size: 2.5vw !important;
+  }
+  @media (max-width: 425px) {
+    font-size: 3vw !important;
   }
 }

@@ -452,3 +452,13 @@ export function getWidth() {
   }
   return 0  
 }
+
+export const currencyFormater = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+export function groupLocations (data: any[]) {
+  const groupByData = _.groupBy(data, (o) => (o.state && o.city))
+  return groupByData
+}

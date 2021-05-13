@@ -195,7 +195,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
       handleChangeChooseData(7, {
         code: code,
         data: {
-          address: selectVal.name,
+          address: { name: selectVal.name, code: selectVal.code },
           time: time,
           day: day,
           month: t(MONTHS[month]),

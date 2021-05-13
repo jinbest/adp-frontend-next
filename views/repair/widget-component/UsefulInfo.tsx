@@ -5,6 +5,7 @@ import Button from "../../../components/Button"
 import RepairSummary from "./RepairSummary"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../../store"
+import ReactTooltip from "react-tooltip"
 
 type Props = {
   data: any
@@ -25,9 +26,12 @@ const UsefulInfo = ({
   const themeCol = mainData.general.colorPalle.themeColor
 
   const [message, setMessage] = useState("")
+  const [error, setError] = useState(false)
+  const [count, setCount] = useState(0)
   const [t] = useTranslation()
 
   const ChooseNextStep = () => {
+    if (error) return
     handleChangeChooseData(8, message)
     handleStep(step + 1)
   }
@@ -46,7 +50,7 @@ const UsefulInfo = ({
         }
       }
     },
-    [step, message]
+    [step, message, error]
   )
 
   useEffect(() => {
@@ -54,7 +58,16 @@ const UsefulInfo = ({
     return () => {
       document.removeEventListener("keydown", onKeyPress, false)
     }
-  }, [step, message])
+  }, [step, message, error])
+
+  useEffect(() => {
+    setCount(message ? message.length : 0)
+    if (message && message.length > 500) {
+      setError(true)
+    } else {
+      setError(false)
+    }
+  }, [message])
 
   return (
     <div>
@@ -77,6 +90,17 @@ const UsefulInfo = ({
                   className="useful-textarea"
                 />
               </div>
+              <div className="d-flex">
+                {error && (
+                  <ReactTooltip id="error-tip" place="top" effect="solid">
+                    {t("You can only enter 500 characters")}
+                  </ReactTooltip>
+                )}
+                <div className="error-tooltip" data-tip data-for="error-tip">
+                  <span style={{ color: count > 500 ? "red" : "black" }}>{count}</span>
+                  <span> / 500</span>
+                </div>
+              </div>
             </div>
             <div className="service-card-button">
               <Button
@@ -87,6 +111,7 @@ const UsefulInfo = ({
                 height="30px"
                 fontSize="17px"
                 onClick={ChooseNextStep}
+                disable={error}
               />
               <p>{t("or press ENTER")}</p>
             </div>
