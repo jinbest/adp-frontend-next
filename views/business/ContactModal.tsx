@@ -433,7 +433,10 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                 aria-label="close"
                 className={classes.closeButtonDiv}
                 onClick={() => {
-                  setContacted(false)
+                  handleClose()
+                  setTimeout(() => {
+                    setContacted(false)
+                  }, 1)
                 }}
               >
                 <Close />
