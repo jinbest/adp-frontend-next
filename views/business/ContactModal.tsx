@@ -436,7 +436,7 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                   handleClose()
                   setTimeout(() => {
                     setContacted(false)
-                  }, 1)
+                  }, 500)
                 }}
               >
                 <Close />
