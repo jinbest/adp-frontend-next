@@ -56,12 +56,10 @@ export default function DynamicPages({ features, handleStatus }: Props) {
         exact
         component={() => <Home handleStatus={handleStatus} features={features} />}
       />
-      {!isRoute && <Redirect to="/" />}
       <Route
         path={routes.locationsPage}
         component={() => <Locations handleStatus={handleStatus} />}
       />
-      {isRoute && isSpecLoc && !isRightSlug && <Redirect to={routes.locationsPage} />}
       <Route
         path={routes.repairPage}
         component={() => <Repair handleStatus={handleStatus} features={features} />}
@@ -85,6 +83,7 @@ export default function DynamicPages({ features, handleStatus }: Props) {
           component={() => <PrivacyPolicy handleStatus={handleStatus} />}
         />
       )}
+      {isRoute && isSpecLoc && !isRightSlug && <Redirect to={routes.locationsPage} />}
       {storesDetails.storeCnts.locations.map((item: any, index: number) => {
         return (
           <React.Fragment key={index}>
@@ -97,6 +96,7 @@ export default function DynamicPages({ features, handleStatus }: Props) {
           </React.Fragment>
         )
       })}
+      {!isRoute && <Redirect to="/" />}
     </Switch>
   )
 }
