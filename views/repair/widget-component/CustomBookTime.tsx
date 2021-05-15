@@ -26,7 +26,7 @@ const CustomBookTime = ({
   title,
   timezoneIndex,
   timeZoneList,
-  changeTimezone,
+  // changeTimezone,
   selectYear,
   selectMonth,
   selectDay,
@@ -37,7 +37,8 @@ const CustomBookTime = ({
 }: Props) => {
   const interval = 30,
     multi = 60 * 1000
-  const [val, setVal] = useState(timezoneIndex)
+  // const [val, setVal] = useState(timezoneIndex)
+  const val = timezoneIndex
   const [bookArray, setBookArray] = useState<ArrayProps[]>([])
   const [t] = useTranslation()
 
@@ -98,11 +99,11 @@ const CustomBookTime = ({
     setBookArray([...booklist])
   }, [selectYear, selectMonth, selectDay, val, hoursRange])
 
-  const handleChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const cntVal = e.target.value
-    setVal(parseInt(cntVal))
-    changeTimezone(parseInt(cntVal))
-  }
+  // const handleChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const cntVal = e.target.value
+  //   setVal(parseInt(cntVal))
+  //   changeTimezone(parseInt(cntVal))
+  // }
 
   const handleBook = (n: number) => {
     const cntBookArray: any[] = bookArray
@@ -146,7 +147,7 @@ const CustomBookTime = ({
         })}
       </div>
       <div>
-        <select className="booking-select-timezone" value={val} onChange={handleChangeOption}>
+        {/* <select className="booking-select-timezone" value={val} onChange={handleChangeOption}>
           {timeZoneList.map((item: any, index: number) => {
             return (
               <option value={index} key={index}>
@@ -154,7 +155,7 @@ const CustomBookTime = ({
               </option>
             )
           })}
-        </select>
+        </select> */}
       </div>
     </div>
   )

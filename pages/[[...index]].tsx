@@ -220,7 +220,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     routeKeys = Object.keys(routes)
   let urlStatus = false
   for (let i = 0; i < routeKeys.length; i++) {
-    if (routes[routeKeys[i]] === ctx.resolvedUrl) {
+    if (routes[routeKeys[i]] === ctx.resolvedUrl.split("?")[0]) {
       urlStatus = true
       break
     }
