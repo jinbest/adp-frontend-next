@@ -187,23 +187,18 @@ const Footer = () => {
             </Link>
           )}
         </div>
-        <div style={{textAlign: "center"}}>
-          <a href={storesDetails.storeCnts.socials[0].link} target="_blank" rel="noreferrer">
-            <img
-              src={storesDetails.storeCnts.socials[0].img}
-              alt="Facebook-logo"
-              width="auto"
-              height="auto"
-            />
-          </a>
-          <a href={storesDetails.storeCnts.socials[1].link} target="_blank" rel="noreferrer">
-            <img
-              src={storesDetails.storeCnts.socials[1].img}
-              alt="Instagram-logo"
-              width="auto"
-              height="auto"
-            />
-          </a>
+        <div style={{textAlign: "center"}}>    
+          {data.socials && data.socials.length ? 
+            data.socials.map((social: { link: string | undefined; img: string | undefined }) => (
+              <a href={social.link} target="_blank" rel="noreferrer">
+                <img
+                  src={social.img}
+                  width="auto"
+                  height="auto"
+                />
+              </a>))
+            : <></>
+            }
         </div>
       </Box>
     </footer>
