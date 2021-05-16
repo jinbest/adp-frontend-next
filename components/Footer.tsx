@@ -193,8 +193,8 @@ const Footer = () => {
               <a key={index} href={social.link} target="_blank" rel="noreferrer">
                 <img
                   src={social.img}
-                  width="auto"
-                  height="auto"
+                  width="32"
+                  height="32"
                 />
               </a>))
             : <></>
