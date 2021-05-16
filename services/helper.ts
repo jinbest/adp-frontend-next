@@ -186,16 +186,17 @@ export function isPast(
   selyear: number,
   selmonth: number,
   selday: number,
-  seloff: number,
+  // seloff: number,
   hrs: number,
   mins: number
 ) {
-  const timeoffset = -new Date().getTimezoneOffset() / 60
+  // const timeoffset = -new Date().getTimezoneOffset() / 60
   const selectedTiemStamp = new Date(
     selyear,
     selmonth,
     selday,
-    hrs + (timeoffset - seloff),
+    // hrs + (timeoffset - seloff),
+    hrs,
     mins
   ).getTime()
   const standTimeStamp = new Date().getTime()

@@ -10,7 +10,9 @@ import { useTranslation } from "react-i18next"
 import { repairWidgetStore, storesDetails } from "../../../store"
 import { makeLocations } from "../../../services/helper"
 import { observer } from "mobx-react"
-import { timeZoneList, defaultTimezone } from "../../../static/timezoneList"
+import { findIndex, isEmpty } from "lodash"
+
+const moment = require("moment-timezone")
 
 const DAYS_OF_THE_WEEK: string[] = [
   "Sunday",
@@ -50,8 +52,12 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   const repairBooktimeCol = mainData.general.colorPalle.repairBooktimeCol
   const brandThemeCol = mainData.homepage.header.brandData.brandThemeCol
 
-  const [tzIndex, setTZIndex] = useState(0)
-  const [timezone, setTimezone] = useState(timeZoneList[tzIndex].timezone)
+  const [timezone, setTimeZone] = useState(
+    !isEmpty(storesDetails.allLocations)
+      ? storesDetails.allLocations[0].timezone
+      : "America/Winnipeg"
+  )
+  const [offset, setOffset] = useState(0)
   const [today, setToday] = useState(changeTimezone(new Date(), timezone))
   const [date, setDate] = useState(today)
   const [day, setDay] = useState(date.getDate())
@@ -87,6 +93,15 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
 
   const [findLocs, setFindLocs] = useState<FindLocProps[]>([])
   const [selHours, setSelHours] = useState<SelectHoursProps[]>([])
+
+  useEffect(() => {
+    const locIndex = findIndex(storesDetails.allLocations, { id: selectVal.code })
+    if (locIndex > -1) {
+      const cntTimeZone = storesDetails.allLocations[locIndex].timezone
+      setTimeZone(cntTimeZone)
+      setOffset(moment().tz(cntTimeZone).utcOffset() / 60)
+    }
+  }, [selectVal])
 
   useEffect(() => {
     const cntFindLoc: FindLocProps[] = []
@@ -148,10 +163,6 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   }, [timezone])
 
   useEffect(() => {
-    setTimezone(timeZoneList[tzIndex].timezone)
-  }, [tzIndex])
-
-  useEffect(() => {
     if (code === "MAIL_IN" && storesDetails.cntUserLocation.length) {
       setSendToAddress(
         storesDetails.cntUserLocation[0].address_1 +
@@ -201,7 +212,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
           month: t(MONTHS[month]),
           year: year,
           week: t(DAYS_OF_THE_WEEK[week]),
-          timezone: timeZoneList[tzIndex].offset,
+          timezone: offset,
         },
       })
       handleChangeSelectTime(time)
@@ -385,15 +396,12 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                         brandThemeCol={brandThemeCol}
                         repairBooktimeCol={repairBooktimeCol}
                         title={t(DAYS_OF_THE_WEEK[week]) + ", " + t(MONTHS[month]) + " " + day}
-                        timezoneIndex={tzIndex}
-                        timeZoneList={timeZoneList}
-                        defaultTimezone={defaultTimezone}
-                        changeTimezone={setTZIndex}
                         changeBooktime={setTime}
                         selectYear={year}
                         selectMonth={month}
                         selectDay={day}
                         hoursRange={hoursRange}
+                        offset={offset}
                       />
                     ) : (
                       <></>
