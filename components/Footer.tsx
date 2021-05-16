@@ -189,8 +189,8 @@ const Footer = () => {
         </div>
         <div style={{textAlign: "center"}}>    
           {data.socials && data.socials.length ? 
-            data.socials.map((social: { link: string | undefined; img: string | undefined }) => (
-              <a href={social.link} target="_blank" rel="noreferrer">
+            data.socials.map((social: { link: string | undefined; img: string | undefined }, index : number) => (
+              <a key={index} href={social.link} target="_blank" rel="noreferrer">
                 <img
                   src={social.img}
                   width="auto"
