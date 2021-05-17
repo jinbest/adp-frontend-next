@@ -21,7 +21,7 @@ const apiClient = ApiClient.getInstance()
 
 type Props = {
   handleStatus: (status: boolean) => void
-  locID: number
+  locID?: number
 }
 
 const SpecificLocation = ({ handleStatus, locID }: Props) => {
@@ -85,14 +85,14 @@ const SpecificLocation = ({ handleStatus, locID }: Props) => {
         <React.Fragment>
           {!specConfig.commingsoon.flag ? (
             <>
-              <SpecSection1 config={specConfig.section1} locID={locID} />
+              {locID && <SpecSection1 config={specConfig.section1} locID={locID} />}
               {specConfig.section2.isVisible && <SpecSection2 config={specConfig.section2} />}
               {specConfig.section3.isVisible && <SpecSection3 config={specConfig.section3} />}
               {specConfig.section4.isVisible && <SpecSection4 config={specConfig.section4} />}
               <SpecSection5 config={specConfig.section5} />
             </>
           ) : (
-            <SpecCommingSoon config={specConfig.commingsoon} locID={locID} />
+            <>{locID && <SpecCommingSoon config={specConfig.commingsoon} locID={locID} />}</>
           )}
         </React.Fragment>
       )}

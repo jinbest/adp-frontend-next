@@ -333,25 +333,6 @@ const HeaderDrawer = (props: Props) => {
               </React.Fragment>
             )
           })}
-          {data.hasOwnProperty("pages") &&
-            data.pages.length &&
-            data.pages.map((item: any, index: number) => {
-              return (
-                <div
-                  className={classes.itemDiv}
-                  onClick={() => {
-                    setState({ ...state, ["left"]: false })
-                    toggleMenuStatus(false)
-                    handleStatus(true)
-                  }}
-                  key={index}
-                >
-                  <Link to={`/${item.slug}`} style={{ display: "flex" }}>
-                    {t(item.name)}
-                  </Link>
-                </div>
-              )
-            })}
           {data.homepage.header.visibility.covidPage && (
             <div
               className={classes.itemDiv}

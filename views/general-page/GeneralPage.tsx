@@ -11,8 +11,8 @@ import { createStyles, makeStyles } from "@material-ui/core/styles"
 
 type Props = {
   handleStatus: (status: boolean) => void
-  slug: string
-  type: string
+  slug?: string
+  type?: string
 }
 
 const GeneralPage = ({ handleStatus, slug, type }: Props) => {
@@ -49,9 +49,11 @@ const GeneralPage = ({ handleStatus, slug, type }: Props) => {
   }, [slug])
 
   const loadData = async (slg: string) => {
-    const cntPageData = await loadPage(storeID, type, `${slg}.json`)
-    setPageData(cntPageData)
-    setEditorVisible(true)
+    if (type) {
+      const cntPageData = await loadPage(storeID, type, `${slg}.json`)
+      setPageData(cntPageData)
+      setEditorVisible(true)
+    }
   }
 
   return (
