@@ -329,7 +329,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                 </Typography>
               }
               <div style={{ marginBottom: "20px" }}>
-                {code !== "MAIL_IN" && (
+                {code !== "MAIL_IN" && !isEmpty(selectVal) && !isEmpty(findLocs) && (
                   <CustomSelect
                     value={selectVal}
                     handleSetValue={setSelectVal}

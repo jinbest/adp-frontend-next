@@ -1,6 +1,7 @@
 import { repairWidgetAPI } from "../../services/"
 import { repairWidData, storesDetails } from "../../store/"
 import { setQuotesStore } from "../../services/helper"
+import _ from "lodash"
 
 function getRepairLookupAPI() {
   const lookupTypes: any[] = ["repair_delivery_method", "repair_contact_method", "warranty_unit"]
@@ -98,7 +99,7 @@ async function addMoreDeviceBrandsAPI(searchText: string, page: number, per_page
   await repairWidgetAPI
     .getDeviceBrands(store_id, per_page, page, is_enabled, searchText)
     .then(async (res: any) => {
-      const cntDeviceBrands = repairWidData.repairDeviceBrands
+      const cntDeviceBrands = _.cloneDeep(repairWidData.repairDeviceBrands)
       for (let i = 0; i < res.data.length; i++) {
         cntDeviceBrands.data.push(res.data[i])
       }
@@ -142,7 +143,7 @@ async function addMoreBrandProductsAPI(
   await repairWidgetAPI
     .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText, category_id)
     .then(async (res: any) => {
-      const cntDeviceProducts = repairWidData.repairBrandProducts
+      const cntDeviceProducts = _.cloneDeep(repairWidData.repairBrandProducts)
       for (let i = 0; i < res.data.length; i++) {
         cntDeviceProducts.data.push(res.data[i])
       }
@@ -212,7 +213,7 @@ async function addMoreRepairsOfferedDeviceAPI(
       text
     )
     .then(async (res: any) => {
-      const cntOfferedRepairs = repairWidData.repairsOfferedDevices
+      const cntOfferedRepairs = _.cloneDeep(repairWidData.repairsOfferedDevices)
       for (let i = 0; i < res.data.length; i++) {
         cntOfferedRepairs.data.push(res.data[i])
       }

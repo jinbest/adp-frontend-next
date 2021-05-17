@@ -132,9 +132,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   }
 
   const handleRepairWidget = () => {
-    const cntAppointment: any = repairWidgetStore.appointResponse
     repairWidgetStore.init()
-    repairWidgetStore.changeAppointResponse(cntAppointment)
     handleStatus(false)
   }
 
@@ -227,6 +225,20 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               />
             )}
             {!mobile && thisPage.visibility.lang && <LangDropdown color={brandData.brandCol} />}
+            {!mobile &&
+              data.hasOwnProperty("pages") &&
+              data.pages.length &&
+              data.pages.map((item: any, index: number) => {
+                return (
+                  <BrandItemLink
+                    item={t(item.name)}
+                    color={brandData.brandCol}
+                    phoneNumber={false}
+                    href={`/${item.slug}`}
+                    key={index}
+                  />
+                )
+              })}
             {!mobile && thisPage.visibility.covidPage && (
               <BrandItemLink
                 item={data.homepage.footer.bottomLinks.covidPage.text}
@@ -235,21 +247,23 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                 href={data.homepage.footer.bottomLinks.covidPage.link}
               />
             )}
-            <FeatureToggles features={feats}>
-              <Feature
-                name="FRONTEND_USER_ACCOUNT"
-                inactiveComponent={() => <></>}
-                activeComponent={() => (
-                  <Feature
-                    name="FRONTEND_USER_LOGIN"
-                    inactiveComponent={() => <></>}
-                    activeComponent={() => (
-                      <BrandItemLink item={t("LOG_IN")} color={brandData.brandCol} href="#" />
-                    )}
-                  />
-                )}
-              />
-            </FeatureToggles>
+            {!mobile && (
+              <FeatureToggles features={feats}>
+                <Feature
+                  name="FRONTEND_USER_ACCOUNT"
+                  inactiveComponent={() => <></>}
+                  activeComponent={() => (
+                    <Feature
+                      name="FRONTEND_USER_LOGIN"
+                      inactiveComponent={() => <></>}
+                      activeComponent={() => (
+                        <BrandItemLink item={t("LOG_IN")} color={brandData.brandCol} href="#" />
+                      )}
+                    />
+                  )}
+                />
+              </FeatureToggles>
+            )}
           </ul>
           {mobile && getQuteStatus && (
             <Link
@@ -295,8 +309,12 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                       color="rgba(0,0,0,0.8)"
                       bgcolor="white"
                       border="rgba(0,0,0,0.2)"
-                      handleChange={() => {}}
-                      handleIconClick={() => {}}
+                      handleChange={() => {
+                        // EMPTY
+                      }}
+                      handleIconClick={() => {
+                        // EMPTY
+                      }}
                     />
                   </div>
                 )}

@@ -100,8 +100,12 @@ const Section1 = ({ features, handleStatus }: Props) => {
                   color="white"
                   bgcolor={storesDetails.storeCnts.general.colorPalle.themeColor}
                   height="60px"
-                  handleChange={() => {}}
-                  handleIconClick={() => {}}
+                  handleChange={() => {
+                    // EMPTY
+                  }}
+                  handleIconClick={() => {
+                    // EMPTY
+                  }}
                 />
               </Box>
             )}

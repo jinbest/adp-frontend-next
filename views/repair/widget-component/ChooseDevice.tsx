@@ -22,6 +22,7 @@ import CustomSelect from "../../../components/CustomSelect"
 import { SelectParams, FilterParams } from "../../../model/select-dropdown-param"
 import Config from "../../../config/config"
 import ApiClient from "../../../services/api-client"
+import _ from "lodash"
 
 const apiClient = ApiClient.getInstance()
 
@@ -153,7 +154,7 @@ const ChooseDevice = ({
           page + 1,
           perPage
         )
-        cntOfferedRepairs = repairWidData.repairsOfferedDevices.data
+        cntOfferedRepairs = _.cloneDeep(repairWidData.repairsOfferedDevices.data)
         setSliceNum(repairWidData.repairsOfferedDevices.data.length)
         if (repairWidData.repairsOfferedDevices.metadata.total <= (page + 1) * perPage) {
           setPlusVisible(false)
@@ -284,7 +285,7 @@ const ChooseDevice = ({
         break
       case "deviceRepairs":
         await getRepairsOfferedDeviceAPI(repairWidData.cntProductID, text, pg, perpg)
-        cntOfferedRepairs = repairWidData.repairsOfferedDevices.data
+        cntOfferedRepairs = _.cloneDeep(repairWidData.repairsOfferedDevices.data)
 
         if (cntOfferedRepairs != null) {
           setSliceNum(repairWidData.repairsOfferedDevices.data.length)
@@ -360,9 +361,9 @@ const ChooseDevice = ({
     if (step === 4) {
       const cntTypes: any[] = []
       const cntDeliverySets: any[] = repairWidData.apiDropOffDevices.types.length
-        ? repairWidData.apiDropOffDevices.types
+        ? _.cloneDeep(repairWidData.apiDropOffDevices.types)
         : []
-      const cntAvailableDeliveryMethod: any[] = repairWidData.repairDeliveryMethod
+      const cntAvailableDeliveryMethod: any[] = _.cloneDeep(repairWidData.repairDeliveryMethod)
       for (let i = 0; i < cntDeliverySets.length; i++) {
         for (let j = 0; j < cntAvailableDeliveryMethod.length; j++) {
           if (
@@ -388,7 +389,7 @@ const ChooseDevice = ({
     } else if (step === 5) {
       const cntQuote: any[] = [],
         cntTypes: any[] = repairWidData.receiveQuote.types.length
-          ? repairWidData.receiveQuote.types
+          ? _.cloneDeep(repairWidData.receiveQuote.types)
           : []
       for (let i = 0; i < cntTypes.length; i++) {
         cntTypes[i].bg = "white"
@@ -532,7 +533,7 @@ const ChooseDevice = ({
             <div className="service-choose-device-container">
               {stepName !== "deviceBrand" && step < 3 && (
                 <div className="search-bar-container">
-                  {stepName === "deviceModel" && (
+                  {stepName === "deviceModel" && filterList.length && (
                     <div style={{ marginRight: "5px", minWidth: "120px" }}>
                       <CustomSelect
                         value={filter}
