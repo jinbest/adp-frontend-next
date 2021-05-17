@@ -37,7 +37,8 @@ const LangDropdown = ({ color }: Props) => {
       return
     }
     const cntLang =
-      typeof window !== "undefined" ? window.localStorage.getItem("cntLang") || "en" : "en"
+      typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined" ? 
+        window.localStorage.getItem("cntLang") || "en" : "en"
     cntLang === "en" ? setState(options[0]) : setState(options[1])
     i18n.changeLanguage(cntLang)
   }, [])

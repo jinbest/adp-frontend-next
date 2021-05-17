@@ -5,7 +5,8 @@ import _ from "lodash"
 
 function getRepairLookupAPI() {
   const lookupTypes: any[] = ["repair_delivery_method", "repair_contact_method", "warranty_unit"]
-  const locale: string = (typeof window !== "undefined") ? window.localStorage.getItem("cntLang") || "en" : "en"
+  const locale: string = (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") ? 
+    window.localStorage.getItem("cntLang") || "en" : "en"
 
   repairWidgetAPI
     .getRepairLookup(locale, lookupTypes)
@@ -160,7 +161,8 @@ async function getRepairsOfferedDeviceAPI(
   page: number,
   per_page: number
 ) {
-  const locale: string = (typeof window !== "undefined") ? window.localStorage.getItem("cntLang") || "en" : "en"
+  const locale: string = (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") ? 
+    window.localStorage.getItem("cntLang") || "en" : "en"
   const store_id: number = storesDetails.store_id
   const included_voided = false
   const is_active = true
@@ -193,7 +195,8 @@ async function addMoreRepairsOfferedDeviceAPI(
   page: number,
   per_page: number
 ) {
-  const locale: string = (typeof window !== "undefined") ? window.localStorage.getItem("cntLang") || "en" : "en"
+  const locale: string = (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") ? 
+    window.localStorage.getItem("cntLang") || "en" : "en"
   const store_id: number = storesDetails.store_id
   const included_voided = false
   const is_active = true
