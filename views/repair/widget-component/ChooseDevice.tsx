@@ -533,7 +533,7 @@ const ChooseDevice = ({
             <div className="service-choose-device-container">
               {stepName !== "deviceBrand" && step < 3 && (
                 <div className="search-bar-container">
-                  {stepName === "deviceModel" && filterList.length && (
+                  {stepName === "deviceModel" && filterList.length ? (
                     <div style={{ marginRight: "5px", minWidth: "120px" }}>
                       <CustomSelect
                         value={filter}
@@ -543,6 +543,8 @@ const ChooseDevice = ({
                         options={filterList}
                       />
                     </div>
+                  ) : (
+                    <></>
                   )}
                   {features.includes("SEARCH") && (
                     <Search
