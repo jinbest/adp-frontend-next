@@ -70,7 +70,7 @@ export class RepairWidgetStore {
 
   @action
   private load = () => {
-    if (typeof window !== "undefined" && window.localStorage  !== null) {
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
       Object.assign(this, JSON.parse(window.localStorage.getItem(RepairWidgetStore.name) || '{}'))
     }
   }    
