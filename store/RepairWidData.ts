@@ -44,7 +44,7 @@ export class RepairWidData {
 
   @action
   private load = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null) {
       Object.assign(this, JSON.parse(window.localStorage.getItem(RepairWidData.name) || '{}'))
     } else {
       Object.assign(this, {})

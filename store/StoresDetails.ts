@@ -53,7 +53,7 @@ export class StoresDetails {
 
   @action
   private load = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null) {
       Object.assign(this, JSON.parse(window.localStorage.getItem(StoresDetails.name) || "{}"))
     }
   }    
