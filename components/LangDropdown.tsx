@@ -26,18 +26,21 @@ const LangDropdown = ({ color }: Props) => {
     setState(la)
     cntLang = la === "English" ? "en" : "fr"
     i18n.changeLanguage(la === "English" ? "en" : "fr")
-    if (typeof window !== "undefined") window.localStorage.setItem("cntLang", cntLang)
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") 
+      window.localStorage.setItem("cntLang", cntLang)
   }
 
   useEffect(() => {
     if (data.general.condition.defaultLang === "fr") {
       setState(options[1])
       i18n.changeLanguage("fr")
-      if (typeof window !== "undefined") window.localStorage.setItem("cntLang", "fr")
+      if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined")
+        window.localStorage.setItem("cntLang", "fr")
       return
     }
     const cntLang =
-      typeof window !== "undefined" ? window.localStorage.getItem("cntLang") || "en" : "en"
+      typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined" ? 
+        window.localStorage.getItem("cntLang") || "en" : "en"
     cntLang === "en" ? setState(options[0]) : setState(options[1])
     i18n.changeLanguage(cntLang)
   }, [])

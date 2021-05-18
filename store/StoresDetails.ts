@@ -1,6 +1,5 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { GetCurrentLocParams } from "../model/get-current-location"
-import { SpecificConfigArray } from "../model/specific-config-param"
 
 configure({ enforceActions: "always" })
 
@@ -19,7 +18,6 @@ export class StoresDetails {
   @observable storeCnts: any = {}
   @observable commonCnts: any = {}
   @observable privacyTemplate = ""
-  @observable specConfigArray: SpecificConfigArray[] = []
 
   constructor() {
     this.load()
@@ -28,7 +26,7 @@ export class StoresDetails {
   }
 
   private save = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
       window.localStorage.setItem(
         StoresDetails.name,
         JSON.stringify({
@@ -44,8 +42,7 @@ export class StoresDetails {
           allLocations: this.allLocations,
           storeCnts: this.storeCnts,
           commonCnts: this.commonCnts,
-          privacyTemplate: this.privacyTemplate,
-          specConfigArray: this.specConfigArray
+          privacyTemplate: this.privacyTemplate
         })
       )
     }
@@ -53,7 +50,7 @@ export class StoresDetails {
 
   @action
   private load = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
       Object.assign(this, JSON.parse(window.localStorage.getItem(StoresDetails.name) || "{}"))
     }
   }    
@@ -157,20 +154,6 @@ export class StoresDetails {
   @action
   changePrivacyPolicy = (privacyTemplate: string) => {
     this.privacyTemplate = privacyTemplate
-    this.save()
-  }
-
-  @action
-  changeSpecConfArray = (config: SpecificConfigArray[]) => {
-    this.specConfigArray = config
-    this.save()
-  }
-
-  @action
-  addSpecConfArray = (config: SpecificConfigArray) => {
-    const cntSpecConf: SpecificConfigArray[] = this.specConfigArray
-    cntSpecConf.push(config)
-    this.specConfigArray = cntSpecConf
     this.save()
   }
 }

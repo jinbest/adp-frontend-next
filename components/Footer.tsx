@@ -154,12 +154,32 @@ const Footer = () => {
         {t(thisPage.title.text)}
       </Typography>
       <Box className={classes.footerContainer}>
-        <Logo
-          type="footer"
-          handleStatus={() => {
-            console.log("logo clicked")
-          }}
-        />
+        {thisPage.specImages && thisPage.specImages.length ? (
+          <div className={classes.imgContainer}>
+            <Logo
+              type="footer"
+              handleStatus={() => {
+                // EMPTY
+              }}
+            />
+            <div className={classes.specialImages}>
+              {thisPage.specImages.map((item: any, index: number) => {
+                return (
+                  <a href={item.link} target="_blank" rel="noreferrer" key={index}>
+                    <img src={item.img_src} alt={`${index}-spec-img`} />
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        ) : (
+          <Logo
+            type="footer"
+            handleStatus={() => {
+              // EMPTY
+            }}
+          />
+        )}
         <Grid item container>
           {[true, false].map((item: any, index: number) => {
             return (
@@ -187,18 +207,18 @@ const Footer = () => {
             </Link>
           )}
         </div>
-        <div style={{textAlign: "center"}}>    
-          {data.socials && data.socials.length ? 
-            data.socials.map((social: { link: string | undefined; img: string | undefined }, index : number) => (
-              <a key={index} href={social.link} target="_blank" rel="noreferrer">
-                <img
-                  src={social.img}
-                  width="32"
-                  height="32"
-                />
-              </a>))
-            : <></>
-            }
+        <div style={{ textAlign: "center" }}>
+          {data.socials && data.socials.length ? (
+            data.socials.map(
+              (social: { link: string | undefined; img: string | undefined }, index: number) => (
+                <a key={index} href={social.link} target="_blank" rel="noreferrer">
+                  <img src={social.img} width="32" height="32" />
+                </a>
+              )
+            )
+          ) : (
+            <></>
+          )}
         </div>
       </Box>
     </footer>
@@ -287,6 +307,28 @@ const useStyles = makeStyles(() =>
       maxWidth: "1440px",
       margin: "auto",
       ["@media (max-width:600px)"]: {
+        textAlign: "center",
+      },
+    },
+    imgContainer: {
+      display: "flex",
+      ["@media (max-width:600px)"]: {
+        display: "block",
+      },
+    },
+    specialImages: {
+      margin: "auto 0 0 auto",
+      height: "50px",
+      "& a": {
+        width: "fit-content",
+        height: "fit-content",
+        marginLeft: "10px",
+      },
+      "& img": {
+        height: "100%",
+      },
+      ["@media (max-width:600px)"]: {
+        margin: "20px auto",
         textAlign: "center",
       },
     },

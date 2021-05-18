@@ -225,20 +225,6 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               />
             )}
             {!mobile && thisPage.visibility.lang && <LangDropdown color={brandData.brandCol} />}
-            {!mobile &&
-              data.hasOwnProperty("pages") &&
-              data.pages.length &&
-              data.pages.map((item: any, index: number) => {
-                return (
-                  <BrandItemLink
-                    item={t(item.name)}
-                    color={brandData.brandCol}
-                    phoneNumber={false}
-                    href={`/${item.slug}`}
-                    key={index}
-                  />
-                )
-              })}
             {!mobile && thisPage.visibility.covidPage && (
               <BrandItemLink
                 item={data.homepage.footer.bottomLinks.covidPage.text}

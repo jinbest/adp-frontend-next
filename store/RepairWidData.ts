@@ -22,7 +22,7 @@ export class RepairWidData {
   }
 
   private save = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
       window.localStorage.setItem(
         RepairWidData.name,
         JSON.stringify({
@@ -44,7 +44,7 @@ export class RepairWidData {
 
   @action
   private load = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
       Object.assign(this, JSON.parse(window.localStorage.getItem(RepairWidData.name) || '{}'))
     } else {
       Object.assign(this, {})
