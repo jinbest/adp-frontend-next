@@ -4,57 +4,42 @@ import { MetaParams } from "../../model/meta-params"
 import Head from "next/head"
 import { observer } from "mobx-react"
 import { findIndex, isEmpty } from "lodash"
-import { loadPage } from "./page-service"
 import ReactPageEditor from "./react-page-editor"
 import { Value } from "@react-page/editor"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 
 type Props = {
   handleStatus: (status: boolean) => void
-  slug?: string
-  type?: string
+  slug: string
+  pageData: Value
 }
 
-const GeneralPage = ({ handleStatus, slug, type }: Props) => {
+const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
   const classes = useStyles()
 
   const mainData = storesDetails.storeCnts.pages
-  const storeID = storesDetails.storesDetails.settings.store_id
 
   const [pageTitle, setPageTitle] = useState("General")
   const [meta, setMeta] = useState<MetaParams>({} as MetaParams)
-  const [pageData, setPageData] = useState<Value>({} as Value)
   const [editorVisible, setEditorVisible] = useState(false)
 
   useEffect(() => {
-    const pageIndex = findIndex(mainData, { slug: slug })
-    if (pageIndex > -1) {
-      setPageTitle(mainData[pageIndex].header.title)
-      setMeta({ name: "description", content: mainData[pageIndex].header.meta_description })
-    }
-    handleStatus(true)
-    if (typeof window !== "undefined") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    }
     if (slug) {
-      loadData(slug)
-    }
-    return () => {
-      setPageData({} as Value)
-      setEditorVisible(false)
+      const pageIndex = findIndex(mainData, { slug: slug })
+      if (pageIndex > -1) {
+        setPageTitle(mainData[pageIndex].header.title)
+        setMeta({ name: "description", content: mainData[pageIndex].header.meta_description })
+      }
+      handleStatus(true)
+      setEditorVisible(true)
+      if (typeof window !== "undefined") {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      }
     }
   }, [slug])
-
-  const loadData = async (slg: string) => {
-    if (type) {
-      const cntPageData = await loadPage(storeID, type, `${slg}.json`)
-      setPageData(cntPageData)
-      setEditorVisible(true)
-    }
-  }
 
   return (
     <div>

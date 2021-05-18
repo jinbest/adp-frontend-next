@@ -1,6 +1,8 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { FeaturesParam } from "../model/feature-toggle"
+import { SpecificConfigParams } from "../model/specific-config-param"
+import { Value } from "@react-page/editor"
 
 type AppRouteProps = {
   Component: any
@@ -10,10 +12,12 @@ type AppRouteProps = {
   slug?: string
   type?: string
   locID?: number
+  specConfig?: SpecificConfigParams
+  pageData?: Value
 }
 
 const AppRoute = (props: AppRouteProps) => {
-  const { Component, features, handleStatus, path, slug, type, locID } = props
+  const { Component, features, handleStatus, path, slug, type, locID, specConfig, pageData } = props
   return (
     <Route
       path={path}
@@ -25,6 +29,8 @@ const AppRoute = (props: AppRouteProps) => {
           slug={slug}
           type={type}
           locID={locID}
+          specConfig={specConfig}
+          pageData={pageData}
         />
       )}
     />

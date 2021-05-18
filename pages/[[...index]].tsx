@@ -5,7 +5,6 @@ import { FeaturesParam } from "../model/feature-toggle"
 import { observer } from "mobx-react"
 import AppRoute from "../routes/route"
 import { pageRoutes } from "../routes/index"
-import { isEmpty } from "lodash"
 
 type Props = {
   features: FeaturesParam[]
@@ -24,16 +23,6 @@ const DynamicPages = ({ features, handleStatus }: Props) => {
             path={item.path}
             features={features}
             handleStatus={handleStatus}
-            slug={
-              !isEmpty(item.special) && item.special.type === "General Page"
-                ? item.special.data.slug
-                : ""
-            }
-            type={
-              !isEmpty(item.special) && item.special.type === "General Page"
-                ? item.special.data.type
-                : ""
-            }
             key={index}
           />
         )

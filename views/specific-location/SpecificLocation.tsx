@@ -10,40 +10,16 @@ import SpecSection3 from "./Section3"
 import SpecSection4 from "./Section4"
 import SpecSection5 from "./Section5"
 import SpecCommingSoon from "./CommingSoon"
-import { ToastMsgParams } from "../../components/toast/toast-msg-params"
-import Toast from "../../components/toast/toast"
-import { storesDetails } from "../../store"
-import { observer } from "mobx-react"
-import ApiClient from "../../services/api-client"
-import Config from "../../config/config"
-
-const apiClient = ApiClient.getInstance()
 
 type Props = {
   handleStatus: (status: boolean) => void
-  locID?: number
+  locID: number
+  specConfig: SpecificConfigParams
 }
 
-const SpecificLocation = ({ handleStatus, locID }: Props) => {
-  const [specConfig, setSpecConfig] = useState<SpecificConfigParams>({} as SpecificConfigParams)
-
-  useEffect(() => {
-    loadConfig()
-    return () => {
-      setSpecConfig({} as SpecificConfigParams)
-    }
-  }, [])
-
-  const loadConfig = async () => {
-    const conf = await apiClient.get<SpecificConfigParams>(
-      `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/location/${locID}/config`
-    )
-    setSpecConfig(conf)
-  }
-
+const SpecificLocation = ({ handleStatus, locID, specConfig }: Props) => {
   const [pageTitle, setPageTitle] = useState("Store")
   const [metaList, setMetaList] = useState<MetaParams[]>([])
-  const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
 
   useEffect(() => {
     handleStatus(true)
@@ -61,16 +37,6 @@ const SpecificLocation = ({ handleStatus, locID }: Props) => {
       setMetaList(specConfig.headData.metaList)
     }
   }, [specConfig])
-
-  const resetStatuses = () => {
-    setToastParams({
-      msg: "",
-      isError: false,
-      isWarning: false,
-      isInfo: false,
-      isSuccess: false,
-    })
-  }
 
   return (
     <div>
@@ -96,9 +62,8 @@ const SpecificLocation = ({ handleStatus, locID }: Props) => {
           )}
         </React.Fragment>
       )}
-      <Toast params={toastParams} resetStatuses={resetStatuses} />
     </div>
   )
 }
 
-export default observer(SpecificLocation)
+export default SpecificLocation

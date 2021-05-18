@@ -208,10 +208,11 @@ export function RevertDateTime(date:string, time: string | null, timezone: strin
 }
 
 export function Customer_timezone() {
-  const offsetHr = Math.floor(Math.abs(new Date().getTimezoneOffset()) / 60), 
-    offsetMin = Math.abs(new Date().getTimezoneOffset()) % 60
+  const timezoneOffset = new Date().getTimezoneOffset(),
+    offsetHr = Math.floor(Math.abs(timezoneOffset) / 60), 
+    offsetMin = Math.abs(timezoneOffset) % 60
   let customer_timezone = ""
-  if (new Date().getTimezoneOffset() > 0) {
+  if (timezoneOffset > 0) {
     customer_timezone += "-"
   }
   if (offsetHr < 10) {

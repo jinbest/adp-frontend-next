@@ -62,12 +62,6 @@ const pageRoutes = (data, specLoc) => {
   }
 
   availableRoutes.push({
-    path: "/location/:others",
-    component: () => <Redirect to={routes.locationsPage} />,
-    special: {},
-  })
-
-  availableRoutes.push({
     path: routes.locationsPage,
     component: Locations,
     special: {},
