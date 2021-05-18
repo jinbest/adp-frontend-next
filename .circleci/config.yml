@@ -70,7 +70,8 @@ jobs:
             cd adp-frontend-v2 &&
             chmod u+x ./templater.sh &&
             ./templater.sh -s linux -p development -c "skaffold deploy -p development -t latest" &&
-            rm -rf adp-frontend' -- -L${DEV_BASTION_PORT}:%INSTANCE%:${DEV_BASTION_PORT}
+            rm -rf adp-frontend-v2 &&
+            kubectl rollout restart deployment/adp-frontend' -- -L${DEV_BASTION_PORT}:%INSTANCE%:${DEV_BASTION_PORT}
 
   #_______________________________________________________________PRODUCTION_STEPS______________________________________________________________________________________________________________________________
   push-prod-image:
@@ -124,7 +125,8 @@ jobs:
             cd adp-frontend-v2 &&
             chmod u+x ./templater.sh &&
             ./templater.sh -s linux -p production -c "skaffold deploy -p production -t latest" &&
-            rm -rf adp-frontend' -- -L${PROD_BASTION_PORT}:%INSTANCE%:${PROD_BASTION_PORT}
+            rm -rf adp-frontend-v2 &&
+            kubectl rollout restart deployment/adp-frontend' -- -L${PROD_BASTION_PORT}:%INSTANCE%:${PROD_BASTION_PORT}
 #____________________________________________________________________________________________________________________________________________________________________________________________________________
 orbs:
   node: circleci/node@4.1.0
