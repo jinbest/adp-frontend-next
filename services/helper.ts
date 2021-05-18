@@ -208,6 +208,11 @@ export function RevertDateTime(date:string, time: string | null, timezone: strin
 }
 
 export function Customer_timezone() {
+  const moment = require("moment-timezone")
+  const tzName = moment.tz.guess(moment())
+  return tzName
+
+  /*
   const timezoneOffset = new Date().getTimezoneOffset(),
     offsetHr = Math.floor(Math.abs(timezoneOffset) / 60), 
     offsetMin = Math.abs(timezoneOffset) % 60
@@ -226,6 +231,7 @@ export function Customer_timezone() {
     customer_timezone += offsetMin
   }
   return customer_timezone
+  */
 }
 
 export function isPast(
