@@ -11,6 +11,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
   try {
     const domainMatch = req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
     const host = domainMatch ? domainMatch[0] : "dccmtx.com"
+    const domain = req.headers.host ? req.headers.host : ""
 
     const apiClient = ApiClient.getInstance()
 
@@ -25,7 +26,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     let storeSitemap = storeConfig.sitemap.custom
 
     if (isEmpty(storeSitemap)) {
-      storeSitemap = await getDynamicSiteMap(host, storeConfig)
+      storeSitemap = await getDynamicSiteMap(domain, storeConfig)
     }
 
     res.write(storeSitemap)
@@ -44,6 +45,7 @@ const getDynamicSiteMap = async (
 ): Promise<string> => {
   const routes = storeConfig.general.routes
   const locations = storeConfig.locations
+  const pages = storeConfig.pages
 
   const hostname = `https://${host}`
   const smStream = new SitemapStream({ hostname })
@@ -79,6 +81,14 @@ const getDynamicSiteMap = async (
           url: `location/${location.slug}`,
         })
       }
+    })
+  }
+
+  if (!isEmpty(pages)) {
+    pages.forEach((page: Record<string, any>) => {
+      smStream.write({
+        url: `${page.type}/${page.slug}`,
+      })
     })
   }
 
