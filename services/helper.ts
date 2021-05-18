@@ -182,6 +182,51 @@ export function isWeek(selyear: number, selmonth: number, selday: number) {
   return new Date(selyear, selmonth, selday).getDay()
 }
 
+export function RevertDateTime(date:string, time: string | null, timezone: string | undefined) {
+  if (timezone && date && time) {
+    const moment = require("moment-timezone")
+
+    const year = Number(date.split("-")[0]), 
+      month = Number(date.split("-")[1]) - 1, 
+      day = Number(date.split("-")[2]),
+      hr = Number(time.split(":")[0]),
+      min = Number(time.split(":")[1])
+
+    const cntTimeStamp = new Date(year, month, day, hr, min).getTime()
+    const revertDate = moment.tz(cntTimeStamp, timezone).format("YYYY-MM-DD"),
+      revertTime = moment.tz(cntTimeStamp, timezone).format("HH:mm")
+      
+    return {
+      date: revertDate,
+      time: revertTime
+    }
+  }
+  return {
+    date: date,
+    time: time
+  }
+}
+
+export function Customer_timezone() {
+  const offsetHr = Math.floor(Math.abs(new Date().getTimezoneOffset()) / 60), 
+    offsetMin = Math.abs(new Date().getTimezoneOffset()) % 60
+  let customer_timezone = ""
+  if (new Date().getTimezoneOffset() > 0) {
+    customer_timezone += "-"
+  }
+  if (offsetHr < 10) {
+    customer_timezone += `0${offsetHr}:`
+  } else {
+    customer_timezone += `${offsetHr}:`
+  }
+  if (offsetMin < 10) {
+    customer_timezone += `0${offsetMin}`
+  } else {
+    customer_timezone += offsetMin
+  }
+  return customer_timezone
+}
+
 export function isPast(
   selyear: number,
   selmonth: number,

@@ -17,6 +17,7 @@ export interface PostAppointParams {
     customer_country: string
     customer_note: string | null
     customer_contact_method: string
+    customer_timezone: string | null
     repairs: any[]
     booking_date: string
     selected_date: string

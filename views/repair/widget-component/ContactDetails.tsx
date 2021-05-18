@@ -18,6 +18,7 @@ import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
 import { ValidateEmail, ValidatePhoneNumber } from "../../../services/helper"
+import { Customer_timezone } from "../../../services/helper"
 
 type Props = {
   data: any
@@ -101,6 +102,7 @@ const ContactDetails = ({
       params.customer_country = country.code
       params.customer_note = null
       params.customer_contact_method = repairWidgetStore.receiveQuote.code
+      params.customer_timezone = Customer_timezone()
       params.repairs = repairs
       params.selected_date = repairWidgetStore.repairWidgetInitialValue.selectDate
       params.selected_start_time = repairWidgetStore.repairWidgetInitialValue.selected_start_time
