@@ -46,7 +46,7 @@ export class RepairWidgetStore {
   }
 
   private save = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
       window.localStorage.setItem(
         RepairWidgetStore.name,
         JSON.stringify({

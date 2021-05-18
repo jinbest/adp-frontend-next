@@ -28,7 +28,7 @@ export class StoresDetails {
   }
 
   private save = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
       window.localStorage.setItem(
         StoresDetails.name,
         JSON.stringify({
