@@ -11,7 +11,7 @@ import { PostAppointParams } from "../../../model/post-appointment-params"
 import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
-// import { RevertTimeTZ } from "../../../services/helper"
+import { RevertDateTime, Customer_timezone } from "../../../services/helper"
 
 type Props = {
   repairWidgetData: any
@@ -35,7 +35,13 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     setIsSubmitting(true)
     // const tp: string = code === "MAIL_IN" ? "QUOTE" : "APPOINTMENT"
     const tp = "APPOINTMENT"
-    const repairs: any[] = []
+    const repairs: any[] = [],
+      select_date =
+        repairWidgetStore.repairWidgetInitialValue.selectDate || moment().format("YYYY-MM-DD"),
+      selected_start_time =
+        repairWidgetStore.repairWidgetInitialValue.selected_start_time || moment().format("HH:mm"),
+      selected_end_time = repairWidgetStore.repairWidgetInitialValue.selected_end_time,
+      timezone = repairWidgetStore.timezone
     for (let i = 0; i < repairWidgetStore.deviceCounter; i++) {
       for (let j = 0; j < repairWidgetStore.chooseRepair[i].length; j++) {
         repairs.push({
@@ -73,20 +79,16 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     params.customer_note = repairWidgetStore.message
     params.customer_contact_method = repairWidgetStore.receiveQuote.code
     params.repairs = repairs
-    params.selected_date =
-      repairWidgetStore.repairWidgetInitialValue.selectDate || moment().format("YYYY-MM-DD")
-    // params.selected_start_time = RevertTimeTZ(
-    //   repairWidgetStore.repairWidgetInitialValue.selected_start_time || moment().format("HH:mm"),
-    //   repairWidgetStore.timezone
-    // )
-    // params.selected_end_time = RevertTimeTZ(
-    //   repairWidgetStore.repairWidgetInitialValue.selected_end_time,
-    //   repairWidgetStore.timezone
-    // )
-    params.selected_start_time =
-      repairWidgetStore.repairWidgetInitialValue.selected_start_time || moment().format("HH:mm")
-    params.selected_end_time = repairWidgetStore.repairWidgetInitialValue.selected_end_time
     params.booking_date = moment().format("YYYY-MM-DD")
+    params.customer_timezone = Customer_timezone()
+
+    // params.selected_date = select_date
+    // params.selected_start_time = selected_start_time
+    // params.selected_end_time = selected_end_time
+
+    params.selected_date = RevertDateTime(select_date, selected_start_time, timezone).date
+    params.selected_start_time = RevertDateTime(select_date, selected_start_time, timezone).time
+    params.selected_end_time = RevertDateTime(select_date, selected_end_time, timezone).time
 
     repairWidgetAPI
       .postAppointmentQuote(params)
