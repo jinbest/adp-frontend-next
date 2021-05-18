@@ -6,18 +6,21 @@ import { observer } from "mobx-react"
 import AppRoute from "../../routes/route"
 import { pageRoutes } from "../../routes/index"
 import { isEmpty } from "lodash"
+import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 
-type Props = {
+interface SlugPageProps extends InferGetServerSidePropsType<typeof getServerSideProps> {
   features: FeaturesParam[]
   handleStatus: (status: boolean) => void
 }
 
-const Slug = ({ features, handleStatus }: Props) => {
-  const data = storesDetails.storeCnts
+const Slug = ({ features, handleStatus, data }: SlugPageProps) => {
+  const { slug } = data
+
+  console.log("slug", slug)
 
   return (
     <Switch>
-      {pageRoutes(data, true).map((item: any, index: number) => {
+      {pageRoutes(storesDetails.storeCnts, true).map((item: any, index: number) => {
         return (
           <AppRoute
             Component={item.component}
@@ -35,6 +38,19 @@ const Slug = ({ features, handleStatus }: Props) => {
       })}
     </Switch>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const slug = ctx.params?.slug
+
+  const data = {
+    slug: slug,
+  }
+  return {
+    props: {
+      data,
+    },
+  }
 }
 
 export default observer(Slug)
