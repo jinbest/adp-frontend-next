@@ -5,6 +5,7 @@ import { observer } from "mobx-react"
 import { repairWidgetStore } from "../../../store"
 import { useTranslation } from "react-i18next"
 import { ConvertWarrantyUnit } from "../../../services/helper"
+import _ from "lodash"
 
 interface Props {
   themeCol: string
@@ -26,9 +27,9 @@ const RepairSummary = ({ themeCol, showInfo }: Props) => {
   }, [repairWidgetStore])
 
   const handleTrashSummary = (countNum: number, serviceNum: number) => {
-    const cntDeviceBrand = repairWidgetStore.deviceBrand,
-      cntDeviceModel = repairWidgetStore.deviceModel,
-      cntChooseRepair = repairWidgetStore.chooseRepair
+    const cntDeviceBrand = _.cloneDeep(repairWidgetStore.deviceBrand),
+      cntDeviceModel = _.cloneDeep(repairWidgetStore.deviceModel),
+      cntChooseRepair = _.cloneDeep(repairWidgetStore.chooseRepair)
     let cntDeviceCounter = repairWidgetStore.deviceCounter
     cntChooseRepair[countNum].splice(serviceNum, 1)
 

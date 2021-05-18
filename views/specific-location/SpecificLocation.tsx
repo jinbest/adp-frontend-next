@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
-import { SpecificConfigParams, SpecificConfigArray } from "../../model/specific-config-param"
-import { isEmpty, findIndex } from "lodash"
+import { SpecificConfigParams } from "../../model/specific-config-param"
+import { isEmpty } from "lodash"
 import Shape from "./Shape"
 import SpecSection1 from "./Section1"
 import SpecSection2 from "./Section2"
@@ -14,6 +14,10 @@ import { ToastMsgParams } from "../../components/toast/toast-msg-params"
 import Toast from "../../components/toast/toast"
 import { storesDetails } from "../../store"
 import { observer } from "mobx-react"
+import ApiClient from "../../services/api-client"
+import Config from "../../config/config"
+
+const apiClient = ApiClient.getInstance()
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -21,9 +25,21 @@ type Props = {
 }
 
 const SpecificLocation = ({ handleStatus, locID }: Props) => {
-  const specConfArray: SpecificConfigArray[] = storesDetails.specConfigArray
-  const confIndex = findIndex(specConfArray, { id: locID })
-  const specConfig: SpecificConfigParams = specConfArray[confIndex].config
+  const [specConfig, setSpecConfig] = useState<SpecificConfigParams>({} as SpecificConfigParams)
+
+  useEffect(() => {
+    loadConfig()
+    return () => {
+      setSpecConfig({} as SpecificConfigParams)
+    }
+  }, [])
+
+  const loadConfig = async () => {
+    const conf = await apiClient.get<SpecificConfigParams>(
+      `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/location/${locID}/config`
+    )
+    setSpecConfig(conf)
+  }
 
   const [pageTitle, setPageTitle] = useState("Store")
   const [metaList, setMetaList] = useState<MetaParams[]>([])

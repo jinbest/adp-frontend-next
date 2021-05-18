@@ -37,7 +37,7 @@ export class RepairWidgetStore {
     selected_end_time: null
   }
   @observable appointResponse: any = {}
-  @observable timezone: string | undefined = "-06:00"
+  @observable timezone: string | undefined = "America/Winnipeg"
 
   constructor() {
     this.load();
@@ -218,7 +218,7 @@ export class RepairWidgetStore {
       selected_end_time: null
     }
     this.appointResponse = {}
-    this.timezone = "-06:00"
+    this.timezone = "America/Winnipeg"
     this.save();
   }
 

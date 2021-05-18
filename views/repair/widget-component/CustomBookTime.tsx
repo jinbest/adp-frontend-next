@@ -7,15 +7,12 @@ type Props = {
   brandThemeCol?: string
   repairBooktimeCol?: string
   title: string
-  timezoneIndex: number
-  timeZoneList: any[]
-  defaultTimezone: any
-  changeTimezone: (tzIndex: number) => void
   changeBooktime: (mark: string) => void
   selectYear: number
   selectMonth: number
   selectDay: number
   hoursRange: any[]
+  offset: number
 }
 
 type ArrayProps = {
@@ -24,20 +21,16 @@ type ArrayProps = {
 
 const CustomBookTime = ({
   title,
-  timezoneIndex,
-  timeZoneList,
-  changeTimezone,
   selectYear,
   selectMonth,
   selectDay,
-  defaultTimezone,
   repairBooktimeCol,
   changeBooktime,
   hoursRange,
+  offset,
 }: Props) => {
   const interval = 30,
     multi = 60 * 1000
-  const [val, setVal] = useState(timezoneIndex)
   const [bookArray, setBookArray] = useState<ArrayProps[]>([])
   const [t] = useTranslation()
 
@@ -45,15 +38,13 @@ const CustomBookTime = ({
     const timesRng = convertTimeRange(hoursRange)
     const cntTimeStamp = new Date(selectYear, selectMonth, selectDay).getTime(),
       booklist: any[] = [],
-      cntTimeStampOffset = timeZoneList[val].offset,
-      defaultOffset = defaultTimezone.offset,
       week = isWeek(selectYear, selectMonth, selectDay),
       availRange: any[] = availableTimeRange(timesRng[week][0], timesRng[week][1], interval, multi)
+    const timeoffset = -new Date().getTimezoneOffset() / 60
 
     if (!availRange.includes("Closed")) {
       for (let i = 0; i < availRange.length - 1; i++) {
-        const cntbookStamp =
-          cntTimeStamp + availRange[i] + (cntTimeStampOffset - defaultOffset) * 3600 * 1000
+        const cntbookStamp = cntTimeStamp + availRange[i] + (timeoffset - offset) * 3600 * 1000
         const cntbook = new Date(cntbookStamp)
         const mark = cntbook.getHours() >= 12 ? "PM" : "AM",
           markMin = cntbook.getMinutes() === 0 ? "00" : cntbook.getMinutes(),
@@ -64,7 +55,7 @@ const CustomBookTime = ({
             selectYear,
             selectMonth,
             selectDay + 1,
-            timeZoneList[val].offset,
+            // offset,
             cntbook.getHours(),
             cntbook.getMinutes()
           )
@@ -73,7 +64,7 @@ const CustomBookTime = ({
             selectYear,
             selectMonth,
             selectDay,
-            timeZoneList[val].offset,
+            // offset,
             cntbook.getHours(),
             cntbook.getMinutes()
           )
@@ -96,13 +87,7 @@ const CustomBookTime = ({
       })
     }
     setBookArray([...booklist])
-  }, [selectYear, selectMonth, selectDay, val, hoursRange])
-
-  const handleChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const cntVal = e.target.value
-    setVal(parseInt(cntVal))
-    changeTimezone(parseInt(cntVal))
-  }
+  }, [selectYear, selectMonth, selectDay, hoursRange])
 
   const handleBook = (n: number) => {
     const cntBookArray: any[] = bookArray
@@ -144,17 +129,6 @@ const CustomBookTime = ({
             </div>
           )
         })}
-      </div>
-      <div>
-        <select className="booking-select-timezone" value={val} onChange={handleChangeOption}>
-          {timeZoneList.map((item: any, index: number) => {
-            return (
-              <option value={index} key={index}>
-                {item.title}
-              </option>
-            )
-          })}
-        </select>
       </div>
     </div>
   )

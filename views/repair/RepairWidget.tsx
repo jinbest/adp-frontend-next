@@ -18,6 +18,7 @@ import {
 import { storesDetails, repairWidgetStore } from "../../store"
 import Head from "next/head"
 import { useQuery } from "../../services/helper"
+import _ from "lodash"
 
 const stepList: string[] = [
   "deviceBrand",
@@ -85,9 +86,9 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
 
   const handleBackStep = () => {
     const cntStep: number = step,
-      cntDeviceBrand = repairWidgetStore.deviceBrand,
-      cntDeviceModel = repairWidgetStore.deviceModel,
-      cntChooseRepair = repairWidgetStore.chooseRepair,
+      cntDeviceBrand = _.cloneDeep(repairWidgetStore.deviceBrand),
+      cntDeviceModel = _.cloneDeep(repairWidgetStore.deviceModel),
+      cntChooseRepair = _.cloneDeep(repairWidgetStore.chooseRepair),
       cntDeviceCounter = repairWidgetStore.deviceCounter
 
     switch (cntStep) {
@@ -157,17 +158,17 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
 
   const handleChangeChooseData = (i: number, chooseData: any) => {
     if (i === 0) {
-      const cntDeviceBrand = repairWidgetStore.deviceBrand,
+      const cntDeviceBrand = _.cloneDeep(repairWidgetStore.deviceBrand),
         cntDeviceCounter = repairWidgetStore.deviceCounter
       cntDeviceBrand.push(chooseData)
       repairWidgetStore.changeDeviceBrand(cntDeviceBrand)
       repairWidgetStore.changeDeviceCounter(cntDeviceCounter + 1)
     } else if (i === 1) {
-      const cntDeviceModel = repairWidgetStore.deviceModel
+      const cntDeviceModel = _.cloneDeep(repairWidgetStore.deviceModel)
       cntDeviceModel.push(chooseData)
       repairWidgetStore.changeDeviceModel(cntDeviceModel)
     } else if (i === 2) {
-      const cntChooseRepair = repairWidgetStore.chooseRepair
+      const cntChooseRepair = _.cloneDeep(repairWidgetStore.chooseRepair)
       const counter = chooseData.counter
       if (cntChooseRepair.length >= counter) {
         cntChooseRepair[counter - 1] = chooseData.data
