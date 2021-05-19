@@ -1,3 +1,5 @@
+import React from "react"
+
 const Error = ({ statusCode }: Record<string, any>) => {
   return (
     <p>
