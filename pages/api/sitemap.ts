@@ -86,9 +86,11 @@ const getDynamicSiteMap = async (
 
   if (!isEmpty(pages)) {
     pages.forEach((page: Record<string, any>) => {
-      smStream.write({
-        url: `${page.type}/${page.slug}`,
-      })
+      if (page.header?.include_in_sitemap) {
+        smStream.write({
+          url: `${page.type}/${page.slug}`,
+        })
+      }
     })
   }
 
