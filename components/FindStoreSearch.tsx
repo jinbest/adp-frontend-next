@@ -76,10 +76,17 @@ const useStyles = makeStyles(() =>
       "&:hover": {
         boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.25)",
       },
+      maxWidth: "850px",
+      ["@media (max-width:960px)"]: {
+        width: "calc(100% - 24px)",
+      },
     },
     searchInput: {
       width: "100%",
       marginLeft: "5px",
+      ["@media (max-width:425px)"]: {
+        fontSize: "13px",
+      },
     },
     button: {
       borderRadius: "0 80px 80px 0",
@@ -90,6 +97,12 @@ const useStyles = makeStyles(() =>
       width: "150px",
       cursor: "pointer",
       padding: 0,
+      ["@media (max-width:425px)"]: {
+        width: "fit-content",
+        fontSize: "13px",
+        whiteSpace: "nowrap",
+        padding: "0 10px",
+      },
     },
   })
 )

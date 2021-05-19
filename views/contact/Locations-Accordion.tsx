@@ -218,6 +218,8 @@ const useStyles = makeStyles(() =>
       width: "100%",
       borderRadius: "5px",
       background: "white",
+      maxWidth: "450px",
+      margin: "auto",
     },
     accordionContainer: {
       maxHeight: "calc(100vh - 300px)",
@@ -242,6 +244,12 @@ const useStyles = makeStyles(() =>
     accordionSummary: {
       borderTop: "1px solid rgba(0,0,0,0.1)",
       padding: "0 20px 10px",
+      ["@media (max-width:1200px)"]: {
+        padding: "0 15px 10px",
+        "& .MuiButtonBase-root": {
+          padding: "5px",
+        },
+      },
     },
     accordionDetails: {
       display: "block",
@@ -276,12 +284,23 @@ const useStyles = makeStyles(() =>
           opacity: 0.6,
         },
       },
+      ["@media (max-width:1200px)"]: {
+        "& svg": {
+          fontSize: "1rem",
+        },
+        "& a": {
+          marginRight: "10px",
+        },
+      },
     },
     phoneText: {
       marginLeft: "10px",
       textDecoration: "none",
       "&:hover": {
         opacity: 0.6,
+      },
+      ["@media (max-width:1200px)"]: {
+        marginLeft: "0px",
       },
     },
     getAppoint: {
@@ -298,6 +317,10 @@ const useStyles = makeStyles(() =>
       padding: "0 10px",
       "&:hover": {
         opacity: 0.8,
+      },
+      ["@media (max-width:1200px)"]: {
+        fontSize: "11px !important",
+        whiteSpace: "nowrap",
       },
     },
   })

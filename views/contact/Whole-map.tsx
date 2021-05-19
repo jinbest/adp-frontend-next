@@ -70,7 +70,7 @@ const WholeMap = ({
   }
 
   return (
-    <div className={classes.mapWrapper}>
+    <div>
       <MapContainer
         center={[centerX, centerY]}
         zoom={zoom}
@@ -106,31 +106,33 @@ const WholeMap = ({
             )
           })}
       </MapContainer>
-      <Grid container spacing={2} className={classes.customComponent}>
-        <Grid item xs={12} sm={4}>
-          <LocationsAccordion
-            features={features}
-            handleStatus={handleStatus}
-            handleLocationID={handleLocationID}
-            location_id={location_id}
-          />
+      <div className={classes.customContainer}>
+        <Grid container spacing={3} className={classes.customComponent}>
+          <Grid item xs={12} md={4} style={{ maxWidth: "500px", margin: "auto" }}>
+            <LocationsAccordion
+              features={features}
+              handleStatus={handleStatus}
+              handleLocationID={handleLocationID}
+              location_id={location_id}
+            />
+          </Grid>
+          <Grid item xs={12} md={8} style={{ height: "fit-content" }}>
+            <FindStoreSearch
+              placeholder={t("Enter your postal code")}
+              color="rgba(0,0,0,0.8)"
+              bgcolor="white"
+              border="rgba(0,0,0,0.2)"
+              buttonCol={buttonCol}
+              handleChange={() => {
+                //EMPTY
+              }}
+              handleButtonClick={() => {
+                //EMPTY
+              }}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={8}>
-          <FindStoreSearch
-            placeholder={t("Enter your postal code")}
-            color="rgba(0,0,0,0.8)"
-            bgcolor="white"
-            border="rgba(0,0,0,0.2)"
-            buttonCol={buttonCol}
-            handleChange={() => {
-              //EMPTY
-            }}
-            handleButtonClick={() => {
-              //EMPTY
-            }}
-          />
-        </Grid>
-      </Grid>
+      </div>
     </div>
   )
 }
@@ -138,24 +140,36 @@ export default observer(WholeMap)
 
 const useStyles = makeStyles(() =>
   createStyles({
-    mapWrapper: {
-      width: "100%",
-      position: "relative",
-    },
     mapContainer: {
       height: "100vh",
       overflow: "hidden !important",
-      zIndex: -1,
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      zIndex: 1,
+      ["@media (max-width:960px)"]: {
+        height: "200vh",
+      },
+    },
+    customContainer: {
+      position: "absolute",
+      zIndex: 2,
+      width: "100%",
+      height: 0,
     },
     popupWrapper: {
       fontSize: "12px !important",
     },
     customComponent: {
       maxWidth: "1440px",
-      top: 170,
-      left: 50,
-      margin: "auto !important",
-      position: "absolute",
+      width: "95%",
+      padding: "170px 0 50px",
+      margin: "0 0 0 100px",
+      height: 0,
+      ["@media (max-width:1600px)"]: {
+        margin: "auto !important",
+      },
     },
   })
 )
