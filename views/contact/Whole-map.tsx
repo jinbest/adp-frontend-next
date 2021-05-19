@@ -152,7 +152,7 @@ const useStyles = makeStyles(() =>
     },
     customComponent: {
       maxWidth: "1440px",
-      top: 200,
+      top: 170,
       left: 50,
       margin: "auto !important",
       position: "absolute",

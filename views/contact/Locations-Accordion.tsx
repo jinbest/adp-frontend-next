@@ -10,15 +10,8 @@ import PhoneIcon from "@material-ui/icons/Phone"
 import CallSplitIcon from "@material-ui/icons/CallSplit"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { isEmpty } from "lodash"
-import {
-  // getRegularHours,
-  // getHourType,
-  getAddress,
-  makeLocations,
-  phoneFormatString,
-} from "../../services/helper"
-
-// const DAYS_OF_THE_WEEK: string[] = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"]
+import { getAddress, makeLocations, phoneFormatString } from "../../services/helper"
+import HoursViewer from "../specific-location/component/hours-viewer"
 
 type Props = {
   features: any[]
@@ -27,12 +20,12 @@ type Props = {
   handleLocationID: (id: number) => void
 }
 
-const LocationsAccordion = ({ features, handleStatus, location_id, handleLocationID }: Props) => {
+const LocationsAccordion = ({ features, handleStatus, handleLocationID }: Props) => {
   const locations = storesDetails.allLocations
   const data = storesDetails.storeCnts
   const [t] = useTranslation()
   const classes = useStyles()
-  const [expanded, setExpanded] = useState<number | false>(0)
+  const [expanded, setExpanded] = useState<number | false>(false)
   const [feats, setFeatures] = useState<any[]>([])
 
   useEffect(() => {
@@ -46,7 +39,7 @@ const LocationsAccordion = ({ features, handleStatus, location_id, handleLocatio
   }, [features])
 
   const handleLocSelect = (location: any) => {
-    storesDetails.cntUserLocation = makeLocations([location])
+    storesDetails.changeCntUserLocation(makeLocations([location]))
     storesDetails.changeLocationID(location.id)
     storesDetails.changeCntUserLocationSelected(true)
   }
@@ -56,22 +49,24 @@ const LocationsAccordion = ({ features, handleStatus, location_id, handleLocatio
     handleStatus(false)
   }
 
-  useEffect(() => {
-    for (let i = 0; i < locations.length; i++) {
-      if (parseInt(locations[i].id) === location_id) {
-        setExpanded(i)
-        break
-      }
-    }
-  }, [locations, location_id])
+  // useEffect(() => {
+  //   for (let i = 0; i < locations.length; i++) {
+  //     if (parseInt(locations[i].id) === location_id) {
+  //       setExpanded(i)
+  //       break
+  //     }
+  //   }
+  // }, [locations, location_id])
 
   const handleChange = (panel: number) => (_: React.ChangeEvent<any>, isExpanded: boolean) => {
-    setExpanded(panel)
     if (storesDetails.cntUserLocationSelected) {
       handleLocSelect(locations[panel])
     }
     if (isExpanded) {
       handleLocationID(locations[panel].id)
+      setExpanded(panel)
+    } else {
+      setExpanded(false)
     }
   }
 
@@ -83,7 +78,7 @@ const LocationsAccordion = ({ features, handleStatus, location_id, handleLocatio
           storesDetails.cntUserLocation[0].location_id === locations[i].id
         ) {
           handleLocationID(locations[i].id)
-          setExpanded(i)
+          // setExpanded(i)
           break
         }
       }
@@ -92,125 +87,125 @@ const LocationsAccordion = ({ features, handleStatus, location_id, handleLocatio
   }, [storesDetails.cntUserLocation])
 
   return (
-    <div className={`${classes.container} custom-scroll-bar`}>
+    <div className={classes.container}>
       <div
         className={classes.banner}
         style={{ background: storesDetails.storeCnts.homepage.header.brandData.brandThemeCol }}
       >
         {`${storesDetails.allLocations.length} Stores near you`}
       </div>
-      {locations.map((element: any, index: number) => {
-        return (
-          <Accordion
-            key={index}
-            expanded={expanded === index}
-            onChange={handleChange(index)}
-            className={classes.accordion}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-              style={{ borderTop: "1px solid rgba(0,0,0,0.1)" }}
+      <div className={`${classes.accordionContainer} custom-scroll-bar`}>
+        {locations.map((element: any, index: number) => {
+          return (
+            <Accordion
+              key={index}
+              expanded={expanded === index}
+              onChange={handleChange(index)}
+              className={classes.accordion}
             >
-              <h2 className={classes.summaryTitle}>{storesDetails.storesDetails.name}</h2>
-              <h2 className={classes.summaryContent}>{getAddress(element)}</h2>
-              <div className={classes.directions}>
-                <a
-                  href={`${
-                    element.business_page_link != null
-                      ? element.business_page_link
-                      : `https://www.google.com/maps/search/?api=1&query=${getAddress(element)
-                          .split(" ")
-                          .join("+")}`
-                  }`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                  }}
-                >
-                  <CallSplitIcon />
-                  <span>{t("Directions")}</span>
-                </a>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <PhoneIcon />
-                  <a href={`tel:${element.phone}`} className={classes.phoneText}>
-                    <span
-                      style={{
-                        color: data.general.colorPalle.repairButtonCol,
-                      }}
-                    >
-                      {phoneFormatString(element.phone)}
-                    </span>
-                  </a>
-                </div>
-              </div>
-              <div style={{ display: "flex" }}>
-                <Link
-                  to={data.general.routes.repairWidgetPage}
-                  style={{
-                    textDecoration: "none",
-                    display: "flex",
-                  }}
-                  onClick={handleGetQuote}
-                >
-                  <button
-                    className={classes.getAppoint}
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                className={classes.accordionSummary}
+              >
+                <h2 className={classes.summaryTitle}>{storesDetails.storesDetails.name}</h2>
+                <h2 className={classes.summaryContent}>{getAddress(element)}</h2>
+                <div className={classes.directions}>
+                  <a
+                    href={`${
+                      element.business_page_link != null
+                        ? element.business_page_link
+                        : `https://www.google.com/maps/search/?api=1&query=${getAddress(element)
+                            .split(" ")
+                            .join("+")}`
+                    }`}
+                    target="_blank"
+                    rel="noreferrer"
                     style={{
-                      backgroundColor: data.general.colorPalle.repairButtonCol,
-                    }}
-                    onClick={() => {
-                      handleLocSelect(element)
+                      textDecoration: "none",
+                      color: "black",
                     }}
                   >
-                    {t("Get Quote")}
-                  </button>
-                </Link>
-                <FeatureToggles features={feats}>
-                  <Feature
-                    name="FRONTEND_REPAIR_APPOINTMENT"
-                    inactiveComponent={() => <></>}
-                    activeComponent={() => (
-                      <Link
-                        to={data.general.routes.repairWidgetPage}
+                    <CallSplitIcon />
+                    <span>{t("Directions")}</span>
+                  </a>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <PhoneIcon />
+                    <a href={`tel:${element.phone}`} className={classes.phoneText}>
+                      <span
                         style={{
-                          textDecoration: "none",
-                          display: "flex",
+                          color: data.general.colorPalle.repairButtonCol,
                         }}
-                        onClick={handleGetQuote}
                       >
-                        <button
-                          className={classes.getAppoint}
+                        {phoneFormatString(element.phone)}
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <div style={{ display: "flex" }}>
+                  <Link
+                    to={data.general.routes.repairWidgetPage}
+                    style={{
+                      textDecoration: "none",
+                      display: "flex",
+                    }}
+                    onClick={handleGetQuote}
+                  >
+                    <button
+                      className={classes.getAppoint}
+                      style={{
+                        backgroundColor: data.general.colorPalle.repairButtonCol,
+                      }}
+                      onClick={() => {
+                        handleLocSelect(element)
+                      }}
+                    >
+                      {t("Get Quote")}
+                    </button>
+                  </Link>
+                  <FeatureToggles features={feats}>
+                    <Feature
+                      name="FRONTEND_REPAIR_APPOINTMENT"
+                      inactiveComponent={() => <></>}
+                      activeComponent={() => (
+                        <Link
+                          to={data.general.routes.repairWidgetPage}
                           style={{
-                            backgroundColor: data.general.colorPalle.repairButtonCol,
+                            textDecoration: "none",
+                            display: "flex",
                           }}
-                          onClick={() => {
-                            handleLocSelect(element)
-                          }}
+                          onClick={handleGetQuote}
                         >
-                          {t("Book Appointment")}
-                        </button>
-                      </Link>
-                    )}
-                  />
-                </FeatureToggles>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails
-              style={{ display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)" }}
-            >
-              details
-            </AccordionDetails>
-          </Accordion>
-        )
-      })}
+                          <button
+                            className={classes.getAppoint}
+                            style={{
+                              backgroundColor: data.general.colorPalle.repairButtonCol,
+                            }}
+                            onClick={() => {
+                              handleLocSelect(element)
+                            }}
+                          >
+                            {t("Book Appointment")}
+                          </button>
+                        </Link>
+                      )}
+                    />
+                  </FeatureToggles>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails className={classes.accordionDetails}>
+                <HoursViewer location={element} />
+              </AccordionDetails>
+            </Accordion>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -221,18 +216,21 @@ const useStyles = makeStyles(() =>
   createStyles({
     container: {
       width: "100%",
-      maxHeight: "500px",
-      overflowY: "scroll",
       borderRadius: "5px",
       background: "white",
     },
+    accordionContainer: {
+      maxHeight: "calc(100vh - 300px)",
+      overflowY: "scroll !important",
+    },
     banner: {
-      height: "40px",
+      height: "60px",
       borderRadius: "5px 5px 0 0",
       color: "white",
       display: "flex",
       alignItems: "center",
       padding: "0 20px",
+      fontSize: "20px",
     },
     accordion: {
       margin: "0 !important",
@@ -241,12 +239,24 @@ const useStyles = makeStyles(() =>
         display: "block !important",
       },
     },
+    accordionSummary: {
+      borderTop: "1px solid rgba(0,0,0,0.1)",
+      padding: "0 20px 10px",
+    },
+    accordionDetails: {
+      display: "block",
+      padding: "10px 30px",
+    },
     summaryTitle: {
-      fontSize: "14px",
+      fontSize: "18px",
+      margin: 0,
+      padding: "10px 0",
       fontFamily: "Poppins Bold !important",
     },
     summaryContent: {
-      fontSize: "14px",
+      fontSize: "16px",
+      margin: 0,
+      padding: "0 0 10px",
     },
     directions: {
       display: "flex",
