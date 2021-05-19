@@ -77,8 +77,8 @@ export default class SubDomains {
       ],
     },
     {
-      name: "pradowireless",
-      domain: "pradowireless.com",
+      name: "blackapplecellularvictoria",
+      domain: "blackapplecellularvictoria.com",
       storeID: 10,
       locations: [
         {

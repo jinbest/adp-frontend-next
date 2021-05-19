@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react"
-import SectionMap from "./Section-map"
-import ContactForm from "./ContactForm"
 import Head from "next/head"
 import { observer } from "mobx-react"
 import { useQuery } from "../../services/helper"
 import { storesDetails } from "../../store"
 import { MetaParams } from "../../model/meta-params"
+import { findIndex, isEmpty } from "lodash"
+import dynamic from "next/dynamic"
+
+const DynamicWholeMap = dynamic(() => import("./Whole-map"), { ssr: false })
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -17,7 +19,7 @@ const Contact = ({ handleStatus, features }: Props) => {
   const thisPage = mainData.contactPage
   const query = useQuery()
 
-  const [locations, setLocations] = useState<any[]>([])
+  const [selectLocation, setSelectLocation] = useState<any>({} as any)
   const [locationID, setLocationID] = useState(0)
 
   const [pageTitle, setPageTitle] = useState("Contact Us | ")
@@ -26,8 +28,7 @@ const Contact = ({ handleStatus, features }: Props) => {
   useEffect(() => {
     setPageTitle(thisPage.headData.title)
     setMetaList(thisPage.headData.metaList)
-    setLocations(storesDetails.allLocations)
-    handleStatus(true)
+    handleStatus(false)
     if (typeof window !== "undefined") {
       window.scrollTo({
         top: 0,
@@ -35,16 +36,25 @@ const Contact = ({ handleStatus, features }: Props) => {
       })
     }
     if (Number(query.get("location_id"))) {
-      setLocationID(Number(query.get("location_id")))
-    } else if (storesDetails.allLocations.length) {
-      for (let i = 0; i < storesDetails.allLocations.length; i++) {
-        if (storesDetails.allLocations[i].is_main) {
-          setLocationID(storesDetails.allLocations[i].id)
-          break
-        }
-      }
+      const locIndex = findIndex(storesDetails.allLocations, {
+        id: Number(query.get("location_id")),
+      })
+      setSelectLocation(locIndex > -1 ? storesDetails.allLocations[locIndex] : ({} as any))
+      setLocationID(locIndex > -1 ? storesDetails.allLocations[locIndex].id : -1)
+    } else {
+      const locMain = findIndex(storesDetails.allLocations, { is_main: true })
+      setSelectLocation(locMain > -1 ? storesDetails.allLocations[locMain] : ({} as any))
+      setLocationID(locMain > -1 ? storesDetails.allLocations[locMain].id : -1)
     }
   }, [])
+
+  const handleLocationID = (id: number) => {
+    setLocationID(id)
+    const locIndex = findIndex(storesDetails.allLocations, { id: id })
+    if (locIndex > -1) {
+      setSelectLocation(storesDetails.allLocations[locIndex])
+    }
+  }
 
   return (
     <div>
@@ -56,20 +66,13 @@ const Contact = ({ handleStatus, features }: Props) => {
         <link rel="icon" id="favicon" href={mainData.homepage.headData.fav.img} />
         <link rel="apple-touch-icon" href={mainData.homepage.headData.fav.img} />
       </Head>
-      {locations.length && locationID && (
-        <SectionMap
-          locations={locations}
-          handleStatus={handleStatus}
-          location_id={locationID}
-          handleLocationID={setLocationID}
+      {!isEmpty(selectLocation) && (
+        <DynamicWholeMap
+          selectedLocation={selectLocation}
           features={features}
-        />
-      )}
-      {locations.length && locationID && (
-        <ContactForm
-          locations={locations}
-          locationID={locationID}
-          handleLocationID={setLocationID}
+          handleStatus={handleStatus}
+          handleLocationID={handleLocationID}
+          location_id={locationID}
         />
       )}
     </div>
