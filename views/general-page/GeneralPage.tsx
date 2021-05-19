@@ -30,7 +30,13 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
         setPageTitle(mainData[pageIndex].header.title)
         setMeta({ name: "description", content: mainData[pageIndex].header.meta_description })
       }
-      handleStatus(true)
+      handleStatus(mainData[pageIndex].include_footer)
+      if (!mainData[pageIndex].include_header) {
+        const header = document.getElementsByClassName("header")[0] as HTMLElement,
+          editorContainer = document.getElementById("react-page-editor-container") as HTMLDivElement
+        header.style.display = "none"
+        editorContainer.classList.add(classes.withoutHeader)
+      }
       setEditorVisible(true)
       if (typeof window !== "undefined") {
         window.scrollTo({
@@ -47,7 +53,9 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
         <title>{pageTitle}</title>
         {!isEmpty(meta) && <meta name={meta.name} content={meta.content} />}
       </Head>
-      <div className={classes.root}>{editorVisible && <ReactPageEditor value={pageData} />}</div>
+      <div className={classes.root} id="react-page-editor-container">
+        {editorVisible && <ReactPageEditor value={pageData} />}
+      </div>
     </div>
   )
 }
@@ -60,6 +68,9 @@ const useStyles = makeStyles(() =>
       maxWidth: "1440px",
       padding: "170px 30px 50px !important",
       margin: "auto",
+    },
+    withoutHeader: {
+      padding: "50px 30px !important",
     },
   })
 )
