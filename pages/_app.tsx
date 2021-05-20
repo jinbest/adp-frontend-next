@@ -77,14 +77,14 @@ const App = ({
     }
   }
 
-  const handleTabData = (mainData: any, store_id: number) => {
+  const handleTabData = (mainData: any) => {
     const homepage = mainData.homepage,
       scripts: ScriptParams[] = []
 
     setPageTitle(homepage.headData.title)
     setMetaList(homepage.headData.metaList)
     setFavIcon(homepage.headData.fav.img)
-    setTheme(`${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/theme/theme.min.css/asset`)
+    setTheme(mainData.general.themes.minified)
 
     homepage.bodyData.tags.forEach((item: TagParams) => {
       loadBodyTag(item.content)
@@ -110,7 +110,7 @@ const App = ({
 
   useEffect(() => {
     if (!isEmpty(storeData) && !isEmpty(storeCnts) && !isEmpty(commonCnts) && !isEmpty(locations)) {
-      handleTabData(storeCnts, storeData.settings.store_id)
+      handleTabData(storeCnts)
       storesDetails.changeStoreID(storeData.settings.store_id)
       storesDetails.changeIsVoided(storeData.is_voided)
       storesDetails.changestoresDetails(storeData)
@@ -149,12 +149,13 @@ const App = ({
       {loadStatus && (
         <React.Fragment>
           <Helmet>
-            {storeCnts.general.condition.googleVerification.status && (
-              <meta
-                name={storeCnts.general.condition.googleVerification.metaData.name}
-                content={storeCnts.general.condition.googleVerification.metaData.content}
-              />
-            )}
+            {storeCnts.general.condition.googleVerification.status &&
+              !isEmpty(storeCnts.general.condition.googleVerification.metaData) && (
+                <meta
+                  name={storeCnts.general.condition.googleVerification.metaData.name}
+                  content={storeCnts.general.condition.googleVerification.metaData.content}
+                />
+              )}
           </Helmet>
           <Router>
             <Header handleStatus={handleFooterStatus} features={features} />
@@ -177,7 +178,7 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
 
   /* Local Prod Mode */
   /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), prado(6), repar(7), wireless(8)] */
-  // const siteNum = 8,
+  // const siteNum = 1,
   //   subDomainID = SubDomains.DEVICE_ADP_LISTS[siteNum].storeID
 
   let apexDomain = ""
@@ -185,6 +186,7 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
     apexDomain = SubDomains.DEVICE_ADP_LISTS[siteNum].domain
   } else {
     apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
+    // apexDomain = domainMatch ? domainMatch[0] : "mtlcmtx.com"
   }
 
   const storeData = await apiClient.get<Store>(

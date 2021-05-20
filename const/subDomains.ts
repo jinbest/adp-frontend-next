@@ -1,8 +1,8 @@
 export default class SubDomains {
   static DEVICE_ADP_LISTS = [
     {
-      name: "bananaservices",
-      domain: "bananaservices.ca",
+      name: "bananaservice",
+      domain: "bananaservice.ca",
       storeID: 1,
       locations: [],
     },

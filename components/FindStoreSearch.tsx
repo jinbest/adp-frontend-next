@@ -104,7 +104,7 @@ const useStyles = makeStyles(() =>
       alignItems: "center",
       justifyContent: "center",
       ["@media (max-width:425px)"]: {
-        width: "fit-content",
+        width: "80px",
         fontSize: "13px",
         whiteSpace: "nowrap",
         padding: "0 10px",

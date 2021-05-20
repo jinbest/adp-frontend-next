@@ -28,7 +28,9 @@ const Contact = ({ handleStatus, features }: Props) => {
   useEffect(() => {
     setPageTitle(thisPage.headData.title)
     setMetaList(thisPage.headData.metaList)
-    storesDetails.changeFindAddLocation(storesDetails.allLocations)
+    if (!storesDetails.findAddLocation.length) {
+      storesDetails.changeFindAddLocation(storesDetails.allLocations)
+    }
 
     handleStatus(true)
 
@@ -39,15 +41,15 @@ const Contact = ({ handleStatus, features }: Props) => {
       })
     }
     if (Number(query.get("location_id"))) {
-      const locIndex = findIndex(storesDetails.allLocations, {
+      const locIndex = findIndex(storesDetails.findAddLocation, {
         id: Number(query.get("location_id")),
       })
-      setSelectLocation(locIndex > -1 ? storesDetails.allLocations[locIndex] : ({} as any))
-      setLocationID(locIndex > -1 ? storesDetails.allLocations[locIndex].id : -1)
+      setSelectLocation(locIndex > -1 ? storesDetails.findAddLocation[locIndex] : ({} as any))
+      setLocationID(locIndex > -1 ? storesDetails.findAddLocation[locIndex].id : -1)
     } else {
-      const locMain = findIndex(storesDetails.allLocations, { is_main: true })
-      setSelectLocation(locMain > -1 ? storesDetails.allLocations[locMain] : ({} as any))
-      setLocationID(locMain > -1 ? storesDetails.allLocations[locMain].id : -1)
+      const locMain = findIndex(storesDetails.findAddLocation, { is_main: true })
+      setSelectLocation(locMain > -1 ? storesDetails.findAddLocation[locMain] : ({} as any))
+      setLocationID(locMain > -1 ? storesDetails.findAddLocation[locMain].id : -1)
     }
   }, [])
 

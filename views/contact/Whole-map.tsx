@@ -219,7 +219,7 @@ export default observer(WholeMap)
 const useStyles = makeStyles(() =>
   createStyles({
     map: {
-      height: "100vh",
+      height: "calc(100vh + 200px)",
       width: "100%",
       position: "absolute",
       top: 0,
@@ -238,7 +238,7 @@ const useStyles = makeStyles(() =>
       },
     },
     mapContainer: {
-      height: "100vh",
+      height: "calc(100vh + 200px)",
       position: "absolute",
       top: 0,
       left: 0,

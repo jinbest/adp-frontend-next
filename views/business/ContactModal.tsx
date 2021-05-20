@@ -164,6 +164,7 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
   }, [firstName, lastName, email, loc, message])
 
   const handleClose = () => {
+    initState()
     handleModal(false)
   }
 
@@ -252,18 +253,7 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
     contactAPI
       .postContactForm(params)
       .then(() => {
-        // setToastParams({
-        //   msg: "Request Sent Successfully",
-        //   isSuccess: true,
-        // })
-        setFirstName("")
-        setLastName("")
-        setEmail("")
-        setPhone("")
-        setLoc({ name: "", code: 0 })
-        setMessage("")
-        setIsSubmit(false)
-        setCompanyName("")
+        initState()
         setContacted(true)
       })
       .catch(() => {
@@ -274,6 +264,17 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
         setDisableStatus(false)
         setIsSubmit(false)
       })
+  }
+
+  const initState = () => {
+    setFirstName("")
+    setLastName("")
+    setEmail("")
+    setPhone("")
+    setLoc({ name: "", code: 0 })
+    setMessage("")
+    setIsSubmit(false)
+    setCompanyName("")
   }
 
   const resetStatuses = () => {

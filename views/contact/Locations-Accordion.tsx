@@ -12,6 +12,7 @@ import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { isEmpty, findIndex } from "lodash"
 import { getAddress, makeLocations, phoneFormatString } from "../../services/helper"
 import HoursViewer from "../specific-location/component/hours-viewer"
+import ContactModal from "../business/ContactModal"
 
 type Props = {
   features: any[]
@@ -27,6 +28,7 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
   const classes = useStyles()
   const [expanded, setExpanded] = useState<number | false>(false)
   const [feats, setFeatures] = useState<any[]>([])
+  const [openModal, setOpenModal] = useState(false)
 
   useEffect(() => {
     const cntFeatures: any[] = []
@@ -42,6 +44,11 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
     storesDetails.changeCntUserLocation(makeLocations([location]))
     storesDetails.changeLocationID(location.id)
     storesDetails.changeCntUserLocationSelected(true)
+  }
+
+  const handleContactModal = (location: any) => {
+    handleLocSelect(location)
+    setOpenModal(true)
   }
 
   const handleGetQuote = () => {
@@ -106,7 +113,11 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
                 id="panel1a-header"
                 className={classes.accordionSummary}
               >
-                <h2 className={classes.summaryTitle}>{storesDetails.storesDetails.name}</h2>
+                <h2 className={classes.summaryTitle}>
+                  {element.distance
+                    ? `${element.location_name} (${element.distance / 1000}km)`
+                    : element.location_name}
+                </h2>
                 <h2 className={classes.summaryContent}>{getAddress(element)}</h2>
                 <div className={classes.directions}>
                   <a
@@ -145,7 +156,7 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
                     </a>
                   </div>
                 </div>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", flexWrap: "wrap" }}>
                   <Link
                     to={data.general.routes.repairWidgetPage}
                     style={{
@@ -194,6 +205,17 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
                       )}
                     />
                   </FeatureToggles>
+                  <button
+                    className={classes.getAppoint}
+                    style={{
+                      backgroundColor: data.general.colorPalle.repairButtonCol,
+                    }}
+                    onClick={() => {
+                      handleContactModal(element)
+                    }}
+                  >
+                    {t("Contact Us")}
+                  </button>
                 </div>
               </AccordionSummary>
               <AccordionDetails className={classes.accordionDetails}>
@@ -203,6 +225,7 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
           )
         })}
       </div>
+      <ContactModal openModal={openModal} handleModal={setOpenModal} />
     </div>
   )
 }
@@ -220,7 +243,7 @@ const useStyles = makeStyles(() =>
       boxShadow: "0px 5px 8px 3px rgb(0 0 0 / 20%)",
     },
     accordionContainer: {
-      maxHeight: "calc(100vh - 300px)",
+      maxHeight: "calc(100vh - 350px)",
     },
     banner: {
       height: "60px",

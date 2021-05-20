@@ -35,6 +35,7 @@ const Repair = ({ handleStatus, features }: Props) => {
   useEffect(() => {
     setPageTitle(thisPage.headData.title)
     setMetaList(thisPage.headData.metaList)
+    handleStatus(true)
     if (typeof window !== "undefined") {
       window.scrollTo({
         top: 0,
