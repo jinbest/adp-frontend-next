@@ -5,7 +5,6 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Badge from "../components/Badge"
 import { storesDetails, repairWidgetStore, repairWidData } from "../store/"
-import { appLoadAPI } from "../services/"
 import { FeaturesParam } from "../model/feature-toggle"
 import { MetaParams } from "../model/meta-params"
 import { ScriptParams } from "../model/script-params"
@@ -15,12 +14,11 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { TagParams } from "../model/tag-params"
 import _, { isEmpty } from "lodash"
 import { Helmet } from "react-helmet"
-import { Store } from "../model/store"
 import { StoreToggle } from "../model/store-toggle"
-import { GetManyResponse } from "../model/get-many-response"
 import ApiClient from "../services/api-client"
 import "../static/style/index.scss"
 import "../static/style/theme.css"
+import { GeneralData } from "../model/general-data"
 
 const apiClient = ApiClient.getInstance()
 
@@ -70,6 +68,7 @@ const App = ({
       const noScript = document.createElement("noscript")
       const htmlDoc = parser.parseFromString(tag, "text/html")
       const iframeNode = htmlDoc.getElementsByTagName("iframe")[0]
+
       if (iframeNode != null) {
         noScript.prepend(iframeNode)
         document.body.prepend(noScript)
@@ -93,13 +92,17 @@ const App = ({
     homepage.headData.scripts.forEach((item: ScriptParams) => {
       if (item.type === "reamaze" && item.content) {
         const script = document.createElement("script")
+
         script.type = "text/javascript"
         script.append(item.content)
+
         document.body.appendChild(script)
+
         const scriptReamaze = document.createElement("script")
         scriptReamaze.type = "text/javascript"
         scriptReamaze.src = "https://cdn.reamaze.com/assets/reamaze.js"
         scriptReamaze.async = true
+
         document.body.appendChild(scriptReamaze)
       } else if (item.type !== "reamaze") {
         scripts.push(item)
@@ -117,11 +120,15 @@ const App = ({
       storesDetails.changeStoreCnts(storeCnts)
       storesDetails.changeCommonCnts(commonCnts)
       storesDetails.changeAddLocations(locations)
+
       setFooterStatus(true)
+
       const cntFeats = _.cloneDeep(feats)
+
       if (storeCnts.general.condition.hasShopLink) {
         cntFeats.push({ flag: "FRONTEND_BUY", isActive: true })
       }
+
       setFeatures([...cntFeats])
       setLoadStatus(true)
     }
@@ -139,13 +146,16 @@ const App = ({
         <link rel="icon" id="favicon" href={favIcon} />
         <link rel="apple-touch-icon" href={favIcon} />
         <link rel="stylesheet" href={theme} />
+
         {metaList.map((item: MetaParams, index: number) => {
           return <meta name={item.name} content={item.content} key={index} />
         })}
+
         {scriptList.map((item: ScriptParams, index: number) => {
           return <script key={index}>{item.content}</script>
         })}
       </Helmet>
+
       {loadStatus && (
         <React.Fragment>
           <Helmet>
@@ -189,57 +199,47 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
     // apexDomain = domainMatch ? domainMatch[0] : "mtlcmtx.com"
   }
 
-  const storeData = await apiClient.get<Store>(
-    `${Config.STORE_SERVICE_API_URL}dc/store/domain/${apexDomain}?include_children=false`
+  const {
+    storeConfig,
+    storeDetails,
+    locations,
+    featureToggles,
+    commonConfig,
+  } = await apiClient.get<GeneralData>(
+    `${Config.STORE_SERVICE_API_URL}dc/store/general/${apexDomain}?toggleType=FRONTEND`
   )
 
-  const url = `${Config.ADMIN_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/features/toggle?types=FRONTEND`
-  const storeToggles = await apiClient.get<StoreToggle[]>(url)
   const features: FeaturesParam[] = [
     { flag: "ALWAYS_TRUE", isActive: true },
     { flag: "FRONTEND_INSURE", isActive: false },
   ]
-  storeToggles.forEach((item: StoreToggle) => {
+
+  featureToggles.forEach((item: StoreToggle) => {
     features.push({
       flag: item.feature_id,
       isActive: item.is_enabled,
     })
   })
 
-  const contents = await appLoadAPI
-    .getStoreConfig(storeData.settings.store_id)
-    .then((res: any) => {
-      return res
-    })
-    .catch((err) => {
-      console.log("Error in get Store Config", err)
-    })
-
-  const locURL = `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/locations?page=1&per_page=10000&include_voided=false`
-  const response = await apiClient.get<GetManyResponse>(locURL)
-  const locations = response.data
-
-  if (isEmpty(storeData) || isEmpty(features) || isEmpty(locations) || isEmpty(contents)) {
+  if (isEmpty(storeDetails) || isEmpty(features) || isEmpty(locations) || isEmpty(storeConfig)) {
     return {
       notFound: true,
     }
   }
 
   let privacyTemplate = ""
-  if (
-    !isEmpty(contents) &&
-    contents[0].data.homepage.footer.bottomLinks.privacyPolicy.externalLink
-  ) {
-    const htmlLink = contents[0].data.homepage.footer.bottomLinks.privacyPolicy.externalLink
+
+  if (!isEmpty(storeConfig) && storeConfig.homepage.footer.bottomLinks.privacyPolicy.externalLink) {
+    const htmlLink = storeConfig.homepage.footer.bottomLinks.privacyPolicy.externalLink
     privacyTemplate = await apiClient.get<string>(htmlLink)
   }
 
   return {
-    storeData: storeData,
+    storeData: storeDetails,
     feats: features,
     locations: locations,
-    storeCnts: contents[0].data,
-    commonCnts: contents[1].data,
+    storeCnts: storeConfig,
+    commonCnts: commonConfig,
     privacyTemplate: privacyTemplate,
   }
 }

@@ -11,10 +11,9 @@ import ApiClient from "../../services/api-client"
 import Config from "../../config/config"
 import { SpecificConfigParams } from "../../model/specific-config-param"
 import SubDomains from "../../const/subDomains"
-import { Store } from "../../model/store"
-import { appLoadAPI } from "../../services/"
 import { findIndex } from "lodash"
 import { Value } from "@react-page/editor"
+import { GeneralData } from "../../model/general-data"
 
 const apiClient = ApiClient.getInstance()
 
@@ -84,23 +83,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
   }
 
-  const storeData = await apiClient.get<Store>(
-    `${Config.STORE_SERVICE_API_URL}dc/store/domain/${apexDomain}?include_children=false`
+  const { storeConfig, storeDetails } = await apiClient.get<GeneralData>(
+    `${Config.STORE_SERVICE_API_URL}dc/store/general/${apexDomain}?toggleType=FRONTEND`
   )
 
-  const contents = await appLoadAPI
-    .getStoreConfig(storeData.settings.store_id)
-    .then((res: any) => {
-      return res
-    })
-    .catch((err) => {
-      console.log("Error in get Store Config", err)
-    })
-
-  const specSlugIndex = findIndex(contents[0].data.locations, { slug: slug }),
-    pageIndex = contents[0].data.pages
-      ? findIndex(contents[0].data.pages, { type: type, slug: slug })
-      : -1
+  const specSlugIndex = findIndex(storeConfig.locations, { slug: slug }),
+    pageIndex = storeConfig.pages ? findIndex(storeConfig.pages, { type: type, slug: slug }) : -1
   let specConfig = {} as SpecificConfigParams,
     pageData = {} as Value,
     specLocStatus = false
@@ -110,14 +98,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       console.log("Can't find matched slug for specific location: ", slug)
       return {
         redirect: {
-          destination: contents[0].data.general.routes.locationsPage,
+          destination: storeConfig.general.routes.locationsPage,
           permanent: false,
         },
       }
     } else {
-      const locID = contents[0].data.locations[specSlugIndex].id
+      const locID = storeConfig.locations[specSlugIndex].id
       specConfig = await apiClient.get<SpecificConfigParams>(
-        `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/location/${locID}/config`
+        `${Config.STORE_SERVICE_API_URL}dc/store/${storeDetails.settings.store_id}/location/${locID}/config`
       )
       specLocStatus = true
     }
@@ -126,13 +114,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       console.log("Can't find matched type and slug for general page: ", type, slug)
       return {
         redirect: {
-          destination: contents[0].data.general.routes.homePage,
+          destination: storeConfig.general.routes.homePage,
           permanent: false,
         },
       }
     } else {
       pageData = await apiClient.get<Value>(
-        `${Config.STORE_SERVICE_API_URL}dc/store/${storeData.settings.store_id}/template/${type}/asset?file_name=${slug}.json`
+        `${Config.STORE_SERVICE_API_URL}dc/store/${storeDetails.settings.store_id}/template/${type}/asset?file_name=${slug}.json`
       )
     }
   }
