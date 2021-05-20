@@ -50,7 +50,7 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
     handleLocSelect(location)
     setOpenModal(true)
   }
-
+  
   const handleGetQuote = () => {
     repairWidgetStore.init()
     handleStatus(false)
