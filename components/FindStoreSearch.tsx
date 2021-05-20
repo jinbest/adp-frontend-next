@@ -2,6 +2,7 @@ import React from "react"
 import { Box, InputBase } from "@material-ui/core"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { useTranslation } from "react-i18next"
+import Loading from "../components/Loading"
 
 type Props = {
   color?: string
@@ -13,6 +14,7 @@ type Props = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleButtonClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   buttonCol?: string
+  isSubmit?: boolean
 }
 
 const FindStoreSearch = ({
@@ -25,6 +27,7 @@ const FindStoreSearch = ({
   handleChange,
   handleButtonClick,
   buttonCol,
+  isSubmit,
 }: Props) => {
   const tPlaceholder = placeholder || "Find your device"
   const classes = useStyles()
@@ -43,9 +46,9 @@ const FindStoreSearch = ({
         onChange={handleChange}
       />
       <div onClick={handleButtonClick} className={classes.searchButtonDiv}>
-        <button className={classes.button} style={{ background: buttonCol, height: height }}>
-          {t("Find stores")}
-        </button>
+        <div className={classes.button} style={{ background: buttonCol, height: height }}>
+          {isSubmit ? <Loading /> : t("Find stores")}
+        </div>
       </div>
     </Box>
   )
@@ -97,6 +100,9 @@ const useStyles = makeStyles(() =>
       width: "150px",
       cursor: "pointer",
       padding: 0,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       ["@media (max-width:425px)"]: {
         width: "fit-content",
         fontSize: "13px",

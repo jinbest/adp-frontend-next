@@ -28,7 +28,10 @@ const Contact = ({ handleStatus, features }: Props) => {
   useEffect(() => {
     setPageTitle(thisPage.headData.title)
     setMetaList(thisPage.headData.metaList)
-    handleStatus(false)
+    storesDetails.changeFindAddLocation(storesDetails.allLocations)
+
+    handleStatus(true)
+
     if (typeof window !== "undefined") {
       window.scrollTo({
         top: 0,
@@ -50,9 +53,9 @@ const Contact = ({ handleStatus, features }: Props) => {
 
   const handleLocationID = (id: number) => {
     setLocationID(id)
-    const locIndex = findIndex(storesDetails.allLocations, { id: id })
+    const locIndex = findIndex(storesDetails.findAddLocation, { id: id })
     if (locIndex > -1) {
-      setSelectLocation(storesDetails.allLocations[locIndex])
+      setSelectLocation(storesDetails.findAddLocation[locIndex])
     }
   }
 

@@ -54,6 +54,14 @@ const App = ({
 
   const handleFooterStatus = (status: boolean) => {
     setFooterStatus(status)
+    const footer = document.getElementsByClassName("footer")[0] as HTMLElement
+    if (footer) {
+      if (window.location.pathname === storeCnts.general.routes.contactPage) {
+        footer.classList.add("new-contact-footer")
+      } else {
+        footer.classList.remove("new-contact-footer")
+      }
+    }
   }
 
   const loadBodyTag = (tag: string) => {

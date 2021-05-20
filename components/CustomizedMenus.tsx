@@ -352,6 +352,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                 </a>
               )}
               {storesDetails.findAddLocation.length > 1 &&
+                !requireUserInfo &&
                 locations.length < storesDetails.findAddLocation.length && (
                   <a className="link" style={{ color: underLineCol }} onClick={viewMoreStores}>
                     {t("View More Stores")}

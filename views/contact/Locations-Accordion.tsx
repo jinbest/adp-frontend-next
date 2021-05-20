@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 import PhoneIcon from "@material-ui/icons/Phone"
 import CallSplitIcon from "@material-ui/icons/CallSplit"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
-import { isEmpty } from "lodash"
+import { isEmpty, findIndex } from "lodash"
 import { getAddress, makeLocations, phoneFormatString } from "../../services/helper"
 import HoursViewer from "../specific-location/component/hours-viewer"
 
@@ -20,8 +20,8 @@ type Props = {
   handleLocationID: (id: number) => void
 }
 
-const LocationsAccordion = ({ features, handleStatus, handleLocationID }: Props) => {
-  const locations = storesDetails.allLocations
+const LocationsAccordion = ({ features, handleStatus, handleLocationID, location_id }: Props) => {
+  const locations = storesDetails.findAddLocation
   const data = storesDetails.storeCnts
   const [t] = useTranslation()
   const classes = useStyles()
@@ -49,14 +49,14 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID }: Props)
     handleStatus(false)
   }
 
-  // useEffect(() => {
-  //   for (let i = 0; i < locations.length; i++) {
-  //     if (parseInt(locations[i].id) === location_id) {
-  //       setExpanded(i)
-  //       break
-  //     }
-  //   }
-  // }, [locations, location_id])
+  useEffect(() => {
+    for (let i = 0; i < locations.length; i++) {
+      if (parseInt(locations[i].id) === location_id) {
+        setExpanded(i)
+        break
+      }
+    }
+  }, [locations, location_id])
 
   const handleChange = (panel: number) => (_: React.ChangeEvent<any>, isExpanded: boolean) => {
     if (storesDetails.cntUserLocationSelected) {
@@ -65,22 +65,19 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID }: Props)
     if (isExpanded) {
       handleLocationID(locations[panel].id)
       setExpanded(panel)
-    } else {
-      setExpanded(false)
     }
   }
 
   useEffect(() => {
-    if (storesDetails.cntUserLocationSelected && locations.length) {
-      for (let i = 0; i < locations.length; i++) {
-        if (
-          !isEmpty(storesDetails.cntUserLocation) &&
-          storesDetails.cntUserLocation[0].location_id === locations[i].id
-        ) {
-          handleLocationID(locations[i].id)
-          // setExpanded(i)
-          break
-        }
+    if (
+      storesDetails.cntUserLocationSelected &&
+      locations.length &&
+      !isEmpty(storesDetails.cntUserLocation)
+    ) {
+      const locIndex = findIndex(locations, { id: storesDetails.cntUserLocation[0].location_id })
+      if (locIndex > -1) {
+        handleLocationID(locations[locIndex].id)
+        setExpanded(locIndex)
       }
       return
     }
@@ -92,9 +89,9 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID }: Props)
         className={classes.banner}
         style={{ background: storesDetails.storeCnts.homepage.header.brandData.brandThemeCol }}
       >
-        {`${storesDetails.allLocations.length} Stores near you`}
+        {`${storesDetails.findAddLocation.length} Stores near you`}
       </div>
-      <div className={`${classes.accordionContainer} custom-scroll-bar`}>
+      <div className={`${`${classes.accordionContainer} overflowY`} custom-scroll-bar`}>
         {locations.map((element: any, index: number) => {
           return (
             <Accordion
@@ -220,10 +217,10 @@ const useStyles = makeStyles(() =>
       background: "white",
       maxWidth: "450px",
       margin: "auto",
+      boxShadow: "0px 5px 8px 3px rgb(0 0 0 / 20%)",
     },
     accordionContainer: {
       maxHeight: "calc(100vh - 300px)",
-      overflowY: "scroll !important",
     },
     banner: {
       height: "60px",

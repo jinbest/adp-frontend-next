@@ -87,3 +87,14 @@ img {
   width: 100% !important;
   margin: 0 !important;
 }
+
+.overflowY {
+  overflow-y: scroll !important;
+}
+
+.new-contact-footer {
+  top: 60vh !important;
+  @media (max-width: 960px) {
+    top: inherit !important;
+  }
+}
