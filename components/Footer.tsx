@@ -121,6 +121,7 @@ const Footer = () => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.footer
+  const commonData = storesDetails.commonCnts
   const [t] = useTranslation()
 
   const [mobile, setMobile] = useState(false)
@@ -180,7 +181,7 @@ const Footer = () => {
             }}
           />
         )}
-        <Grid item container>
+        <Grid container>
           {[true, false].map((item: any, index: number) => {
             return (
               <FooterLinksComponent
@@ -192,9 +193,57 @@ const Footer = () => {
             )
           })}
         </Grid>
-        <p className="device-list-grid copyright" style={{ color: "grey" }}>
-          {t(thisPage.copyRight)}
-        </p>
+        <Grid container className={classes.footerlinks}>
+          {thisPage.footerLinks.map((item: any, index: number) => {
+            return (
+              <Grid item xs={12} sm={3} key={index}>
+                <ul>
+                  <li className={classes.footerLocName}>{t(item.name)}</li>
+                  {item.lists.map((it: any, idx: number) => (
+                    <li key={idx} className={classes.footerLocAddress}>
+                      <a href={it.href}>{t(it.text)}</a>
+                    </li>
+                  ))}
+                </ul>
+              </Grid>
+            )
+          })}
+        </Grid>
+        <Grid container>
+          <Grid item xs={12} xl={5}>
+            <p className="device-list-grid copyright" style={{ color: "grey" }}>
+              {t(thisPage.copyRight)}
+            </p>
+          </Grid>
+          <Grid item xs={12} xl={7}>
+            <div className={classes.footerImages}>
+              <div>
+                <img
+                  src={commonData.footerImageData.deviceList}
+                  className="footer-device-response"
+                />
+                {commonData.footerImageData.bell && (
+                  <img src={commonData.footerImageData.bell} className="footer-device-response" />
+                )}
+              </div>
+              <div>
+                <img src={commonData.footerImageData.buyNow} className="footer-buynow" />
+                {commonData.footerImageData.others.map((item: any, index: number) => {
+                  return (
+                    <div className="footer-others" key={index}>
+                      <img src={item} key={index} />
+                    </div>
+                  )
+                })}
+                <img src={commonData.footerImageData.deviceList} className="footer-device-list" />
+                {commonData.footerImageData.bell && (
+                  <img src={commonData.footerImageData.bell} className="footer-device-list" />
+                )}
+              </div>
+            </div>
+          </Grid>
+        </Grid>
+
         <div className={classes.bottomLink}>
           {thisPage.bottomLinks.privacyPolicy.externalLink && (
             <Link to={thisPage.bottomLinks.privacyPolicy.href}>
@@ -330,6 +379,37 @@ const useStyles = makeStyles(() =>
       ["@media (max-width:600px)"]: {
         margin: "20px auto",
         textAlign: "center",
+      },
+    },
+    footerlinks: {
+      margin: "10px 0",
+      "& ul": {
+        margin: 0,
+        padding: 0,
+        "& li": {
+          listStyle: "none",
+        },
+        "& a": {
+          textDecoration: "none",
+          width: "fit-content",
+        },
+      },
+    },
+    footerImages: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginTop: "25px",
+      "& > div": {
+        display: "flex",
+        alignItems: "flex-end",
+      },
+      ["@media (max-width:600px)"]: {
+        display: "block",
+        "& > div": {
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "20px 0",
+        },
       },
     },
   })
