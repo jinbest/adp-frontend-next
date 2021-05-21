@@ -140,11 +140,42 @@ const WholeMap = ({
 
   return (
     <div>
+      <div className={classes.customContainer}>
+        <Grid container spacing={3} className={classes.customComponent}>
+          <Grid item xs={12} md={4} className={classes.item1}>
+            <LocationsAccordion
+              features={features}
+              handleStatus={handleStatus}
+              handleLocationID={handleLocationID}
+              location_id={location_id}
+            />
+          </Grid>
+          <Grid item xs={12} md={8} className={classes.item2}>
+            <FindStoreSearch
+              placeholder={t("Enter your postal code")}
+              color="rgba(0,0,0,0.8)"
+              bgcolor="white"
+              border="rgba(0,0,0,0.2)"
+              buttonCol={buttonCol}
+              value={postCode}
+              handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChangeSearch(e)
+              }}
+              handleButtonClick={async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                await handleClickSearchButton(e)
+              }}
+              isSubmit={isFinding}
+            />
+          </Grid>
+        </Grid>
+        <Toast params={toastParams} resetStatuses={resetStatuses} />
+      </div>
+
       <div className={classes.map}>
         <MapContainer
           center={[centerX, centerY]}
           zoom={zoom}
-          scrollWheelZoom={true}
+          scrollWheelZoom={false}
           whenCreated={setMap}
           className={classes.mapContainer}
         >
@@ -181,36 +212,6 @@ const WholeMap = ({
             })}
         </MapContainer>
       </div>
-      <div className={classes.customContainer}>
-        <Grid container spacing={3} className={classes.customComponent}>
-          <Grid item xs={12} md={4} className={classes.item1}>
-            <LocationsAccordion
-              features={features}
-              handleStatus={handleStatus}
-              handleLocationID={handleLocationID}
-              location_id={location_id}
-            />
-          </Grid>
-          <Grid item xs={12} md={8} className={classes.item2}>
-            <FindStoreSearch
-              placeholder={t("Enter your postal code")}
-              color="rgba(0,0,0,0.8)"
-              bgcolor="white"
-              border="rgba(0,0,0,0.2)"
-              buttonCol={buttonCol}
-              value={postCode}
-              handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChangeSearch(e)
-              }}
-              handleButtonClick={async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-                await handleClickSearchButton(e)
-              }}
-              isSubmit={isFinding}
-            />
-          </Grid>
-        </Grid>
-        <Toast params={toastParams} resetStatuses={resetStatuses} />
-      </div>
     </div>
   )
 }
@@ -229,12 +230,11 @@ const useStyles = makeStyles(() =>
       ["@media (max-width:960px)"]: {
         position: "relative",
         width: "calc(100% - 60px)",
-        margin: "170px auto 30px",
+        margin: "0 auto 50px",
         height: "500px",
       },
       ["@media (max-width:425px)"]: {
         width: "calc(100% - 40px)",
-        margin: "180px auto 30px",
       },
     },
     mapContainer: {
@@ -255,6 +255,10 @@ const useStyles = makeStyles(() =>
       ["@media (max-width:960px)"]: {
         position: "inherit",
         height: "fit-content",
+        paddingTop: "170px",
+      },
+      ["@media (max-width:425px)"]: {
+        paddingTop: "180px",
       },
     },
     popupWrapper: {

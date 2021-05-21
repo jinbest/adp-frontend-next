@@ -98,7 +98,7 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
       >
         {`${storesDetails.findAddLocation.length} Stores near you`}
       </div>
-      <div className={`${`${classes.accordionContainer} overflowY`} custom-scroll-bar`}>
+      <div className="accordion-container">
         {locations.map((element: any, index: number) => {
           return (
             <Accordion
@@ -241,9 +241,6 @@ const useStyles = makeStyles(() =>
       maxWidth: "450px",
       margin: "auto",
       boxShadow: "0px 5px 8px 3px rgb(0 0 0 / 20%)",
-    },
-    accordionContainer: {
-      maxHeight: "calc(100vh - 350px)",
     },
     banner: {
       height: "60px",
