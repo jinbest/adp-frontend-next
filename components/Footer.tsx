@@ -143,133 +143,142 @@ const Footer = () => {
   }
 
   return (
-    <footer
-      className="footer"
-      style={{
-        backgroundImage: mobile
-          ? "url(" + thisPage.images.mobile + ")"
-          : "url(" + thisPage.images.desktop + ")",
-      }}
-    >
+    <footer id="footer">
+      <div className="footer-bg-container">
+        <img src={mobile ? thisPage.images.mobile : thisPage.images.desktop} />
+      </div>
       <Typography className="footer-title" style={{ color: thisPage.title.color }}>
         {t(thisPage.title.text)}
       </Typography>
-      <Box className={classes.footerContainer}>
-        {thisPage.specImages && thisPage.specImages.length ? (
-          <div className={classes.imgContainer}>
-            <Logo
-              type="footer"
-              handleStatus={() => {
-                // EMPTY
-              }}
-            />
-            <div className={classes.specialImages}>
-              {thisPage.specImages.map((item: any, index: number) => {
+      <div className="footer-box">
+        <div className="footer-bgCol">
+          <Box className={classes.footerContainer}>
+            {thisPage.specImages && thisPage.specImages.length ? (
+              <div className={classes.imgContainer}>
+                <Logo
+                  type="footer"
+                  handleStatus={() => {
+                    // EMPTY
+                  }}
+                />
+                <div className={classes.specialImages}>
+                  {thisPage.specImages.map((item: any, index: number) => {
+                    return (
+                      <a href={item.link} target="_blank" rel="noreferrer" key={index}>
+                        <img src={item.img_src} alt={`${index}-spec-img`} />
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+            ) : (
+              <Logo
+                type="footer"
+                handleStatus={() => {
+                  // EMPTY
+                }}
+              />
+            )}
+            <Grid container>
+              {[true, false].map((item: any, index: number) => {
                 return (
-                  <a href={item.link} target="_blank" rel="noreferrer" key={index}>
-                    <img src={item.img_src} alt={`${index}-spec-img`} />
-                  </a>
+                  <FooterLinksComponent
+                    key={index}
+                    data={storesDetails.allLocations}
+                    isMain={item}
+                    initGridMD={4}
+                  />
                 )
               })}
-            </div>
-          </div>
-        ) : (
-          <Logo
-            type="footer"
-            handleStatus={() => {
-              // EMPTY
-            }}
-          />
-        )}
-        <Grid container>
-          {[true, false].map((item: any, index: number) => {
-            return (
-              <FooterLinksComponent
-                key={index}
-                data={storesDetails.allLocations}
-                isMain={item}
-                initGridMD={4}
-              />
-            )
-          })}
-        </Grid>
-        <Grid container className={classes.footerlinks}>
-          {thisPage.footerLinks.map((item: any, index: number) => {
-            return (
-              <Grid item xs={12} sm={3} key={index}>
-                <ul>
-                  <li className={classes.footerLocName}>{t(item.name)}</li>
-                  {item.lists.map((it: any, idx: number) => (
-                    <li key={idx} className={classes.footerLocAddress}>
-                      <a href={it.href}>{t(it.text)}</a>
-                    </li>
-                  ))}
-                </ul>
+            </Grid>
+            <Grid container className={classes.footerlinks}>
+              {thisPage.footerLinks.map((item: any, index: number) => {
+                return (
+                  <Grid item xs={12} sm={3} key={index}>
+                    <ul>
+                      <li className={classes.footerLocName}>{t(item.name)}</li>
+                      {item.lists.map((it: any, idx: number) => (
+                        <li key={idx} className={classes.footerLocAddress}>
+                          <a href={it.href}>{t(it.text)}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </Grid>
+                )
+              })}
+            </Grid>
+            <Grid container>
+              <Grid item xs={12} xl={4}>
+                <p className="device-list-grid copyright" style={{ color: "grey" }}>
+                  {t(thisPage.copyRight)}
+                </p>
               </Grid>
-            )
-          })}
-        </Grid>
-        <Grid container>
-          <Grid item xs={12} xl={5}>
-            <p className="device-list-grid copyright" style={{ color: "grey" }}>
-              {t(thisPage.copyRight)}
-            </p>
-          </Grid>
-          <Grid item xs={12} xl={7}>
-            <div className={classes.footerImages}>
-              <div>
-                <img
-                  src={commonData.footerImageData.deviceList}
-                  className="footer-device-response"
-                />
-                {commonData.footerImageData.bell && (
-                  <img src={commonData.footerImageData.bell} className="footer-device-response" />
-                )}
-              </div>
-              <div>
-                <img src={commonData.footerImageData.buyNow} className="footer-buynow" />
-                {commonData.footerImageData.others.map((item: any, index: number) => {
-                  return (
-                    <div className="footer-others" key={index}>
-                      <img src={item} key={index} />
-                    </div>
-                  )
-                })}
-                <img src={commonData.footerImageData.deviceList} className="footer-device-list" />
-                {commonData.footerImageData.bell && (
-                  <img src={commonData.footerImageData.bell} className="footer-device-list" />
-                )}
-              </div>
-            </div>
-          </Grid>
-        </Grid>
+              <Grid item xs={12} xl={8}>
+                <div className={classes.footerImages}>
+                  <div>
+                    <img
+                      src={commonData.footerImageData.deviceList}
+                      className="footer-device-response"
+                    />
+                    {commonData.footerImageData.bell && (
+                      <img
+                        src={commonData.footerImageData.bell}
+                        className="footer-device-response"
+                      />
+                    )}
+                  </div>
+                  <div>
+                    <img src={commonData.footerImageData.buyNow} className="footer-buynow" />
+                    {commonData.footerImageData.others.map((item: any, index: number) => {
+                      return (
+                        <div className="footer-others" key={index}>
+                          <img src={item} key={index} />
+                        </div>
+                      )
+                    })}
+                    <img
+                      src={commonData.footerImageData.deviceList}
+                      className="footer-device-list"
+                    />
+                    {commonData.footerImageData.bell && (
+                      <img src={commonData.footerImageData.bell} className="footer-device-list" />
+                    )}
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
 
-        <div className={classes.bottomLink}>
-          {thisPage.bottomLinks.privacyPolicy.externalLink && (
-            <Link to={thisPage.bottomLinks.privacyPolicy.href}>
-              {t(thisPage.bottomLinks.privacyPolicy.text)}
-            </Link>
-          )}
-          {thisPage.bottomLinks.covidPage.visible && (
-            <Link to={thisPage.bottomLinks.covidPage.link} style={{ marginLeft: "15px" }}>
-              {t(thisPage.bottomLinks.covidPage.text)}
-            </Link>
-          )}
+            <div className={classes.bottomLink}>
+              {thisPage.bottomLinks.privacyPolicy.externalLink && (
+                <Link to={thisPage.bottomLinks.privacyPolicy.href}>
+                  {t(thisPage.bottomLinks.privacyPolicy.text)}
+                </Link>
+              )}
+              {thisPage.bottomLinks.covidPage.visible && (
+                <Link to={thisPage.bottomLinks.covidPage.link} style={{ marginLeft: "15px" }}>
+                  {t(thisPage.bottomLinks.covidPage.text)}
+                </Link>
+              )}
+            </div>
+            <div style={{ textAlign: "center" }}>
+              {data.socials && data.socials.length ? (
+                data.socials.map(
+                  (
+                    social: { link: string | undefined; img: string | undefined },
+                    index: number
+                  ) => (
+                    <a key={index} href={social.link} target="_blank" rel="noreferrer">
+                      <img src={social.img} width="32" height="32" />
+                    </a>
+                  )
+                )
+              ) : (
+                <></>
+              )}
+            </div>
+          </Box>
         </div>
-        <div style={{ textAlign: "center" }}>
-          {data.socials && data.socials.length ? (
-            data.socials.map(
-              (social: { link: string | undefined; img: string | undefined }, index: number) => (
-                <a key={index} href={social.link} target="_blank" rel="noreferrer">
-                  <img src={social.img} width="32" height="32" />
-                </a>
-              )
-            )
-          ) : (
-            <></>
-          )}
-        </div>
-      </Box>
+      </div>
     </footer>
   )
 }
@@ -399,6 +408,8 @@ const useStyles = makeStyles(() =>
       display: "flex",
       justifyContent: "space-between",
       marginTop: "25px",
+      paddingRight: "10px",
+      overflow: "hidden !important",
       "& > div": {
         display: "flex",
         alignItems: "flex-end",

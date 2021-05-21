@@ -43,7 +43,7 @@ const useStyles = makeStyles(() =>
       position: "fixed",
       left: "20px",
       bottom: "20px",
-      zIndex: 5,
+      zIndex: 15,
       width: "50px",
       height: "70px",
       ["@media (max-width:500px)"]: {

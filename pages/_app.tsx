@@ -52,7 +52,7 @@ const App = ({
 
   const handleFooterStatus = (status: boolean) => {
     setFooterStatus(status)
-    const footer = document.getElementsByClassName("footer")[0] as HTMLElement
+    const footer = document.getElementById("footer") as HTMLElement
     if (footer) {
       if (window.location.pathname === storeCnts.general.routes.contactPage) {
         footer.classList.add("new-contact-footer")
@@ -188,7 +188,7 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
 
   /* Local Prod Mode */
   /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), prado(6), repar(7), wireless(8)] */
-  // const siteNum = 1,
+  // const siteNum = 8,
   //   subDomainID = SubDomains.DEVICE_ADP_LISTS[siteNum].storeID
 
   let apexDomain = ""
