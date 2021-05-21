@@ -115,7 +115,7 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
               >
                 <h2 className={classes.summaryTitle}>
                   {element.distance
-                    ? `${element.location_name} (${element.distance / 1000}km)`
+                    ? `${element.location_name} (${(element.distance / 1000).toFixed(1)}km)`
                     : element.location_name}
                 </h2>
                 <h2 className={classes.summaryContent}>{getAddress(element)}</h2>
