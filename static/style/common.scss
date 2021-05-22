@@ -88,6 +88,26 @@ img {
   margin: 0 !important;
 }
 
-.overflowY {
-  overflow-y: scroll !important;
+.accordion-container {
+  @media (min-width: 960px) {
+    max-height: calc(100vh - 350px);
+    overflow-y: scroll !important;
+    &::-webkit-scrollbar {
+      width: 3px;
+      cursor: pointer;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #999;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #666;
+    }
+  }
+  @media (max-width: 960px) {
+    max-height: inherit;
+    overflow-y: inherit;
+  }
 }
