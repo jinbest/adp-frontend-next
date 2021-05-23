@@ -125,6 +125,7 @@ const Footer = () => {
   const [t] = useTranslation()
 
   const [mobile, setMobile] = useState(false)
+  const [colSM, setColSM] = useState<GridMDInterface>(3)
 
   useEffect(() => {
     handleResize()
@@ -133,6 +134,11 @@ const Footer = () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
+
+  useEffect(() => {
+    const cntSM = Math.max(3, Math.round(12 / thisPage.footerLinks.length)) as GridMDInterface
+    setColSM(cntSM)
+  }, [thisPage])
 
   const handleResize = () => {
     if (getWidth() < 960) {
@@ -194,7 +200,7 @@ const Footer = () => {
             <Grid container className={classes.footerlinks}>
               {thisPage.footerLinks.map((item: any, index: number) => {
                 return (
-                  <Grid item xs={12} sm={3} key={index}>
+                  <Grid item xs={12} sm={colSM} key={index}>
                     <ul>
                       <li className={classes.footerLocName}>{t(item.name)}</li>
                       {item.lists.map((it: any, idx: number) => (
@@ -208,12 +214,12 @@ const Footer = () => {
               })}
             </Grid>
             <Grid container>
-              <Grid item xs={12} xl={4}>
+              <Grid item xs={12} lg={4}>
                 <p className="device-list-grid copyright" style={{ color: "grey" }}>
                   {t(thisPage.copyRight)}
                 </p>
               </Grid>
-              <Grid item xs={12} xl={8}>
+              <Grid item xs={12} lg={8}>
                 <div className={classes.footerImages}>
                   <div>
                     <img
@@ -227,7 +233,7 @@ const Footer = () => {
                       />
                     )}
                   </div>
-                  <div>
+                  <div style={{ flexWrap: "wrap", marginLeft: "10px" }}>
                     <img src={commonData.footerImageData.buyNow} className="footer-buynow" />
                     {commonData.footerImageData.others.map((item: any, index: number) => {
                       return (
@@ -236,13 +242,15 @@ const Footer = () => {
                         </div>
                       )
                     })}
-                    <img
-                      src={commonData.footerImageData.deviceList}
-                      className="footer-device-list"
-                    />
-                    {commonData.footerImageData.bell && (
-                      <img src={commonData.footerImageData.bell} className="footer-device-list" />
-                    )}
+                    <div style={{ marginTop: "10px" }}>
+                      <img
+                        src={commonData.footerImageData.deviceList}
+                        className="footer-device-list"
+                      />
+                      {commonData.footerImageData.bell && (
+                        <img src={commonData.footerImageData.bell} className="footer-device-list" />
+                      )}
+                    </div>
                   </div>
                 </div>
               </Grid>
