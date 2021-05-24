@@ -152,7 +152,11 @@ const App = ({
         })}
 
         {scriptList.map((item: ScriptParams, index: number) => {
-          return <script key={index}>{item.content}</script>
+          return (
+            <script async={true} key={index}>
+              {item.content}
+            </script>
+          )
         })}
       </Helmet>
 
