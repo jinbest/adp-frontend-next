@@ -1,28 +1,31 @@
-import { action, autorun, configure, observable, makeAutoObservable } from 'mobx'
+import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 
-configure({ enforceActions: 'always' })
+configure({ enforceActions: "always" })
 
 export class RepairWidData {
-
-  @observable repairDeviceBrands: any = {};
-  @observable repairBrandProducts: any = {};
-  @observable repairWidgetLookup: any = {};
-  @observable repairDeliveryMethod: any[] = [];
-  @observable repairsOfferedDevices: any = {};
-  @observable apiDropOffDevices: any = {};
-  @observable receiveQuote: any = {};
-  @observable cntBrandID = 0;
-  @observable cntProductID = 0;
-  @observable contactMethod: any[] = [];
+  @observable repairDeviceBrands: any = {}
+  @observable repairBrandProducts: any = {}
+  @observable repairWidgetLookup: any = {}
+  @observable repairDeliveryMethod: any[] = []
+  @observable repairsOfferedDevices: any = {}
+  @observable apiDropOffDevices: any = {}
+  @observable receiveQuote: any = {}
+  @observable cntBrandID = 0
+  @observable cntProductID = 0
+  @observable contactMethod: any[] = []
 
   constructor() {
-    this.load();
-    autorun(this.save);
-    makeAutoObservable(this);
+    this.load()
+    autorun(this.save)
+    makeAutoObservable(this)
   }
 
   private save = () => {
-    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
+    if (
+      typeof window !== "undefined" &&
+      window.localStorage !== null &&
+      typeof window.localStorage !== "undefined"
+    ) {
       window.localStorage.setItem(
         RepairWidData.name,
         JSON.stringify({
@@ -35,22 +38,24 @@ export class RepairWidData {
           receiveQuote: this.receiveQuote,
           cntBrandID: this.cntBrandID,
           cntProductID: this.cntProductID,
-          contactMethod: this.contactMethod
+          contactMethod: this.contactMethod,
         })
       )
-    }    
+    }
   }
-    
 
   @action
   private load = () => {
-    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
-      Object.assign(this, JSON.parse(window.localStorage.getItem(RepairWidData.name) || '{}'))
+    if (
+      typeof window !== "undefined" &&
+      window.localStorage !== null &&
+      typeof window.localStorage !== "undefined"
+    ) {
+      Object.assign(this, JSON.parse(window.localStorage.getItem(RepairWidData.name) || "{}"))
     } else {
       Object.assign(this, {})
     }
   }
-    
 
   @action
   changeRepairDeviceBrands = (repairDeviceBrands: any) => {
@@ -111,7 +116,6 @@ export class RepairWidData {
     this.contactMethod = contactMethod
     this.save()
   }
-
 }
 
-export default new RepairWidData();
+export default new RepairWidData()

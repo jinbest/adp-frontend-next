@@ -26,7 +26,11 @@ export class StoresDetails {
   }
 
   private save = () => {
-    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
+    if (
+      typeof window !== "undefined" &&
+      window.localStorage !== null &&
+      typeof window.localStorage !== "undefined"
+    ) {
       window.localStorage.setItem(
         StoresDetails.name,
         JSON.stringify({
@@ -42,18 +46,22 @@ export class StoresDetails {
           allLocations: this.allLocations,
           storeCnts: this.storeCnts,
           commonCnts: this.commonCnts,
-          privacyTemplate: this.privacyTemplate
+          privacyTemplate: this.privacyTemplate,
         })
       )
     }
-  }    
+  }
 
   @action
   private load = () => {
-    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
+    if (
+      typeof window !== "undefined" &&
+      window.localStorage !== null &&
+      typeof window.localStorage !== "undefined"
+    ) {
       Object.assign(this, JSON.parse(window.localStorage.getItem(StoresDetails.name) || "{}"))
     }
-  }    
+  }
 
   @action
   changestoresDetails = (storesDetails: any) => {
@@ -81,7 +89,7 @@ export class StoresDetails {
 
   @action
   changeAddLocations = (allLocations: any[]) => {
-    const data = [];
+    const data = []
     for (let i = 0; i < allLocations.length; i++) {
       if (allLocations[i].is_main) {
         data.push(allLocations[i])
@@ -98,15 +106,17 @@ export class StoresDetails {
 
   @action
   sortDataByDistance = (data: any[]) => {
-    let temp:any = {};
-    for (let i = 0; i < data.length-1; i++) {
-      for (let j = i+1; j < data.length; j++) {
+    let temp: any = {}
+    for (let i = 0; i < data.length - 1; i++) {
+      for (let j = i + 1; j < data.length; j++) {
         if (data[i].distance > data[j].distance) {
-          temp = data[i]; data[i] = data[j]; data[j] = temp;
+          temp = data[i]
+          data[i] = data[j]
+          data[j] = temp
         }
       }
     }
-    return data;
+    return data
   }
 
   @action
