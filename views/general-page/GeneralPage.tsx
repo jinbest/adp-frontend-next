@@ -7,6 +7,8 @@ import { findIndex, isEmpty } from "lodash"
 import ReactPageEditor from "./react-page-editor"
 import { Value } from "@react-page/editor"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
+// import ReactToPrint from "react-to-print"
+// import { useTranslation } from "react-i18next"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -16,8 +18,9 @@ type Props = {
 
 const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
   const classes = useStyles()
-
-  const mainData = storesDetails.storeCnts.pages
+  // const [t] = useTranslation()
+  const data = storesDetails.storeCnts
+  const mainData = data.pages
 
   const [pageTitle, setPageTitle] = useState("General")
   const [meta, setMeta] = useState<MetaParams>({} as MetaParams)
@@ -56,6 +59,14 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
       <div className={classes.root} id="react-page-editor-container">
         {editorVisible && <ReactPageEditor value={pageData} />}
       </div>
+      {/* <div className={classes.download}>
+        <ReactToPrint
+          trigger={() => (
+            <p style={{ color: data.general.colorPalle.textThemeCol }}>{t("Print")}</p>
+          )}
+          content={() => document.getElementById("react-page-editor-container") as HTMLDivElement}
+        />
+      </div> */}
     </div>
   )
 }
@@ -71,6 +82,26 @@ const useStyles = makeStyles(() =>
     },
     withoutHeader: {
       padding: "50px 30px !important",
+    },
+    download: {
+      textAlign: "right",
+      padding: "0 50px",
+      "& p": {
+        cursor: "pointer",
+        fontWeight: "bold",
+        fontSize: "16px",
+        width: "fit-content",
+        marginLeft: "auto",
+        "&:hover": {
+          opacity: 0.7,
+        },
+      },
+      ["@media (max-width:500px)"]: {
+        padding: "0 30px",
+      },
+      ["@media (max-width:425px)"]: {
+        padding: "0 20px",
+      },
     },
   })
 )

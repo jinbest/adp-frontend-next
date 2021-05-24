@@ -6,7 +6,7 @@ import { getAddress, phoneFormatString, getWidth } from "../services/helper"
 import { observer } from "mobx-react"
 import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import { GridMDInterface } from "../model/grid-params"
 
 type FooterLinksComponentProps = {
@@ -256,18 +256,6 @@ const Footer = () => {
               </Grid>
             </Grid>
 
-            <div className={classes.bottomLink}>
-              {thisPage.bottomLinks.privacyPolicy.externalLink && (
-                <Link to={thisPage.bottomLinks.privacyPolicy.href}>
-                  {t(thisPage.bottomLinks.privacyPolicy.text)}
-                </Link>
-              )}
-              {thisPage.bottomLinks.covidPage.visible && (
-                <Link to={thisPage.bottomLinks.covidPage.link} style={{ marginLeft: "15px" }}>
-                  {t(thisPage.bottomLinks.covidPage.text)}
-                </Link>
-              )}
-            </div>
             <div style={{ textAlign: "center" }}>
               {data.socials && data.socials.length ? (
                 data.socials.map(

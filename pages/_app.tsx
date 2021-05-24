@@ -28,7 +28,6 @@ interface DataProps extends AppProps {
   locations: any
   storeCnts: any
   commonCnts: any
-  privacyTemplate: string
 }
 
 const App = ({
@@ -39,7 +38,6 @@ const App = ({
   locations,
   storeCnts,
   commonCnts,
-  privacyTemplate,
 }: DataProps) => {
   const [theme, setTheme] = useState("")
   const [favIcon, setFavIcon] = useState("")
@@ -132,7 +130,6 @@ const App = ({
       setFeatures([...cntFeats])
       setLoadStatus(true)
     }
-    storesDetails.changePrivacyPolicy(privacyTemplate)
   }, [])
 
   return (
@@ -231,20 +228,12 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
     }
   }
 
-  let privacyTemplate = ""
-
-  if (!isEmpty(storeConfig) && storeConfig.homepage.footer.bottomLinks.privacyPolicy.externalLink) {
-    const htmlLink = storeConfig.homepage.footer.bottomLinks.privacyPolicy.externalLink
-    privacyTemplate = await apiClient.get<string>(htmlLink)
-  }
-
   return {
     storeData: storeDetails,
     feats: features,
     locations: locations,
     storeCnts: storeConfig,
     commonCnts: commonConfig,
-    privacyTemplate: privacyTemplate,
   }
 }
 

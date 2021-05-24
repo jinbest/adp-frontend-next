@@ -5,7 +5,6 @@ import Contact from "../views/contact/Contact"
 import Covid from "../views/covid/Covid"
 import Repair from "../views/repair/Repair"
 import RepairWidget from "../views/repair/RepairWidget"
-import PrivacyPolicy from "../views/privacy-policy/PrivacyPolicy"
 import GeneralPage from "../views/general-page/GeneralPage"
 import SpecificLocation from "../views/specific-location/SpecificLocation"
 
@@ -21,14 +20,6 @@ const pageRoutes = (data, specLoc) => {
     { path: routes.businessPage, component: Business, special: {} },
     { path: routes.covidPage, component: Covid, special: {} },
   ]
-
-  if (data.homepage.footer.bottomLinks.privacyPolicy.externalLink) {
-    availableRoutes.push({
-      path: routes.privacyPolicy,
-      component: PrivacyPolicy,
-      special: {},
-    })
-  }
 
   if (data.hasOwnProperty("pages") && data.pages.length) {
     data.pages.forEach((item) => {
