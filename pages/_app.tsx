@@ -188,15 +188,15 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
 
   /* Local Dev Mode */
   const siteNum = -1,
-    subDomainID = -1
+    subDomainID = -2
 
   /* Local Prod Mode */
-  /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), prado(6), repar(7), wireless(8)] */
-  // const siteNum = 8,
+  /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), prado(6), repar(7), wireless(8), device(11)] */
+  // const siteNum = 11,
   //   subDomainID = SubDomains.DEVICE_ADP_LISTS[siteNum].storeID
 
   let apexDomain = ""
-  if (subDomainID > 0) {
+  if (subDomainID > -1) {
     apexDomain = SubDomains.DEVICE_ADP_LISTS[siteNum].domain
   } else {
     apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"

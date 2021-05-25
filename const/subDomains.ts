@@ -121,5 +121,11 @@ export default class SubDomains {
       storeID: 2,
       locations: [],
     },
+    {
+      name: "devicelist",
+      domain: "mtlcmtx.com",
+      storeID: 0,
+      locations: [],
+    },
   ]
 }

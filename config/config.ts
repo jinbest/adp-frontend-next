@@ -1,4 +1,3 @@
-
 export default class Config {
   /* Local Dev Mode */
   static STORE_SERVICE_API_URL = "https://dev.dccmtx.com/api/store-service/"
@@ -14,5 +13,5 @@ export default class Config {
   // static PRODUCT_SERVICE_API_URL = "https://prod.pcmtx.com/api/product-service/"
   // static REPAIR_SERVICE_API_URL = "https://prod.pcmtx.com/api/repair-service/"
   // static ENVIRONMENT = "production"
-  // static TRANSLATION_SERVICE_API_URL = "https://prod.pcmtx.com/api/translation-service/"  
+  // static TRANSLATION_SERVICE_API_URL = "https://prod.pcmtx.com/api/translation-service/"
 }
