@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import Search from "./Search"
 import CustomizedMenus from "./CustomizedMenus"
 import Logo from "./Logo"
-import MegamenuShop from "./MegamenuShop"
+// import MegamenuShop from "./MegamenuShop"
 import HeaderDrawer from "./HeaderDrawer"
 import LangDropdown from "./LangDropdown"
 import { Link } from "react-router-dom"
@@ -10,7 +10,13 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails, repairWidgetStore } from "../store"
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
-import { phoneFormatString, isExternal, getBusinessLink, getWidth } from "../services/helper"
+import {
+  phoneFormatString,
+  isExternal,
+  getBusinessLink,
+  getWidth,
+  isOriginSameAsLocation,
+} from "../services/helper"
 import _ from "lodash"
 
 type PropsNavItemLink = {
@@ -19,7 +25,7 @@ type PropsNavItemLink = {
   feats: any[]
 }
 
-const NavItemLink = ({ item: { href, text }, handleStatus, feats }: PropsNavItemLink) => {
+const NavItemLink = ({ item: { href, text }, handleStatus }: PropsNavItemLink) => {
   const [t] = useTranslation()
   const data = storesDetails.storeCnts
 
@@ -35,20 +41,20 @@ const NavItemLink = ({ item: { href, text }, handleStatus, feats }: PropsNavItem
   return (
     <li className="nav-item" style={{ whiteSpace: "nowrap" }}>
       {isExternal(href) ? (
-        <a className="nav-link" href={href} target="_blank" rel="noreferrer">
-          {text === "SHOP" ? (
-            <MegamenuShop text={text} disableMenu={feats.includes("FRONTEND_MEGA_MENU")} />
+        <>
+          {isOriginSameAsLocation(href) ? (
+            <a className="nav-link" href={href}>
+              {t(text)}
+            </a>
           ) : (
-            t(text)
+            <a className="nav-link" href={href} target="_blank" rel="noreferrer">
+              {t(text)}
+            </a>
           )}
-        </a>
+        </>
       ) : (
         <Link to={href} className="nav-link" onClick={handle}>
-          {text === "SHOP" ? (
-            <MegamenuShop text={text} disableMenu={feats.includes("FRONTEND_MEGA_MENU")} />
-          ) : (
-            t(text)
-          )}
+          {t(text)}
         </Link>
       )}
     </li>
@@ -69,28 +75,52 @@ const BrandItemLink = ({ item, color, phoneNumber, href }: PropsBrand) => {
         <a
           style={{
             color: color,
-            padding: "0 5px",
-            fontWeight: 100,
-            fontSize: "15px",
-            textDecoration: "none",
           }}
+          className="brand-nav-item"
           href={`tel:${item}`}
         >
           {phoneFormatString(item).toLocaleUpperCase()}
         </a>
       ) : (
-        <Link
-          to={href}
-          style={{
-            color: color,
-            padding: "0 5px",
-            fontWeight: 100,
-            fontSize: "15px",
-            textDecoration: "none",
-          }}
-        >
-          {item.toLocaleUpperCase()}
-        </Link>
+        <>
+          {isExternal(href) ? (
+            <>
+              {isOriginSameAsLocation(href) ? (
+                <a
+                  style={{
+                    color: color,
+                  }}
+                  className="brand-nav-item"
+                  href={href}
+                >
+                  {item.toLocaleUpperCase()}
+                </a>
+              ) : (
+                <a
+                  style={{
+                    color: color,
+                  }}
+                  className="brand-nav-item"
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {item.toLocaleUpperCase()}
+                </a>
+              )}
+            </>
+          ) : (
+            <Link
+              to={href}
+              style={{
+                color: color,
+              }}
+              className="brand-nav-item"
+            >
+              {item.toLocaleUpperCase()}
+            </Link>
+          )}
+        </>
       )}
     </li>
   )

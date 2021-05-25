@@ -205,7 +205,9 @@ const Footer = () => {
                       <li className={classes.footerLocName}>{t(item.name)}</li>
                       {item.lists.map((it: any, idx: number) => (
                         <li key={idx} className={classes.footerLocAddress}>
-                          <a href={it.href}>{t(it.text)}</a>
+                          <a href={it.href} target="_blank" rel="noreferrer">
+                            {t(it.text)}
+                          </a>
                         </li>
                       ))}
                     </ul>

@@ -38,8 +38,8 @@ export function getRegularHours(hours: any[]) {
 //   const tz = ConvertTZToNum(timezone),
 //     cntTzOfset = -(new Date().getTimezoneOffset() / 60)
 //   const stamp = (
-//       Number(time.split(":")[0]) + (tz - cntTzOfset) > 0 ? 
-//         Number(time.split(":")[0]) + (tz - cntTzOfset) : 
+//       Number(time.split(":")[0]) + (tz - cntTzOfset) > 0 ?
+//         Number(time.split(":")[0]) + (tz - cntTzOfset) :
 //         Number(time.split(":")[0]) + (tz - cntTzOfset + 24)
 //     ) * 60 + Number(time.split(":")[1])
 //   const hour = Math.floor(stamp/60), min = stamp % 60 > 9 ? (stamp % 60).toString() : "0" + stamp % 60
@@ -71,7 +71,9 @@ export function getRegularHours(hours: any[]) {
 export function getHourType(hourStr: string) {
   if (!hourStr) return "12:00 a.m"
   const ptr = hourStr.split(":")
-  let hour = 12, minute = "00", AP = "a.m."
+  let hour = 12,
+    minute = "00",
+    AP = "a.m."
   if (ptr.length > 0) {
     hour = parseInt(ptr[0])
     if (hour >= 12) {
@@ -119,7 +121,7 @@ export function makeLocations(data: any[]) {
     const hours: any[] = [],
       weekDays: any[] = [],
       storeGroup: any[] = []
-    const cntLocationHours = _.sortBy(data[i].location_hours, o => o.day)
+    const cntLocationHours = _.sortBy(data[i].location_hours, (o) => o.day)
     for (let j = 0; j < cntLocationHours.length; j++) {
       if (cntLocationHours[j].type === "REGULAR") {
         const cntStoreID = cntLocationHours[j].store_id
@@ -132,7 +134,7 @@ export function makeLocations(data: any[]) {
         if (!cntLocationHours[j].open || !cntLocationHours[j].close) {
           hour = "Closed"
         } else {
-          const open = getHourType(cntLocationHours[j].open), 
+          const open = getHourType(cntLocationHours[j].open),
             close = getHourType(cntLocationHours[j].close)
           hour = open + " - " + close
         }
@@ -157,7 +159,7 @@ export function makeLocations(data: any[]) {
       latitude: data[i].latitude,
       longitude: data[i].longitude,
       business_page_link: data[i].business_page_link,
-      timezone: data[i].timezone
+      timezone: data[i].timezone,
     }
     locations.push(cntItem)
   }
@@ -182,12 +184,12 @@ export function isWeek(selyear: number, selmonth: number, selday: number) {
   return new Date(selyear, selmonth, selday).getDay()
 }
 
-export function RevertDateTime(date:string, time: string | null, timezone: string | undefined) {
+export function RevertDateTime(date: string, time: string | null, timezone: string | undefined) {
   if (timezone && date && time) {
     const moment = require("moment-timezone")
 
-    const year = Number(date.split("-")[0]), 
-      month = Number(date.split("-")[1]) - 1, 
+    const year = Number(date.split("-")[0]),
+      month = Number(date.split("-")[1]) - 1,
       day = Number(date.split("-")[2]),
       hr = Number(time.split(":")[0]),
       min = Number(time.split(":")[1])
@@ -195,15 +197,15 @@ export function RevertDateTime(date:string, time: string | null, timezone: strin
     const cntTimeStamp = new Date(year, month, day, hr, min).getTime()
     const revertDate = moment.tz(cntTimeStamp, timezone).format("YYYY-MM-DD"),
       revertTime = moment.tz(cntTimeStamp, timezone).format("HH:mm")
-      
+
     return {
       date: revertDate,
-      time: revertTime
+      time: revertTime,
     }
   }
   return {
     date: date,
-    time: time
+    time: time,
   }
 }
 
@@ -334,6 +336,33 @@ export function isExternal(url: string) {
   )
 }
 
+export function isOriginSameAsLocation(url: string) {
+  const pageLocation = window.location
+  const URL_HOST_PATTERN = /(\w+:)?(?:\/\/)([\w.-]+)?(?::(\d+))?\/?/
+  const urlMatch = URL_HOST_PATTERN.exec(url) || []
+  const urlparts = {
+    protocol: urlMatch[1] || "",
+    host: urlMatch[2] || "",
+    port: urlMatch[3] || "",
+  }
+
+  function defaultPort(protocol: string) {
+    return { "http:": 80, "https:": 443 }[protocol]
+  }
+
+  function portOf(location: any) {
+    return location.port || defaultPort(location.protocol || pageLocation.protocol)
+  }
+
+  return !!(
+    urlparts.protocol &&
+    urlparts.protocol == pageLocation.protocol &&
+    urlparts.host &&
+    urlparts.host == pageLocation.host &&
+    portOf(urlparts) == portOf(pageLocation)
+  )
+}
+
 export function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
@@ -344,8 +373,8 @@ export async function setQuotesStore(data: GetQuotesParams) {
     prodsID.push(data.repairs[i].product_id)
   }
   const uniqueProdsID = prodsID.filter((c, index) => {
-    return prodsID.indexOf(c) === index;
-  });
+    return prodsID.indexOf(c) === index
+  })
   await repairWidgetAPI
     .getBrandsProducts(data.store_id, uniqueProdsID)
     .then(async (res: any) => {
@@ -358,19 +387,21 @@ export async function setQuotesStore(data: GetQuotesParams) {
 
 function setRepairWidgetStore(res: any[], data: GetQuotesParams) {
   // console.log("Brands & Products\n", res, data)
-  const deviceBrand = [], deviceModel = [], chooseRepair = []
+  const deviceBrand = [],
+    deviceModel = [],
+    chooseRepair = []
   for (let i = 0; i < res.length; i++) {
     deviceBrand.push({
       alt: res[i].brand.img_alt,
       id: res[i].brand.id,
       img: res[i].brand.img_src,
-      name: res[i].brand.name
+      name: res[i].brand.name,
     })
     deviceModel.push({
       alt: res[i].img_alt,
       id: res[i].id,
       img: res[i].img_src,
-      name: res[i].name
+      name: res[i].name,
     })
     const chooseRepairItem = []
     for (let j = 0; j < data.repairs.length; j++) {
@@ -394,31 +425,34 @@ function setRepairWidgetStore(res: any[], data: GetQuotesParams) {
   for (let i = 0; i < repairWidData.repairWidgetLookup.repair_delivery_method.length; i++) {
     if (data.delivery_method === repairWidData.repairWidgetLookup.repair_delivery_method[i].code) {
       repairWidgetStore.changeDeliveryMethod({
-        method: repairWidData.repairWidgetLookup.repair_delivery_method[i].code_text, 
-        code: data.delivery_method
+        method: repairWidData.repairWidgetLookup.repair_delivery_method[i].code_text,
+        code: data.delivery_method,
       })
       break
     }
   }
   for (let i = 0; i < repairWidData.repairWidgetLookup.repair_contact_method.length; i++) {
-    if (data.customer_contact_method === repairWidData.repairWidgetLookup.repair_contact_method[i].code) {
+    if (
+      data.customer_contact_method ===
+      repairWidData.repairWidgetLookup.repair_contact_method[i].code
+    ) {
       repairWidgetStore.changeReceiveQuote({
-        method: repairWidData.repairWidgetLookup.repair_contact_method[i].code_text, 
-        code: data.customer_contact_method
+        method: repairWidData.repairWidgetLookup.repair_contact_method[i].code_text,
+        code: data.customer_contact_method,
       })
       break
     }
   }
   repairWidgetStore.changeContactDetails({
-    firstName: data.customer_first_name, 
-    lastName: data.customer_last_name, 
-    email: data.customer_email, 
+    firstName: data.customer_first_name,
+    lastName: data.customer_last_name,
+    email: data.customer_email,
     phone: data.customer_phone,
-    address1: { code: '', name: data.customer_address_1 },
-    address2: { code: '', name: data.customer_address_2 },
-    country: { code: '', name: data.customer_country },
+    address1: { code: "", name: data.customer_address_1 },
+    address2: { code: "", name: data.customer_address_2 },
+    country: { code: "", name: data.customer_country },
     city: data.customer_city,
-    postalCode: data.customer_postcode
+    postalCode: data.customer_postcode,
   })
   storesDetails.changeFindAddLocation(storesDetails.allLocations)
   for (let i = 0; i < storesDetails.allLocations.length; i++) {
@@ -427,7 +461,7 @@ function setRepairWidgetStore(res: any[], data: GetQuotesParams) {
       storesDetails.changeLocationID(data.location_id)
       storesDetails.changeCustomerID(data.customer_id)
       storesDetails.changeCntUserLocationSelected(true)
-      break;
+      break
     }
   }
 }
@@ -462,8 +496,8 @@ export function ValidatePhoneNumber(p: string) {
 
 export function AddressFormatViewer(address: GetAddressFormat) {
   return (
-    `${address.address_1 ? address.address_1 : ""} ` + 
-    `${address.address_2 ? address.address_2 : ""} ` + 
+    `${address.address_1 ? address.address_1 : ""} ` +
+    `${address.address_2 ? address.address_2 : ""} ` +
     `${address.city ? address.city + "," : ""} ${address.state ? address.state : ""} ${
       address.postcode ? address.postcode : ""
     }`
@@ -472,12 +506,12 @@ export function AddressFormatViewer(address: GetAddressFormat) {
 
 export function AddFormat12(address: GetCurrentLocParams) {
   return (
-    `${address.address_1 ? address.address_1 : ""}` + 
+    `${address.address_1 ? address.address_1 : ""}` +
     `${address.address_2 ? " " + address.address_2 : ""} `
   )
 }
 
-export function DuplicatedNavItem(navItems: any[], brandItem:any) {
+export function DuplicatedNavItem(navItems: any[], brandItem: any) {
   let ans = false
   for (let i = 0; i < navItems.length; i++) {
     if (navItems[i].text === brandItem.text) {
@@ -503,15 +537,15 @@ export function getWidth() {
   if (typeof window !== "undefined") {
     return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
   }
-  return 0  
+  return 0
 }
 
-export const currencyFormater = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
+export const currencyFormater = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+})
 
-export function groupLocations (data: any[]) {
-  const groupByData = _.groupBy(data, (o) => (o.state && o.city))
+export function groupLocations(data: any[]) {
+  const groupByData = _.groupBy(data, (o) => o.state && o.city)
   return groupByData
 }

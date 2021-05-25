@@ -17,7 +17,12 @@ import { storesDetails } from "../store"
 import { makeLocations } from "../services/helper"
 import { findLocationAPI } from "../services/"
 import { repairWidgetStore } from "../store/"
-import { getAddress, isExternal, DuplicatedNavItem } from "../services/helper"
+import {
+  getAddress,
+  isExternal,
+  DuplicatedNavItem,
+  isOriginSameAsLocation,
+} from "../services/helper"
 import _ from "lodash"
 
 type Anchor = "top" | "left" | "bottom" | "right"
@@ -274,14 +279,22 @@ const HeaderDrawer = (props: Props) => {
                         }}
                       >
                         {isExternal(item.href) ? (
-                          <a
-                            href={item.href}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{ display: "flex" }}
-                          >
-                            {t(item.text)}
-                          </a>
+                          <>
+                            {isOriginSameAsLocation(item.href) ? (
+                              <a href={item.href} style={{ display: "flex" }}>
+                                {t(item.text)}
+                              </a>
+                            ) : (
+                              <a
+                                href={item.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                style={{ display: "flex" }}
+                              >
+                                {t(item.text)}
+                              </a>
+                            )}
+                          </>
                         ) : (
                           <Link to={item.href} style={{ display: "flex" }}>
                             {t(item.text)}
@@ -311,14 +324,22 @@ const HeaderDrawer = (props: Props) => {
                         }}
                       >
                         {isExternal(item.href) ? (
-                          <a
-                            href={item.href}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{ display: "flex" }}
-                          >
-                            {t(item.text)}
-                          </a>
+                          <>
+                            {isOriginSameAsLocation(item.href) ? (
+                              <a href={item.href} style={{ display: "flex" }}>
+                                {t(item.text)}
+                              </a>
+                            ) : (
+                              <a
+                                href={item.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                style={{ display: "flex" }}
+                              >
+                                {t(item.text)}
+                              </a>
+                            )}
+                          </>
                         ) : (
                           <Link to={item.href} style={{ display: "flex" }}>
                             {t(item.text)}
