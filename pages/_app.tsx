@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { AppProps } from "next/app"
-import { Provider, observer } from "mobx-react"
+import { Provider } from "mobx-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Badge from "../components/Badge"
@@ -19,6 +19,9 @@ import ApiClient from "../services/api-client"
 import "../static/style/index.scss"
 import "../static/style/theme.css"
 import { GeneralData } from "../model/general-data"
+import { enableStaticRendering } from "mobx-react"
+
+enableStaticRendering(typeof window === "undefined")
 
 const apiClient = ApiClient.getInstance()
 
@@ -237,4 +240,4 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
   }
 }
 
-export default observer(App)
+export default App

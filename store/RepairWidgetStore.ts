@@ -1,52 +1,87 @@
-import { action, autorun, configure, observable, makeAutoObservable } from 'mobx'
+import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 
-configure({ enforceActions: 'always' })
+configure({ enforceActions: "always" })
 
 export class RepairWidgetStore {
-
   @observable deviceBrand: any[] = []
   @observable deviceModel: any[] = []
   @observable chooseRepair: any[] = []
   @observable deviceCounter = 0
-  @observable deliveryMethod: any = { method: '', code: '' }
-  @observable receiveQuote: any = { method: '', code: '' }
-  @observable contactDetails: any = { 
-    firstName: '', 
-    lastName: '', 
-    email: '', 
-    phone: '',
-    address1: { code: '', name: '' },
-    address2: { code: '', name: '' },
-    country: { code: '', name: '' },
-    city: '',
-    province: { code: '', name: '' },
-    postalCode: ''
+  @observable deliveryMethod: any = { method: "", code: "" }
+  @observable receiveQuote: any = { method: "", code: "" }
+  @observable contactDetails: any = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address1: { code: "", name: "" },
+    address2: { code: "", name: "" },
+    country: { code: "", name: "" },
+    city: "",
+    province: { code: "", name: "" },
+    postalCode: "",
   }
   @observable bookData: any = {
-    'MAIL_IN': { sendTo: '' },
-    'WALK_IN': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-    'PICK_UP': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-    'CURBSIDE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-    'ONSITE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
+    MAIL_IN: { sendTo: "" },
+    WALK_IN: {
+      address: { code: "", name: "" },
+      time: "",
+      day: "",
+      month: "",
+      year: "",
+      week: "",
+      timezone: "",
+    },
+    PICK_UP: {
+      address: { code: "", name: "" },
+      time: "",
+      day: "",
+      month: "",
+      year: "",
+      week: "",
+      timezone: "",
+    },
+    CURBSIDE: {
+      address: { code: "", name: "" },
+      time: "",
+      day: "",
+      month: "",
+      year: "",
+      week: "",
+      timezone: "",
+    },
+    ONSITE: {
+      address: { code: "", name: "" },
+      time: "",
+      day: "",
+      month: "",
+      year: "",
+      week: "",
+      timezone: "",
+    },
   }
-  @observable message = ''
+  @observable message = ""
   @observable cntStep = 0
   @observable repairWidgetInitialValue: any = {
     selectDate: null,
     selected_start_time: null,
-    selected_end_time: null
+    selected_end_time: null,
   }
   @observable appointResponse: any = {}
   @observable timezone: string | undefined = "America/Winnipeg"
 
   constructor() {
-    this.load();
-    autorun(this.save);
-    makeAutoObservable(this);
+    this.load()
+    autorun(this.save)
+    makeAutoObservable(this)
   }
 
   private save = () => {
-    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
+    if (
+      typeof window !== "undefined" &&
+      window.localStorage !== null &&
+      typeof window.localStorage !== "undefined"
+    ) {
       window.localStorage.setItem(
         RepairWidgetStore.name,
         JSON.stringify({
@@ -62,18 +97,22 @@ export class RepairWidgetStore {
           cntStep: this.cntStep,
           repairWidgetInitialValue: this.repairWidgetInitialValue,
           appointResponse: this.appointResponse,
-          timezone: this.timezone
+          timezone: this.timezone,
         })
       )
     }
-  }    
+  }
 
   @action
   private load = () => {
-    if (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") {
-      Object.assign(this, JSON.parse(window.localStorage.getItem(RepairWidgetStore.name) || '{}'))
+    if (
+      typeof window !== "undefined" &&
+      window.localStorage !== null &&
+      typeof window.localStorage !== "undefined"
+    ) {
+      Object.assign(this, JSON.parse(window.localStorage.getItem(RepairWidgetStore.name) || "{}"))
     }
-  }    
+  }
 
   @action
   changeDeviceBrand = (deviceBrand: any[]) => {
@@ -118,24 +157,25 @@ export class RepairWidgetStore {
   }
 
   @action initContactDetails = () => {
-    this.contactDetails = { 
-      firstName: '', 
-      lastName: '', 
-      email: '', 
-      phone: '',
-      address1: { code: '', name: '' },
-      address2: { code: '', name: '' },
-      country: { code: '', name: '' },
-      city: '',
-      province: { code: '', name: '' },
-      postalCode: ''
+    this.contactDetails = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address1: { code: "", name: "" },
+      address2: { code: "", name: "" },
+      country: { code: "", name: "" },
+      city: "",
+      province: { code: "", name: "" },
+      postalCode: "",
     }
     this.save()
   }
 
   @action
   changeBookData = (bookData: any) => {
-    const code = bookData.code, cntBookData = this.bookData
+    const code = bookData.code,
+      cntBookData = this.bookData
     cntBookData[code] = bookData.data
     this.bookData = cntBookData
     this.save()
@@ -144,11 +184,43 @@ export class RepairWidgetStore {
   @action
   initBookData = () => {
     this.bookData = {
-      'MAIL_IN': { sendTo: '' },
-      'WALK_IN': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-      'PICK_UP': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-      'CURBSIDE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-      'ONSITE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
+      MAIL_IN: { sendTo: "" },
+      WALK_IN: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
+      PICK_UP: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
+      CURBSIDE: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
+      ONSITE: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
     }
     this.save()
   }
@@ -185,48 +257,79 @@ export class RepairWidgetStore {
 
   @action
   init = () => {
-    this.deviceBrand = [];
-    this.deviceModel = [];
-    this.chooseRepair = [];
-    this.deviceCounter = 0;
-    this.deliveryMethod = { method: '', code: '' };
-    this.receiveQuote = { method: '', code: '' };
+    this.deviceBrand = []
+    this.deviceModel = []
+    this.chooseRepair = []
+    this.deviceCounter = 0
+    this.deliveryMethod = { method: "", code: "" }
+    this.receiveQuote = { method: "", code: "" }
     this.contactDetails = {
-      firstName: '', 
-      lastName: '', 
-      email: '', 
-      phone: '',
-      address1: { code: '', name: '' },
-      address2: { code: '', name: '' },
-      country: { code: '', name: '' },
-      city: '',
-      province: { code: '', name: '' },
-      postalCode: ''
-    };
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address1: { code: "", name: "" },
+      address2: { code: "", name: "" },
+      country: { code: "", name: "" },
+      city: "",
+      province: { code: "", name: "" },
+      postalCode: "",
+    }
     this.bookData = {
-      'MAIL_IN': { sendTo: '' },
-      'WALK_IN': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-      'PICK_UP': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-      'CURBSIDE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-      'ONSITE': { address: { code: '', name: '' }, time: '', day: '', month: '', year: '', week: '', timezone: '' },
-    };
-    this.message = '';
-    this.cntStep = 0;
+      MAIL_IN: { sendTo: "" },
+      WALK_IN: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
+      PICK_UP: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
+      CURBSIDE: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
+      ONSITE: {
+        address: { code: "", name: "" },
+        time: "",
+        day: "",
+        month: "",
+        year: "",
+        week: "",
+        timezone: "",
+      },
+    }
+    this.message = ""
+    this.cntStep = 0
     this.repairWidgetInitialValue = {
       selectDate: null,
       selected_start_time: null,
-      selected_end_time: null
+      selected_end_time: null,
     }
     this.appointResponse = {}
     this.timezone = "America/Winnipeg"
-    this.save();
+    this.save()
   }
 
   @action
   reset = () => {
-    this.init();
+    this.init()
   }
-
 }
 
-export default new RepairWidgetStore();
+export default new RepairWidgetStore()
