@@ -68,6 +68,18 @@ export function getRegularHours(hours: any[]) {
 //   return `${hour % 12 === 0 ? 12 : hour % 12}:${minute} ${AP}`
 // }
 
+export function getConvertHourType(
+  hour: string,
+  defaultTz: string | undefined,
+  convertTz: string | null
+) {
+  const moment = require("moment-timezone")
+  const defaultOffset = moment().tz(defaultTz).utcOffset() / 60
+  const convertOffset = moment().tz(convertTz).utcOffset() / 60
+  console.log("convertTimezone", hour, defaultOffset, convertOffset)
+  return getHourType(hour)
+}
+
 export function getHourType(hourStr: string) {
   if (!hourStr) return "12:00 a.m"
   const ptr = hourStr.split(":")
@@ -120,7 +132,8 @@ export function makeLocations(data: any[]) {
   for (let i = 0; i < data.length; i++) {
     const hours: any[] = [],
       weekDays: any[] = [],
-      storeGroup: any[] = []
+      storeGroup: any[] = [],
+      loc_hours: any[] = []
     const cntLocationHours = _.sortBy(data[i].location_hours, (o) => o.day)
     for (let j = 0; j < cntLocationHours.length; j++) {
       if (cntLocationHours[j].type === "REGULAR") {
@@ -145,6 +158,11 @@ export function makeLocations(data: any[]) {
             break
           }
         }
+        loc_hours.push({
+          day: days[cntLocationHours[j].day],
+          open: cntLocationHours[j].open,
+          close: cntLocationHours[j].close,
+        })
       }
     }
     const cntItem: GetCurrentLocParams = {
@@ -155,6 +173,7 @@ export function makeLocations(data: any[]) {
       distance: data[i].distance ? (data[i].distance / 1000).toFixed(1) + "km" : "",
       location_id: data[i].id,
       hours: hours,
+      loc_hours: loc_hours,
       days: weekDays,
       latitude: data[i].latitude,
       longitude: data[i].longitude,
@@ -184,7 +203,7 @@ export function isWeek(selyear: number, selmonth: number, selday: number) {
   return new Date(selyear, selmonth, selday).getDay()
 }
 
-export function RevertDateTime(date: string, time: string | null, timezone: string | undefined) {
+export function RevertDateTime(date: string, time: string | null, timezone: string | null) {
   if (timezone && date && time) {
     const moment = require("moment-timezone")
 
@@ -240,19 +259,12 @@ export function isPast(
   selyear: number,
   selmonth: number,
   selday: number,
-  // seloff: number,
+  seloff: number,
   hrs: number,
   mins: number
 ) {
   // const timeoffset = -new Date().getTimezoneOffset() / 60
-  const selectedTiemStamp = new Date(
-    selyear,
-    selmonth,
-    selday,
-    // hrs + (timeoffset - seloff),
-    hrs,
-    mins
-  ).getTime()
+  const selectedTiemStamp = new Date(selyear, selmonth, selday, hrs - seloff, hrs, mins).getTime()
   const standTimeStamp = new Date().getTime()
   return selectedTiemStamp < standTimeStamp
 }

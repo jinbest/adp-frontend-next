@@ -8,6 +8,12 @@ type hourProps = {
   hrs: string[]
 }
 
+type locHourProps = {
+  day: string
+  open: string | null
+  close: string | null
+}
+
 export interface GetCurrentLocParams {
   address_1?: string
   address_2?: string
@@ -15,6 +21,7 @@ export interface GetCurrentLocParams {
   days?: dayProps[]
   distance?: string
   hours?: hourProps[]
+  loc_hours?: locHourProps[]
   location_id: number
   location_name: string
   latitude?: number

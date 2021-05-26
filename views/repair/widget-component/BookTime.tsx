@@ -237,7 +237,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
       selected_end_time: null,
     }
     repairWidgetStore.changeRepairWidgetInitialValue(repairSelectedTime)
-    repairWidgetStore.changeTimezone(storesDetails.cntUserLocation[0].timezone)
+    // repairWidgetStore.changeTimezone(storesDetails.cntUserLocation[0].timezone)
   }
 
   const onKeyPress = useCallback(

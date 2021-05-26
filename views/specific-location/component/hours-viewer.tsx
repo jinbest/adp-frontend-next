@@ -2,8 +2,10 @@ import React from "react"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { Typography } from "@material-ui/core"
 import { useTranslation } from "react-i18next"
-import { getRegularHours, getHourType } from "../../../services/helper"
+import { getRegularHours, getHourType, getConvertHourType } from "../../../services/helper"
 import { StoreLocation } from "../../../model/store-location"
+import { observer } from "mobx-react"
+import { repairWidgetStore } from "../../../store"
 
 const DAYS_OF_THE_WEEK: string[] = [
   "Sunday",
@@ -39,7 +41,9 @@ const HoursViewer = ({ location }: Props) => {
                     ? it.by_appointment_only
                       ? t("Call to book appointment")
                       : t("Closed")
-                    : getHourType(it.open) + "-" + getHourType(it.close)}
+                    : getConvertHourType(it.open, location.timezone, repairWidgetStore.timezone) +
+                      "-" +
+                      getHourType(it.close)}
                 </Typography>
               </div>
             </div>
@@ -52,7 +56,7 @@ const HoursViewer = ({ location }: Props) => {
   )
 }
 
-export default HoursViewer
+export default observer(HoursViewer)
 
 const useStyles = makeStyles(() =>
   createStyles({

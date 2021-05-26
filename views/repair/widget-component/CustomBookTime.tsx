@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { availableTimeRange, isWeek, isPast, convertTimeRange } from "../../../services/helper"
 import moment from "moment-timezone"
 import { observer } from "mobx-react"
-import { storesDetails } from "../../../store"
+import { repairWidgetStore } from "../../../store"
 
 type Props = {
   themeCol?: string
@@ -39,9 +39,10 @@ const CustomBookTime = ({
 
   const [timezoneIDs, setTimezoneIDs] = useState<any[]>([])
   const [valTimezone, setValTimezone] = useState<any>({
-    value: storesDetails.cntUserLocation[0].timezone,
-    label: storesDetails.cntUserLocation[0].timezone,
+    value: repairWidgetStore.timezone,
+    label: repairWidgetStore.timezone,
   })
+  const [selOffset, setSelOffset] = useState(offset)
 
   useEffect(() => {
     setTimezoneIDs(
@@ -60,8 +61,9 @@ const CustomBookTime = ({
   }
 
   useEffect(() => {
-    console.log("valTimezone", valTimezone, storesDetails.cntUserLocation[0].timezone)
-  }, [storesDetails.cntUserLocation, valTimezone])
+    setSelOffset(moment().tz(valTimezone.value).utcOffset() / 60)
+    repairWidgetStore.changeTimezone(valTimezone.value)
+  }, [valTimezone])
 
   useEffect(() => {
     const timesRng = convertTimeRange(hoursRange)
@@ -73,7 +75,7 @@ const CustomBookTime = ({
 
     if (!availRange.includes("Closed")) {
       for (let i = 0; i < availRange.length - 1; i++) {
-        const cntbookStamp = cntTimeStamp + availRange[i] + (timeoffset - offset) * 3600 * 1000
+        const cntbookStamp = cntTimeStamp + availRange[i] + (timeoffset - selOffset) * 3600 * 1000
         const cntbook = new Date(cntbookStamp)
         const mark = cntbook.getHours() >= 12 ? "PM" : "AM",
           markMin = cntbook.getMinutes() === 0 ? "00" : cntbook.getMinutes(),
@@ -84,7 +86,7 @@ const CustomBookTime = ({
             selectYear,
             selectMonth,
             selectDay + 1,
-            // offset,
+            offset - selOffset,
             cntbook.getHours(),
             cntbook.getMinutes()
           )
@@ -93,7 +95,7 @@ const CustomBookTime = ({
             selectYear,
             selectMonth,
             selectDay,
-            // offset,
+            offset - selOffset,
             cntbook.getHours(),
             cntbook.getMinutes()
           )
@@ -116,7 +118,7 @@ const CustomBookTime = ({
       })
     }
     setBookArray([...booklist])
-  }, [selectYear, selectMonth, selectDay, hoursRange])
+  }, [selectYear, selectMonth, selectDay, hoursRange, selOffset])
 
   const handleBook = (n: number) => {
     const cntBookArray: any[] = bookArray

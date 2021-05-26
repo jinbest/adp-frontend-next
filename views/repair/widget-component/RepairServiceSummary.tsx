@@ -11,7 +11,7 @@ import { PostAppointParams } from "../../../model/post-appointment-params"
 import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
-import { RevertDateTime, Customer_timezone } from "../../../services/helper"
+import { RevertDateTime } from "../../../services/helper"
 
 type Props = {
   repairWidgetData: any
@@ -82,7 +82,7 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     params.customer_contact_method = repairWidgetStore.receiveQuote.code
     params.repairs = repairs
     params.booking_date = moment().format("YYYY-MM-DD")
-    params.customer_timezone = Customer_timezone()
+    params.customer_timezone = repairWidgetStore.timezone
 
     // params.selected_date = select_date
     // params.selected_start_time = selected_start_time
