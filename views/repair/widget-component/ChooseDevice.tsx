@@ -66,7 +66,9 @@ const ChooseDevice = ({
   const [openContactModal, setOpenContactModal] = useState(false)
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<SelectParams>({ name: "All", code: "0" } as SelectParams)
-  const [filterList, setFileterList] = useState<SelectParams[]>([] as SelectParams[])
+  const [filterList, setFileterList] = useState<SelectParams[]>([
+    { name: "All", code: "0" },
+  ] as SelectParams[])
 
   useEffect(() => {
     if (stepName === "deviceModel") {

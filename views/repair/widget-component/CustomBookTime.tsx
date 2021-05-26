@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { availableTimeRange, isWeek, isPast, convertTimeRange } from "../../../services/helper"
+import moment from "moment-timezone"
+import { observer } from "mobx-react"
+import { storesDetails } from "../../../store"
 
 type Props = {
   themeCol?: string
@@ -33,6 +36,32 @@ const CustomBookTime = ({
     multi = 60 * 1000
   const [bookArray, setBookArray] = useState<ArrayProps[]>([])
   const [t] = useTranslation()
+
+  const [timezoneIDs, setTimezoneIDs] = useState<any[]>([])
+  const [valTimezone, setValTimezone] = useState<any>({
+    value: storesDetails.cntUserLocation[0].timezone,
+    label: storesDetails.cntUserLocation[0].timezone,
+  })
+
+  useEffect(() => {
+    setTimezoneIDs(
+      moment.tz.names().map((val) => ({
+        value: val,
+        label: val,
+      }))
+    )
+  }, [])
+
+  const handleChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValTimezone({
+      value: e.target.value,
+      label: e.target.value,
+    })
+  }
+
+  useEffect(() => {
+    console.log("valTimezone", valTimezone, storesDetails.cntUserLocation[0].timezone)
+  }, [storesDetails.cntUserLocation, valTimezone])
 
   useEffect(() => {
     const timesRng = convertTimeRange(hoursRange)
@@ -130,8 +159,25 @@ const CustomBookTime = ({
           )
         })}
       </div>
+      {timezoneIDs.length && (
+        <div>
+          <select
+            className="booking-select-timezone"
+            value={valTimezone.value}
+            onChange={handleChangeOption}
+          >
+            {timezoneIDs.map((item: any, index: number) => {
+              return (
+                <option value={item.value} key={index}>
+                  {item.label}
+                </option>
+              )
+            })}
+          </select>
+        </div>
+      )}
     </div>
   )
 }
 
-export default CustomBookTime
+export default observer(CustomBookTime)
