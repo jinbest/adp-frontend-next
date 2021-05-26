@@ -8,6 +8,7 @@ import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 // import { Link } from "react-router-dom"
 import { GridMDInterface } from "../model/grid-params"
+import _ from "lodash"
 
 type FooterLinksComponentProps = {
   data: any[]
@@ -124,6 +125,8 @@ const Footer = () => {
   const commonData = storesDetails.commonCnts
   const [t] = useTranslation()
 
+  const footerCols = _.sortBy(thisPage.footerLinks, (o) => o.order)
+
   const [mobile, setMobile] = useState(false)
   const [colSM, setColSM] = useState<GridMDInterface>(3)
 
@@ -136,9 +139,17 @@ const Footer = () => {
   }, [])
 
   useEffect(() => {
-    const cntSM = Math.max(3, Math.round(12 / thisPage.footerLinks.length)) as GridMDInterface
-    setColSM(cntSM)
-  }, [thisPage])
+    let availCols = 0
+    for (let i = 0; i < footerCols.length; i++) {
+      if (footerCols[i].visible) {
+        availCols += 1
+      }
+    }
+    if (availCols) {
+      const cntSM = Math.max(3, Math.round(12 / availCols)) as GridMDInterface
+      setColSM(cntSM)
+    }
+  }, [footerCols])
 
   const handleResize = () => {
     if (getWidth() < 960) {
@@ -198,20 +209,32 @@ const Footer = () => {
               })}
             </Grid>
             <Grid container className={classes.footerlinks}>
-              {thisPage.footerLinks.map((item: any, index: number) => {
+              {footerCols.map((item: any, index: number) => {
                 return (
-                  <Grid item xs={12} sm={colSM} key={index}>
-                    <ul>
-                      <li className={classes.footerLocName}>{t(item.name)}</li>
-                      {item.lists.map((it: any, idx: number) => (
-                        <li key={idx} className={classes.footerLocAddress}>
-                          <a href={it.href} target="_blank" rel="noreferrer">
-                            {t(it.text)}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </Grid>
+                  <React.Fragment key={index}>
+                    {item.visible ? (
+                      <Grid item xs={12} sm={colSM}>
+                        <ul>
+                          <li className={classes.footerLocName}>{t(item.name)}</li>
+                          {_.sortBy(item.lists, (o) => o.order).map((it: any, idx: number) => (
+                            <React.Fragment key={idx}>
+                              {it.visible ? (
+                                <li className={classes.footerLocAddress}>
+                                  <a href={it.href} target="_blank" rel="noreferrer">
+                                    {t(it.text)}
+                                  </a>
+                                </li>
+                              ) : (
+                                <></>
+                              )}
+                            </React.Fragment>
+                          ))}
+                        </ul>
+                      </Grid>
+                    ) : (
+                      <></>
+                    )}
+                  </React.Fragment>
                 )
               })}
             </Grid>
