@@ -81,6 +81,8 @@ const ContactDetails = ({
             product_name:
               repairWidgetStore.deviceBrand[i].name + " " + repairWidgetStore.deviceModel[i].name,
             repair_name: repairWidgetStore.chooseRepair[i][j].name,
+            warranty: repairWidgetStore.chooseRepair[i][j].warranty,
+            warranty_unit: repairWidgetStore.chooseRepair[i][j].warranty_unit,
           })
         }
       }
