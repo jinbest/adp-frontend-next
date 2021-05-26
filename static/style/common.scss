@@ -128,7 +128,12 @@ footer {
   align-items: center;
   justify-content: center;
   img {
-    width: 1920px;
+    width: 100%;
+  }
+  @media (max-width: 1920px) {
+    img {
+      width: 1920px;
+    }
   }
 }
 
