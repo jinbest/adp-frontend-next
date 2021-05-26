@@ -146,7 +146,7 @@ const Footer = () => {
       }
     }
     if (availCols) {
-      const cntSM = Math.max(3, Math.round(12 / availCols)) as GridMDInterface
+      const cntSM = Math.min(Math.max(3, Math.round(12 / availCols)), 4) as GridMDInterface
       setColSM(cntSM)
     }
   }, [footerCols])
