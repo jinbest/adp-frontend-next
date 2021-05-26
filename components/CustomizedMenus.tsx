@@ -12,7 +12,7 @@ import { ToastMsgParams } from "./toast/toast-msg-params"
 import Toast from "./toast/toast"
 import Loading from "./Loading"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
-import { makeLocations, getAddress, AddFormat12 } from "../services/helper"
+import { makeLocations, getAddress, AddFormat12, getConvertHourType } from "../services/helper"
 
 const StyledMenu = withStyles({
   paper: {
@@ -445,7 +445,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                 })}
                               </div>
                               <div>
-                                {item.hours[index].hrs.map((itm: any, idx: number) => {
+                                {/* {item.hours[index].hrs.map((itm: any, idx: number) => {
                                   return (
                                     <p
                                       className="block-content"
@@ -458,6 +458,34 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                     >
                                       {itm === "Closed" ? t(itm) : itm}
                                     </p>
+                                  )
+                                })} */}
+                                {item.loc_hours.map((itm: any, idx: number) => {
+                                  return (
+                                    <React.Fragment key={idx}>
+                                      {!itm.open || !itm.close ? (
+                                        <>{t("Close")}</>
+                                      ) : (
+                                        <p
+                                          className="block-content"
+                                          style={{
+                                            textDecoration: "none",
+                                            opacity: 1,
+                                            cursor: "default",
+                                          }}
+                                        >
+                                          {`${getConvertHourType(
+                                            itm.open,
+                                            item.timezone,
+                                            repairWidgetStore.timezone
+                                          )} - ${getConvertHourType(
+                                            itm.close,
+                                            item.timezone,
+                                            repairWidgetStore.timezone
+                                          )}`}
+                                        </p>
+                                      )}
+                                    </React.Fragment>
                                   )
                                 })}
                               </div>

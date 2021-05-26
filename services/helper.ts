@@ -68,16 +68,33 @@ export function getRegularHours(hours: any[]) {
 //   return `${hour % 12 === 0 ? 12 : hour % 12}:${minute} ${AP}`
 // }
 
+const formatHHMM = (val: number) => {
+  if (val < 10) {
+    return `0${val}`
+  } else {
+    return val.toString()
+  }
+}
+
 export function getConvertHourType(
   hour: string,
   defaultTz: string | undefined,
   convertTz: string | null
 ) {
-  const moment = require("moment-timezone")
-  const defaultOffset = moment().tz(defaultTz).utcOffset() / 60
-  const convertOffset = moment().tz(convertTz).utcOffset() / 60
-  console.log("convertTimezone", hour, defaultOffset, convertOffset)
-  return getHourType(hour)
+  if (!defaultTz || !convertTz || !hour) {
+    return getHourType(hour)
+  }
+  const moment = require("moment-timezone"),
+    defaultOffset = moment().tz(defaultTz).utcOffset() / 60,
+    convertOffset = moment().tz(convertTz).utcOffset() / 60,
+    diff = convertOffset - defaultOffset,
+    ptr = hour.split(":"),
+    convertedMin = (diff + Number(ptr[0])) * 60 + Number(ptr[1])
+  if (convertedMin <= 0 || convertedMin >= 1440) {
+    return getHourType(hour)
+  }
+  const newHour = `${formatHHMM(Math.floor(convertedMin / 60))}:${formatHHMM(convertedMin % 60)}`
+  return getHourType(newHour)
 }
 
 export function getHourType(hourStr: string) {

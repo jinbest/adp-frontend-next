@@ -43,7 +43,7 @@ const HoursViewer = ({ location }: Props) => {
                       : t("Closed")
                     : getConvertHourType(it.open, location.timezone, repairWidgetStore.timezone) +
                       "-" +
-                      getHourType(it.close)}
+                      getConvertHourType(it.close, location.timezone, repairWidgetStore.timezone)}
                 </Typography>
               </div>
             </div>
