@@ -13,6 +13,9 @@ import { ToastMsgParams } from "../../components/toast/toast-msg-params"
 import Config from "../../config/config"
 import Toast from "../../components/toast/toast"
 import "leaflet/dist/leaflet.css"
+import L from "leaflet"
+
+const icon = L.icon({ iconUrl: "/img/marker-icon.png" })
 
 type Props = {
   selectedLocation: any
@@ -190,6 +193,7 @@ const WholeMap = ({
                   position={[element.latitude, element.longitude]}
                   key={index}
                   ref={openPopup}
+                  icon={icon}
                 >
                   <Popup>
                     <a

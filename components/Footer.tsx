@@ -405,12 +405,14 @@ const useStyles = makeStyles(() =>
     footerImages: {
       display: "flex",
       justifyContent: "space-between",
-      marginTop: "25px",
       paddingRight: "10px",
       overflow: "hidden !important",
       "& > div": {
         display: "flex",
         alignItems: "flex-end",
+      },
+      ["@media (max-width:1280px)"]: {
+        marginTop: "25px",
       },
       ["@media (max-width:600px)"]: {
         display: "block",

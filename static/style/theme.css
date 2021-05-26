@@ -1081,6 +1081,13 @@ p {
 
 .copyright {
   font-size: 13px;
+  margin-top: 45px;
+}
+
+@media (max-width: 1280px) {
+  .copyright {
+    margin-top: 25px;
+  }
 }
 
 .device-list-grid > div {
@@ -1599,4 +1606,9 @@ p {
   .custom-select {
     font-size: 3.5vw !important;
   }
+}
+
+.leaflet-marker-icon {
+  margin-left: -12px;
+  margin-top: -10px;
 }
