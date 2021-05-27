@@ -33,41 +33,6 @@ export function getRegularHours(hours: any[]) {
     .sort((d) => d.day)
 }
 
-// export function RevertTimeTZ(time: string, timezone: string | undefined) {
-//   if (!time) return null
-//   const tz = ConvertTZToNum(timezone),
-//     cntTzOfset = -(new Date().getTimezoneOffset() / 60)
-//   const stamp = (
-//       Number(time.split(":")[0]) + (tz - cntTzOfset) > 0 ?
-//         Number(time.split(":")[0]) + (tz - cntTzOfset) :
-//         Number(time.split(":")[0]) + (tz - cntTzOfset + 24)
-//     ) * 60 + Number(time.split(":")[1])
-//   const hour = Math.floor(stamp/60), min = stamp % 60 > 9 ? (stamp % 60).toString() : "0" + stamp % 60
-//   return hour + ":" + min
-// }
-
-// export function getHourType(hourStr: string, timezone: string) {
-//   if (!hourStr) return "12:00 a.m"
-//   const tz = ConvertTZToNum(timezone),
-//     cntTzOfset = -(new Date().getTimezoneOffset() / 60)
-//   const ptr = hourStr.split(":")
-//   let hour = 12, minute = "00", stamp = 0
-//   let AP = "a.m."
-//   stamp = (Number(ptr[0]) + (cntTzOfset-tz)) * 60 + Number(ptr[1])
-//   hour = Math.floor(stamp / 60)
-//   if (hour >= 36) {
-//     AP = "p.m."
-//   } else if (hour >= 24) {
-//     AP = "a.m."
-//   } else if (hour >= 12) {
-//     AP = "p.m."
-//   } else {
-//     AP = "a.m."
-//   }
-//   minute = stamp % 60 > 9 ? (stamp % 60).toString() : "0" + stamp % 60
-//   return `${hour % 12 === 0 ? 12 : hour % 12}:${minute} ${AP}`
-// }
-
 const formatHHMM = (val: number) => {
   if (val < 10) {
     return `0${val}`
@@ -130,19 +95,6 @@ export function getAddress(location: any) {
   }`
 }
 
-// export function ConvertTZToNum(val: string | undefined) {
-//   if (!val) return 0
-//   const prev = val[0],
-//     ptrs = val.substring(1).split(":")
-//   let result = 0
-//   if (prev === "-") {
-//     result = -(Number(ptrs[0]) + Number(ptrs[1]) / 60)
-//   } else {
-//     result = -(Number(ptrs[0]) + Number(ptrs[1]) / 60)
-//   }
-//   return result
-// }
-
 export function makeLocations(data: any[]) {
   const locations: GetCurrentLocParams[] = []
   const days: any[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -202,8 +154,22 @@ export function makeLocations(data: any[]) {
   return locations
 }
 
-export function availableTimeRange(min: number, max: number, intv: number, mut: number) {
-  if (min === max) return ["Closed"]
+const convertTimeStrStamp = (val: string) => {
+  const ptr = val.split(":")
+  return Number(ptr[0]) * 60 + Number(ptr[1])
+}
+
+export function availTimeRange(
+  open: string | null,
+  close: string | null,
+  intv: number,
+  mut: number
+) {
+  if (!open || !close) {
+    return ["Closed"]
+  }
+  const min = convertTimeStrStamp(open),
+    max = convertTimeStrStamp(close)
   const timeRange: any[] = []
   let cntMin = min
   while (1) {
@@ -249,27 +215,6 @@ export function Customer_timezone() {
   const moment = require("moment-timezone")
   const tzName = moment.tz.guess(moment())
   return tzName
-
-  /*
-  const timezoneOffset = new Date().getTimezoneOffset(),
-    offsetHr = Math.floor(Math.abs(timezoneOffset) / 60), 
-    offsetMin = Math.abs(timezoneOffset) % 60
-  let customer_timezone = ""
-  if (timezoneOffset > 0) {
-    customer_timezone += "-"
-  }
-  if (offsetHr < 10) {
-    customer_timezone += `0${offsetHr}:`
-  } else {
-    customer_timezone += `${offsetHr}:`
-  }
-  if (offsetMin < 10) {
-    customer_timezone += `0${offsetMin}`
-  } else {
-    customer_timezone += offsetMin
-  }
-  return customer_timezone
-  */
 }
 
 export function isPast(
@@ -280,8 +225,14 @@ export function isPast(
   hrs: number,
   mins: number
 ) {
-  // const timeoffset = -new Date().getTimezoneOffset() / 60
-  const selectedTiemStamp = new Date(selyear, selmonth, selday, hrs - seloff, hrs, mins).getTime()
+  const timeoffset = -new Date().getTimezoneOffset() / 60
+  const selectedTiemStamp = new Date(
+    selyear,
+    selmonth,
+    selday,
+    hrs + (timeoffset - seloff),
+    mins
+  ).getTime()
   const standTimeStamp = new Date().getTime()
   return selectedTiemStamp < standTimeStamp
 }
@@ -301,25 +252,6 @@ export function convertStrToStamp(val: string, open: boolean) {
     if (hr === 12) return hr * 60 + min
     return (hr + 12) * 60 + min
   }
-}
-
-export function convertTimeRange(hoursRange: any[]) {
-  const timesRange = []
-  for (let i = 0; i < hoursRange.length; i++) {
-    if (parseInt(hoursRange[i].split("-")[0])) {
-      const startTime = convertStrToStamp(hoursRange[i].split(" - ")[0], true)
-      let endTime = 0
-      if (hoursRange[i].split(" - ")[0].split(" ")[1] === "a.m.") {
-        endTime = convertStrToStamp(hoursRange[i].split(" - ")[1], true)
-      } else {
-        endTime = convertStrToStamp(hoursRange[i].split(" - ")[1], false)
-      }
-      timesRange.push([startTime, endTime])
-    } else {
-      timesRange.push([0, 0])
-    }
-  }
-  return timesRange
 }
 
 export function phoneFormatString(phnumber: string) {

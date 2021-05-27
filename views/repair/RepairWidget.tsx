@@ -17,7 +17,7 @@ import {
 } from "./RepairWidgetCallAPI"
 import { storesDetails, repairWidgetStore } from "../../store"
 import Head from "next/head"
-import { useQuery, Customer_timezone } from "../../services/helper"
+import { useQuery } from "../../services/helper"
 import _ from "lodash"
 
 const stepList: string[] = [
@@ -63,8 +63,6 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
       }
     }
     setFeats([...cntFeatures])
-
-    repairWidgetStore.changeTimezone(Customer_timezone())
 
     getRepairLookupAPI()
     getDeliveryMethodsAPI()

@@ -445,7 +445,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                 })}
                               </div>
                               <div>
-                                {/* {item.hours[index].hrs.map((itm: any, idx: number) => {
+                                {item.loc_hours.map((itm: any, idx: number) => {
                                   return (
                                     <p
                                       className="block-content"
@@ -456,25 +456,9 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                       }}
                                       key={idx}
                                     >
-                                      {itm === "Closed" ? t(itm) : itm}
-                                    </p>
-                                  )
-                                })} */}
-                                {item.loc_hours.map((itm: any, idx: number) => {
-                                  return (
-                                    <React.Fragment key={idx}>
-                                      {!itm.open || !itm.close ? (
-                                        <>{t("Close")}</>
-                                      ) : (
-                                        <p
-                                          className="block-content"
-                                          style={{
-                                            textDecoration: "none",
-                                            opacity: 1,
-                                            cursor: "default",
-                                          }}
-                                        >
-                                          {`${getConvertHourType(
+                                      {!itm.open || !itm.close
+                                        ? t("Closed")
+                                        : `${getConvertHourType(
                                             itm.open,
                                             item.timezone,
                                             repairWidgetStore.timezone
@@ -483,9 +467,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                             item.timezone,
                                             repairWidgetStore.timezone
                                           )}`}
-                                        </p>
-                                      )}
-                                    </React.Fragment>
+                                    </p>
                                   )
                                 })}
                               </div>

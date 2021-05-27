@@ -126,6 +126,7 @@ const Footer = () => {
   const [t] = useTranslation()
 
   const footerCols = _.sortBy(thisPage.footerLinks, (o) => o.order)
+  const imageVisible = thisPage.specImages && thisPage.specImages.length
 
   const [mobile, setMobile] = useState(false)
   const [colSM, setColSM] = useState<GridMDInterface>(3)
@@ -170,7 +171,7 @@ const Footer = () => {
       <div className="footer-box">
         <div className="footer-bgCol">
           <Box className={classes.footerContainer}>
-            {thisPage.specImages && thisPage.specImages.length ? (
+            {imageVisible ? (
               <div className={classes.imgContainer}>
                 <Logo
                   type="footer"
@@ -238,48 +239,61 @@ const Footer = () => {
                 )
               })}
             </Grid>
-            <Grid container>
-              <Grid item xs={12} lg={4}>
-                <p className="device-list-grid copyright" style={{ color: "grey" }}>
-                  {t(thisPage.copyRight)}
-                </p>
-              </Grid>
-              <Grid item xs={12} lg={8}>
-                <div className={classes.footerImages}>
-                  <div>
-                    <img
-                      src={commonData.footerImageData.deviceList}
-                      className="footer-device-response"
-                    />
-                    {commonData.footerImageData.bell && (
-                      <img
-                        src={commonData.footerImageData.bell}
-                        className="footer-device-response"
-                      />
-                    )}
-                  </div>
-                  <div style={{ flexWrap: "wrap", marginLeft: "10px" }}>
-                    <img src={commonData.footerImageData.buyNow} className="footer-buynow" />
-                    {commonData.footerImageData.others.map((item: any, index: number) => {
-                      return (
-                        <div className="footer-others" key={index}>
-                          <img src={item} key={index} />
-                        </div>
-                      )
-                    })}
-                    <div style={{ marginTop: "10px" }}>
+
+            {imageVisible ? (
+              <Grid container>
+                <Grid item xs={12} lg={4}>
+                  <p className="device-list-grid copyright" style={{ color: "grey" }}>
+                    {t(thisPage.copyRight)}
+                  </p>
+                </Grid>
+                <Grid item xs={12} lg={8}>
+                  <div className={classes.footerImages}>
+                    <div>
                       <img
                         src={commonData.footerImageData.deviceList}
-                        className="footer-device-list"
+                        className="footer-device-response"
                       />
                       {commonData.footerImageData.bell && (
-                        <img src={commonData.footerImageData.bell} className="footer-device-list" />
+                        <img
+                          src={commonData.footerImageData.bell}
+                          className="footer-device-response"
+                        />
                       )}
                     </div>
+                    <div style={{ flexWrap: "wrap", marginLeft: "10px" }}>
+                      <img src={commonData.footerImageData.buyNow} className="footer-buynow" />
+                      {commonData.footerImageData.others.map((item: any, index: number) => {
+                        return (
+                          <div className="footer-others" key={index}>
+                            <img src={item} key={index} />
+                          </div>
+                        )
+                      })}
+                      <div style={{ marginTop: "10px" }}>
+                        <img
+                          src={commonData.footerImageData.deviceList}
+                          className="footer-device-list"
+                        />
+                        {commonData.footerImageData.bell && (
+                          <img
+                            src={commonData.footerImageData.bell}
+                            className="footer-device-list"
+                          />
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Grid>
               </Grid>
-            </Grid>
+            ) : (
+              <p
+                className="device-list-grid copyright"
+                style={{ color: "grey", marginTop: "25px" }}
+              >
+                {t(thisPage.copyRight)}
+              </p>
+            )}
 
             <div style={{ textAlign: "center" }}>
               {data.socials && data.socials.length ? (

@@ -77,7 +77,6 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   const [sendToAddress, setSendToAddress] = useState<string | undefined>("")
   const [mailInChecked, setMailinChecked] = useState(0)
   const [disableStatus, setDisableStatus] = useState(true)
-  const [hoursRange, setHoursRange] = useState<any[]>([])
 
   const [t] = useTranslation()
 
@@ -287,11 +286,6 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
           const cntLoc: any[] = makeLocations([storesDetails.findAddLocation[i]])
           storesDetails.changeCntUserLocation(cntLoc)
           storesDetails.changeLocationID(storesDetails.findAddLocation[i].id)
-          setHoursRange(
-            cntLoc[0].hours[0] && cntLoc[0].hours[0].hrs
-              ? cntLoc[0].hours[0].hrs
-              : ["Closed", "Closed", "Closed", "Closed", "Closed", "Closed", "Closed"]
-          )
         }
       }
     }
@@ -390,22 +384,17 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                     <CustomCalendar handleParentDate={setDate} timezone={timezone} />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    {hoursRange.length ? (
-                      <CustomBookTime
-                        themeCol={themeCol}
-                        brandThemeCol={brandThemeCol}
-                        repairBooktimeCol={repairBooktimeCol}
-                        title={t(DAYS_OF_THE_WEEK[week]) + ", " + t(MONTHS[month]) + " " + day}
-                        changeBooktime={setTime}
-                        selectYear={year}
-                        selectMonth={month}
-                        selectDay={day}
-                        hoursRange={hoursRange}
-                        offset={offset}
-                      />
-                    ) : (
-                      <></>
-                    )}
+                    <CustomBookTime
+                      themeCol={themeCol}
+                      brandThemeCol={brandThemeCol}
+                      repairBooktimeCol={repairBooktimeCol}
+                      title={t(DAYS_OF_THE_WEEK[week]) + ", " + t(MONTHS[month]) + " " + day}
+                      changeBooktime={setTime}
+                      selectYear={year}
+                      selectMonth={month}
+                      selectDay={day}
+                      offset={offset}
+                    />
                   </Grid>
                   <Grid item xs={12}>
                     <div

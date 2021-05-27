@@ -1,4 +1,5 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
+import { Customer_timezone } from "../services/helper"
 
 configure({ enforceActions: "always" })
 
@@ -68,7 +69,7 @@ export class RepairWidgetStore {
     selected_end_time: null,
   }
   @observable appointResponse: any = {}
-  @observable timezone: string | null = "America/Winnipeg"
+  @observable timezone: string | null = Customer_timezone()
 
   constructor() {
     this.load()
@@ -322,7 +323,7 @@ export class RepairWidgetStore {
       selected_end_time: null,
     }
     this.appointResponse = {}
-    this.timezone = "America/Winnipeg"
+    this.timezone = Customer_timezone()
     this.save()
   }
 
