@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Grid, Box, Typography, Popover } from "@material-ui/core"
 import Logo from "./Logo"
 import { useTranslation } from "react-i18next"
-import { getAddress, phoneFormatString, getWidth } from "../services/helper"
+import { getAddress, phoneFormatString, getWidth, isOriginSameAsLocation } from "../services/helper"
 import { observer } from "mobx-react"
 import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
@@ -200,9 +200,13 @@ const Footer = () => {
                             <React.Fragment key={idx}>
                               {it.visible ? (
                                 <li className={classes.footerLocAddress}>
-                                  <a href={it.href} target="_blank" rel="noreferrer">
-                                    {t(it.text)}
-                                  </a>
+                                  {isOriginSameAsLocation(it.href) ? (
+                                    <a href={it.href}>{t(it.text)}</a>
+                                  ) : (
+                                    <a href={it.href} target="_blank" rel="noreferrer">
+                                      {t(it.text)}
+                                    </a>
+                                  )}
                                 </li>
                               ) : (
                                 <></>
@@ -237,7 +241,10 @@ const Footer = () => {
                           <React.Fragment key={index}>
                             {item.visible ? (
                               <div className="footer-other-images" key={index}>
-                                <a href={item.link}>
+                                <a
+                                  href={item.link}
+                                  style={{ cursor: item.link ? "pointer" : "inherit" }}
+                                >
                                   <img src={item.img_src} alt={`footer-logos-${index + 1}`} />
                                 </a>
                               </div>
