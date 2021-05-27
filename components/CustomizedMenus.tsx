@@ -6,7 +6,7 @@ import InputComponent from "./InputComponent"
 import { useTranslation } from "react-i18next"
 import { repairWidgetStore, storesDetails } from "../store/"
 import { findLocationAPI } from "../services/"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 import { observer } from "mobx-react"
 import { ToastMsgParams } from "./toast/toast-msg-params"
 import Toast from "./toast/toast"
@@ -229,6 +229,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
           storesDetails.changeFindAddLocation(res)
           setLocations(makeLocations([storesDetails.findAddLocation[0]]))
           storesDetails.changeLocationID(storesDetails.findAddLocation[0].id)
+          setRequireUserInfo(false)
         } else {
           setToastParams({
             msg: "Response is an empty data, please check your infos.",
@@ -391,7 +392,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                           text-decoration: none;
                         }
                       `}</style>
-                      <Link href={data.general.routes.repairWidgetPage}>
+                      <Link to={data.general.routes.repairWidgetPage}>
                         <div onClick={handleBookRepair}>
                           <Button
                             title={t("Book Appointment")}

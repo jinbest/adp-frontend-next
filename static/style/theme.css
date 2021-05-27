@@ -1377,6 +1377,10 @@ p {
   padding-right: 20px !important;
 }
 
+.footer-bgCol {
+  padding: 0 32px 30px !important;
+}
+
 .mobile-brand-button {
   color: white;
   height: 35px;
