@@ -6,7 +6,6 @@ import { getAddress, phoneFormatString, getWidth } from "../services/helper"
 import { observer } from "mobx-react"
 import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
-// import { Link } from "react-router-dom"
 import { GridMDInterface } from "../model/grid-params"
 import _ from "lodash"
 
@@ -122,11 +121,11 @@ const Footer = () => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.footer
-  const commonData = storesDetails.commonCnts
   const [t] = useTranslation()
 
   const footerCols = _.sortBy(thisPage.footerLinks, (o) => o.order)
-  const imageVisible = thisPage.specImages && thisPage.specImages.length
+  const footerImageData = thisPage.imageData
+  const imageVisible = footerImageData.visible
 
   const [mobile, setMobile] = useState(false)
   const [colSM, setColSM] = useState<GridMDInterface>(3)
@@ -171,32 +170,12 @@ const Footer = () => {
       <div className="footer-box">
         <div className="footer-bgCol">
           <Box className={classes.footerContainer}>
-            {imageVisible ? (
-              <div className={classes.imgContainer}>
-                <Logo
-                  type="footer"
-                  handleStatus={() => {
-                    // EMPTY
-                  }}
-                />
-                <div className={classes.specialImages}>
-                  {thisPage.specImages.map((item: any, index: number) => {
-                    return (
-                      <a href={item.link} target="_blank" rel="noreferrer" key={index}>
-                        <img src={item.img_src} alt={`${index}-spec-img`} />
-                      </a>
-                    )
-                  })}
-                </div>
-              </div>
-            ) : (
-              <Logo
-                type="footer"
-                handleStatus={() => {
-                  // EMPTY
-                }}
-              />
-            )}
+            <Logo
+              type="footer"
+              handleStatus={() => {
+                // EMPTY
+              }}
+            />
             <Grid container>
               {[true, false].map((item: any, index: number) => {
                 return (
@@ -243,46 +222,32 @@ const Footer = () => {
             {imageVisible ? (
               <Grid container>
                 <Grid item xs={12} lg={4}>
-                  <p className="device-list-grid copyright" style={{ color: "grey" }}>
+                  <p
+                    className="device-list-grid copyright"
+                    style={{ color: "grey", marginBottom: 0 }}
+                  >
                     {t(thisPage.copyRight)}
                   </p>
                 </Grid>
                 <Grid item xs={12} lg={8}>
                   <div className={classes.footerImages}>
-                    <div>
-                      <img
-                        src={commonData.footerImageData.deviceList}
-                        className="footer-device-response"
-                      />
-                      {commonData.footerImageData.bell && (
-                        <img
-                          src={commonData.footerImageData.bell}
-                          className="footer-device-response"
-                        />
-                      )}
-                    </div>
-                    <div style={{ flexWrap: "wrap", marginLeft: "10px" }}>
-                      <img src={commonData.footerImageData.buyNow} className="footer-buynow" />
-                      {commonData.footerImageData.others.map((item: any, index: number) => {
+                    {_.sortBy(footerImageData.others, (o) => o.order).map(
+                      (item: any, index: number) => {
                         return (
-                          <div className="footer-others" key={index}>
-                            <img src={item} key={index} />
-                          </div>
+                          <React.Fragment key={index}>
+                            {item.visible ? (
+                              <div className="footer-other-images" key={index}>
+                                <a href={item.link}>
+                                  <img src={item.img_src} alt={`footer-logos-${index + 1}`} />
+                                </a>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                          </React.Fragment>
                         )
-                      })}
-                      <div style={{ marginTop: "10px" }}>
-                        <img
-                          src={commonData.footerImageData.deviceList}
-                          className="footer-device-list"
-                        />
-                        {commonData.footerImageData.bell && (
-                          <img
-                            src={commonData.footerImageData.bell}
-                            className="footer-device-list"
-                          />
-                        )}
-                      </div>
-                    </div>
+                      }
+                    )}
                   </div>
                 </Grid>
               </Grid>
@@ -441,22 +406,23 @@ const useStyles = makeStyles(() =>
     },
     footerImages: {
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "flex-end",
+      marginTop: "25px",
+      marginBottom: "20px",
       paddingRight: "10px",
-      overflow: "hidden !important",
+      alignItems: "center",
+      flexWrap: "wrap",
       "& > div": {
         display: "flex",
         alignItems: "flex-end",
       },
       ["@media (max-width:1280px)"]: {
-        marginTop: "25px",
+        justifyContent: "center",
       },
       ["@media (max-width:600px)"]: {
-        display: "block",
         "& > div": {
           alignItems: "center",
           justifyContent: "center",
-          margin: "20px 0",
         },
       },
     },

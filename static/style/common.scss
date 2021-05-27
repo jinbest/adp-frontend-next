@@ -167,3 +167,21 @@ footer {
   font-size: 15px;
   text-decoration: none;
 }
+
+.footer-other-images {
+  text-align: center;
+  margin: 5px;
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+    height: fit-content;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  img {
+    width: auto;
+    height: 40px;
+  }
+}

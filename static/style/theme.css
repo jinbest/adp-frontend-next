@@ -1081,13 +1081,7 @@ p {
 
 .copyright {
   font-size: 13px;
-  margin-top: 45px;
-}
-
-@media (max-width: 1280px) {
-  .copyright {
-    margin-top: 25px;
-  }
+  margin-bottom: 20px;
 }
 
 .device-list-grid > div {
