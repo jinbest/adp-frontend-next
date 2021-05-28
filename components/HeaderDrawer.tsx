@@ -22,6 +22,7 @@ import {
   isExternal,
   DuplicatedNavItem,
   isOriginSameAsLocation,
+  isSlugLink,
 } from "../services/helper"
 import _ from "lodash"
 
@@ -296,9 +297,17 @@ const HeaderDrawer = (props: Props) => {
                             )}
                           </>
                         ) : (
-                          <Link to={item.href} style={{ display: "flex" }}>
-                            {t(item.text)}
-                          </Link>
+                          <>
+                            {isSlugLink(item.href) ? (
+                              <a href={item.href} style={{ display: "flex" }}>
+                                {t(item.text)}
+                              </a>
+                            ) : (
+                              <Link to={item.href} style={{ display: "flex" }}>
+                                {t(item.text)}
+                              </Link>
+                            )}
+                          </>
                         )}
                       </div>
                     )}
@@ -341,9 +350,17 @@ const HeaderDrawer = (props: Props) => {
                             )}
                           </>
                         ) : (
-                          <Link to={item.href} style={{ display: "flex" }}>
-                            {t(item.text)}
-                          </Link>
+                          <>
+                            {isSlugLink(item.href) ? (
+                              <a href={item.href} style={{ display: "flex" }}>
+                                {t(item.text)}
+                              </a>
+                            ) : (
+                              <Link to={item.href} style={{ display: "flex" }}>
+                                {t(item.text)}
+                              </Link>
+                            )}
+                          </>
                         )}
                       </div>
                     )}

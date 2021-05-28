@@ -16,6 +16,7 @@ import {
   getBusinessLink,
   getWidth,
   isOriginSameAsLocation,
+  isSlugLink,
 } from "../services/helper"
 import _ from "lodash"
 
@@ -53,9 +54,17 @@ const NavItemLink = ({ item: { href, text }, handleStatus }: PropsNavItemLink) =
           )}
         </>
       ) : (
-        <Link to={href} className="nav-link" onClick={handle}>
-          {t(text)}
-        </Link>
+        <>
+          {isSlugLink(href) ? (
+            <a href={href} className="nav-link" onClick={handle}>
+              {t(text)}
+            </a>
+          ) : (
+            <Link to={href} className="nav-link" onClick={handle}>
+              {t(text)}
+            </Link>
+          )}
+        </>
       )}
     </li>
   )

@@ -158,7 +158,6 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
 
   useEffect(() => {
     setToday(changeTimezone(new Date(), timezone))
-    setDate(changeTimezone(new Date(), timezone))
   }, [timezone])
 
   useEffect(() => {

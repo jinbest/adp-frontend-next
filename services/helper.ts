@@ -280,6 +280,13 @@ export function phoneFormatString(phnumber: string) {
   return formatPhnumber
 }
 
+export function isSlugLink(url: string) {
+  if (url.includes("/page/") || url.includes("/blog/") || url.includes("/service/")) {
+    return true
+  }
+  return false
+}
+
 export function checkDomain(url: string) {
   if (url.indexOf("//") === 0) {
     url = location.protocol + url
