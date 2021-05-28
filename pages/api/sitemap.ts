@@ -4,13 +4,13 @@ import ApiClient from "../../services/api-client"
 import Config from "../../config/config"
 import { Store } from "../../model/store"
 import { isEmpty } from "lodash"
+import { GetDomain } from "../../services/helper"
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   res.setHeader("Content-Type", "text/xml")
 
   try {
-    const domainMatch = req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
-    const host = domainMatch ? domainMatch[0] : "dccmtx.com"
+    const host = GetDomain(req.headers.host)
     const domain = req.headers.host ? req.headers.host : ""
 
     const apiClient = ApiClient.getInstance()

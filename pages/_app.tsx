@@ -20,6 +20,7 @@ import "../static/style/index.scss"
 import "../static/style/theme.css"
 import { GeneralData } from "../model/general-data"
 import { enableStaticRendering } from "mobx-react"
+import { GetDomain } from "../services/helper"
 
 enableStaticRendering(typeof window === "undefined")
 
@@ -184,8 +185,6 @@ const App = ({
 }
 
 App.getInitialProps = async ({ ctx }: Record<string, any>) => {
-  const domainMatch = ctx.req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
-
   /* Local Dev Mode */
   const siteNum = -1,
     subDomainID = -2
@@ -199,7 +198,7 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
   if (subDomainID > -1) {
     apexDomain = SubDomains.DEVICE_ADP_LISTS[siteNum].domain
   } else {
-    apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
+    apexDomain = GetDomain(ctx.req.headers.host)
     // apexDomain = domainMatch ? domainMatch[0] : "mtlcmtx.com"
   }
 

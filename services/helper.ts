@@ -4,7 +4,7 @@ import { GetQuotesParams } from "../model/get-quote-params"
 import { repairWidgetStore, storesDetails, repairWidData } from "../store"
 import { repairWidgetAPI } from "./"
 import { GetAddressFormat } from "../model/get-address-format"
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 
 interface LocationHour {
   close: string
@@ -509,4 +509,22 @@ export const currencyFormater = new Intl.NumberFormat("en-US", {
 export function groupLocations(data: any[]) {
   const groupByData = _.groupBy(data, (o) => o.state && o.city)
   return groupByData
+}
+
+export const GetDomain = (host?: string) => {
+  let domain = "dccmtx.com"
+
+  const supportedDomains = ["mtlcmtx.com", "devicecommerce.com"]
+
+  if (host) {
+    const domainMatch = host.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
+
+    if (domainMatch && !isEmpty(domainMatch) && supportedDomains.includes(domainMatch[0])) {
+      domain = host.replace("www.", "")
+    } else if (domainMatch && !isEmpty(domainMatch)) {
+      domain = domainMatch[0]
+    }
+  }
+
+  return domain
 }

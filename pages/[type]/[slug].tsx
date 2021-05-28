@@ -14,6 +14,7 @@ import SubDomains from "../../const/subDomains"
 import { findIndex } from "lodash"
 import { Value } from "@react-page/editor"
 import { GeneralData } from "../../model/general-data"
+import { GetDomain } from "../../services/helper"
 
 const apiClient = ApiClient.getInstance()
 
@@ -63,7 +64,6 @@ const Slug = ({ features, handleStatus, data }: SlugPageProps) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const domainMatch = ctx.req.headers.host?.match(/[a-zA-Z0-9-]*\.[a-zA-Z0-9-]*$/g)
   const slug = ctx.params?.slug,
     type = ctx.params?.type
 
@@ -80,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (subDomainID > 0) {
     apexDomain = SubDomains.DEVICE_ADP_LISTS[siteNum].domain
   } else {
-    apexDomain = domainMatch ? domainMatch[0] : "dccmtx.com"
+    apexDomain = GetDomain(ctx.req.headers.host)
   }
 
   const { storeConfig, storeDetails } = await apiClient.get<GeneralData>(
