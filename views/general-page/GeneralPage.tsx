@@ -7,8 +7,8 @@ import { findIndex, isEmpty } from "lodash"
 import ReactPageEditor from "./react-page-editor"
 import { Value } from "@react-page/editor"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
-// import ReactToPrint from "react-to-print"
-// import { useTranslation } from "react-i18next"
+import ReactToPrint from "react-to-print"
+import { useTranslation } from "react-i18next"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -18,13 +18,14 @@ type Props = {
 
 const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
   const classes = useStyles()
-  // const [t] = useTranslation()
+  const [t] = useTranslation()
   const data = storesDetails.storeCnts
   const mainData = data.pages
 
   const [pageTitle, setPageTitle] = useState("General")
   const [meta, setMeta] = useState<MetaParams>({} as MetaParams)
   const [editorVisible, setEditorVisible] = useState(false)
+  const [print, setPrint] = useState(false)
 
   useEffect(() => {
     if (slug) {
@@ -32,9 +33,10 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
       if (pageIndex > -1) {
         setPageTitle(mainData[pageIndex].header.title)
         setMeta({ name: "description", content: mainData[pageIndex].header.meta_description })
+        setPrint(mainData[pageIndex].print ? true : false)
       }
       handleStatus(mainData[pageIndex].include_footer)
-      if (!mainData[pageIndex].include_header) {
+      if (pageIndex > -1 && !mainData[pageIndex].include_header) {
         const header = document.getElementsByClassName("header")[0] as HTMLElement,
           editorContainer = document.getElementById("react-page-editor-container") as HTMLDivElement
         header.style.display = "none"
@@ -56,17 +58,23 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
         <title>{pageTitle}</title>
         {!isEmpty(meta) && <meta name={meta.name} content={meta.content} />}
       </Head>
-      <div className={classes.root} id="react-page-editor-container">
-        {editorVisible && <ReactPageEditor value={pageData} />}
+      <div className={classes.root}>
+        {editorVisible && (
+          <div id="react-page-editor-container">
+            <ReactPageEditor value={pageData} />
+          </div>
+        )}
       </div>
-      {/* <div className={classes.download}>
-        <ReactToPrint
-          trigger={() => (
-            <p style={{ color: data.general.colorPalle.textThemeCol }}>{t("Print")}</p>
-          )}
-          content={() => document.getElementById("react-page-editor-container") as HTMLDivElement}
-        />
-      </div> */}
+      {print && (
+        <div className={classes.download}>
+          <ReactToPrint
+            trigger={() => (
+              <p style={{ color: data.general.colorPalle.textThemeCol }}>{t("Print")}</p>
+            )}
+            content={() => document.getElementById("react-page-editor-container") as HTMLDivElement}
+          />
+        </div>
+      )}
     </div>
   )
 }
