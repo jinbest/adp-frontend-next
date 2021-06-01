@@ -33,7 +33,7 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
       if (pageIndex > -1) {
         setPageTitle(mainData[pageIndex].header.title)
         setMeta({ name: "description", content: mainData[pageIndex].header.meta_description })
-        setPrint(mainData[pageIndex].print ? true : false)
+        setPrint(!!mainData[pageIndex].print)
       }
       handleStatus(mainData[pageIndex].include_footer)
       if (pageIndex > -1 && !mainData[pageIndex].include_header) {
