@@ -1,5 +1,7 @@
 import React from "react"
 import Rating from "@material-ui/lab/Rating"
+import { createStyles, makeStyles } from "@material-ui/core/styles"
+import { storesDetails } from "../store"
 
 type Props = {
   score: number
@@ -8,12 +10,26 @@ type Props = {
   reviewer: string
 }
 
+type RatingStyleProps = {
+  color: string
+}
+
 const CardWhyCustomer = ({ score, content, reviewer }: Props) => {
+  const data = storesDetails.storeCnts
+  const styleProps = { color: data.general.colorPalle.ratingCol } as RatingStyleProps
+  const classes = useStyles(styleProps)
+
   return (
     <div className="card-why-customer">
       <div className="score-div">
         <div className="rating">
-          <Rating name="read-only" value={Math.round(score)} max={5} readOnly />
+          <Rating
+            name="read-only"
+            value={Math.round(score)}
+            max={5}
+            className={classes.rating}
+            readOnly
+          />
         </div>
         {/* <p>{days}</p> */}
       </div>
@@ -32,3 +48,11 @@ CardWhyCustomer.defaultProps = {
 }
 
 export default CardWhyCustomer
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    rating: (props: RatingStyleProps) => ({
+      color: `${props.color} !important`,
+    }),
+  })
+)

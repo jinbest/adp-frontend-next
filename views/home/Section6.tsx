@@ -7,13 +7,19 @@ import Rating from "@material-ui/lab/Rating"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { getBusinessLink } from "../../services/helper"
 
+type RatingStyleProps = {
+  color: string
+}
+
 const Section6 = () => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section6
   const businessLink = getBusinessLink(storesDetails.allLocations)
   const [t] = useTranslation()
-  const classes = useStyles()
   const overAllRating = thisPage.overAllRating
+
+  const styleProps = { color: data.general.colorPalle.ratingCol } as RatingStyleProps
+  const classes = useStyles(styleProps)
 
   return (
     <section className="Container center sec6-container">
@@ -37,6 +43,7 @@ const Section6 = () => {
                 max={5}
                 readOnly
                 style={{ transform: "scale(1.2)" }}
+                className={classes.rating}
               />
               <Typography className={classes.subTitle}>{`${overAllRating.averScore} ${t("of")} ${
                 overAllRating.score
@@ -53,6 +60,7 @@ const Section6 = () => {
                 max={5}
                 readOnly
                 style={{ transform: "scale(1.2)" }}
+                className={classes.rating}
               />
               <Typography className={classes.subTitle}>{`${overAllRating.averScore} ${t("of")} ${
                 overAllRating.score
@@ -114,5 +122,8 @@ const useStyles = makeStyles(() =>
         margin: "auto !important",
       },
     },
+    rating: (props: RatingStyleProps) => ({
+      color: `${props.color} !important`,
+    }),
   })
 )

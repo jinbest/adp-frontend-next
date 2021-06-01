@@ -640,8 +640,11 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerLogo: {
       width: 150,
       margin: "0 auto 10px",
+      textAlign: "center",
       "& img": {
-        width: "100%",
+        width: "auto",
+        maxWidth: "100%",
+        height: "100px",
       },
     },
     modal: {
