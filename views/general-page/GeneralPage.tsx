@@ -52,6 +52,25 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
     }
   }, [slug])
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.hash
+      if (path && path.includes("#")) {
+        setTimeout(() => {
+          const id = path.replace("#", "")
+          const el = window.document.getElementById(id) as HTMLElement
+          if (el) {
+            const r = el.getBoundingClientRect()
+            window.top.scroll({
+              top: pageYOffset + r.top - 150,
+              behavior: "smooth",
+            })
+          }
+        }, 0)
+      }
+    }
+  }, [window])
+
   return (
     <div>
       <Head>
@@ -87,6 +106,19 @@ const useStyles = makeStyles(() =>
       maxWidth: "1440px",
       padding: "170px 30px 50px !important",
       margin: "auto",
+      "& a": {
+        textDecoration: "none !important",
+        color: "blue !important",
+        "&:hover": {
+          opacity: 0.7,
+        },
+      },
+      "& ol li::marker": {
+        color: "blue !important",
+      },
+      "& ol li": {
+        padding: "5px 0",
+      },
     },
     withoutHeader: {
       padding: "50px 30px !important",
