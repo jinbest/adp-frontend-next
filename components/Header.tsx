@@ -13,7 +13,6 @@ import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
 import {
   phoneFormatString,
   isExternal,
-  getBusinessLink,
   getWidth,
   isOriginSameAsLocation,
   isSlugLink,
@@ -143,7 +142,6 @@ type PropsHeader = {
 const Header = ({ handleStatus, features }: PropsHeader) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.header
-  const businessLink = getBusinessLink(storesDetails.allLocations)
 
   const navItemsLink = _.sortBy(thisPage.navItems, (o) => o.order),
     brandItemLink = _.sortBy(thisPage.brandItems, (o) => o.order),
