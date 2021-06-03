@@ -446,7 +446,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                 })}
                               </div>
                               <div>
-                                {item.loc_hours.map((itm: any, idx: number) => {
+                                {item.loc_hours?.map((itm: any, idx: number) => {
                                   return (
                                     <p
                                       className="block-content"

@@ -13,7 +13,6 @@ import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
 import {
   phoneFormatString,
   isExternal,
-  getBusinessLink,
   getWidth,
   isOriginSameAsLocation,
   isSlugLink,
@@ -144,7 +143,6 @@ type PropsHeader = {
 const Header = ({ handleStatus, features }: PropsHeader) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.header
-  const businessLink = getBusinessLink(storesDetails.allLocations)
 
   const navItemsLink = _.sortBy(thisPage.navItems, (o) => o.order),
     brandItemLink = _.sortBy(thisPage.brandItems, (o) => o.order),
@@ -303,31 +301,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             </ul>
           )}
           {mobile && (
-            <>
-              {businessLink ? (
-                <a
-                  href={businessLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="brand-direction"
-                  style={{
-                    color: brandData.brandCol,
-                  }}
-                >
-                  <RoomOutlinedIcon />
-                  {t("Directions")}
-                </a>
-              ) : (
-                <Link
-                  to={data.general.routes.contactPage}
-                  className="brand-direction"
-                  style={{ color: brandData.brandCol }}
-                >
-                  <RoomOutlinedIcon />
-                  {t("Directions")}
-                </Link>
-              )}
-            </>
+            <Link
+              to={data.general.routes.contactPage}
+              className="brand-direction"
+              style={{ color: brandData.brandCol }}
+            >
+              <RoomOutlinedIcon />
+              {t("Directions")}
+            </Link>
           )}
           <ul
             style={{

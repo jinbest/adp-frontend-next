@@ -5,7 +5,7 @@ const apiClient = ApiClient.getInstance()
 
 class GeneralSearchAPI {
   elasticSearch = async (text: string) => {
-    const apiURL = `${Config.SEARCH_SERVICE}?q=${text}`
+    const apiURL = `${Config.SEARCH_SERVICE_API_URL}combined-search/_search?q=${text}`
     return await apiClient.get<any>(apiURL)
   }
 }
