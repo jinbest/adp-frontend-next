@@ -223,31 +223,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             </ul>
           )}
           {mobile && (
-            <>
-              {businessLink ? (
-                <a
-                  href={businessLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="brand-direction"
-                  style={{
-                    color: brandData.brandCol,
-                  }}
-                >
-                  <RoomOutlinedIcon />
-                  {t("Directions")}
-                </a>
-              ) : (
-                <Link
-                  to={data.general.routes.contactPage}
-                  className="brand-direction"
-                  style={{ color: brandData.brandCol }}
-                >
-                  <RoomOutlinedIcon />
-                  {t("Directions")}
-                </Link>
-              )}
-            </>
+            <Link
+              to={data.general.routes.contactPage}
+              className="brand-direction"
+              style={{ color: brandData.brandCol }}
+            >
+              <RoomOutlinedIcon />
+              {t("Directions")}
+            </Link>
           )}
           <ul
             style={{
