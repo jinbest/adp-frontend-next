@@ -8,7 +8,7 @@ import LangDropdown from "./LangDropdown"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
-import { storesDetails, repairWidgetStore } from "../store"
+import { storesDetails, repairWidgetStore, repairWidData } from "../store"
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
 import {
   phoneFormatString,
@@ -18,7 +18,8 @@ import {
   isOriginSameAsLocation,
   isSlugLink,
 } from "../services/helper"
-import _ from "lodash"
+import _, { capitalize, isEmpty } from "lodash"
+import { generalSearchAPI } from "../services"
 
 type PropsNavItemLink = {
   item: any
@@ -156,6 +157,85 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [feats, setFeatures] = useState<any[]>([])
   const [mobile, setMobile] = useState(false)
   const [getQuteStatus, setGetQuoteStatus] = useState(false)
+  const [searchKey, setSearchKey] = useState("")
+  const [searchData, setSearchData] = useState<any>({} as any)
+
+  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    setSearchKey(e.target.value)
+  }
+
+  useEffect(() => {
+    if (searchKey) {
+      generalSearch(searchKey)
+    } else {
+      setSearchData({})
+    }
+  }, [searchKey])
+
+  const reverseObj = (obj: any) => {
+    const newObj = {} as any
+    Object.keys(obj)
+      .sort()
+      .reverse()
+      .forEach((key) => {
+        newObj[key] = obj[key]
+      })
+    return newObj
+  }
+
+  const generalSearch = async (text: string) => {
+    const val = await generalSearchAPI.elasticSearch(text)
+    if (!isEmpty(val) && !isEmpty(val.hits)) {
+      const hits = _.sortBy(val.hits.hits, (o) => o._score)
+      const groupHits = _.groupBy(hits, (o) => o._source.type)
+      setSearchData(reverseObj(groupHits))
+    }
+    return () => {
+      setSearchData({})
+    }
+  }
+
+  const handleSearchItem = (item: any) => {
+    console.log("search-item", item)
+    repairWidgetStore.init()
+    handleStatus(false)
+    repairWidgetStore.changeDeviceCounter(1)
+    if (item._source.type === "product") {
+      repairWidgetStore.changeCntStep(2)
+      repairWidgetStore.changeDeviceBrand([
+        {
+          name: "",
+          img: "",
+          id: item._source.brand_id,
+          alt: "",
+        },
+      ])
+      repairWidgetStore.changeDeviceModel([
+        {
+          name: item._source.name,
+          img: item._source.img_src,
+          id: item._source.id,
+          alt: item._source.img_alt,
+        },
+      ])
+      repairWidData.changeCntBrandID(item._source.brand_id)
+      repairWidData.changeCntProductID(item._source.id)
+    } else if (item._source.type === "brand") {
+      repairWidgetStore.changeCntStep(1)
+      repairWidgetStore.changeDeviceBrand([
+        {
+          name: item._source.img_alt,
+          img: item._source.img_src,
+          id: item._source.id,
+          alt: item._source.name,
+        },
+      ])
+      repairWidData.changeCntBrandID(item._source.id)
+    }
+    setSearchData({})
+    setSearchKey("")
+  }
 
   const handleResize = () => {
     if (getWidth() < 768) {
@@ -319,34 +399,51 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       >
         <Logo type="header" handleStatus={handleStatus} />
 
-        <FeatureToggles features={feats}>
-          <Feature
-            name="SEARCH"
-            inactiveComponent={() => <></>}
-            activeComponent={() => (
-              <Feature
-                name="FRONTEND_GLOBAL_SEARCH"
-                inactiveComponent={() => <></>}
-                activeComponent={() => (
-                  <div className="search-div" id="header-search">
-                    <Search
-                      placeholder={searchPlaceholder}
-                      color="rgba(0,0,0,0.8)"
-                      bgcolor="white"
-                      border="rgba(0,0,0,0.2)"
-                      handleChange={() => {
-                        // EMPTY
-                      }}
-                      handleIconClick={() => {
-                        // EMPTY
-                      }}
-                    />
-                  </div>
-                )}
-              />
+        {feats.includes("FRONTEND_GLOBAL_SEARCH") && (
+          <div className="search-div" id="header-search">
+            <Search
+              placeholder={searchPlaceholder}
+              color="rgba(0,0,0,0.8)"
+              bgcolor="white"
+              border="rgba(0,0,0,0.2)"
+              value={searchKey}
+              handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChangeSearch(e)
+              }}
+              handleIconClick={() => {
+                // EMPTY
+              }}
+            />
+            {!isEmpty(searchData) && (
+              <div className="search-data-viewer custom-scroll-bar">
+                {Object.keys(searchData).map((keyName: any, idx: number) => {
+                  return (
+                    <div key={idx}>
+                      <p className="search-type">{capitalize(keyName)}</p>
+                      {searchData[keyName].map((item: any, index: number) => {
+                        return (
+                          <Link
+                            className="search-item"
+                            key={index}
+                            onClick={() => {
+                              handleSearchItem(item)
+                            }}
+                            to={data.general.routes.repairWidgetPage}
+                          >
+                            {item._source.img_src && (
+                              <img src={item._source.img_src} alt={`search-item-${idx}-${index}`} />
+                            )}
+                            <p>{item._source.name || item._source.title}</p>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )
+                })}
+              </div>
             )}
-          />
-        </FeatureToggles>
+          </div>
+        )}
 
         <div className="nav-div">
           <ul className="navlink-parent">
