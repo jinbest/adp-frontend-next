@@ -186,8 +186,10 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   }
 
   const generalSearch = async (text: string) => {
+    const store_id = storesDetails.store_id
     const param: SearchParams = {
-      q: text,
+      // q: text,
+      q: `${text} AND store_id:(${store_id})`,
     }
     const val = await searchService.generalSearch(param)
     if (!isEmpty(val) && !isEmpty(val.hits)) {

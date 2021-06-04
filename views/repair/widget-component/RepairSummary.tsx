@@ -71,7 +71,12 @@ const RepairSummary = ({ themeCol, showInfo }: Props) => {
                         }}
                       />
                       <div className="service-summary-img">
-                        <img src={item.img} width="1" height="auto" alt={item.alt} />
+                        <img
+                          src={item.img || model[index]["img"]}
+                          width="1"
+                          height="auto"
+                          alt={item.alt || model[index]["alt"]}
+                        />
                       </div>
                       <div>
                         <Typography className="service-summary-title">
