@@ -11,6 +11,7 @@ import { PostAppointParams } from "../../../model/post-appointment-params"
 import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
+import { convertTimezone } from "../../../services/helper"
 
 type Props = {
   repairWidgetData: any
@@ -29,6 +30,14 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [t] = useTranslation()
 
+  useEffect(() => {
+    const dt = repairWidgetStore.repairWidgetInitialValue.selectDate,
+      tm = repairWidgetStore.repairWidgetInitialValue.selected_start_time,
+      tz1 = repairWidgetStore.timezone,
+      tz2 = storesDetails.cntUserLocation[0].timezone
+    convertTimezone(dt, tm, tz1, tz2)
+  }, [])
+
   const handleSubmit = () => {
     setDisableStatus(true)
     setIsSubmitting(true)
@@ -40,7 +49,8 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
       selected_start_time =
         repairWidgetStore.repairWidgetInitialValue.selected_start_time || moment().format("HH:mm"),
       selected_end_time = repairWidgetStore.repairWidgetInitialValue.selected_end_time,
-      timezone = repairWidgetStore.timezone
+      timezone = repairWidgetStore.timezone,
+      store_tz = storesDetails.cntUserLocation[0].timezone
     for (let i = 0; i < repairWidgetStore.deviceCounter; i++) {
       for (let j = 0; j < repairWidgetStore.chooseRepair[i].length; j++) {
         repairs.push({
@@ -83,9 +93,20 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     params.booking_date = moment().format("YYYY-MM-DD")
     params.customer_timezone = timezone
 
-    params.selected_date = select_date
-    params.selected_start_time = selected_start_time
-    params.selected_end_time = selected_end_time
+    // params.selected_date = select_date
+    // params.selected_start_time = selected_start_time
+    // params.selected_end_time = selected_end_time
+
+    const convertDtTm = convertTimezone(select_date, selected_start_time, timezone, store_tz)
+
+    params.selected_date = convertDtTm.date
+    params.selected_start_time = convertDtTm.time
+    params.selected_end_time = convertTimezone(
+      select_date,
+      selected_end_time,
+      timezone,
+      store_tz
+    ).time
 
     repairWidgetAPI
       .postAppointmentQuote(params)

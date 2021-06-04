@@ -535,3 +535,33 @@ export const GetDomain = (host?: string) => {
 
   return domain
 }
+
+export function convertTimezone(
+  dt: string | null,
+  tm: string | null,
+  tz1: string | null,
+  tz2: string | null
+) {
+  if (!dt || !tm || !tz1 || !tz2) {
+    return {
+      date: dt,
+      time: tm,
+    }
+  }
+  const moment = require("moment-timezone")
+
+  const off1 = moment().tz(tz1).utcOffset() / 60,
+    off2 = moment().tz(tz2).utcOffset() / 60
+
+  const timeDt = moment(`${dt} ${tm}`, "YYYY-M-D H:mm")
+    .add(off2 - off1, "hours")
+    .format("YYYY-M-D")
+  const timeTm = moment(`${dt} ${tm}`, "YYYY-M-D H:mm")
+    .add(off2 - off1, "hours")
+    .format("HH:m")
+
+  return {
+    date: timeDt !== "Invalid date" ? timeDt : null,
+    time: timeTm !== "Invalid date" ? timeTm : null,
+  }
+}
