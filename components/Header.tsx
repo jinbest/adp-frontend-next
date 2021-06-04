@@ -18,7 +18,10 @@ import {
   isSlugLink,
 } from "../services/helper"
 import _, { capitalize, isEmpty } from "lodash"
-import { generalSearchAPI } from "../services"
+import SearchService from "../services/api/search-service"
+import { SearchParams } from "../model/search-params"
+
+const searchService = SearchService.getInstance()
 
 type PropsNavItemLink = {
   item: any
@@ -183,7 +186,10 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   }
 
   const generalSearch = async (text: string) => {
-    const val = await generalSearchAPI.elasticSearch(text)
+    const param: SearchParams = {
+      q: text,
+    }
+    const val = await searchService.generalSearch(param)
     if (!isEmpty(val) && !isEmpty(val.hits)) {
       const hits = _.sortBy(val.hits.hits, (o) => o._score)
       const groupHits = _.groupBy(hits, (o) => o._source.type)
