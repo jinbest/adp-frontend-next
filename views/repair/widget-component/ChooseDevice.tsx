@@ -7,7 +7,7 @@ import Search from "../../../components/Search"
 import Button from "../../../components/Button"
 import RepairSummary from "./RepairSummary"
 import { useTranslation } from "react-i18next"
-import { repairWidData, storesDetails } from "../../../store/"
+import { repairWidData, repairWidgetStore, storesDetails } from "../../../store/"
 import {
   getDeviceBrandsAPI,
   addMoreDeviceBrandsAPI,
@@ -22,7 +22,7 @@ import CustomSelect from "../../../components/CustomSelect"
 import { SelectParams, FilterParams } from "../../../model/select-dropdown-param"
 import Config from "../../../config/config"
 import ApiClient from "../../../services/api-client"
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 
 const apiClient = ApiClient.getInstance()
 
@@ -304,17 +304,20 @@ const ChooseDevice = ({
               id: cntOfferedRepairs[i].id,
             })
           }
-          for (let i = 0; i < cntTypes.length; i++) {
-            for (let j = 0; j < repairWidgetData.chooseRepair.length; j++) {
-              if (cntTypes[i].name === repairWidgetData.chooseRepair[j].name) {
-                cntTypes[i].bg = repairChooseItemCol
-                cntTypes[i].col = "white"
-                cntTypes[i].selected = true
-              }
+          if (!isEmpty(repairWidgetStore.repairBySearch)) {
+            const chooseIndex = _.findIndex(cntTypes, { id: repairWidgetStore.repairBySearch.id })
+            if (chooseIndex > -1) {
+              cntTypes[chooseIndex].bg = repairChooseItemCol
+              cntTypes[chooseIndex].col = "white"
+              cntTypes[chooseIndex].selected = true
+              const cntChooseRepair = _.cloneDeep(repairWidgetStore.chooseRepair)
+              cntChooseRepair.push([repairWidgetStore.repairBySearch])
+              repairWidgetStore.changeChooseRepair(cntChooseRepair)
             }
           }
           setItemTypes([...cntTypes])
         }
+
         if (
           repairWidData.repairsOfferedDevices != null &&
           repairWidData.repairsOfferedDevices.metadata != null &&

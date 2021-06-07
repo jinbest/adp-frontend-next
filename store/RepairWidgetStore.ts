@@ -7,6 +7,7 @@ export class RepairWidgetStore {
   @observable deviceBrand: any[] = []
   @observable deviceModel: any[] = []
   @observable chooseRepair: any[] = []
+  @observable repairBySearch: any = {}
   @observable deviceCounter = 0
   @observable deliveryMethod: any = { method: "", code: "" }
   @observable receiveQuote: any = { method: "", code: "" }
@@ -89,6 +90,7 @@ export class RepairWidgetStore {
           deviceBrand: this.deviceBrand,
           deviceModel: this.deviceModel,
           chooseRepair: this.chooseRepair,
+          repairBySearch: this.repairBySearch,
           deviceCounter: this.deviceCounter,
           deliveryMethod: this.deliveryMethod,
           receiveQuote: this.receiveQuote,
@@ -130,6 +132,12 @@ export class RepairWidgetStore {
   @action
   changeChooseRepair = (chooseRepair: any[]) => {
     this.chooseRepair = chooseRepair
+    this.save()
+  }
+
+  @action
+  changeRepairBySearch = (repairBySearch: any) => {
+    this.repairBySearch = repairBySearch
     this.save()
   }
 
@@ -261,6 +269,7 @@ export class RepairWidgetStore {
     this.deviceBrand = []
     this.deviceModel = []
     this.chooseRepair = []
+    this.repairBySearch = {}
     this.deviceCounter = 0
     this.deliveryMethod = { method: "", code: "" }
     this.receiveQuote = { method: "", code: "" }

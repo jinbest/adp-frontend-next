@@ -20,6 +20,7 @@ import {
 import _, { capitalize, isEmpty } from "lodash"
 import SearchService from "../services/api/search-service"
 import { SearchParams } from "../model/search-params"
+import { repairWidgetAPI } from "../services"
 
 const searchService = SearchService.getInstance()
 
@@ -202,21 +203,25 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     }
   }
 
+  const getBrandByProduct = async (store_id: number, product_id: number) => {
+    const brandByProduct = await repairWidgetAPI.getBrandsProducts(store_id, [product_id])
+    repairWidgetStore.changeDeviceBrand([
+      {
+        name: brandByProduct.data[0].brand.name,
+        img: brandByProduct.data[0].brand.img_src,
+        id: brandByProduct.data[0].brand.id,
+        alt: brandByProduct.data[0].brand.img_alt,
+      },
+    ])
+  }
+
   const handleSearchItem = (item: any) => {
     console.log("search-item", item)
     repairWidgetStore.init()
     handleStatus(false)
-    repairWidgetStore.changeDeviceCounter(1)
     if (item._source.type === "product") {
+      getBrandByProduct(item._source.store_id, item._source.id)
       repairWidgetStore.changeCntStep(2)
-      repairWidgetStore.changeDeviceBrand([
-        {
-          name: "",
-          img: "",
-          id: item._source.brand_id,
-          alt: "",
-        },
-      ])
       repairWidgetStore.changeDeviceModel([
         {
           name: item._source.name,
@@ -227,6 +232,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       ])
       repairWidData.changeCntBrandID(item._source.brand_id)
       repairWidData.changeCntProductID(item._source.id)
+      repairWidgetStore.changeDeviceCounter(1)
     } else if (item._source.type === "brand") {
       repairWidgetStore.changeCntStep(1)
       repairWidgetStore.changeDeviceBrand([
@@ -238,6 +244,16 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         },
       ])
       repairWidData.changeCntBrandID(item._source.id)
+      repairWidgetStore.changeDeviceCounter(1)
+    } else if (item._source.type === "service") {
+      repairWidgetStore.changeRepairBySearch({
+        cost: item._source.cost,
+        estimate: item._source.duration,
+        id: item._source.id,
+        name: item._source.title,
+        warranty: item._source.warranty,
+        warranty_unit: item._source.warranty_unit,
+      })
     }
     setSearchData({})
     setSearchKey("")
