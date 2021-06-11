@@ -5,7 +5,7 @@ import Logo from "./Logo"
 // import MegamenuShop from "./MegamenuShop"
 import HeaderDrawer from "./HeaderDrawer"
 import LangDropdown from "./LangDropdown"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails, repairWidgetStore, repairWidData } from "../store"
@@ -17,10 +17,9 @@ import {
   isOriginSameAsLocation,
   isSlugLink,
 } from "../services/helper"
-import _, { capitalize, isEmpty } from "lodash"
+import _, { isEmpty } from "lodash"
 import SearchService from "../services/api/search-service"
 import { SearchParams } from "../model/search-params"
-import { repairWidgetAPI } from "../services"
 
 const searchService = SearchService.getInstance()
 
@@ -147,6 +146,7 @@ type PropsHeader = {
 const Header = ({ handleStatus, features }: PropsHeader) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.header
+  const history = useHistory()
 
   const navItemsLink = _.sortBy(thisPage.navItems, (o) => o.order),
     brandItemLink = _.sortBy(thisPage.brandItems, (o) => o.order),
@@ -160,7 +160,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [mobile, setMobile] = useState(false)
   const [getQuteStatus, setGetQuoteStatus] = useState(false)
   const [searchKey, setSearchKey] = useState("")
-  const [searchData, setSearchData] = useState<any>({} as any)
+  const [searchData, setSearchData] = useState<any[]>([] as any[])
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -171,48 +171,24 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     if (searchKey) {
       generalSearch(searchKey)
     } else {
-      setSearchData({})
+      setSearchData([])
     }
   }, [searchKey])
-
-  const reverseObj = (obj: any) => {
-    const newObj = {} as any
-    Object.keys(obj)
-      .sort()
-      .reverse()
-      .forEach((key) => {
-        newObj[key] = obj[key]
-      })
-    return newObj
-  }
 
   const generalSearch = async (text: string) => {
     const store_id = storesDetails.store_id
     const param: SearchParams = {
-      // q: text,
       q: `${text} AND store_id:(${store_id})`,
     }
     const val = await searchService.generalSearch(param)
     if (!isEmpty(val) && !isEmpty(val.hits)) {
       const hits = _.sortBy(val.hits.hits, (o) => o._score)
-      const groupHits = _.groupBy(hits, (o) => o._source.type)
-      setSearchData(reverseObj(groupHits))
+      // console.log("hits", hits)
+      setSearchData(hits)
     }
     return () => {
-      setSearchData({})
+      setSearchData([])
     }
-  }
-
-  const getBrandByProduct = async (store_id: number, product_id: number) => {
-    const brandByProduct = await repairWidgetAPI.getBrandsProducts(store_id, [product_id])
-    repairWidgetStore.changeDeviceBrand([
-      {
-        name: brandByProduct.data[0].brand.name,
-        img: brandByProduct.data[0].brand.img_src,
-        id: brandByProduct.data[0].brand.id,
-        alt: brandByProduct.data[0].brand.img_alt,
-      },
-    ])
   }
 
   const handleSearchItem = (item: any) => {
@@ -220,7 +196,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     repairWidgetStore.init()
     handleStatus(false)
     if (item._source.type === "product") {
-      getBrandByProduct(item._source.store_id, item._source.id)
+      repairWidgetStore.changeDeviceBrand([
+        {
+          name: item._source.brand.name,
+          img: item._source.brand.img_src,
+          id: item._source.brand.id,
+          alt: item._source.brand.img_alt,
+        },
+      ])
       repairWidgetStore.changeCntStep(2)
       repairWidgetStore.changeDeviceModel([
         {
@@ -233,6 +216,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       repairWidData.changeCntBrandID(item._source.brand_id)
       repairWidData.changeCntProductID(item._source.id)
       repairWidgetStore.changeDeviceCounter(1)
+      history.push(data.general.routes.repairWidgetPage)
     } else if (item._source.type === "brand") {
       repairWidgetStore.changeCntStep(1)
       repairWidgetStore.changeDeviceBrand([
@@ -245,6 +229,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       ])
       repairWidData.changeCntBrandID(item._source.id)
       repairWidgetStore.changeDeviceCounter(1)
+      history.push(data.general.routes.repairWidgetPage)
     } else if (item._source.type === "service") {
       repairWidgetStore.changeRepairBySearch({
         cost: item._source.cost,
@@ -254,8 +239,29 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         warranty: item._source.warranty,
         warranty_unit: item._source.warranty_unit,
       })
+      repairWidgetStore.changeDeviceBrand([
+        {
+          name: item._source.product.brand.name,
+          img: item._source.product.brand.img_src,
+          id: item._source.product.brand.id,
+          alt: item._source.product.brand.img_alt,
+        },
+      ])
+      repairWidgetStore.changeCntStep(2)
+      repairWidgetStore.changeDeviceModel([
+        {
+          name: item._source.product.name,
+          img: item._source.product.img_src,
+          id: item._source.product.id,
+          alt: item._source.product.img_alt,
+        },
+      ])
+      repairWidData.changeCntBrandID(item._source.product.brand_id)
+      repairWidData.changeCntProductID(item._source.product.id)
+      repairWidgetStore.changeDeviceCounter(1)
+      history.push(data.general.routes.repairWidgetPage)
     }
-    setSearchData({})
+    setSearchData([])
     setSearchKey("")
   }
 
@@ -419,33 +425,30 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                 // EMPTY
               }}
             />
-            {!isEmpty(searchData) && (
+            {searchData.length ? (
               <div className="search-data-viewer custom-scroll-bar">
-                {Object.keys(searchData).map((keyName: any, idx: number) => {
-                  return (
-                    <div key={idx}>
-                      <p className="search-type">{capitalize(keyName)}</p>
-                      {searchData[keyName].map((item: any, index: number) => {
-                        return (
-                          <Link
-                            className="search-item"
-                            key={index}
-                            onClick={() => {
-                              handleSearchItem(item)
-                            }}
-                            to={data.general.routes.repairWidgetPage}
-                          >
-                            {item._source.img_src && (
-                              <img src={item._source.img_src} alt={`search-item-${idx}-${index}`} />
-                            )}
-                            <p>{item._source.name || item._source.title}</p>
-                          </Link>
-                        )
-                      })}
-                    </div>
-                  )
-                })}
+                <div>
+                  <p className="search-type">{t("Service")}</p>
+                  {searchData.map((item: any, index: number) => {
+                    return (
+                      <div
+                        className="search-item"
+                        key={index}
+                        onClick={() => {
+                          handleSearchItem(item)
+                        }}
+                      >
+                        {item._source.img_src && (
+                          <img src={item._source.img_src} alt={`search-item-${index}`} />
+                        )}
+                        <p>{item._source.name || item._source.title}</p>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
+            ) : (
+              <></>
             )}
           </div>
         )}
