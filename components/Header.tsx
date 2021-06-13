@@ -480,7 +480,12 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                         {item._source.img_src && (
                           <img src={item._source.img_src} alt={`search-item-${index}`} />
                         )}
-                        <p>{item._source.name || item._source.title}</p>
+                        <p>
+                          {item._source.name ||
+                            `${item._source.product ? item._source.product.name : ""} ${
+                              item._source.title
+                            }`.trim()}
+                        </p>
                       </div>
                     )
                   })}
