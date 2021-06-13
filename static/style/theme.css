@@ -1462,7 +1462,8 @@ p {
 
 @media (max-width: 996px) {
   .container-header .search-div {
-    display: none;
+    /* display: none; */
+    margin: 0 20px;
   }
 }
 

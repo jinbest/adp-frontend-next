@@ -161,6 +161,9 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [getQuteStatus, setGetQuoteStatus] = useState(false)
   const [searchKey, setSearchKey] = useState("")
   const [searchData, setSearchData] = useState<any[]>([] as any[])
+  const [searchEnd, setSearchEnd] = useState(false)
+  const [from, setFrom] = useState(0)
+  const [total, setTotal] = useState(0)
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -170,24 +173,57 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   useEffect(() => {
     if (searchKey) {
       generalSearch(searchKey)
-    } else {
-      setSearchData([])
     }
+    setSearchData([])
+    setTotal(0)
+    setFrom(0)
+    setSearchEnd(false)
   }, [searchKey])
+
+  const handleScroll = async (e: any) => {
+    if (searchEnd || total <= searchData.length) {
+      return
+    }
+    const target = e.target
+    if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+      const store_id = storesDetails.store_id
+      const param: SearchParams = {
+        q: `${searchKey} AND store_id:(${store_id})`,
+        from: from + 10,
+      }
+      const val = await searchService.generalSearch(param)
+      if (!isEmpty(val) && !isEmpty(val.hits)) {
+        const hits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score))
+        if (hits.length) {
+          const cntSearchData = searchData
+          for (let i = 0; i < hits.length; i++) {
+            cntSearchData.push(hits[i])
+          }
+          setSearchData(cntSearchData)
+          setFrom(from + 10)
+          if (cntSearchData.length === total) {
+            setSearchEnd(true)
+          }
+        }
+      }
+    }
+  }
 
   const generalSearch = async (text: string) => {
     const store_id = storesDetails.store_id
     const param: SearchParams = {
       q: `${text} AND store_id:(${store_id})`,
+      from: from,
     }
     const val = await searchService.generalSearch(param)
     if (!isEmpty(val) && !isEmpty(val.hits)) {
-      const hits = _.sortBy(val.hits.hits, (o) => o._score)
-      // console.log("hits", hits)
+      const hits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score))
+      setTotal(val.hits.total.value)
       setSearchData(hits)
     }
     return () => {
       setSearchData([])
+      setTotal(0)
     }
   }
 
@@ -263,6 +299,9 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     }
     setSearchData([])
     setSearchKey("")
+    setFrom(0)
+    setTotal(0)
+    setSearchEnd(false)
   }
 
   const handleResize = () => {
@@ -426,7 +465,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               }}
             />
             {searchData.length ? (
-              <div className="search-data-viewer custom-scroll-bar">
+              <div className="search-data-viewer custom-scroll-bar" onScroll={handleScroll}>
                 <div>
                   <p className="search-type">{t("Service")}</p>
                   {searchData.map((item: any, index: number) => {
