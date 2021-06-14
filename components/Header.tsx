@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import Search from "./Search"
 import CustomizedMenus from "./CustomizedMenus"
 import Logo from "./Logo"
@@ -165,6 +165,8 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [searchEnd, setSearchEnd] = useState(false)
   const [from, setFrom] = useState(0)
   const [total, setTotal] = useState(0)
+  const [selectList, setSelectList] = useState(0)
+  const [hover, setHover] = useState(false)
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -176,6 +178,10 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       generalSearch(searchKey)
     }
     initSearchData()
+    return () => {
+      setSearchData([])
+      setTotal(0)
+    }
   }, [searchKey])
 
   useEffect(() => {
@@ -227,6 +233,62 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     }
   }
 
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyPress, false)
+    return () => {
+      document.removeEventListener("keydown", onKeyPress, false)
+    }
+  })
+
+  const onKeyPress = useCallback(
+    (e) => {
+      let index = 0,
+        item = null,
+        itemOffset = 0,
+        itemHeight = 0,
+        cntHeight = 0,
+        scrlTop = 0
+      const searchItems = document.getElementsByClassName("search-item")
+      const searchContainer = document.getElementsByClassName(
+        "search-data-viewer"
+      )[0] as HTMLDivElement
+
+      if (e.key === "ArrowDown") {
+        index = Math.min(selectList + 1, searchData.length - 1)
+        setSelectList(index)
+        item = searchItems[index] as HTMLDivElement
+        itemOffset = item.offsetTop
+        itemHeight = item.clientHeight
+        cntHeight = searchContainer.clientHeight
+        scrlTop = searchContainer.scrollTop
+        if (cntHeight + scrlTop < itemOffset + itemHeight) {
+          searchContainer.scrollTo({
+            behavior: "smooth",
+            top: itemOffset + itemHeight - cntHeight + 10,
+          })
+        }
+      } else if (e.key === "ArrowUp") {
+        index = Math.max(selectList - 1, 0)
+        setSelectList(index)
+        item = searchItems[index] as HTMLDivElement
+        itemOffset = item.offsetTop
+        scrlTop = searchContainer.scrollTop
+        if (itemOffset < scrlTop) {
+          searchContainer.scrollTo({ behavior: "smooth", top: itemOffset - 40 })
+        }
+      } else if (e.key === "Enter" || e.key === "Tab") {
+        if (!searchData.length) {
+          return
+        }
+        e.preventDefault()
+        handleSearchItem(searchData[selectList])
+        setSelectList(0)
+        setHover(false)
+      }
+    },
+    [selectList, searchData]
+  )
+
   const generalSearch = async (text: string) => {
     const store_id = storesDetails.store_id
     const param: SearchParams = {
@@ -250,10 +312,6 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       }
       setTotal(val.hits.total.value)
       setSearchData(_.uniq(hits))
-    }
-    return () => {
-      setSearchData([])
-      setTotal(0)
     }
   }
 
@@ -496,7 +554,16 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               }}
             />
             {searchData.length ? (
-              <div className="search-data-viewer custom-scroll-bar" onScroll={handleScroll}>
+              <div
+                className="search-data-viewer custom-scroll-bar"
+                onScroll={handleScroll}
+                onMouseOver={() => {
+                  setHover(true)
+                }}
+                onMouseLeave={() => {
+                  setHover(false)
+                }}
+              >
                 <div>
                   <p className="search-type">{t("Services")}</p>
                   {searchData.map((item: any, index: number) => {
@@ -505,7 +572,12 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                         className="search-item"
                         key={index}
                         onClick={() => {
+                          setHover(false)
+                          setSelectList(0)
                           handleSearchItem(item)
+                        }}
+                        style={{
+                          background: selectList === index && !hover ? "#f5f5f5" : "",
                         }}
                       >
                         {item._source.img_src && (

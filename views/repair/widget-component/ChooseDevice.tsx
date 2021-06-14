@@ -74,6 +74,9 @@ const ChooseDevice = ({
     if (stepName === "deviceModel") {
       getFilterList()
     }
+    return () => {
+      setFileterList([])
+    }
   }, [stepName])
 
   const getFilterList = async () => {
