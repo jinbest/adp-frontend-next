@@ -5,7 +5,7 @@ import Logo from "./Logo"
 // import MegamenuShop from "./MegamenuShop"
 import HeaderDrawer from "./HeaderDrawer"
 import LangDropdown from "./LangDropdown"
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails, repairWidgetStore, repairWidData } from "../store"
@@ -147,6 +147,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.header
   const history = useHistory()
+  const location = useLocation()
 
   const navItemsLink = _.sortBy(thisPage.navItems, (o) => o.order),
     brandItemLink = _.sortBy(thisPage.brandItems, (o) => o.order),
@@ -174,11 +175,20 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     if (searchKey) {
       generalSearch(searchKey)
     }
+    initSearchData()
+  }, [searchKey])
+
+  useEffect(() => {
+    setSearchKey("")
+    initSearchData()
+  }, [location])
+
+  const initSearchData = () => {
     setSearchData([])
     setTotal(0)
     setFrom(0)
     setSearchEnd(false)
-  }, [searchKey])
+  }
 
   const handleScroll = async (e: any) => {
     if (searchEnd || total <= searchData.length) {
@@ -197,11 +207,19 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         if (hits.length) {
           const cntSearchData = searchData
           for (let i = 0; i < hits.length; i++) {
-            cntSearchData.push(hits[i])
+            if (
+              hits[i]._source.type === "product" ||
+              hits[i]._source.type === "brand" ||
+              (hits[i]._source.type === "service" &&
+                hits[i]._source.product &&
+                !isEmpty(hits[i]._source.product))
+            ) {
+              cntSearchData.push(hits[i])
+            }
           }
-          setSearchData(cntSearchData)
+          setSearchData(_.uniq(cntSearchData))
           setFrom(from + 10)
-          if (cntSearchData.length === total) {
+          if (from + 10 >= total) {
             setSearchEnd(true)
           }
         }
@@ -217,9 +235,21 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     }
     const val = await searchService.generalSearch(param)
     if (!isEmpty(val) && !isEmpty(val.hits)) {
-      const hits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score))
+      const preHits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score)),
+        hits = [] as any[]
+      for (let i = 0; i < preHits.length; i++) {
+        if (
+          preHits[i]._source.type === "product" ||
+          preHits[i]._source.type === "brand" ||
+          (preHits[i]._source.type === "service" &&
+            preHits[i]._source.product &&
+            !isEmpty(preHits[i]._source.product))
+        ) {
+          hits.push(preHits[i])
+        }
+      }
       setTotal(val.hits.total.value)
-      setSearchData(hits)
+      setSearchData(_.uniq(hits))
     }
     return () => {
       setSearchData([])
@@ -266,7 +296,11 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       repairWidData.changeCntBrandID(item._source.id)
       repairWidgetStore.changeDeviceCounter(1)
       history.push(data.general.routes.repairWidgetPage)
-    } else if (item._source.type === "service") {
+    } else if (
+      item._source.type === "service" &&
+      item._source.product &&
+      !isEmpty(item._source.product)
+    ) {
       repairWidgetStore.changeRepairBySearch({
         cost: item._source.cost,
         estimate: item._source.duration,
@@ -297,11 +331,8 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       repairWidgetStore.changeDeviceCounter(1)
       history.push(data.general.routes.repairWidgetPage)
     }
-    setSearchData([])
     setSearchKey("")
-    setFrom(0)
-    setTotal(0)
-    setSearchEnd(false)
+    initSearchData()
   }
 
   const handleResize = () => {
@@ -467,7 +498,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             {searchData.length ? (
               <div className="search-data-viewer custom-scroll-bar" onScroll={handleScroll}>
                 <div>
-                  <p className="search-type">{t("Service")}</p>
+                  <p className="search-type">{t("Services")}</p>
                   {searchData.map((item: any, index: number) => {
                     return (
                       <div

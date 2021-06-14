@@ -1213,8 +1213,9 @@ p {
 }
 
 .container-header .search-div .search-data-viewer .search-item {
-  height: 40px;
-  padding: 0 15px;
+  height: auto;
+  min-height: 40px;
+  padding: 3px 15px;
   background-color: white;
   cursor: pointer;
   font-size: 14px;
@@ -1238,12 +1239,32 @@ p {
 
 .container-header .search-div .search-data-viewer .search-type {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   padding: 0 15px;
   height: 30px;
   background-color: #e6e6e6;
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 425px) {
+  .container-header .search-div .search-data-viewer .search-item {
+    font-size: 12px;
+    padding: 3px 7px;
+  }
+  .container-header .search-div .search-data-viewer .search-type {
+    font-size: 13px;
+    padding: 2px 7px;
+  }
+  .container-header .search-div {
+    margin: 0 15px;
+  }
+  .search-container {
+    padding-left: 10px;
+  }
+  .search-container input {
+    font-size: 13px;
+  }
 }
 
 .service-section-button > a {
@@ -1462,7 +1483,6 @@ p {
 
 @media (max-width: 996px) {
   .container-header .search-div {
-    /* display: none; */
     margin: 0 20px;
   }
 }
