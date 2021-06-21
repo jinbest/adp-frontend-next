@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback, useRef } from "react"
 import Search from "./Search"
 import CustomizedMenus from "./CustomizedMenus"
 import Logo from "./Logo"
@@ -169,6 +169,29 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [total, setTotal] = useState(0)
   const [selectList, setSelectList] = useState(0)
   const [hover, setHover] = useState(false)
+  const [viewFilterList, setViewFilterList] = useState(false);
+
+  const customRef = useRef(null);
+  useOutsideHit(customRef);
+
+  function useOutsideHit(ref: any) {
+    useEffect(
+      () => {
+        function handleClickOutside(event: any) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            setViewFilterList(false);
+            setSelectList(0);
+            setHover(false);
+          }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      },
+      [ref]
+    );
+  }
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -176,12 +199,12 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   }
 
   useEffect(() => {
-    if (searchData.length) {
+    if (searchData.length && viewFilterList) {
       blockScroll()
     } else {
       allowScroll()
     }
-  }, [searchData])
+  }, [searchData, viewFilterList])
 
   useEffect(() => {
     if (searchKey) {
@@ -549,7 +572,9 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         <Logo type="header" handleStatus={handleStatus} />
 
         {feats.includes("FRONTEND_GLOBAL_SEARCH") && (
-          <div className="search-div" id="header-search">
+          <div className="search-div" id="header-search" ref={customRef} onFocus={() => {
+            setViewFilterList(true);
+          }}>
             <Search
               placeholder={searchPlaceholder}
               color="rgba(0,0,0,0.8)"
@@ -563,7 +588,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                 // EMPTY
               }}
             />
-            {searchData.length ? (
+            {viewFilterList && searchData.length ? (
               <div
                 className="search-data-viewer custom-scroll-bar"
                 onScroll={handleScroll}
@@ -595,9 +620,8 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                         )}
                         <p>
                           {item._source.name ||
-                            `${item._source.product ? item._source.product.name : ""} ${
-                              item._source.title
-                            }`.trim()}
+                            `${item._source.product ? item._source.product.name : ""} ${item._source.title
+                              }`.trim()}
                         </p>
                       </div>
                     )
