@@ -20,6 +20,7 @@ import {
 import _, { isEmpty } from "lodash"
 import SearchService from "../services/api/search-service"
 import { SearchParams } from "../model/search-params"
+import useScrollBlock from "../services/useScrollBlock"
 
 const searchService = SearchService.getInstance()
 
@@ -155,6 +156,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     searchPlaceholder = data.homepage.section1.searchPlaceholder
 
   const [t] = useTranslation()
+  const [blockScroll, allowScroll] = useScrollBlock();
 
   const [menuStatus, setMenuStatus] = useState(false)
   const [feats, setFeatures] = useState<any[]>([])
@@ -172,6 +174,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     e.preventDefault()
     setSearchKey(e.target.value)
   }
+
+  useEffect(() => {
+    if (searchData.length) {
+      blockScroll()
+    } else {
+      allowScroll()
+    }
+  }, [searchData])
 
   useEffect(() => {
     if (searchKey) {
