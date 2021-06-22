@@ -170,6 +170,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [selectList, setSelectList] = useState(0)
   const [hover, setHover] = useState(false)
   const [viewFilterList, setViewFilterList] = useState(false);
+  const [searching, setSearching] = useState(false);
 
   const customRef = useRef(null);
   useOutsideHit(customRef);
@@ -234,13 +235,15 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       return
     }
     const target = e.target
-    if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+    if (Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) < 50 && !searching) {
+      setSearching(true)
       const store_id = storesDetails.store_id
       const param: SearchParams = {
         q: `${searchKey} AND store_id:(${store_id})`,
         from: from + 10,
       }
       const val = await searchService.generalSearch(param)
+      setSearching(false)
       if (!isEmpty(val) && !isEmpty(val.hits)) {
         const hits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score))
         if (hits.length) {
