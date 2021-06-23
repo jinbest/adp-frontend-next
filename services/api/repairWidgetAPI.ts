@@ -14,7 +14,8 @@ class RepairWidgetAPI {
     per_page: number,
     page: number,
     is_enabled: boolean,
-    searchText: string
+    searchText: string,
+    cateID: number
   ) => {
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/brands`
     const params: GetBrandsParam = {
@@ -24,6 +25,9 @@ class RepairWidgetAPI {
       has_products: true,
       include_voided: false,
       display_sort_order: "asc"
+    }
+    if (cateID > 0) {
+      params.category_id = cateID
     }
     if (searchText) {
       params.name = searchText
@@ -52,7 +56,7 @@ class RepairWidgetAPI {
     if (searchText) {
       params.name = searchText
     }
-    if (category_id) {
+    if (category_id > 0) {
       params.category_id = category_id
     }
     return await apiClient.get<GetManyResponse>(apiURL, params)

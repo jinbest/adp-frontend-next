@@ -71,15 +71,7 @@ const ChooseDevice = ({
   const [filterList, setFileterList] = useState<SelectParams[]>([
     { name: "All", code: "0" },
   ] as SelectParams[])
-
-  useEffect(() => {
-    if (stepName === "deviceModel") {
-      getFilterList()
-    }
-    return () => {
-      setFileterList([])
-    }
-  }, [stepName])
+  const [cateID, setCateID] = useState(-1)
 
   const getFilterList = async () => {
     const params: FilterParams = {
@@ -100,7 +92,12 @@ const ChooseDevice = ({
       })
     })
     setFileterList(tmpFilterList)
-    tmpFilterList.length && setFilter(tmpFilterList[0])
+    if (categoryName && filterData.data.length) {
+      setCateID(filterData.data[0].id)
+      return filterData.data[0].id
+    } else {
+      return -1
+    }
   }
 
   const [t] = useTranslation()
@@ -111,7 +108,7 @@ const ChooseDevice = ({
     let cntOfferedRepairs: any[] = []
     switch (stepName) {
       case "deviceBrand":
-        await addMoreDeviceBrandsAPI(searchText, page + 1, perPage)
+        await addMoreDeviceBrandsAPI(searchText, page + 1, perPage, cateID)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
           setSliceNum(repairWidData.repairDeviceBrands.data.length)
           if (repairWidData.repairDeviceBrands.metadata.total <= (page + 1) * perPage) {
@@ -130,13 +127,23 @@ const ChooseDevice = ({
         }
         break
       case "deviceModel":
-        await addMoreBrandProductsAPI(
-          repairWidData.cntBrandID,
-          searchText,
-          page + 1,
-          perPage,
-          Number(filter.code)
-        )
+        if (Number(filter.code) > 0) {
+          await addMoreBrandProductsAPI(
+            repairWidData.cntBrandID,
+            searchText,
+            page + 1,
+            perPage,
+            Number(filter.code)
+          )
+        } else {
+          await addMoreBrandProductsAPI(
+            repairWidData.cntBrandID,
+            searchText,
+            page + 1,
+            perPage,
+            cateID
+          )
+        }
         if (
           repairWidData.repairBrandProducts.data &&
           repairWidData.repairBrandProducts.data.length
@@ -248,12 +255,16 @@ const ChooseDevice = ({
 
   const loadStepData = async (name: string, text: string, pg: number, perpg: number) => {
     setLoading(true)
+    let catID = -1
+    if ((name === "deviceBrand" && categoryName) || name === "deviceModel") {
+      catID = await getFilterList()
+    }
     const cntImgData: any[] = [],
       cntTypes: any[] = []
     let cntOfferedRepairs: any[] = []
     switch (name) {
       case "deviceBrand":
-        await getDeviceBrandsAPI(text, pg, perpg)
+        await getDeviceBrandsAPI(text, pg, perpg, catID)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
           setSliceNum(repairWidData.repairDeviceBrands.data.length)
           for (let i = 0; i < repairWidData.repairDeviceBrands.data.length; i++) {
@@ -272,7 +283,11 @@ const ChooseDevice = ({
         }
         break
       case "deviceModel":
-        await getBrandProductsAPI(repairWidData.cntBrandID, text, pg, perpg, Number(filter.code))
+        if (Number(filter.code) > 0) {
+          await getBrandProductsAPI(repairWidData.cntBrandID, text, pg, perpg, Number(filter.code))
+        } else {
+          await getBrandProductsAPI(repairWidData.cntBrandID, text, pg, perpg, catID)
+        }
         if (
           repairWidData.repairBrandProducts.data &&
           repairWidData.repairBrandProducts.data.length

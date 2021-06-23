@@ -79,12 +79,12 @@ function getContactMethodsAPI() {
     })
 }
 
-async function getDeviceBrandsAPI(searchText: string, page: number, per_page: number) {
+async function getDeviceBrandsAPI(searchText: string, page: number, per_page: number, cateID: number) {
   const store_id: number = storesDetails.store_id
   const is_enabled = true
 
   await repairWidgetAPI
-    .getDeviceBrands(store_id, per_page, page, is_enabled, searchText)
+    .getDeviceBrands(store_id, per_page, page, is_enabled, searchText, cateID)
     .then(async (res: any) => {
       repairWidData.changeRepairDeviceBrands(res)
     })
@@ -93,12 +93,12 @@ async function getDeviceBrandsAPI(searchText: string, page: number, per_page: nu
     })
 }
 
-async function addMoreDeviceBrandsAPI(searchText: string, page: number, per_page: number) {
+async function addMoreDeviceBrandsAPI(searchText: string, page: number, per_page: number, cateID: number) {
   const store_id: number = storesDetails.store_id
   const is_enabled = true
 
   await repairWidgetAPI
-    .getDeviceBrands(store_id, per_page, page, is_enabled, searchText)
+    .getDeviceBrands(store_id, per_page, page, is_enabled, searchText, cateID)
     .then(async (res: any) => {
       const cntDeviceBrands = _.cloneDeep(repairWidData.repairDeviceBrands)
       for (let i = 0; i < res.data.length; i++) {

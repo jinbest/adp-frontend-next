@@ -16,13 +16,13 @@ const categoryFilterName = [
   },
   {
     name: "Console",
-    slug: "laptops",
-    id: 3,
+    slug: "console",
+    id: 4,
   },
   {
     name: "Other",
     slug: "other",
-    id: 3,
+    id: 5,
   },
 ]
 
