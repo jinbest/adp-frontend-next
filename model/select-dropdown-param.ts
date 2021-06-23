@@ -8,4 +8,5 @@ export interface FilterParams {
   per_page?: number
   include_voided?: boolean
   display_sort_order?: string
+  name?: string
 }

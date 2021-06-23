@@ -4,9 +4,10 @@ import CardFix from "../../components/CardFix"
 import ContentFix from "../../components/ContentFix"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { repairWidgetStore, storesDetails } from "../../store"
 import _ from "lodash"
+import { categoryFilterName } from "../../const/categoryName"
 
 type Props = {
   features: any[]
@@ -18,6 +19,7 @@ const Section2 = ({ features }: Props) => {
   const cards = _.sortBy(thisPage.cards, (o) => o.order)
   const contents = _.sortBy(thisPage.contents, (o) => o.order)
   const [t] = useTranslation()
+  const history = useHistory()
 
   const [feats, setFeatures] = useState<any[]>([])
 
@@ -31,8 +33,16 @@ const Section2 = ({ features }: Props) => {
     setFeatures(cntFeatures)
   }, [features, data])
 
-  const handleRepairWidget = () => {
+  const handleRepairWidget = (title: string) => {
     repairWidgetStore.init()
+    const slugIndex = _.findIndex(categoryFilterName, (o) => o.name === title)
+    if (slugIndex > -1) {
+      history.push(
+        `${data.general.routes.repairWidgetPage}?c=${categoryFilterName[slugIndex].slug}`
+      )
+    } else {
+      history.push(data.general.routes.repairWidgetPage)
+    }
   }
 
   return (
@@ -46,42 +56,39 @@ const Section2 = ({ features }: Props) => {
             <div className="card-customized-container-desktop">
               {cards.map((item: any, index: number) => {
                 return (
-                  <Link
-                    to={data.general.routes.repairWidgetPage}
+                  <div
                     className="card-customized-item"
                     key={index}
-                    onClick={handleRepairWidget}
+                    onClick={() => handleRepairWidget(item.title)}
                   >
                     <CardFix title={t(item.title)} img={item.img} key={index} />
-                  </Link>
+                  </div>
                 )
               })}
             </div>
             <div className="card-customized-container-mobile">
               {cards.slice(0, 3).map((item: any, index: number) => {
                 return (
-                  <Link
-                    to={data.general.routes.repairWidgetPage}
+                  <div
                     className="card-customized-item"
                     key={index}
-                    onClick={handleRepairWidget}
+                    onClick={() => handleRepairWidget(item.title)}
                   >
                     <CardFix title={t(item.title)} img={item.img} key={index} />
-                  </Link>
+                  </div>
                 )
               })}
             </div>
             <div className="card-customized-container-mobile">
               {cards.slice(3, 5).map((item: any, index: number) => {
                 return (
-                  <Link
-                    to={data.general.routes.repairWidgetPage}
+                  <div
                     className="card-customized-item"
                     key={index}
-                    onClick={handleRepairWidget}
+                    onClick={() => handleRepairWidget(item.title)}
                   >
                     <CardFix title={t(item.title)} img={item.img} key={index} />
-                  </Link>
+                  </div>
                 )
               })}
             </div>

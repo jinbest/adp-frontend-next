@@ -803,6 +803,7 @@
 .card-customized-item {
   width: 15%;
   margin: 20px 0;
+  cursor: pointer;
 }
 
 .card-img {

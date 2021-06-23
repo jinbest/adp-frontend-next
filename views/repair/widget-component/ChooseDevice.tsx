@@ -34,6 +34,7 @@ type Props = {
   handleChangeChooseData: (step: number, chooseData: any) => void
   repairWidgetData: any
   features: any[]
+  categoryName: string
 }
 
 type ArrayProps = {
@@ -48,6 +49,7 @@ const ChooseDevice = ({
   handleChangeChooseData,
   repairWidgetData,
   features,
+  categoryName,
 }: Props) => {
   const mainData = storesDetails.storeCnts
   const themeCol = mainData.general.colorPalle.themeColor
@@ -85,17 +87,20 @@ const ChooseDevice = ({
       per_page: 100,
       include_voided: false,
       display_sort_order: "asc",
+      name: categoryName,
     }
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/categories`
     const filterData = await apiClient.get<any>(apiURL, params)
-    const tmpFilterList: SelectParams[] = [{ name: "All", code: "0" }] as SelectParams[]
+    const tmpFilterList: SelectParams[] = [] as SelectParams[]
+    tmpFilterList.push({ name: "All", code: "0" })
     filterData.data.forEach((item: any) => {
       tmpFilterList.push({
         name: item.name,
         code: item.id.toString(),
       })
     })
-    setFileterList([...tmpFilterList])
+    setFileterList(tmpFilterList)
+    tmpFilterList.length && setFilter(tmpFilterList[0])
   }
 
   const [t] = useTranslation()

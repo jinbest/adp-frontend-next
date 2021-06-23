@@ -19,6 +19,7 @@ import { storesDetails, repairWidgetStore } from "../../store"
 import Head from "next/head"
 import { useQuery } from "../../services/helper"
 import _ from "lodash"
+import { categoryFilterName } from "../../const/categoryName"
 
 const stepList: string[] = [
   "deviceBrand",
@@ -48,6 +49,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
   const [feats, setFeats] = useState<any[]>([])
   const [pageTitle, setPageTitle] = useState("Quotes | ")
   const [loading, setLoading] = useState(false)
+  const [cateName, setCateName] = useState("")
 
   const query = useQuery()
 
@@ -72,6 +74,12 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
   useEffect(() => {
     if (Number(query.get("lid")) && Number(query.get("id"))) {
       handleGetQuote(Number(query.get("lid")), Number(query.get("id")))
+    } else if (query.get("c")) {
+      const cateIndex = _.findIndex(categoryFilterName, (o) => o.slug === query.get("c"))
+      if (cateIndex > -1) {
+        setCateName(categoryFilterName[cateIndex].slug)
+      }
+      setLoading(true)
     } else {
       setLoading(true)
     }
@@ -224,6 +232,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
                     step={step}
                     repairWidgetData={repairWidgetStore}
                     features={feats}
+                    categoryName={cateName}
                   />
                 )}
                 {step === 6 && (

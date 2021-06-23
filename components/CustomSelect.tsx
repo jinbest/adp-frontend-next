@@ -54,6 +54,7 @@ const CustomSelect = ({ options, value, handleSetValue, variant }: Props) => {
       >
         <Select
           value={state.code}
+          defaultValue=""
           onChange={handleChange}
           inputProps={{
             name: "code",
