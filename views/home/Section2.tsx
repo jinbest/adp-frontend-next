@@ -7,7 +7,29 @@ import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { useHistory } from "react-router-dom"
 import { repairWidgetStore, storesDetails } from "../../store"
 import _ from "lodash"
-import { categoryFilterName } from "../../const/categoryName"
+
+const categoryFilterName = [
+  {
+    name: "Cellphone",
+    slug: "phones",
+  },
+  {
+    name: "Tablet",
+    slug: "tablets",
+  },
+  {
+    name: "Computer",
+    slug: "laptops",
+  },
+  {
+    name: "Console",
+    slug: "console",
+  },
+  {
+    name: "Other",
+    slug: "other",
+  },
+]
 
 type Props = {
   features: any[]

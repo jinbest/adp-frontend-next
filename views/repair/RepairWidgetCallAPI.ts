@@ -2,6 +2,8 @@ import { repairWidgetAPI } from "../../services/"
 import { repairWidData, storesDetails } from "../../store/"
 import { setQuotesStore } from "../../services/helper"
 import _ from "lodash"
+import { GetProductsParam} from "../../model/get-products-params"
+import { GetBrandsParam } from "../../model/get-brands-params"
 
 function getRepairLookupAPI() {
   const lookupTypes: any[] = ["repair_delivery_method", "repair_contact_method", "warranty_unit"]
@@ -79,12 +81,19 @@ function getContactMethodsAPI() {
     })
 }
 
-async function getDeviceBrandsAPI(searchText: string, page: number, per_page: number, cateID: number) {
+async function getDeviceBrandsAPI(val: GetBrandsParam) {
   const store_id: number = storesDetails.store_id
-  const is_enabled = true
+
+  const param: GetBrandsParam = {
+    per_page: val.per_page,
+    page: val.page,
+    is_enabled: true,
+    name: val.name,
+    category_id: val.category_id
+  }
 
   await repairWidgetAPI
-    .getDeviceBrands(store_id, per_page, page, is_enabled, searchText, cateID)
+    .getDeviceBrands(store_id, param)
     .then(async (res: any) => {
       repairWidData.changeRepairDeviceBrands(res)
     })
@@ -93,12 +102,19 @@ async function getDeviceBrandsAPI(searchText: string, page: number, per_page: nu
     })
 }
 
-async function addMoreDeviceBrandsAPI(searchText: string, page: number, per_page: number, cateID: number) {
+async function addMoreDeviceBrandsAPI(val: GetBrandsParam) {
   const store_id: number = storesDetails.store_id
-  const is_enabled = true
+
+  const param: GetBrandsParam = {
+    per_page: val.per_page,
+    page: val.page,
+    name: val.name,
+    category_id: val.category_id,
+    is_enabled: true
+  }
 
   await repairWidgetAPI
-    .getDeviceBrands(store_id, per_page, page, is_enabled, searchText, cateID)
+    .getDeviceBrands(store_id, param)
     .then(async (res: any) => {
       const cntDeviceBrands = _.cloneDeep(repairWidData.repairDeviceBrands)
       for (let i = 0; i < res.data.length; i++) {
@@ -112,17 +128,22 @@ async function addMoreDeviceBrandsAPI(searchText: string, page: number, per_page
 }
 
 async function getBrandProductsAPI(
-  brand_id: number,
-  searchText: string,
-  page: number,
-  per_page: number,
-  category_id: number
+  val: GetProductsParam
 ) {
-  const store_id: number = storesDetails.store_id
-  const included_voided = false
+
+  const store_id = storesDetails.store_id
+
+  const param: GetProductsParam = {
+    per_page: val.per_page,
+    page: val.page,
+    include_voided: false,
+    brand_id: val.brand_id,
+    name: val.name,
+    category_id: val.category_id
+  }
 
   await repairWidgetAPI
-    .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText, category_id)
+    .getBrandProducts(store_id, param)
     .then(async (res: any) => {
       repairWidData.changeRepairBrandProducts(res)
     })
@@ -132,17 +153,21 @@ async function getBrandProductsAPI(
 }
 
 async function addMoreBrandProductsAPI(
-  brand_id: number,
-  searchText: string,
-  page: number,
-  per_page: number,
-  category_id: number
+  val: GetProductsParam
 ) {
   const store_id: number = storesDetails.store_id
-  const included_voided = false
+
+  const param: GetProductsParam = {
+    per_page: val.per_page,
+    page: val.page,
+    include_voided: false,
+    brand_id: val.brand_id,
+    name: val.name,
+    category_id: val.category_id
+  }
 
   await repairWidgetAPI
-    .getBrandProducts(store_id, per_page, page, included_voided, brand_id, searchText, category_id)
+    .getBrandProducts(store_id, param)
     .then(async (res: any) => {
       const cntDeviceProducts = _.cloneDeep(repairWidData.repairBrandProducts)
       for (let i = 0; i < res.data.length; i++) {

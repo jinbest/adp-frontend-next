@@ -11,53 +11,44 @@ class RepairWidgetAPI {
 
   getDeviceBrands = async (
     store_id: number,
-    per_page: number,
-    page: number,
-    is_enabled: boolean,
-    searchText: string,
-    cateID: number
+    val: GetBrandsParam
   ) => {
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/brands`
     const params: GetBrandsParam = {
-      per_page: per_page,
-      page: page,
-      is_enabled: is_enabled,
+      per_page: val.per_page,
+      page: val.page,
+      is_enabled: val.is_enabled,
       has_products: true,
       include_voided: false,
       display_sort_order: "asc"
     }
-    if (cateID > 0) {
-      params.category_id = cateID
+    if (val.category_id && val.category_id > 0) {
+      params.category_id = val.category_id
     }
-    if (searchText) {
-      params.name = searchText
+    if (val.name) {
+      params.name = val.name
     }    
     return await apiClient.get<GetManyResponse>(apiURL, params)
-  }
+  }  
 
   getBrandProducts = async (
     store_id: number,
-    per_page: number,
-    page: number,
-    included_voided: boolean,
-    brand_id: number,
-    searchText: string,
-    category_id: number
+    val: GetProductsParam
   ) => {
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/products`
     const params: GetProductsParam = {
-      per_page: per_page,
-      page: page,
-      include_voided: included_voided,
-      brand_id: brand_id,
+      per_page: val.per_page,
+      page: val.page,
+      include_voided: val.include_voided,
+      brand_id: val.brand_id,
       status: "PUBLISHED",
       display_sort_order: "asc"
     }
-    if (searchText) {
-      params.name = searchText
+    if (val.name) {
+      params.name = val.name
     }
-    if (category_id > 0) {
-      params.category_id = category_id
+    if (val.category_id && val.category_id > 0) {
+      params.category_id = val.category_id
     }
     return await apiClient.get<GetManyResponse>(apiURL, params)
   }

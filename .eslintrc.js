@@ -28,6 +28,7 @@ module.exports = {
     "no-extra-boolean-cast": "off",
     "no-useless-escape": "off",
     "no-prototype-builtins": "off",
+    "no-case-declarations": "off",
     "react/display-name": "off",
     "react/prop-types": "off",
     "@typescript-eslint/no-this-alias": [

@@ -23,6 +23,8 @@ import { SelectParams, FilterParams } from "../../../model/select-dropdown-param
 import Config from "../../../config/config"
 import ApiClient from "../../../services/api-client"
 import _, { isEmpty } from "lodash"
+import { GetProductsParam } from "../../../model/get-products-params"
+import { GetBrandsParam } from "../../../model/get-brands-params"
 
 const apiClient = ApiClient.getInstance()
 
@@ -34,7 +36,7 @@ type Props = {
   handleChangeChooseData: (step: number, chooseData: any) => void
   repairWidgetData: any
   features: any[]
-  categoryName: string
+  categoryName: string | null
 }
 
 type ArrayProps = {
@@ -71,7 +73,7 @@ const ChooseDevice = ({
   const [filterList, setFileterList] = useState<SelectParams[]>([
     { name: "All", code: "0" },
   ] as SelectParams[])
-  const [cateID, setCateID] = useState(-1)
+  const [categoryID, setCategoryID] = useState(-1)
 
   const getFilterList = async () => {
     const params: FilterParams = {
@@ -79,7 +81,9 @@ const ChooseDevice = ({
       per_page: 100,
       include_voided: false,
       display_sort_order: "asc",
-      name: categoryName,
+    }
+    if (categoryName) {
+      params.name = categoryName
     }
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/categories`
     const filterData = await apiClient.get<any>(apiURL, params)
@@ -93,7 +97,7 @@ const ChooseDevice = ({
     })
     setFileterList(tmpFilterList)
     if (categoryName && filterData.data.length) {
-      setCateID(filterData.data[0].id)
+      setCategoryID(filterData.data[0].id)
       return filterData.data[0].id
     } else {
       return -1
@@ -108,7 +112,13 @@ const ChooseDevice = ({
     let cntOfferedRepairs: any[] = []
     switch (stepName) {
       case "deviceBrand":
-        await addMoreDeviceBrandsAPI(searchText, page + 1, perPage, cateID)
+        const paramsBrand: GetBrandsParam = {
+          name: searchText,
+          page: page + 1,
+          per_page: perPage,
+          category_id: categoryID,
+        }
+        await addMoreDeviceBrandsAPI(paramsBrand)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
           setSliceNum(repairWidData.repairDeviceBrands.data.length)
           if (repairWidData.repairDeviceBrands.metadata.total <= (page + 1) * perPage) {
@@ -127,22 +137,18 @@ const ChooseDevice = ({
         }
         break
       case "deviceModel":
+        const paramsModel: GetProductsParam = {
+          brand_id: repairWidData.cntBrandID,
+          name: searchText,
+          page: page + 1,
+          per_page: perPage,
+        }
         if (Number(filter.code) > 0) {
-          await addMoreBrandProductsAPI(
-            repairWidData.cntBrandID,
-            searchText,
-            page + 1,
-            perPage,
-            Number(filter.code)
-          )
+          paramsModel.category_id = Number(filter.code)
+          await addMoreBrandProductsAPI(paramsModel)
         } else {
-          await addMoreBrandProductsAPI(
-            repairWidData.cntBrandID,
-            searchText,
-            page + 1,
-            perPage,
-            cateID
-          )
+          paramsModel.category_id = categoryID
+          await addMoreBrandProductsAPI(paramsModel)
         }
         if (
           repairWidData.repairBrandProducts.data &&
@@ -264,7 +270,13 @@ const ChooseDevice = ({
     let cntOfferedRepairs: any[] = []
     switch (name) {
       case "deviceBrand":
-        await getDeviceBrandsAPI(text, pg, perpg, catID)
+        const paramBrand: GetBrandsParam = {
+          name: text,
+          page: pg,
+          per_page: perpg,
+          category_id: catID,
+        }
+        await getDeviceBrandsAPI(paramBrand)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
           setSliceNum(repairWidData.repairDeviceBrands.data.length)
           for (let i = 0; i < repairWidData.repairDeviceBrands.data.length; i++) {
@@ -283,10 +295,18 @@ const ChooseDevice = ({
         }
         break
       case "deviceModel":
+        const paramModel: GetProductsParam = {
+          brand_id: repairWidData.cntBrandID,
+          name: text,
+          page: pg,
+          per_page: perpg,
+        }
         if (Number(filter.code) > 0) {
-          await getBrandProductsAPI(repairWidData.cntBrandID, text, pg, perpg, Number(filter.code))
+          paramModel.category_id = Number(filter.code)
+          await getBrandProductsAPI(paramModel)
         } else {
-          await getBrandProductsAPI(repairWidData.cntBrandID, text, pg, perpg, catID)
+          paramModel.category_id = catID
+          await getBrandProductsAPI(paramModel)
         }
         if (
           repairWidData.repairBrandProducts.data &&
