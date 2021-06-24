@@ -148,6 +148,8 @@ export function makeLocations(data: any[]) {
       longitude: data[i].longitude,
       business_page_link: data[i].business_page_link,
       timezone: data[i].timezone,
+      id: data[i].id,
+      city: data[i].city,
     }
     locations.push(cntItem)
   }
@@ -447,7 +449,8 @@ export function ConvertWarrantyUnit(val: string, warnt: number) {
 }
 
 export function ValidateEmail(e: string) {
-  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const re =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(e)
 }
 
@@ -564,4 +567,8 @@ export function convertTimezone(
     date: timeDt !== "Invalid date" ? timeDt : null,
     time: timeTm !== "Invalid date" ? timeTm : null,
   }
+}
+
+export function makeAddressValue(val: any) {
+  return val.address_1 + (val.address_2 ? ", " + val.address_2 : "") + ", " + val.city
 }

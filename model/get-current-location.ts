@@ -28,4 +28,6 @@ export interface GetCurrentLocParams {
   longitude?: number
   business_page_link?: string | null
   timezone: string
+  id: number
+  city?: string
 }

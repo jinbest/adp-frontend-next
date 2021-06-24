@@ -392,7 +392,10 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                           text-decoration: none;
                         }
                       `}</style>
-                      <Link to={data.general.routes.repairWidgetPage}>
+                      <Link
+                        to={data.general.routes.repairWidgetPage}
+                        style={{ textDecoration: "none" }}
+                      >
                         <div onClick={handleBookRepair}>
                           <Button
                             title={t("Book Appointment")}

@@ -8,7 +8,7 @@ import CustomBookTime from "./CustomBookTime"
 import RepairSummary from "./RepairSummary"
 import { useTranslation } from "react-i18next"
 import { repairWidgetStore, storesDetails } from "../../../store"
-import { makeLocations } from "../../../services/helper"
+import { makeLocations, makeAddressValue, getConvertHourType } from "../../../services/helper"
 import { observer } from "mobx-react"
 import { findIndex, isEmpty } from "lodash"
 
@@ -46,6 +46,16 @@ type Props = {
   handleChangeChooseData: (step: number, chooseData: any) => void
 }
 
+type FindLocProps = {
+  code: number
+  name: string
+}
+
+type SelectHoursProps = {
+  day: string
+  hour: string
+}
+
 const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Props) => {
   const mainData = storesDetails.storeCnts
   const themeCol = mainData.general.colorPalle.themeColor
@@ -68,27 +78,14 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   const [selectVal, setSelectVal] = useState({
     code: storesDetails.cntUserLocation.length ? storesDetails.cntUserLocation[0].location_id : -1,
     name: storesDetails.cntUserLocation.length
-      ? storesDetails.cntUserLocation[0].address_1 +
-        (storesDetails.cntUserLocation[0].address_2
-          ? ", " + storesDetails.cntUserLocation[0].address_2
-          : "")
+      ? makeAddressValue(storesDetails.cntUserLocation[0])
       : "",
   })
-  const [sendToAddress, setSendToAddress] = useState<string | undefined>("")
+  const [sendToAddress, setSendToAddress] = useState<FindLocProps>({} as FindLocProps)
   const [mailInChecked, setMailinChecked] = useState(0)
   const [disableStatus, setDisableStatus] = useState(true)
 
   const [t] = useTranslation()
-
-  type FindLocProps = {
-    code: string
-    name: string
-  }
-
-  type SelectHoursProps = {
-    day: string
-    hour: string
-  }
 
   const [findLocs, setFindLocs] = useState<FindLocProps[]>([])
   const [selHours, setSelHours] = useState<SelectHoursProps[]>([])
@@ -108,11 +105,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
     for (let i = 0; i < storeLocs.length; i++) {
       cntFindLoc.push({
         code: storeLocs[i].id,
-        name:
-          storeLocs[i].address_1 +
-          (storeLocs[i].address_2 ? ", " + storeLocs[i].address_2 : "") +
-          ", " +
-          storeLocs[i].city,
+        name: makeAddressValue(storeLocs[i]),
       })
     }
     setFindLocs(cntFindLoc)
@@ -127,18 +120,18 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
         if (storeLocs[i].location_hours[j].type === "REGULAR") {
           let hour = ""
           if (!storeLocs[i].location_hours[j].open || !storeLocs[i].location_hours[j].close) {
-            hour = "Closed"
+            hour = t("Closed")
           } else {
-            const open: string =
-              (parseInt(storeLocs[i].location_hours[j].open.split(":")[0]) % 12) +
-              ":" +
-              storeLocs[i].location_hours[j].open.split(":")[1] +
-              " a.m."
-            const close: string =
-              (parseInt(storeLocs[i].location_hours[j].close.split(":")[0]) % 12) +
-              ":" +
-              storeLocs[i].location_hours[j].close.split(":")[1] +
-              " p.m."
+            const open = getConvertHourType(
+              storeLocs[i].location_hours[j].open,
+              storeLocs[i].timezone,
+              repairWidgetStore.timezone
+            )
+            const close = getConvertHourType(
+              storeLocs[i].location_hours[j].close,
+              storeLocs[i].timezone,
+              repairWidgetStore.timezone
+            )
             hour = open + " - " + close
           }
           cntSelHours.push({
@@ -165,27 +158,19 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
 
   useEffect(() => {
     if (code === "MAIL_IN" && storesDetails.cntUserLocation.length) {
-      setSendToAddress(
-        storesDetails.cntUserLocation[0].address_1 +
-          (storesDetails.cntUserLocation[0].address_2
-            ? ", " + storesDetails.cntUserLocation[0].address_2
-            : "")
-      )
+      setSendToAddress({
+        name: makeAddressValue(storesDetails.cntUserLocation[0]),
+        code: storesDetails.cntUserLocation[0].id,
+      })
       for (let i = 0; i < findLocs.length; i++) {
-        if (
-          findLocs[i].name ===
-          storesDetails.cntUserLocation[0].address_1 +
-            (storesDetails.cntUserLocation[0].address_2
-              ? ", " + storesDetails.cntUserLocation[0].address_2
-              : "")
-        ) {
+        if (findLocs[i].code === storesDetails.cntUserLocation[0].id) {
           setMailinChecked(i)
         }
       }
     }
   }, [findLocs])
 
-  const handleChangeMailinAddress = (val: string, i: number) => {
+  const handleChangeMailinAddress = (val: FindLocProps, i: number) => {
     setMailinChecked(i)
     setSendToAddress(val)
   }
@@ -202,7 +187,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
 
   const ChooseNextStep = () => {
     if (code === "MAIL_IN") {
-      handleChangeChooseData(7, { code: code, data: { sendTo: sendToAddress } })
+      handleChangeChooseData(7, { code: code, data: { sendTo: sendToAddress.name } })
     } else {
       handleChangeChooseData(7, {
         code: code,
@@ -259,7 +244,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
 
   useEffect(() => {
     setDisableStatus(true)
-    if (code === "MAIL_IN" && sendToAddress) {
+    if (code === "MAIL_IN" && !isEmpty(sendToAddress)) {
       setDisableStatus(false)
     }
     if (
@@ -278,28 +263,16 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   useEffect(() => {
     if (storesDetails.findAddLocation.length && selectVal.name && code !== "MAIL_IN") {
       for (let i = 0; i < storesDetails.findAddLocation.length; i++) {
-        if (
-          selectVal.name ===
-          storesDetails.findAddLocation[i].address_1 +
-            (storesDetails.findAddLocation[i].address_2
-              ? ", " + storesDetails.findAddLocation[i].address_2
-              : "")
-        ) {
+        if (selectVal.code === storesDetails.findAddLocation[i].id) {
           const cntLoc: any[] = makeLocations([storesDetails.findAddLocation[i]])
           storesDetails.changeCntUserLocation(cntLoc)
           storesDetails.changeLocationID(storesDetails.findAddLocation[i].id)
         }
       }
     }
-    if (storesDetails.findAddLocation.length && sendToAddress && code === "MAIL_IN") {
+    if (storesDetails.findAddLocation.length && !isEmpty(sendToAddress) && code === "MAIL_IN") {
       for (let i = 0; i < storesDetails.findAddLocation.length; i++) {
-        if (
-          sendToAddress ===
-          storesDetails.findAddLocation[i].address_1 +
-            (storesDetails.findAddLocation[i].address_2
-              ? ", " + storesDetails.findAddLocation[i].address_2
-              : "")
-        ) {
+        if (sendToAddress.code === storesDetails.findAddLocation[i].id) {
           const cntLoc: any = makeLocations([storesDetails.findAddLocation[i]])
           storesDetails.changeCntUserLocation(cntLoc)
           storesDetails.changeLocationID(storesDetails.findAddLocation[i].id)
@@ -334,7 +307,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                 )}
                 {code === "MAIL_IN" && (
                   <div>
-                    {findLocs.map((item: any, index: number) => {
+                    {findLocs.map((item: FindLocProps, index: number) => {
                       return (
                         <div key={index} className="select-mail-in-radio">
                           <input
@@ -343,7 +316,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                             name="region"
                             value={item.name}
                             onChange={() => {
-                              handleChangeMailinAddress(item.name, index)
+                              handleChangeMailinAddress(item, index)
                             }}
                             checked={index === mailInChecked}
                           />
@@ -365,9 +338,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                             <p className="select-mail-in-text">{t(item.day)}</p>
                           </div>
                           <div style={{ width: "50%" }}>
-                            <p className="select-mail-in-text">
-                              {item.hour === "Closed" ? t(item.hour) : item.hour}
-                            </p>
+                            <p className="select-mail-in-text">{item.hour}</p>
                           </div>
                         </div>
                       )
