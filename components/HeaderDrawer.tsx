@@ -165,8 +165,8 @@ const HeaderDrawer = (props: Props) => {
   }, [locSelStatus])
 
   const onKeyPress = (event: any) => {
-    if (event.key === "Enter") {
-      handleGetLocation(event.target.value)
+    if (event.key === "Enter" && postCode) {
+      handleGetLocation(postCode)
     }
   }
 
@@ -175,7 +175,7 @@ const HeaderDrawer = (props: Props) => {
     return () => {
       document.removeEventListener("keydown", onKeyPress, false)
     }
-  }, [])
+  }, [postCode])
 
   const handleGetLocation = (poscode: string) => {
     if (!poscode) return
@@ -202,6 +202,7 @@ const HeaderDrawer = (props: Props) => {
         setRequireUserInfo(false)
         setStoreStatus(true)
         setLoadingStatus(false)
+        setPostCode("")
       })
       .catch((error) => {
         console.log("Error to find location with Address", error)
@@ -210,23 +211,23 @@ const HeaderDrawer = (props: Props) => {
           isError: true,
         })
         setLoadingStatus(false)
+        setPostCode("")
       })
   }
 
-  const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    if (
-      event.type === "keydown" &&
-      ((event as React.KeyboardEvent).key === "Tab" ||
-        (event as React.KeyboardEvent).key === "Shift")
-    ) {
-      return
-    }
+  const toggleDrawer =
+    (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return
+      }
 
-    setState({ ...state, [anchor]: open })
-    toggleMenuStatus(open)
-  }
+      setState({ ...state, [anchor]: open })
+      toggleMenuStatus(open)
+    }
 
   const resetStatuses = () => {
     setToastParams({

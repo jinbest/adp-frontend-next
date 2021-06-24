@@ -192,8 +192,8 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   }
 
   const onKeyPress = (event: any) => {
-    if (event.key === "Enter") {
-      handleGetLocation(event.target.value)
+    if (event.key === "Enter" && postCode) {
+      handleGetLocation(postCode)
     }
   }
 
@@ -202,7 +202,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
     return () => {
       document.removeEventListener("keydown", onKeyPress, false)
     }
-  }, [])
+  }, [postCode])
 
   useEffect(() => {
     if (storesDetails.allLocations.length > 1 || !storesDetails.allLocations.length) return
@@ -237,6 +237,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
           })
           setIsRequest(false)
         }
+        setPostCode("")
       })
       .catch((error) => {
         console.log("Error to find location with Address", error)
@@ -245,6 +246,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
           isError: true,
         })
         setIsRequest(false)
+        setPostCode("")
       })
   }
 

@@ -173,6 +173,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   const handleChangeMailinAddress = (val: FindLocProps, i: number) => {
     setMailinChecked(i)
     setSendToAddress(val)
+    handleUpdateStore(val)
   }
 
   function changeTimezone(date: Date, ianatz: string) {
@@ -261,25 +262,36 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   }, [code, sendToAddress, time, day, month, year, week, selectVal])
 
   useEffect(() => {
-    if (storesDetails.findAddLocation.length && selectVal.name && code !== "MAIL_IN") {
-      for (let i = 0; i < storesDetails.findAddLocation.length; i++) {
-        if (selectVal.code === storesDetails.findAddLocation[i].id) {
-          const cntLoc: any[] = makeLocations([storesDetails.findAddLocation[i]])
-          storesDetails.changeCntUserLocation(cntLoc)
-          storesDetails.changeLocationID(storesDetails.findAddLocation[i].id)
-        }
-      }
+    const val: FindLocProps = {
+      name: makeAddressValue(storesDetails.cntUserLocation[0]),
+      code: storesDetails.cntUserLocation[0].id,
     }
-    if (storesDetails.findAddLocation.length && !isEmpty(sendToAddress) && code === "MAIL_IN") {
-      for (let i = 0; i < storesDetails.findAddLocation.length; i++) {
-        if (sendToAddress.code === storesDetails.findAddLocation[i].id) {
-          const cntLoc: any = makeLocations([storesDetails.findAddLocation[i]])
-          storesDetails.changeCntUserLocation(cntLoc)
-          storesDetails.changeLocationID(storesDetails.findAddLocation[i].id)
-        }
-      }
+    if (code !== "MAIL_IN") {
+      setSelectVal(val)
+    } else {
+      setSendToAddress(val)
     }
-  }, [sendToAddress, selectVal])
+    updateTimezoneFromSelVal(val)
+  }, [storesDetails.cntUserLocation])
+
+  const handleUpdateStore = (selVal: FindLocProps) => {
+    const locIndex = findIndex(storesDetails.findAddLocation, (o) => o.id === selVal.code)
+    if (locIndex > -1) {
+      const cntLoc: any = makeLocations([storesDetails.findAddLocation[locIndex]])
+      storesDetails.changeCntUserLocation(cntLoc)
+      storesDetails.changeLocationID(storesDetails.findAddLocation[locIndex].id)
+      updateTimezoneFromSelVal(selVal)
+    }
+  }
+
+  const updateTimezoneFromSelVal = (selVal: FindLocProps) => {
+    const locIndex = findIndex(storesDetails.findAddLocation, (o) => o.id === selVal.code)
+    if (locIndex > -1) {
+      const cntTimeZone = storesDetails.findAddLocation[locIndex].timezone
+      setTimeZone(cntTimeZone)
+      setOffset(moment().tz(cntTimeZone).utcOffset() / 60)
+    }
+  }
 
   return (
     <div>
@@ -301,7 +313,10 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                 {code !== "MAIL_IN" && !isEmpty(selectVal) && !isEmpty(findLocs) && (
                   <CustomSelect
                     value={selectVal}
-                    handleSetValue={setSelectVal}
+                    handleSetValue={(val) => {
+                      handleUpdateStore(val)
+                      setSelectVal(val)
+                    }}
                     options={findLocs}
                   />
                 )}

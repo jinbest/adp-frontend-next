@@ -110,7 +110,7 @@ const CustomBookTime = ({
       })
     }
     setBookArray([...booklist])
-  }, [selectYear, selectMonth, selectDay, selOffset, storesDetails.cntUserLocation])
+  }, [selectYear, selectMonth, selectDay, selOffset, storesDetails.cntUserLocation, offset])
 
   const handleBook = (n: number) => {
     const cntBookArray: any[] = bookArray
