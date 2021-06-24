@@ -11,23 +11,23 @@ import _ from "lodash"
 const categoryFilterName = [
   {
     name: "Cellphone",
-    slug: "phones",
+    slug: "Phones",
   },
   {
     name: "Tablet",
-    slug: "tablets",
+    slug: "Tablets",
   },
   {
     name: "Computer",
-    slug: "laptops",
+    slug: "Laptops",
   },
   {
     name: "Console",
-    slug: "console",
+    slug: "Console",
   },
   {
     name: "Other",
-    slug: "other",
+    slug: "Other",
   },
 ]
 

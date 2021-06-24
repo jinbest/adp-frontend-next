@@ -73,17 +73,20 @@ const ChooseDevice = ({
   const [filterList, setFileterList] = useState<SelectParams[]>([
     { name: "All", code: "0" },
   ] as SelectParams[])
-  const [categoryID, setCategoryID] = useState(-1)
 
-  const getFilterList = async () => {
+  const getFilterList = async (cateName?: string) => {
+    const result = {
+      category_id: -1,
+      filter: { code: "0", name: "All" } as SelectParams,
+    }
     const params: FilterParams = {
       page: 1,
       per_page: 100,
       include_voided: false,
       display_sort_order: "asc",
     }
-    if (categoryName) {
-      params.name = categoryName
+    if (cateName) {
+      params.name = cateName
     }
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/categories`
     const filterData = await apiClient.get<any>(apiURL, params)
@@ -96,12 +99,17 @@ const ChooseDevice = ({
       })
     })
     setFileterList(tmpFilterList)
-    if (categoryName && filterData.data.length) {
-      setCategoryID(filterData.data[0].id)
-      return filterData.data[0].id
-    } else {
-      return -1
+    if (categoryName) {
+      const cateIndex = _.findIndex(tmpFilterList, (o) => o.name === categoryName)
+      if (cateIndex > -1) {
+        setFilter(tmpFilterList[cateIndex])
+        result.filter = tmpFilterList[cateIndex]
+      }
     }
+    if (cateName && filterData.data.length) {
+      result.category_id = filterData.data[0].id
+    }
+    return result
   }
 
   const [t] = useTranslation()
@@ -116,7 +124,9 @@ const ChooseDevice = ({
           name: searchText,
           page: page + 1,
           per_page: perPage,
-          category_id: categoryID,
+        }
+        if (Number(filter.code) > 0) {
+          paramsBrand.category_id = Number(filter.code)
         }
         await addMoreDeviceBrandsAPI(paramsBrand)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
@@ -145,11 +155,8 @@ const ChooseDevice = ({
         }
         if (Number(filter.code) > 0) {
           paramsModel.category_id = Number(filter.code)
-          await addMoreBrandProductsAPI(paramsModel)
-        } else {
-          paramsModel.category_id = categoryID
-          await addMoreBrandProductsAPI(paramsModel)
         }
+        await addMoreBrandProductsAPI(paramsModel)
         if (
           repairWidData.repairBrandProducts.data &&
           repairWidData.repairBrandProducts.data.length
@@ -241,7 +248,7 @@ const ChooseDevice = ({
 
   const onKeyPress = async (event: any) => {
     if (event.key === "Enter" && (step === 0 || step === 1 || step === 2)) {
-      await loadStepData(stepName, event.target.value, 1, page * perPage)
+      await loadFilterData(event.target.value, 1, page * perPage, filter.code)
     }
     if (event.key === "Enter" && !disableStatus && (step === 2 || step === 4 || step === 5)) {
       handleStep(step + 1)
@@ -256,14 +263,51 @@ const ChooseDevice = ({
   const handleClickSearchIcon = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (step >= 3) return
     e.preventDefault()
-    await loadStepData(stepName, searchText, 1, page * perPage)
+    await loadFilterData(searchText, 1, page * perPage, filter.code)
+  }
+
+  const loadFilterData = async (text: string, pg: number, perpg: number, code: string) => {
+    setLoading(true)
+    const cntImgData: any[] = []
+    const paramModel: GetProductsParam = {
+      brand_id: repairWidData.cntBrandID,
+      name: text,
+      page: pg,
+      per_page: perpg,
+    }
+    if (Number(code) > 0) {
+      paramModel.category_id = Number(code)
+    }
+    await getBrandProductsAPI(paramModel)
+    if (repairWidData.repairBrandProducts.data && repairWidData.repairBrandProducts.data.length) {
+      setSliceNum(repairWidData.repairBrandProducts.data.length)
+      for (let i = 0; i < repairWidData.repairBrandProducts.data.length; i++) {
+        cntImgData.push({
+          name: repairWidData.repairBrandProducts.data[i].name,
+          img: repairWidData.repairBrandProducts.data[i].img_src,
+          id: repairWidData.repairBrandProducts.data[i].id,
+          alt: repairWidData.repairBrandProducts.data[i].img_alt,
+        })
+      }
+    }
+    if (repairWidData.repairBrandProducts.metadata.total <= pg * perpg) {
+      setPlusVisible(false)
+    } else {
+      setPlusVisible(true)
+    }
+    setImageData(cntImgData)
+    setLoading(false)
   }
 
   const loadStepData = async (name: string, text: string, pg: number, perpg: number) => {
     setLoading(true)
-    let catID = -1
-    if ((name === "deviceBrand" && categoryName) || name === "deviceModel") {
-      catID = await getFilterList()
+    let catID = -1,
+      result = {} as any
+    if (name === "deviceBrand" && categoryName) {
+      result = await getFilterList(categoryName)
+      catID = result.category_id
+    } else if (name === "deviceModel") {
+      result = await getFilterList()
     }
     const cntImgData: any[] = [],
       cntTypes: any[] = []
@@ -295,6 +339,10 @@ const ChooseDevice = ({
         }
         break
       case "deviceModel":
+        if (categoryName) {
+          loadFilterData(text, pg, perpg, result.filter.code)
+          break
+        }
         const paramModel: GetProductsParam = {
           brand_id: repairWidData.cntBrandID,
           name: text,
@@ -387,14 +435,14 @@ const ChooseDevice = ({
     setPage(initPage)
     setPerPage(initPerPage)
     loadStepData(stepName, searchText, initPage, initPerPage)
-  }, [data, stepName, repairWidData, filter])
+  }, [data, stepName, repairWidData])
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false)
     return () => {
       document.removeEventListener("keydown", onKeyPress, false)
     }
-  }, [step, disableStatus, page, perPage])
+  }, [step, disableStatus, page, perPage, filter])
 
   const GotoNextStep = async () => {
     await ChooseNextStep(999)
@@ -587,6 +635,7 @@ const ChooseDevice = ({
                         value={filter}
                         handleSetValue={(value: SelectParams) => {
                           setFilter({ name: value.name, code: value.code })
+                          loadFilterData(searchText, 1, 10, value.code)
                         }}
                         options={filterList}
                       />

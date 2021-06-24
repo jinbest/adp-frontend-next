@@ -21,4 +21,5 @@ export interface GetBrandsParam {
   category?: string
   display_sort_order?: string
   has_products?: boolean
+  category_ids?: number[]
 }

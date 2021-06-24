@@ -23,7 +23,7 @@ class RepairWidgetAPI {
       display_sort_order: "asc"
     }
     if (val.category_id && val.category_id > 0) {
-      params.category_id = val.category_id
+      params.category_ids = [val.category_id]
     }
     if (val.name) {
       params.name = val.name
