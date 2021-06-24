@@ -109,7 +109,10 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
       cntFindLoc.push({
         code: storeLocs[i].id,
         name:
-          storeLocs[i].address_1 + (storeLocs[i].address_2 ? ", " + storeLocs[i].address_2 : ""),
+          storeLocs[i].address_1 +
+          (storeLocs[i].address_2 ? ", " + storeLocs[i].address_2 : "") +
+          ", " +
+          storeLocs[i].city,
       })
     }
     setFindLocs(cntFindLoc)
