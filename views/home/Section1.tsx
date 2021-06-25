@@ -31,14 +31,15 @@ const Section1 = ({ features, handleStatus }: Props) => {
     // const cntCardMobileData: any = data.cardMobileData.data
     const cntFeature: any[] = [],
       cntFeatSearch: any[] = []
-    for (let j = 0; j < features.length; j++) {
-      if (features[j].flag === "SEARCH" && features[j].isActive) {
-        cntFeatSearch.push(features[j].flag)
+
+    features.map((item) => {
+      if (item.flag === "SEARCH" && item.isActive) {
+        cntFeatSearch.push(item.flag)
       }
-      if (features[j].isActive) {
-        cntFeature.push(features[j].flag)
+      if (item.isActive) {
+        cntFeature.push(item.flag)
       }
-    }
+    })
     // const cntGridMD = Math.round(12 / cntFeature.length)
     // setFeatures(cntFeature)
     setFeatSearch(cntFeatSearch)

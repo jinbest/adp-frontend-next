@@ -20,14 +20,11 @@ import ContactModal from "../../business/ContactModal"
 import { ConvertWarrantyUnit } from "../../../services/helper"
 import CustomSelect from "../../../components/CustomSelect"
 import { SelectParams, FilterParams } from "../../../model/select-dropdown-param"
-import Config from "../../../config/config"
-import ApiClient from "../../../services/api-client"
 import _, { isEmpty } from "lodash"
 import { GetProductsParam } from "../../../model/get-products-params"
 import { GetBrandsParam } from "../../../model/get-brands-params"
 import { repairWidgetStepName } from "../../../const/_variables"
-
-const apiClient = ApiClient.getInstance()
+import { repairWidgetAPI } from "../../../services"
 
 type Props = {
   data: any
@@ -89,8 +86,10 @@ const ChooseDevice = ({
     if (cateName) {
       params.name = cateName
     }
-    const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/categories`
-    const filterData = await apiClient.get<any>(apiURL, params)
+    const filterData: any = await repairWidgetAPI.filterCategories(
+      storesDetails.storesDetails.settings.store_id,
+      params
+    )
     const tmpFilterList: SelectParams[] = [] as SelectParams[]
     tmpFilterList.push({ name: "All", code: "0" })
     filterData.data.forEach((item: any) => {
@@ -137,14 +136,14 @@ const ChooseDevice = ({
           } else {
             setPlusVisible(true)
           }
-          for (let i = 0; i < repairWidData.repairDeviceBrands.data.length; i++) {
+          repairWidData.repairDeviceBrands.data.map((item: any) => {
             cntImgData.push({
-              name: repairWidData.repairDeviceBrands.data[i].name,
-              img: repairWidData.repairDeviceBrands.data[i].img_src,
-              id: repairWidData.repairDeviceBrands.data[i].id,
-              alt: repairWidData.repairDeviceBrands.data[i].img_alt,
+              name: item.name,
+              img: item.img_src,
+              id: item.id,
+              alt: item.img_alt,
             })
-          }
+          })
         }
         break
       case repairWidgetStepName.deviceModel:
@@ -168,14 +167,14 @@ const ChooseDevice = ({
           } else {
             setPlusVisible(true)
           }
-          for (let i = 0; i < repairWidData.repairBrandProducts.data.length; i++) {
+          repairWidData.repairBrandProducts.data.map((item: any) => {
             cntImgData.push({
-              name: repairWidData.repairBrandProducts.data[i].name,
-              img: repairWidData.repairBrandProducts.data[i].img_src,
-              id: repairWidData.repairBrandProducts.data[i].id,
-              alt: repairWidData.repairBrandProducts.data[i].img_alt,
+              name: item.name,
+              img: item.img_src,
+              id: item.id,
+              alt: item.img_alt,
             })
-          }
+          })
         }
         break
       case repairWidgetStepName.deviceRepairs:
@@ -192,28 +191,28 @@ const ChooseDevice = ({
         } else {
           setPlusVisible(true)
         }
-        for (let i = 0; i < cntOfferedRepairs.length; i++) {
+        cntOfferedRepairs.map((item: any) => {
           cntTypes.push({
-            name: cntOfferedRepairs[i].title,
+            name: item.title,
             bg: "white",
             col: "black",
-            estimate: cntOfferedRepairs[i].duration,
+            estimate: item.duration,
             selected: false,
-            cost: cntOfferedRepairs[i].cost,
-            warranty: cntOfferedRepairs[i].warranty,
-            warranty_unit: cntOfferedRepairs[i].warranty_unit,
-            id: cntOfferedRepairs[i].id,
+            cost: item.cost,
+            warranty: item.warranty,
+            warranty_unit: item.warranty_unit,
+            id: item.id,
           })
-        }
-        for (let i = 0; i < cntTypes.length; i++) {
-          for (let j = 0; j < repairWidgetData.chooseRepair.length; j++) {
-            if (cntTypes[i].name === repairWidgetData.chooseRepair[j].name) {
-              cntTypes[i].bg = repairChooseItemCol
-              cntTypes[i].col = "white"
-              cntTypes[i].selected = true
+        })
+        cntTypes.map((itType: any) => {
+          repairWidgetData.chooseRepair.map((item: any) => {
+            if (itType.name === item.name) {
+              itType.bg = repairChooseItemCol
+              itType.col = "white"
+              itType.selected = true
             }
-          }
-        }
+          })
+        })
         setItemTypes([...cntTypes])
         break
       default:
@@ -282,14 +281,14 @@ const ChooseDevice = ({
     await getBrandProductsAPI(paramModel)
     if (repairWidData.repairBrandProducts.data && repairWidData.repairBrandProducts.data.length) {
       setSliceNum(repairWidData.repairBrandProducts.data.length)
-      for (let i = 0; i < repairWidData.repairBrandProducts.data.length; i++) {
+      repairWidData.repairBrandProducts.data.map((item: any) => {
         cntImgData.push({
-          name: repairWidData.repairBrandProducts.data[i].name,
-          img: repairWidData.repairBrandProducts.data[i].img_src,
-          id: repairWidData.repairBrandProducts.data[i].id,
-          alt: repairWidData.repairBrandProducts.data[i].img_alt,
+          name: item.name,
+          img: item.img_src,
+          id: item.id,
+          alt: item.img_alt,
         })
-      }
+      })
     }
     if (repairWidData.repairBrandProducts.metadata.total <= pg * perpg) {
       setPlusVisible(false)
@@ -324,14 +323,14 @@ const ChooseDevice = ({
         await getDeviceBrandsAPI(paramBrand)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
           setSliceNum(repairWidData.repairDeviceBrands.data.length)
-          for (let i = 0; i < repairWidData.repairDeviceBrands.data.length; i++) {
+          repairWidData.repairDeviceBrands.data.map((item: any) => {
             cntImgData.push({
-              name: repairWidData.repairDeviceBrands.data[i].name,
-              img: repairWidData.repairDeviceBrands.data[i].img_src,
-              id: repairWidData.repairDeviceBrands.data[i].id,
-              alt: repairWidData.repairDeviceBrands.data[i].img_alt,
+              name: item.name,
+              img: item.img_src,
+              id: item.id,
+              alt: item.img_alt,
             })
-          }
+          })
         }
         if (repairWidData.repairDeviceBrands.metadata.total <= pg * perpg) {
           setPlusVisible(false)
@@ -362,14 +361,14 @@ const ChooseDevice = ({
           repairWidData.repairBrandProducts.data.length
         ) {
           setSliceNum(repairWidData.repairBrandProducts.data.length)
-          for (let i = 0; i < repairWidData.repairBrandProducts.data.length; i++) {
+          repairWidData.repairBrandProducts.data.map((item: any) => {
             cntImgData.push({
-              name: repairWidData.repairBrandProducts.data[i].name,
-              img: repairWidData.repairBrandProducts.data[i].img_src,
-              id: repairWidData.repairBrandProducts.data[i].id,
-              alt: repairWidData.repairBrandProducts.data[i].img_alt,
+              name: item.name,
+              img: item.img_src,
+              id: item.id,
+              alt: item.img_alt,
             })
-          }
+          })
         }
         if (repairWidData.repairBrandProducts.metadata.total <= pg * perpg) {
           setPlusVisible(false)
@@ -383,19 +382,19 @@ const ChooseDevice = ({
 
         if (cntOfferedRepairs != null) {
           setSliceNum(repairWidData.repairsOfferedDevices.data.length)
-          for (let i = 0; i < cntOfferedRepairs.length; i++) {
+          cntOfferedRepairs.map((item: any) => {
             cntTypes.push({
-              name: cntOfferedRepairs[i].title,
+              name: item.title,
               bg: "white",
               col: "black",
-              estimate: cntOfferedRepairs[i].duration,
+              estimate: item.duration,
               selected: false,
-              cost: cntOfferedRepairs[i].cost,
-              warranty: cntOfferedRepairs[i].warranty,
-              warranty_unit: cntOfferedRepairs[i].warranty_unit,
-              id: cntOfferedRepairs[i].id,
+              cost: item.cost,
+              warranty: item.warranty,
+              warranty_unit: item.warranty_unit,
+              id: item.id,
             })
-          }
+          })
           if (!isEmpty(repairWidgetStore.repairBySearch)) {
             const chooseIndex = _.findIndex(cntTypes, { id: repairWidgetStore.repairBySearch.id })
             if (chooseIndex > -1) {
@@ -461,53 +460,46 @@ const ChooseDevice = ({
         ? _.cloneDeep(repairWidData.apiDropOffDevices.types)
         : []
       const cntAvailableDeliveryMethod: any[] = _.cloneDeep(repairWidData.repairDeliveryMethod)
-      for (let i = 0; i < cntDeliverySets.length; i++) {
-        for (let j = 0; j < cntAvailableDeliveryMethod.length; j++) {
-          if (
-            cntDeliverySets[i].code === cntAvailableDeliveryMethod[j].code &&
-            cntAvailableDeliveryMethod[j].is_enabled
-          ) {
-            cntTypes.push(cntDeliverySets[i])
-            break
+
+      cntDeliverySets.map((itDeliverySet: any) => {
+        cntAvailableDeliveryMethod.map((itAvailMethod: any) => {
+          if (itDeliverySet.code === itAvailMethod.code && itAvailMethod.is_enabled) {
+            cntTypes.push(itDeliverySet)
+            return
           }
+        })
+      })
+      cntTypes.map((item: any) => {
+        item.bg = "white"
+        item.col = "black"
+        item.selected = false
+        if (item.name === repairWidgetData.deliveryMethod.method) {
+          item.bg = repairChooseItemCol
+          item.col = "white"
+          item.selected = true
         }
-      }
-      for (let i = 0; i < cntTypes.length; i++) {
-        cntTypes[i].bg = "white"
-        cntTypes[i].col = "black"
-        cntTypes[i].selected = false
-        if (cntTypes[i].name === repairWidgetData.deliveryMethod.method) {
-          cntTypes[i].bg = repairChooseItemCol
-          cntTypes[i].col = "white"
-          cntTypes[i].selected = true
-        }
-      }
+      })
       setItemTypes([...cntTypes])
     } else if (step === 5) {
       const cntQuote: any[] = [],
         cntTypes: any[] = repairWidData.receiveQuote.types.length
           ? _.cloneDeep(repairWidData.receiveQuote.types)
           : []
-      for (let i = 0; i < cntTypes.length; i++) {
-        cntTypes[i].bg = "white"
-        cntTypes[i].col = "black"
-        cntTypes[i].selected = false
-        if (cntTypes[i].name === repairWidgetData.receiveQuote.method) {
-          cntTypes[i].bg = repairChooseItemCol
-          cntTypes[i].col = "white"
-          cntTypes[i].selected = true
+      cntTypes.map((itType: any) => {
+        itType.bg = "white"
+        itType.col = "black"
+        itType.selected = false
+        if (itType.name === repairWidgetData.receiveQuote.method) {
+          itType.bg = repairChooseItemCol
+          itType.col = "white"
+          itType.selected = true
         }
-        for (let j = 0; j < repairWidData.contactMethod.length; j++) {
-          if (
-            cntTypes[i].code === repairWidData.contactMethod[j].code &&
-            repairWidData.contactMethod[j].is_enabled &&
-            cntTypes[i].code !== "TEXT"
-          ) {
-            cntQuote.push(cntTypes[i])
-            break
+        repairWidData.contactMethod.map((itMethod: any) => {
+          if (itType.code === itMethod.code && itMethod.is_enabled && itType.code !== "TEXT") {
+            cntQuote.push(itType)
           }
-        }
-      }
+        })
+      })
       setItemTypes([...cntQuote])
     }
   }, [step, repairWidgetData, repairWidData])
@@ -526,39 +518,39 @@ const ChooseDevice = ({
       }
       setItemTypes([...cntTypes])
       const preChooseRepairs: any[] = []
-      for (let i = 0; i < cntTypes.length; i++) {
-        if (cntTypes[i].selected) {
+      cntTypes.map((item: any) => {
+        if (item.selected) {
           preChooseRepairs.push({
-            name: cntTypes[i].name,
-            cost: cntTypes[i].cost,
-            estimate: cntTypes[i].estimate,
-            warranty: cntTypes[i].warranty,
-            warranty_unit: cntTypes[i].warranty_unit,
-            id: cntTypes[i].id,
+            name: item.name,
+            cost: item.cost,
+            estimate: item.estimate,
+            warranty: item.warranty,
+            warranty_unit: item.warranty_unit,
+            id: item.id,
           })
         }
-      }
+      })
       handleChangeChooseData(step, {
         data: preChooseRepairs,
         counter: repairWidgetData.deviceCounter,
       })
     } else {
       const cntItemTypes: any[] = itemTypes
-      for (let u = 0; u < cntItemTypes.length; u++) {
-        if (u === i) {
-          cntItemTypes[u].bg = repairChooseItemCol
-          cntItemTypes[u].col = "white"
-          cntItemTypes[u].selected = true
+      cntItemTypes.map((item: any, idx: number) => {
+        if (idx === i) {
+          item.bg = repairChooseItemCol
+          item.col = "white"
+          item.selected = true
           handleChangeChooseData(step, {
-            method: cntItemTypes[u].name,
-            code: cntItemTypes[u].code,
+            method: item.name,
+            code: item.code,
           })
         } else {
-          cntItemTypes[u].bg = "white"
-          cntItemTypes[u].col = "black"
-          cntItemTypes[u].selected = false
+          item.bg = "white"
+          item.col = "black"
+          item.selected = false
         }
-      }
+      })
       setItemTypes([...cntItemTypes])
       ChooseNextStep(999)
     }
@@ -568,18 +560,18 @@ const ChooseDevice = ({
     const cntArray: any[] = [],
       cntTypes: any[] = itemTypes
     if (cntTypes && stepName === repairWidgetStepName.deviceRepairs) {
-      for (let i = 0; i < cntTypes.length; i++) {
-        if (cntTypes[i].bg === repairChooseItemCol) {
+      cntTypes.map((item: any) => {
+        if (item.bg === repairChooseItemCol) {
           cntArray.push({
-            name: cntTypes[i].name,
-            estimate: cntTypes[i].estimate,
-            cost: cntTypes[i].cost,
-            warranty: cntTypes[i].warranty,
-            warranty_unit: cntTypes[i].warranty_unit,
-            id: cntTypes[i].id,
+            name: item.name,
+            estimate: item.estimate,
+            cost: item.cost,
+            warranty: item.warranty,
+            warranty_unit: item.warranty_unit,
+            id: item.id,
           })
         }
-      }
+      })
       setEstimatedTimes([...cntArray])
     }
   }, [itemTypes])
@@ -591,12 +583,12 @@ const ChooseDevice = ({
     }
     if (step === 4 || step === 5) {
       const cntTypes: any[] = itemTypes
-      for (let i = 0; i < cntTypes.length; i++) {
-        if (cntTypes[i].selected) {
+      cntTypes.map((item: any) => {
+        if (item.selected) {
           setDisableStatus(false)
-          break
+          return
         }
-      }
+      })
     }
   }, [step, estimatedTimes, itemTypes])
 

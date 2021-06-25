@@ -92,31 +92,31 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
     const cntSelHours: SelectHoursProps[] = []
     const storeLocs: any[] = storesDetails.findAddLocation
     const i: number = mailInChecked
-    if (storeLocs.length) {
-      for (let j = 0; j < storeLocs[i].location_hours.length; j++) {
-        if (storeLocs[i].location_hours[j].type === "REGULAR") {
+    if (storeLocs.length > i && storeLocs[i].location_hours.length) {
+      storeLocs[i].location_hours.map((item: any) => {
+        if (item.type === "REGULAR") {
           let hour = ""
-          if (!storeLocs[i].location_hours[j].open || !storeLocs[i].location_hours[j].close) {
+          if (!item.open || !item.close) {
             hour = t("Closed")
           } else {
             const open = getConvertHourType(
-              storeLocs[i].location_hours[j].open,
+              item.open,
               storeLocs[i].timezone,
               repairWidgetStore.timezone
             )
             const close = getConvertHourType(
-              storeLocs[i].location_hours[j].close,
+              item.close,
               storeLocs[i].timezone,
               repairWidgetStore.timezone
             )
             hour = open + " - " + close
           }
           cntSelHours.push({
-            day: DAYS_OF_THE_WEEK[storeLocs[i].location_hours[j].day],
+            day: DAYS_OF_THE_WEEK[item.day],
             hour: hour,
           })
         }
-      }
+      })
     }
     setSelHours(cntSelHours)
   }, [mailInChecked, storesDetails])

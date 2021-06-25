@@ -8,12 +8,11 @@ import { getAddress, makeLocations } from "../../services/helper"
 import { useTranslation } from "react-i18next"
 import { observer } from "mobx-react"
 import { storesDetails } from "../../store"
-import ApiClient from "../../services/api-client"
 import { ToastMsgParams } from "../../components/toast/toast-msg-params"
-import Config from "../../config/config"
 import Toast from "../../components/toast/toast"
 import "leaflet/dist/leaflet.css"
 import L from "leaflet"
+import { findLocationAPI } from "../../services"
 
 const icon = L.icon({ iconUrl: "/img/marker-icon.png" })
 
@@ -35,7 +34,6 @@ const WholeMap = ({
   const [t] = useTranslation()
   const locations = storesDetails.findAddLocation
   const buttonCol = storesDetails.storeCnts.general.colorPalle.themeColor
-  const apiClient = ApiClient.getInstance()
 
   const classes = useStyles()
   let centerX = 49.865759
@@ -112,23 +110,31 @@ const WholeMap = ({
       country: "",
     }
 
-    try {
-      setIsFinding(true)
-      const apiURL = `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.store_id}/locations/address`
-      const findLocs = await apiClient.post<any[]>(apiURL, infoData)
-      storesDetails.changeFindAddLocation(findLocs)
-      storesDetails.changeLocationID(storesDetails.findAddLocation[0].id)
-      storesDetails.changeCntUserLocation(makeLocations([storesDetails.findAddLocation[0]]))
-      storesDetails.changeCntUserLocationSelected(true)
-    } catch (error) {
-      setToastParams({
-        msg: t("Error to find location with Postal Code, please check your postcode."),
-        isError: true,
+    findLocationAPI
+      .findAddLocation(storesDetails.store_id, infoData)
+      .then((res: any) => {
+        if (res.length) {
+          storesDetails.changeFindAddLocation(res)
+          storesDetails.changeLocationID(storesDetails.findAddLocation[0].id)
+          storesDetails.changeCntUserLocation(makeLocations([storesDetails.findAddLocation[0]]))
+          storesDetails.changeCntUserLocationSelected(true)
+        } else {
+          setToastParams({
+            msg: "Response is an empty data, please check your infos.",
+            isWarning: true,
+          })
+        }
       })
-    } finally {
-      setIsFinding(false)
-      setPostCode("")
-    }
+      .catch(() => {
+        setToastParams({
+          msg: t("Error to find location with Postal Code, please check your postcode."),
+          isError: true,
+        })
+      })
+      .finally(() => {
+        setIsFinding(false)
+        setPostCode("")
+      })
   }
 
   const resetStatuses = () => {

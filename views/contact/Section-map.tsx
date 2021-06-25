@@ -47,11 +47,11 @@ const SectionMap = ({
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    for (let i = 0; i < features.length; i++) {
-      if (features[i].isActive) {
-        cntFeatures.push(features[i].flag)
+    features.map((item) => {
+      if (item.isActive) {
+        cntFeatures.push(item.flag)
       }
-    }
+    })
     setFeatures(cntFeatures)
   }, [features])
 
@@ -66,14 +66,14 @@ const SectionMap = ({
   }
 
   useEffect(() => {
-    for (let i = 0; i < locations.length; i++) {
-      if (parseInt(locations[i].id) === location_id) {
-        setExpanded(i)
+    locations.map((item, index) => {
+      if (parseInt(item.id) === location_id) {
+        setExpanded(index)
         setIsExpanded(true)
-        setSelectedLocation(locations[i])
-        break
+        setSelectedLocation(item)
+        return
       }
-    }
+    })
   }, [locations, location_id])
 
   const handleChange = (panel: number) => (_: React.ChangeEvent<any>, isExpanded: boolean) => {
@@ -92,18 +92,18 @@ const SectionMap = ({
 
   useEffect(() => {
     if (storesDetails.cntUserLocationSelected && locations.length) {
-      for (let i = 0; i < locations.length; i++) {
+      locations.map((item, index) => {
         if (
           !isEmpty(storesDetails.cntUserLocation) &&
-          storesDetails.cntUserLocation[0].location_id === locations[i].id
+          storesDetails.cntUserLocation[0].location_id === item.id
         ) {
-          setSelectedLocation(locations[i])
-          handleLocationID(locations[i].id)
-          setExpanded(i)
+          setSelectedLocation(item)
+          handleLocationID(item.id)
+          setExpanded(index)
           setIsExpanded(true)
-          break
+          return
         }
-      }
+      })
       return
     }
   }, [storesDetails.cntUserLocation])

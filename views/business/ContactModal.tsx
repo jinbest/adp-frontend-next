@@ -105,11 +105,11 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
   const classes = useStyles()
 
   const [firstName, setFirstName] = useState("")
-  const [fnErrTxt, setFnErrTxt] = useState("")
+  const [firstNameErr, setFirstNameErr] = useState("")
   const [lastName, setLastName] = useState("")
-  const [lnErrTxt, setLnErrTxt] = useState("")
+  const [lastNameErr, setLastNameErr] = useState("")
   const [email, setEmail] = useState("")
-  const [emlErrTxt, setEmlErrTxt] = useState("")
+  const [emailErr, setEmailErr] = useState("")
   const [companyName, setCompanyName] = useState("")
   const [phone, setPhone] = useState("")
   const [option, setOption] = useState<OptionProps[]>([])
@@ -196,26 +196,26 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
       return true
     }
     if (!firstName) {
-      setFnErrTxt(t("Required."))
+      setFirstNameErr(t("Required."))
       setTimeout(() => {
-        setFnErrTxt("")
+        setFirstNameErr("")
       }, 3000)
     }
     if (!lastName) {
-      setLnErrTxt(t("Required."))
+      setLastNameErr(t("Required."))
       setTimeout(() => {
-        setLnErrTxt("")
+        setLastNameErr("")
       }, 3000)
     }
     if (!email) {
-      setEmlErrTxt(t("Required."))
+      setEmailErr(t("Required."))
       setTimeout(() => {
-        setEmlErrTxt("")
+        setEmailErr("")
       }, 3000)
     } else if (!ValidateEmail(email)) {
-      setEmlErrTxt(t("Enter a valid email."))
+      setEmailErr(t("Enter a valid email."))
       setTimeout(() => {
-        setEmlErrTxt("")
+        setEmailErr("")
       }, 3000)
     }
     if (!message) {
@@ -318,7 +318,7 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                     handleChange={(e) => {
                       handleChangeFirstName(e.target.value)
                     }}
-                    errorText={fnErrTxt}
+                    errorText={firstNameErr}
                     border="rgba(0,0,0,0.1)"
                   />
                 </Grid>
@@ -329,7 +329,7 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                     handleChange={(e) => {
                       handleChangeLastName(e.target.value)
                     }}
-                    errorText={lnErrTxt}
+                    errorText={lastNameErr}
                     border="rgba(0,0,0,0.1)"
                   />
                 </Grid>
@@ -349,7 +349,7 @@ const ContactModal = ({ openModal, handleModal }: Props) => {
                     handleChange={(e) => {
                       handleChangeEmail(e.target.value)
                     }}
-                    errorText={emlErrTxt}
+                    errorText={emailErr}
                     border="rgba(0,0,0,0.1)"
                   />
                 </Grid>

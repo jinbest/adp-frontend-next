@@ -1,7 +1,6 @@
 import React from "react"
 import Editor, { Value } from "@react-page/editor"
 import { cellPlugins } from "./plugins/cellPlugins"
-// import "./react-page-editor.scss"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 

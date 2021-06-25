@@ -45,11 +45,11 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
     setPageTitle("Quotes | " + storesDetails.storesDetails.name)
 
     const cntFeatures: any[] = []
-    for (let i = 0; i < features.length; i++) {
-      if (features[i].isActive) {
-        cntFeatures.push(features[i].flag)
+    features.map((item) => {
+      if (item.isActive) {
+        cntFeatures.push(item.flag)
       }
-    }
+    })
     setFeats([...cntFeatures])
 
     getRepairLookupAPI()

@@ -57,19 +57,19 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
       timezone = repairWidgetStore.timezone,
       store_tz = storesDetails.cntUserLocation[0].timezone
     for (let i = 0; i < repairWidgetStore.deviceCounter; i++) {
-      for (let j = 0; j < repairWidgetStore.chooseRepair[i].length; j++) {
+      repairWidgetStore.chooseRepair[i].map((item: any) => {
         repairs.push({
-          repair_id: repairWidgetStore.chooseRepair[i][j].id,
+          repair_id: item.id,
           product_id: repairWidgetStore.deviceModel[i].id,
-          cost: repairWidgetStore.chooseRepair[i][j].cost,
-          duration: repairWidgetStore.chooseRepair[i][j].estimate,
+          cost: item.cost,
+          duration: item.estimate,
           product_name:
             repairWidgetStore.deviceBrand[i].name + " " + repairWidgetStore.deviceModel[i].name,
-          repair_name: repairWidgetStore.chooseRepair[i][j].name,
-          warranty: repairWidgetStore.chooseRepair[i][j].warranty,
-          warranty_unit: repairWidgetStore.chooseRepair[i][j].warranty_unit,
+          repair_name: item.name,
+          warranty: item.warranty,
+          warranty_unit: item.warranty_unit,
         })
-      }
+      })
     }
     const params = {} as PostAppointParams
     params.store_id = storesDetails.store_id

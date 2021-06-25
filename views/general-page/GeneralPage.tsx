@@ -35,7 +35,7 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
         setMeta({ name: "description", content: mainData[pageIndex].header.meta_description })
         setPrint(!!mainData[pageIndex].print)
       }
-      handleStatus(mainData[pageIndex].include_footer)
+      handleStatus(pageIndex > -1 ? mainData[pageIndex].include_footer : false)
       if (pageIndex > -1 && !mainData[pageIndex].include_header) {
         const header = document.getElementsByClassName("header")[0] as HTMLElement,
           editorContainer = document.getElementById("react-page-editor-container") as HTMLDivElement

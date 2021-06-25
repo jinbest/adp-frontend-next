@@ -8,9 +8,8 @@ import dynamic from "next/dynamic"
 import { storesDetails } from "../../store"
 import { findIndex, isEmpty } from "lodash"
 import { StoreLocation } from "../../model/store-location"
-import ApiClient from "../../services/api-client"
-import Config from "../../config/config"
 import { GetManyResponse } from "../../model/get-many-response"
+import { findLocationAPI } from "../../services"
 
 const DynamicCustomMap = dynamic(() => import("../../components/CustomMap"), { ssr: false })
 
@@ -21,7 +20,6 @@ type Props = {
 
 const SpecCommingSoon = ({ config, locID }: Props) => {
   const classes = useStyles()
-  const apiClient = ApiClient.getInstance()
   const [t] = useTranslation()
 
   const [location, setLocation] = useState<StoreLocation>({} as StoreLocation)
@@ -36,10 +34,17 @@ const SpecCommingSoon = ({ config, locID }: Props) => {
   }, [locID])
 
   const loadSpecLocation = async (id: number) => {
-    const url = `${Config.STORE_SERVICE_API_URL}dc/store/${storesDetails.storesDetails.settings.store_id}/locations?ids=${id}&include_voided=true`
-    const response = await apiClient.get<GetManyResponse>(url)
+    findLocationAPI
+      .findSpecLocation(id, storesDetails.storesDetails.settings.store_id)
+      .then((res: GetManyResponse) => {
+        if (!isEmpty(res) && res.data && res.data.length) {
+          setLocation(res.data[0])
+        }
+      })
+      .catch(() => {
+        setLocation({} as StoreLocation)
+      })
 
-    setLocation(response.data[0])
     return () => {
       setLocation({} as StoreLocation)
     }

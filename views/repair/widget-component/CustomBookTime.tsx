@@ -115,17 +115,17 @@ const CustomBookTime = ({
   const handleBook = (n: number) => {
     const cntBookArray: any[] = bookArray
     if (cntBookArray[n].isPast) return
-    for (let i = 0; i < cntBookArray.length; i++) {
-      if (i === n) {
-        cntBookArray[i].color = "white"
-        cntBookArray[i].bgColor = repairBooktimeCol
-        cntBookArray[i].borderCol = repairBooktimeCol
+    cntBookArray.map((item: any, idx: number) => {
+      if (idx === n) {
+        item.color = "white"
+        item.bgColor = repairBooktimeCol
+        item.borderCol = repairBooktimeCol
       } else {
-        cntBookArray[i].color = cntBookArray[i].isPast ? "rgba(0,0,0,0.2)" : repairBooktimeCol
-        cntBookArray[i].borderCol = cntBookArray[i].isPast ? "rgba(0,0,0,0.2)" : repairBooktimeCol
-        cntBookArray[i].bgColor = "white"
+        item.color = item.isPast ? "rgba(0,0,0,0.2)" : repairBooktimeCol
+        item.borderCol = item.isPast ? "rgba(0,0,0,0.2)" : repairBooktimeCol
+        item.bgColor = "white"
       }
-    }
+    })
     changeBooktime(cntBookArray[n].book)
     setBookArray([...cntBookArray])
   }

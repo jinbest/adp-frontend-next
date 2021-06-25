@@ -246,17 +246,17 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         const hits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score))
         if (hits.length) {
           const cntSearchData = searchData
-          for (let i = 0; i < hits.length; i++) {
+          hits.map((item: any) => {
             if (
-              hits[i]._source.type === "product" ||
-              hits[i]._source.type === "brand" ||
-              (hits[i]._source.type === "service" &&
-                hits[i]._source.product &&
-                !isEmpty(hits[i]._source.product))
+              item._source.type === "product" ||
+              item._source.type === "brand" ||
+              (item._source.type === "service" &&
+                item._source.product &&
+                !isEmpty(item._source.product))
             ) {
-              cntSearchData.push(hits[i])
+              cntSearchData.push(item)
             }
-          }
+          })
           setSearchData(_.uniq(cntSearchData))
           setFrom(from + 10)
           if (from + 10 >= total) {
@@ -333,17 +333,17 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     if (!isEmpty(val) && !isEmpty(val.hits)) {
       const preHits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score)),
         hits = [] as any[]
-      for (let i = 0; i < preHits.length; i++) {
+      preHits.map((item: any) => {
         if (
-          preHits[i]._source.type === "product" ||
-          preHits[i]._source.type === "brand" ||
-          (preHits[i]._source.type === "service" &&
-            preHits[i]._source.product &&
-            !isEmpty(preHits[i]._source.product))
+          item._source.type === "product" ||
+          item._source.type === "brand" ||
+          (item._source.type === "service" &&
+            item._source.product &&
+            !isEmpty(item._source.product))
         ) {
-          hits.push(preHits[i])
+          hits.push(item)
         }
-      }
+      })
       setTotal(val.hits.total.value)
       setSearchData(_.uniq(hits))
     }
@@ -457,11 +457,11 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    for (let i = 0; i < features.length; i++) {
-      if (features[i].isActive) {
-        cntFeatures.push(features[i].flag)
+    features.map((item: any) => {
+      if (item.isActive) {
+        cntFeatures.push(item.flag)
       }
-    }
+    })
     setFeatures(cntFeatures)
   }, [data, features])
 
