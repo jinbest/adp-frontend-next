@@ -6,16 +6,7 @@ import { getRegularHours, getConvertHourType } from "../../../services/helper"
 import { StoreLocation } from "../../../model/store-location"
 import { observer } from "mobx-react"
 import { repairWidgetStore } from "../../../store"
-
-const DAYS_OF_THE_WEEK: string[] = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
+import { DAYS_OF_THE_WEEK } from "../../../const/_variables"
 
 type Props = {
   location: StoreLocation

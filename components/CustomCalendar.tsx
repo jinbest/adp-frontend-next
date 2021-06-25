@@ -4,6 +4,7 @@ import styled, { css } from "styled-components"
 import CustomNumeric from "../components/CustomNumeric"
 import { useTranslation } from "react-i18next"
 import { storesDetails } from "../store"
+import { MONTHS } from "../const/_variables"
 
 const Frame = styled.div`
   width: 100%;
@@ -117,20 +118,6 @@ const CustomCalendar = ({ handleParentDate, timezone }: CanlendarProps) => {
     "Friday",
     "Saturday",
     "Sunday",
-  ]
-  const MONTHS: string[] = [
-    "January",
-    "Febrary",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "Octorber",
-    "November",
-    "December",
   ]
 
   const [today, setToday] = useState(changeTimezone(new Date(), timezone))

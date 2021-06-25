@@ -13,6 +13,7 @@ import { isEmpty, findIndex } from "lodash"
 import { getAddress, makeLocations, phoneFormatString } from "../../services/helper"
 import HoursViewer from "../specific-location/component/hours-viewer"
 import ContactModal from "../business/ContactModal"
+import { featureToggleKeys } from "../../const/_variables"
 
 type Props = {
   features: any[]
@@ -179,7 +180,7 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
                   </Link>
                   <FeatureToggles features={feats}>
                     <Feature
-                      name="FRONTEND_REPAIR_APPOINTMENT"
+                      name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
                       inactiveComponent={() => <></>}
                       activeComponent={() => (
                         <Link

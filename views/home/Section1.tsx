@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next"
 import { isExternal } from "../../services/helper"
 import { observer } from "mobx-react"
 import _ from "lodash"
+import { featureToggleKeys } from "../../const/_variables"
 
 type Props = {
   features: any[]
@@ -91,7 +92,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
 
         <FeatureToggles features={featSearch}>
           <Feature
-            name="FRONTEND_GLOBAL_SEARCH"
+            name={featureToggleKeys.FRONTEND_GLOBAL_SEARCH}
             inactiveComponent={() => <></>}
             activeComponent={() => (
               <Box className="sec1-search_input">

@@ -25,6 +25,7 @@ import ApiClient from "../../../services/api-client"
 import _, { isEmpty } from "lodash"
 import { GetProductsParam } from "../../../model/get-products-params"
 import { GetBrandsParam } from "../../../model/get-brands-params"
+import { repairWidgetStepName } from "../../../const/_variables"
 
 const apiClient = ApiClient.getInstance()
 
@@ -119,7 +120,7 @@ const ChooseDevice = ({
       cntTypes: any[] = []
     let cntOfferedRepairs: any[] = []
     switch (stepName) {
-      case "deviceBrand":
+      case repairWidgetStepName.deviceBrand:
         const paramsBrand: GetBrandsParam = {
           name: searchText,
           page: page + 1,
@@ -146,7 +147,7 @@ const ChooseDevice = ({
           }
         }
         break
-      case "deviceModel":
+      case repairWidgetStepName.deviceModel:
         const paramsModel: GetProductsParam = {
           brand_id: repairWidData.cntBrandID,
           name: searchText,
@@ -177,7 +178,7 @@ const ChooseDevice = ({
           }
         }
         break
-      case "deviceRepairs":
+      case repairWidgetStepName.deviceRepairs:
         await addMoreRepairsOfferedDeviceAPI(
           repairWidData.cntProductID,
           searchText,
@@ -233,11 +234,11 @@ const ChooseDevice = ({
     setSearchText("")
     handleChangeChooseData(step, imageData[i])
     switch (stepName) {
-      case "deviceBrand":
+      case repairWidgetStepName.deviceBrand:
         repairWidData.changeCntBrandID(imageData[i].id)
         handleStep(step + 1)
         break
-      case "deviceModel":
+      case repairWidgetStepName.deviceModel:
         repairWidData.changeCntProductID(imageData[i].id)
         handleStep(step + 1)
         break
@@ -303,17 +304,17 @@ const ChooseDevice = ({
     setLoading(true)
     let catID = -1,
       result = {} as any
-    if (name === "deviceBrand" && categoryName) {
+    if (name === repairWidgetStepName.deviceBrand && categoryName) {
       result = await getFilterList(categoryName)
       catID = result.category_id
-    } else if (name === "deviceModel") {
+    } else if (name === repairWidgetStepName.deviceModel) {
       result = await getFilterList()
     }
     const cntImgData: any[] = [],
       cntTypes: any[] = []
     let cntOfferedRepairs: any[] = []
     switch (name) {
-      case "deviceBrand":
+      case repairWidgetStepName.deviceBrand:
         const paramBrand: GetBrandsParam = {
           name: text,
           page: pg,
@@ -338,7 +339,7 @@ const ChooseDevice = ({
           setPlusVisible(true)
         }
         break
-      case "deviceModel":
+      case repairWidgetStepName.deviceModel:
         if (categoryName) {
           loadFilterData(text, pg, perpg, result.filter.code)
           break
@@ -376,7 +377,7 @@ const ChooseDevice = ({
           setPlusVisible(true)
         }
         break
-      case "deviceRepairs":
+      case repairWidgetStepName.deviceRepairs:
         await getRepairsOfferedDeviceAPI(repairWidData.cntProductID, text, pg, perpg)
         cntOfferedRepairs = _.cloneDeep(repairWidData.repairsOfferedDevices.data)
 
@@ -512,7 +513,7 @@ const ChooseDevice = ({
   }, [step, repairWidgetData, repairWidData])
 
   const toggleItemTypes = (i: number, stepN: string) => {
-    if (stepN === "deviceRepairs") {
+    if (stepN === repairWidgetStepName.deviceRepairs) {
       const cntTypes: any[] = itemTypes
       if (cntTypes[i].bg === "white") {
         cntTypes[i].bg = repairChooseItemCol
@@ -566,7 +567,7 @@ const ChooseDevice = ({
   useEffect(() => {
     const cntArray: any[] = [],
       cntTypes: any[] = itemTypes
-    if (cntTypes && stepName === "deviceRepairs") {
+    if (cntTypes && stepName === repairWidgetStepName.deviceRepairs) {
       for (let i = 0; i < cntTypes.length; i++) {
         if (cntTypes[i].bg === repairChooseItemCol) {
           cntArray.push({
@@ -627,9 +628,9 @@ const ChooseDevice = ({
         <Grid item xs={12} md={7}>
           <Card>
             <div className="service-choose-device-container">
-              {stepName !== "deviceBrand" && step < 3 && (
+              {stepName !== repairWidgetStepName.deviceBrand && step < 3 && (
                 <div className="search-bar-container">
-                  {stepName === "deviceModel" && filterList.length ? (
+                  {stepName === repairWidgetStepName.deviceModel && filterList.length ? (
                     <div style={{ marginRight: "5px", minWidth: "120px" }}>
                       <CustomSelect
                         value={filter}
@@ -661,7 +662,7 @@ const ChooseDevice = ({
                 </div>
               )}
               <div className="widget-main-container">
-                {stepName === "deviceBrand" && (
+                {stepName === repairWidgetStepName.deviceBrand && (
                   <>
                     {imageData &&
                       imageData.slice(0, sliceNum).map((item: any, index: number) => {
@@ -687,7 +688,7 @@ const ChooseDevice = ({
                   </>
                 )}
 
-                {stepName === "deviceModel" && (
+                {stepName === repairWidgetStepName.deviceModel && (
                   <>
                     {imageData &&
                       imageData.slice(0, sliceNum).map((item: any, index: number) => {
@@ -716,7 +717,7 @@ const ChooseDevice = ({
                   </>
                 )}
 
-                {stepName === "repairAnotherDevice" && (
+                {stepName === repairWidgetStepName.repairAnotherDevice && (
                   <div className="repair-another-device">
                     <Button
                       title={t("Yes")}
@@ -741,7 +742,7 @@ const ChooseDevice = ({
                   </div>
                 )}
 
-                {stepName === "deviceRepairs" && (
+                {stepName === repairWidgetStepName.deviceRepairs && (
                   <>
                     {itemTypes &&
                       itemTypes.slice(0, sliceNum).map((item: any, index: number) => {
@@ -767,7 +768,8 @@ const ChooseDevice = ({
                   </>
                 )}
 
-                {(stepName === "dropOffDevicce" || stepName === "receiveQuote") && (
+                {(stepName === repairWidgetStepName.dropOffDevicce ||
+                  stepName === repairWidgetStepName.receiveQuote) && (
                   <>
                     {itemTypes &&
                       itemTypes.slice(0, sliceNum).map((item: any, index: number) => {
@@ -789,7 +791,7 @@ const ChooseDevice = ({
               </div>
             </div>
 
-            {stepName === "deviceRepairs" && (
+            {stepName === repairWidgetStepName.deviceRepairs && (
               <div className="service-card-button">
                 <Button
                   title={t("Next")}
@@ -878,7 +880,8 @@ const ChooseDevice = ({
               </div>
             )}
 
-            {(stepName === "dropOffDevicce" || stepName === "receiveQuote") && (
+            {(stepName === repairWidgetStepName.dropOffDevicce ||
+              stepName === repairWidgetStepName.receiveQuote) && (
               <RepairSummary themeCol={themeCol} />
             )}
           </Card>

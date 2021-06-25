@@ -19,20 +19,7 @@ import { storesDetails, repairWidgetStore } from "../../store"
 import Head from "next/head"
 import { useQuery } from "../../services/helper"
 import _ from "lodash"
-
-const stepList: string[] = [
-  "deviceBrand",
-  "deviceModel",
-  "deviceRepairs",
-  "repairAnotherDevice",
-  "dropOffDevicce",
-  "receiveQuote",
-  "contactDetails",
-  "bookTime",
-  "usefulInfo",
-  "repairServiceSummary",
-  "quoteData",
-]
+import { stepList, featureToggleKeys } from "../../const/_variables"
 
 interface Props {
   handleStatus: (status: boolean) => void
@@ -205,7 +192,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
       {loading && (
         <FeatureToggles features={feats}>
           <Feature
-            name="FRONTEND_REPAIR"
+            name={featureToggleKeys.FRONTEND_REPAIR}
             inactiveComponent={() => <Error />}
             activeComponent={() => (
               <div className="service-widget Container">

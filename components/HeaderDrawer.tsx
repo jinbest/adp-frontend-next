@@ -25,6 +25,7 @@ import {
   isSlugLink,
 } from "../services/helper"
 import _ from "lodash"
+import { featureToggleKeys } from "../const/_variables"
 
 type Anchor = "top" | "left" | "bottom" | "right"
 
@@ -575,7 +576,7 @@ const HeaderDrawer = (props: Props) => {
                   </div>
                   <FeatureToggles features={features}>
                     <Feature
-                      name="FRONTEND_REPAIR_APPOINTMENT"
+                      name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
                       inactiveComponent={() => <></>}
                       activeComponent={() => (
                         <Link

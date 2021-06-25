@@ -21,6 +21,7 @@ import _, { isEmpty } from "lodash"
 import SearchService from "../services/api/search-service"
 import { SearchParams } from "../model/search-params"
 import useScrollBlock from "../services/useScrollBlock"
+import { featureToggleKeys } from "../const/_variables"
 
 const searchService = SearchService.getInstance()
 
@@ -156,7 +157,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     searchPlaceholder = data.homepage.section1.searchPlaceholder
 
   const [t] = useTranslation()
-  const [blockScroll, allowScroll] = useScrollBlock();
+  const [blockScroll, allowScroll] = useScrollBlock()
 
   const [menuStatus, setMenuStatus] = useState(false)
   const [feats, setFeatures] = useState<any[]>([])
@@ -169,29 +170,26 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [total, setTotal] = useState(0)
   const [selectList, setSelectList] = useState(0)
   const [hover, setHover] = useState(false)
-  const [viewFilterList, setViewFilterList] = useState(false);
-  const [searching, setSearching] = useState(false);
+  const [viewFilterList, setViewFilterList] = useState(false)
+  const [searching, setSearching] = useState(false)
 
-  const customRef = useRef(null);
-  useOutsideHit(customRef);
+  const customRef = useRef(null)
+  useOutsideHit(customRef)
 
   function useOutsideHit(ref: any) {
-    useEffect(
-      () => {
-        function handleClickOutside(event: any) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            setViewFilterList(false);
-            setSelectList(0);
-            setHover(false);
-          }
+    useEffect(() => {
+      function handleClickOutside(event: any) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setViewFilterList(false)
+          setSelectList(0)
+          setHover(false)
         }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
-      },
-      [ref]
-    );
+      }
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+      }
+    }, [ref])
   }
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -530,11 +528,11 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             {!mobile && (
               <FeatureToggles features={feats}>
                 <Feature
-                  name="FRONTEND_USER_ACCOUNT"
+                  name={featureToggleKeys.FRONTEND_USER_ACCOUNT}
                   inactiveComponent={() => <></>}
                   activeComponent={() => (
                     <Feature
-                      name="FRONTEND_USER_LOGIN"
+                      name={featureToggleKeys.FRONTEND_USER_LOGIN}
                       inactiveComponent={() => <></>}
                       activeComponent={() => (
                         <BrandItemLink item={t("LOG_IN")} color={brandData.brandCol} href="#" />
@@ -574,10 +572,15 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       >
         <Logo type="header" handleStatus={handleStatus} />
 
-        {feats.includes("FRONTEND_GLOBAL_SEARCH") && (
-          <div className="search-div" id="header-search" ref={customRef} onFocus={() => {
-            setViewFilterList(true);
-          }}>
+        {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
+          <div
+            className="search-div"
+            id="header-search"
+            ref={customRef}
+            onFocus={() => {
+              setViewFilterList(true)
+            }}
+          >
             <Search
               placeholder={searchPlaceholder}
               color="rgba(0,0,0,0.8)"
@@ -623,8 +626,9 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                         )}
                         <p>
                           {item._source.name ||
-                            `${item._source.product ? item._source.product.name : ""} ${item._source.title
-                              }`.trim()}
+                            `${item._source.product ? item._source.product.name : ""} ${
+                              item._source.title
+                            }`.trim()}
                         </p>
                       </div>
                     )
@@ -653,7 +657,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
           </ul>
           <FeatureToggles features={feats}>
             <Feature
-              name="FRONTEND_FIND_A_STORE"
+              name={featureToggleKeys.FRONTEND_FIND_A_STORE}
               inactiveComponent={() => <></>}
               activeComponent={() => (
                 <CustomizedMenus
@@ -720,7 +724,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         {userStatus && menuStatus ? (
           <FeatureToggles features={feats}>
             <Feature
-              name="FRONTEND_GLOBAL_SEARCH"
+              name={featureToggleKeys.FRONTEND_GLOBAL_SEARCH}
               inactiveComponent={() => <></>}
               activeComponent={() => (
                 <div className={ "mobile-search-div"}>
@@ -855,7 +859,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                 })}
                 <FeatureToggles features={feats}>
                   <Feature
-                    name="FRONTEND_USER_ACCOUNT"
+                    name={featureToggleKeys.FRONTEND_USER_ACCOUNT}
                     inactiveComponent={() => <></>}
                     activeComponent={() => (
                       <Feature

@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../../store"
 import { observer } from "mobx-react"
 import { currencyFormater, phoneFormatString } from "../../../services/helper"
+import { deliveryMethodCode } from "../../../const/_variables"
 
 type Props = {
   data: any
@@ -102,31 +103,31 @@ const QuoteComponent = ({ data, quoteKey, repairWidgetData, code }: Props) => {
               <Typography className="details" style={{ color: textThemeCol }}>
                 {t(repairWidgetData.deliveryMethod.method)}
               </Typography>
-              {code === "PICK_UP" && (
+              {code === deliveryMethodCode.pickup && (
                 <Typography className="details bolder">{t("Pick Up From")}</Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details bolder">{t("Send To")}</Typography>
               )}
-              {code !== "MAIL_IN" && (
+              {code !== deliveryMethodCode.mailin && (
                 <Typography className="details">
                   {repairWidgetData.bookData[code].address.name}
                 </Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details">
                   {repairWidgetData.bookData[code].sendTo}
                 </Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details bolder">{t("Return To")}</Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details">
                   {repairWidgetData.contactDetails.address1.name}
                 </Typography>
               )}
-              {code !== "MAIL_IN" && quoteKey === 1 && (
+              {code !== deliveryMethodCode.mailin && quoteKey === 1 && (
                 <Typography className="details">
                   {repairWidgetData.bookData[code].week +
                     ", " +

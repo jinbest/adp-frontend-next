@@ -18,18 +18,10 @@ import {
   phoneFormatString,
 } from "../../services/helper"
 import dynamic from "next/dynamic"
+import { DAYS_OF_THE_WEEK, featureToggleKeys } from "../../const/_variables"
 
 const DynamicCustomMap = dynamic(() => import("../../components/CustomMap"), { ssr: false })
 
-const DAYS_OF_THE_WEEK: string[] = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
 interface Props {
   locations: any[]
   handleStatus: (status: boolean) => void
@@ -228,7 +220,7 @@ const SectionMap = ({
                       </Grid>
                       <FeatureToggles features={feats}>
                         <Feature
-                          name="FRONTEND_REPAIR_APPOINTMENT"
+                          name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
                           inactiveComponent={() => <></>}
                           activeComponent={() => (
                             <Grid

@@ -18,6 +18,12 @@ import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
 import { ValidateEmail, ValidatePhoneNumber } from "../../../services/helper"
+import {
+  deliveryMethodCode,
+  contactMethodCode,
+  appointmentQuoteType,
+  featureToggleKeys,
+} from "../../../const/_variables"
 
 type Props = {
   data: any
@@ -89,7 +95,7 @@ const ContactDetails = ({
       params.store_id = storesDetails.store_id
       params.location_id = storesDetails.location_id
       params.customer_id = 1
-      params.type = "QUOTE"
+      params.type = appointmentQuoteType.quote
       params.is_voided = storesDetails.is_voided
       params.delivery_method = repairWidgetStore.deliveryMethod.code
       params.customer_email = email
@@ -155,13 +161,15 @@ const ContactDetails = ({
       firstName &&
       lastName &&
       email &&
-      ((repairWidgetStore.receiveQuote.code === "PHONE" && phone) ||
-        repairWidgetStore.receiveQuote.code !== "PHONE") &&
+      ((repairWidgetStore.receiveQuote.code === contactMethodCode.phone && phone) ||
+        repairWidgetStore.receiveQuote.code !== contactMethodCode.phone) &&
       ((storesDetails.location_id < 0 && postalCode) || storesDetails.location_id > 0) &&
-      ((code === "MAIL_IN" && address1 && city) ||
-        (code === "ONSITE" && address1 && city) ||
-        (code === "PICK_UP" && address1 && city) ||
-        (code !== "MAIL_IN" && code !== "ONSITE" && code !== "PICK_UP"))
+      ((code === deliveryMethodCode.mailin && address1 && city) ||
+        (code === deliveryMethodCode.onsite && address1 && city) ||
+        (code === deliveryMethodCode.pickup && address1 && city) ||
+        (code !== deliveryMethodCode.mailin &&
+          code !== deliveryMethodCode.onsite &&
+          code !== deliveryMethodCode.pickup))
     ) {
       setDisableStatus(false)
     } else {
@@ -175,13 +183,17 @@ const ContactDetails = ({
       lastName &&
       email &&
       ValidateEmail(email) &&
-      ((repairWidgetStore.receiveQuote.code === "PHONE" && phone && ValidatePhoneNumber(phone)) ||
-        repairWidgetStore.receiveQuote.code !== "PHONE") &&
+      ((repairWidgetStore.receiveQuote.code === contactMethodCode.phone &&
+        phone &&
+        ValidatePhoneNumber(phone)) ||
+        repairWidgetStore.receiveQuote.code !== contactMethodCode.phone) &&
       ((storesDetails.location_id < 0 && postalCode) || storesDetails.location_id > 0) &&
-      ((code === "MAIL_IN" && address1 && city) ||
-        (code === "ONSITE" && address1 && city) ||
-        (code === "PICK_UP" && address1 && city) ||
-        (code !== "MAIL_IN" && code !== "ONSITE" && code !== "PICK_UP"))
+      ((code === deliveryMethodCode.mailin && address1 && city) ||
+        (code === deliveryMethodCode.onsite && address1 && city) ||
+        (code === deliveryMethodCode.pickup && address1 && city) ||
+        (code !== deliveryMethodCode.mailin &&
+          code !== deliveryMethodCode.onsite &&
+          code !== deliveryMethodCode.pickup))
     ) {
       return true
     }
@@ -208,7 +220,7 @@ const ContactDetails = ({
         setEmlErrTxt("")
       }, 3000)
     }
-    if (repairWidgetStore.receiveQuote.code === "PHONE") {
+    if (repairWidgetStore.receiveQuote.code === contactMethodCode.phone) {
       if (!phone) {
         setPhErrTxt(t("Required."))
       } else if (!ValidatePhoneNumber(phone)) {
@@ -289,9 +301,12 @@ const ContactDetails = ({
   const onKeyPress = useCallback(
     (event) => {
       if (event.key === "Enter" && step === 6) {
-        if (features.includes("FRONTEND_REPAIR_APPOINTMENT") || code === "MAIL_IN") {
+        if (
+          features.includes(featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT) ||
+          code === deliveryMethodCode.mailin
+        ) {
           handleButton("appointment")
-        } else if (features.includes("FRONTEND_REPAIR_QUOTE")) {
+        } else if (features.includes(featureToggleKeys.FRONTEND_REPAIR_QUOTE)) {
           handleButton("quote")
         }
       }
@@ -393,9 +408,9 @@ const ContactDetails = ({
                   item
                   xs={
                     storesDetails.location_id < 0 &&
-                    code !== "MAIL_IN" &&
-                    code !== "ONSITE" &&
-                    code !== "PICK_UP"
+                    code !== deliveryMethodCode.mailin &&
+                    code !== deliveryMethodCode.onsite &&
+                    code !== deliveryMethodCode.pickup
                       ? 6
                       : 12
                   }
@@ -408,9 +423,9 @@ const ContactDetails = ({
                   />
                 </Grid>
                 {storesDetails.location_id < 0 &&
-                  code !== "MAIL_IN" &&
-                  code !== "ONSITE" &&
-                  code !== "PICK_UP" && (
+                  code !== deliveryMethodCode.mailin &&
+                  code !== deliveryMethodCode.onsite &&
+                  code !== deliveryMethodCode.pickup && (
                     <Grid item xs={6}>
                       <InputComponent
                         value={postalCode}
@@ -425,7 +440,9 @@ const ContactDetails = ({
                   )}
               </Grid>
             </div>
-            {(code === "MAIL_IN" || code === "ONSITE" || code === "PICK_UP") && (
+            {(code === deliveryMethodCode.mailin ||
+              code === deliveryMethodCode.onsite ||
+              code === deliveryMethodCode.pickup) && (
               <div className="service-choose-device-container">
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -480,53 +497,57 @@ const ContactDetails = ({
                 </Grid>
               </div>
             )}
-            {code !== "MAIL_IN" && code !== "ONSITE" && code !== "PICK_UP" && (
-              <div className="service-choose-device-container">
-                <FeatureToggles features={features}>
-                  <Feature
-                    name="FRONTEND_REPAIR_APPOINTMENT"
-                    inactiveComponent={() => <></>}
-                    activeComponent={() => (
-                      <Button
-                        title={t("Book Appointment")}
-                        bgcolor={mainData.general.colorPalle.nextButtonCol}
-                        borderR="20px"
-                        maxWidth="300px"
-                        height="30px"
-                        fontSize="17px"
-                        margin="0 auto 10px"
-                        onClick={() => handleButton("appointment")}
-                        disable={disableStatus}
-                      >
-                        {isSubmiting[0] && <Loading />}
-                      </Button>
-                    )}
-                  />
-                </FeatureToggles>
-                <FeatureToggles features={features}>
-                  <Feature
-                    name="FRONTEND_REPAIR_QUOTE"
-                    inactiveComponent={() => <></>}
-                    activeComponent={() => (
-                      <Button
-                        title={t("Request a Quote")}
-                        bgcolor={mainData.general.colorPalle.nextButtonCol}
-                        borderR="20px"
-                        maxWidth="300px"
-                        height="30px"
-                        fontSize="17px"
-                        margin="0 auto"
-                        onClick={() => handleButton("quote")}
-                        disable={disableStatus}
-                      >
-                        {isSubmiting[1] && <Loading />}
-                      </Button>
-                    )}
-                  />
-                </FeatureToggles>
-              </div>
-            )}
-            {(code === "MAIL_IN" || code === "ONSITE" || code === "PICK_UP") && (
+            {code !== deliveryMethodCode.mailin &&
+              code !== deliveryMethodCode.onsite &&
+              code !== deliveryMethodCode.pickup && (
+                <div className="service-choose-device-container">
+                  <FeatureToggles features={features}>
+                    <Feature
+                      name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
+                      inactiveComponent={() => <></>}
+                      activeComponent={() => (
+                        <Button
+                          title={t("Book Appointment")}
+                          bgcolor={mainData.general.colorPalle.nextButtonCol}
+                          borderR="20px"
+                          maxWidth="300px"
+                          height="30px"
+                          fontSize="17px"
+                          margin="0 auto 10px"
+                          onClick={() => handleButton("appointment")}
+                          disable={disableStatus}
+                        >
+                          {isSubmiting[0] && <Loading />}
+                        </Button>
+                      )}
+                    />
+                  </FeatureToggles>
+                  <FeatureToggles features={features}>
+                    <Feature
+                      name={featureToggleKeys.FRONTEND_REPAIR_QUOTE}
+                      inactiveComponent={() => <></>}
+                      activeComponent={() => (
+                        <Button
+                          title={t("Request a Quote")}
+                          bgcolor={mainData.general.colorPalle.nextButtonCol}
+                          borderR="20px"
+                          maxWidth="300px"
+                          height="30px"
+                          fontSize="17px"
+                          margin="0 auto"
+                          onClick={() => handleButton("quote")}
+                          disable={disableStatus}
+                        >
+                          {isSubmiting[1] && <Loading />}
+                        </Button>
+                      )}
+                    />
+                  </FeatureToggles>
+                </div>
+              )}
+            {(code === deliveryMethodCode.mailin ||
+              code === deliveryMethodCode.onsite ||
+              code === deliveryMethodCode.pickup) && (
               <div className="service-card-button">
                 <Button
                   title={t("Next")}

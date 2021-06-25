@@ -4,6 +4,7 @@ import { CardPopular } from "../../components"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails } from "../../store"
+import { featureToggleKeys } from "../../const/_variables"
 
 type Props = {
   features: any[]
@@ -31,7 +32,7 @@ const Section3 = ({ features }: Props) => {
   return (
     <FeatureToggles features={feats}>
       <Feature
-        name="FRONTEND_ONLINE_PURCHASE"
+        name={featureToggleKeys.FRONTEND_ONLINE_PURCHASE}
         inactiveComponent={() => <></>}
         activeComponent={() => (
           <section className="sec3-container-parent">

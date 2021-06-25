@@ -7,6 +7,7 @@ import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { useHistory } from "react-router-dom"
 import { repairWidgetStore, storesDetails } from "../../store"
 import _ from "lodash"
+import { featureToggleKeys } from "../../const/_variables"
 
 const categoryFilterName = [
   {
@@ -70,7 +71,7 @@ const Section2 = ({ features }: Props) => {
   return (
     <FeatureToggles features={feats}>
       <Feature
-        name="FRONTEND_REPAIR"
+        name={featureToggleKeys.FRONTEND_REPAIR}
         inactiveComponent={() => <></>}
         activeComponent={() => (
           <section className="Container">

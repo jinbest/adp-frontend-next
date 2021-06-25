@@ -11,32 +11,9 @@ import { repairWidgetStore, storesDetails } from "../../../store"
 import { makeLocations, makeAddressValue, getConvertHourType } from "../../../services/helper"
 import { observer } from "mobx-react"
 import { findIndex, isEmpty } from "lodash"
+import { DAYS_OF_THE_WEEK, MONTHS, deliveryMethodCode } from "../../../const/_variables"
 
 const moment = require("moment-timezone")
-
-const DAYS_OF_THE_WEEK: string[] = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
-const MONTHS: string[] = [
-  "January",
-  "Febrary",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "Octorber",
-  "November",
-  "December",
-]
 
 type Props = {
   data: any
@@ -157,7 +134,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   }, [timezone])
 
   useEffect(() => {
-    if (code === "MAIL_IN" && storesDetails.cntUserLocation.length) {
+    if (code === deliveryMethodCode.mailin && storesDetails.cntUserLocation.length) {
       setSendToAddress({
         name: makeAddressValue(storesDetails.cntUserLocation[0]),
         code: storesDetails.cntUserLocation[0].id,
@@ -187,7 +164,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
   }
 
   const ChooseNextStep = () => {
-    if (code === "MAIL_IN") {
+    if (code === deliveryMethodCode.mailin) {
       handleChangeChooseData(7, { code: code, data: { sendTo: sendToAddress.name } })
     } else {
       handleChangeChooseData(7, {
@@ -245,11 +222,11 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
 
   useEffect(() => {
     setDisableStatus(true)
-    if (code === "MAIL_IN" && !isEmpty(sendToAddress)) {
+    if (code === deliveryMethodCode.mailin && !isEmpty(sendToAddress)) {
       setDisableStatus(false)
     }
     if (
-      code !== "MAIL_IN" &&
+      code !== deliveryMethodCode.mailin &&
       selectVal.name &&
       time &&
       day &&
@@ -266,7 +243,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
       name: makeAddressValue(storesDetails.cntUserLocation[0]),
       code: storesDetails.cntUserLocation[0].id,
     }
-    if (code !== "MAIL_IN") {
+    if (code !== deliveryMethodCode.mailin) {
       setSelectVal(val)
     } else {
       setSendToAddress(val)
@@ -310,7 +287,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                 </Typography>
               }
               <div style={{ marginBottom: "20px" }}>
-                {code !== "MAIL_IN" && !isEmpty(selectVal) && !isEmpty(findLocs) && (
+                {code !== deliveryMethodCode.mailin && !isEmpty(selectVal) && !isEmpty(findLocs) && (
                   <CustomSelect
                     value={selectVal}
                     handleSetValue={(val) => {
@@ -320,7 +297,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                     options={findLocs}
                   />
                 )}
-                {code === "MAIL_IN" && (
+                {code === deliveryMethodCode.mailin && (
                   <div>
                     {findLocs.map((item: FindLocProps, index: number) => {
                       return (
@@ -361,12 +338,12 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                   </div>
                 )}
               </div>
-              {code !== "MAIL_IN" && (
+              {code !== deliveryMethodCode.mailin && (
                 <Typography className="service-summary-title">
                   {t(data.select.time.title[code])}
                 </Typography>
               )}
-              {code !== "MAIL_IN" && (
+              {code !== deliveryMethodCode.mailin && (
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <CustomCalendar handleParentDate={setDate} timezone={timezone} />

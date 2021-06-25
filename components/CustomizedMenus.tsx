@@ -13,6 +13,7 @@ import Toast from "./toast/toast"
 import Loading from "./Loading"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { makeLocations, getAddress, AddFormat12, getConvertHourType } from "../services/helper"
+import { featureToggleKeys } from "../const/_variables"
 
 const StyledMenu = withStyles({
   paper: {
@@ -385,7 +386,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
             {locSelStatus && (
               <FeatureToggles features={features}>
                 <Feature
-                  name="FRONTEND_REPAIR_APPOINTMENT"
+                  name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
                   inactiveComponent={() => <></>}
                   activeComponent={() => (
                     <>

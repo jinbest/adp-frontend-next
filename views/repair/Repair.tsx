@@ -8,6 +8,7 @@ import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails } from "../../store"
 import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
+import { featureToggleKeys } from "../../const/_variables"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -54,7 +55,7 @@ const Repair = ({ handleStatus, features }: Props) => {
       </Head>
       <FeatureToggles features={feats}>
         <Feature
-          name="FRONTEND_REPAIR"
+          name={featureToggleKeys.FRONTEND_REPAIR}
           inactiveComponent={() => <Error />}
           activeComponent={() => (
             <div>

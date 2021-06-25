@@ -1,5 +1,6 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { GetCurrentLocParams } from "../model/get-current-location"
+import { appointmentQuoteType } from "../const/_variables"
 
 configure({ enforceActions: "always" })
 
@@ -13,7 +14,7 @@ export class StoresDetails {
   @observable location_id = -1
   @observable is_voided = false
   @observable customer_id = -1
-  @observable type = "QUOTE" /* type is 'QUOTE' or 'APPOINTMENT' */
+  @observable type = appointmentQuoteType.quote
   @observable allLocations: any[] = []
   @observable storeCnts: any = {}
   @observable commonCnts: any = {}

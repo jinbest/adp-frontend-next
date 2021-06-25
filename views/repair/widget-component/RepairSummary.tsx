@@ -6,6 +6,7 @@ import { repairWidgetStore } from "../../../store"
 import { useTranslation } from "react-i18next"
 import { ConvertWarrantyUnit } from "../../../services/helper"
 import _ from "lodash"
+import { deliveryMethodCode } from "../../../const/_variables"
 
 interface Props {
   themeCol: string
@@ -111,31 +112,31 @@ const RepairSummary = ({ themeCol, showInfo }: Props) => {
               <Typography className="service-summary-title">
                 {t(repairWidgetStore.deliveryMethod.method)}
               </Typography>
-              {code === "PICK_UP" && (
+              {code === deliveryMethodCode.pickup && (
                 <Typography className="service-summary-service">{t("Pick Up From")}</Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="service-summary-service">{t("Send To")}</Typography>
               )}
-              {code !== "MAIL_IN" && (
+              {code !== deliveryMethodCode.mailin && (
                 <p className="service-summary-service-child">
                   {t(repairWidgetStore.bookData[code].address.name)}
                 </p>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <p className="service-summary-service-child" style={{ marginBottom: "15px" }}>
                   {t(repairWidgetStore.bookData[code].sendTo)}
                 </p>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="service-summary-service">{t("Return To")}</Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <p className="service-summary-service-child">
                   {t(repairWidgetStore.contactDetails.address1.name)}
                 </p>
               )}
-              {code !== "MAIL_IN" && (
+              {code !== deliveryMethodCode.mailin && (
                 <p className="service-summary-service-child">
                   {repairWidgetStore.bookData[code].week +
                     ", " +

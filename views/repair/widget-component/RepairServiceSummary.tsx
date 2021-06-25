@@ -12,6 +12,11 @@ import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
 import { convertTimezone } from "../../../services/helper"
+import {
+  deliveryMethodCode,
+  appointmentQuoteType,
+  featureToggleKeys,
+} from "../../../const/_variables"
 
 type Props = {
   repairWidgetData: any
@@ -41,8 +46,8 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
   const handleSubmit = () => {
     setDisableStatus(true)
     setIsSubmitting(true)
-    // const tp: string = code === "MAIL_IN" ? "QUOTE" : "APPOINTMENT"
-    const tp = "APPOINTMENT"
+
+    const tp = appointmentQuoteType.appointment
     const repairs: any[] = [],
       select_date =
         repairWidgetStore.repairWidgetInitialValue.selectDate || moment().format("YYYY-MM-DD"),
@@ -112,9 +117,15 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
       .postAppointmentQuote(params)
       .then((res: any) => {
         repairWidgetStore.changeAppointResponse(res)
-        if (code === "MAIL_IN" && features.includes("FRONTEND_REPAIR_QUOTE")) {
+        if (
+          code === deliveryMethodCode.mailin &&
+          features.includes(featureToggleKeys.FRONTEND_REPAIR_QUOTE)
+        ) {
           handleStep(11)
-        } else if (code !== "MAIL_IN" && features.includes("FRONTEND_REPAIR_APPOINTMENT")) {
+        } else if (
+          code !== deliveryMethodCode.mailin &&
+          features.includes(featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT)
+        ) {
           ChooseNextStep()
         } else {
           setToastParams({
@@ -205,31 +216,31 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
               <Typography className="details" style={{ color: textThemeCol }}>
                 {t(repairWidgetData.deliveryMethod.method)}
               </Typography>
-              {code === "PICK_UP" && (
+              {code === deliveryMethodCode.pickup && (
                 <Typography className="details bolder">{t("Pick Up From")}</Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details bolder">{t("Send To")}</Typography>
               )}
-              {code !== "MAIL_IN" && (
+              {code !== deliveryMethodCode.mailin && (
                 <Typography className="details">
                   {repairWidgetData.bookData[code].address.name}
                 </Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details">
                   {repairWidgetData.bookData[code].sendTo}
                 </Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details bolder">{t("Return To")}</Typography>
               )}
-              {code === "MAIL_IN" && (
+              {code === deliveryMethodCode.mailin && (
                 <Typography className="details">
                   {repairWidgetData.contactDetails.address1.name}
                 </Typography>
               )}
-              {code !== "MAIL_IN" && (
+              {code !== deliveryMethodCode.mailin && (
                 <Typography className="details">
                   {repairWidgetData.bookData[code].week +
                     ", " +
@@ -280,10 +291,10 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
               })}
           </div>
           <div className="service-choose-device-container">
-            {code !== "MAIL_IN" && (
+            {code !== deliveryMethodCode.mailin && (
               <FeatureToggles features={features}>
                 <Feature
-                  name="FRONTEND_REPAIR_APPOINTMENT"
+                  name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
                   inactiveComponent={() => <></>}
                   activeComponent={() => (
                     <Button
@@ -303,10 +314,10 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
                 />
               </FeatureToggles>
             )}
-            {code === "MAIL_IN" && (
+            {code === deliveryMethodCode.mailin && (
               <FeatureToggles features={features}>
                 <Feature
-                  name="FRONTEND_REPAIR_QUOTE"
+                  name={featureToggleKeys.FRONTEND_REPAIR_QUOTE}
                   inactiveComponent={() => <></>}
                   activeComponent={() => (
                     <Button
