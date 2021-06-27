@@ -621,7 +621,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                           background: selectList === index && !hover ? "#f5f5f5" : "",
                         }}
                       >
-                        {item._source.img_src && (
+                        {item._source.img_src && item._source.type !== "brand" && (
                           <img src={item._source.img_src} alt={`search-item-${index}`} />
                         )}
                         <p>

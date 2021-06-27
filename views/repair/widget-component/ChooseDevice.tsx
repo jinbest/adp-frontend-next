@@ -20,7 +20,7 @@ import ContactModal from "../../business/ContactModal"
 import { ConvertWarrantyUnit } from "../../../services/helper"
 import CustomSelect from "../../../components/CustomSelect"
 import { SelectParams, FilterParams } from "../../../model/select-dropdown-param"
-import _, { isEmpty } from "lodash"
+import _, { capitalize, isEmpty } from "lodash"
 import { GetProductsParam } from "../../../model/get-products-params"
 import { GetBrandsParam } from "../../../model/get-brands-params"
 import { repairWidgetStepName } from "../../../const/_variables"
@@ -667,7 +667,8 @@ const ChooseDevice = ({
                             key={index}
                             onClick={() => ChooseNextStep(index)}
                           >
-                            <LazyImg src={item.img} style={{ width: "80%" }} alt={item.alt} />
+                            {/* <LazyImg src={item.img} style={{ width: "80%" }} alt={item.alt} /> */}
+                            <p className="repair-widget-brand-name">{capitalize(item.name)}</p>
                           </div>
                         )
                       })}

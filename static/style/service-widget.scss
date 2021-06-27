@@ -96,6 +96,19 @@
   @media (max-width: 500px) {
     width: 30%;
   }
+  .repair-widget-brand-name {
+    font-weight: bold;
+    font-size: 17px;
+    @media (max-width: 1200px) {
+      font-size: 15px;
+    }
+    @media (max-width: 600px) {
+      font-size: 13px;
+    }
+    @media (max-width: 425px) {
+      font-size: 11px;
+    }
+  }
 }
 
 .device-model-item {

@@ -73,10 +73,10 @@ const RepairSummary = ({ themeCol, showInfo }: Props) => {
                       />
                       <div className="service-summary-img">
                         <img
-                          src={item.img || model[index]["img"]}
+                          src={model[index]["img"] || item.img}
                           width="1"
                           height="auto"
-                          alt={item.alt || model[index]["alt"]}
+                          alt={model[index]["alt"] || item.alt}
                         />
                       </div>
                       <div>
