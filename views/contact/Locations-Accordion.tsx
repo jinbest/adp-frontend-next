@@ -33,11 +33,13 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    features.map((item) => {
-      if (item.isActive) {
-        cntFeatures.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item) => {
+        if (item.isActive) {
+          cntFeatures.push(item.flag)
+        }
+      })
+    }
     setFeatures(cntFeatures)
   }, [features])
 

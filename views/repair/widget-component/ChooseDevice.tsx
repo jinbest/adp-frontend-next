@@ -136,7 +136,7 @@ const ChooseDevice = ({
           } else {
             setPlusVisible(true)
           }
-          repairWidData.repairDeviceBrands.data.map((item: any) => {
+          repairWidData.repairDeviceBrands.data.forEach((item: any) => {
             cntImgData.push({
               name: item.name,
               img: item.img_src,
@@ -167,7 +167,7 @@ const ChooseDevice = ({
           } else {
             setPlusVisible(true)
           }
-          repairWidData.repairBrandProducts.data.map((item: any) => {
+          repairWidData.repairBrandProducts.data.forEach((item: any) => {
             cntImgData.push({
               name: item.name,
               img: item.img_src,
@@ -191,7 +191,7 @@ const ChooseDevice = ({
         } else {
           setPlusVisible(true)
         }
-        cntOfferedRepairs.map((item: any) => {
+        cntOfferedRepairs.forEach((item: any) => {
           cntTypes.push({
             name: item.title,
             bg: "white",
@@ -204,8 +204,8 @@ const ChooseDevice = ({
             id: item.id,
           })
         })
-        cntTypes.map((itType: any) => {
-          repairWidgetData.chooseRepair.map((item: any) => {
+        cntTypes.forEach((itType: any) => {
+          repairWidgetData.chooseRepair.forEach((item: any) => {
             if (itType.name === item.name) {
               itType.bg = repairChooseItemCol
               itType.col = "white"
@@ -281,7 +281,7 @@ const ChooseDevice = ({
     await getBrandProductsAPI(paramModel)
     if (repairWidData.repairBrandProducts.data && repairWidData.repairBrandProducts.data.length) {
       setSliceNum(repairWidData.repairBrandProducts.data.length)
-      repairWidData.repairBrandProducts.data.map((item: any) => {
+      repairWidData.repairBrandProducts.data.forEach((item: any) => {
         cntImgData.push({
           name: item.name,
           img: item.img_src,
@@ -323,7 +323,7 @@ const ChooseDevice = ({
         await getDeviceBrandsAPI(paramBrand)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
           setSliceNum(repairWidData.repairDeviceBrands.data.length)
-          repairWidData.repairDeviceBrands.data.map((item: any) => {
+          repairWidData.repairDeviceBrands.data.forEach((item: any) => {
             cntImgData.push({
               name: item.name,
               img: item.img_src,
@@ -361,7 +361,7 @@ const ChooseDevice = ({
           repairWidData.repairBrandProducts.data.length
         ) {
           setSliceNum(repairWidData.repairBrandProducts.data.length)
-          repairWidData.repairBrandProducts.data.map((item: any) => {
+          repairWidData.repairBrandProducts.data.forEach((item: any) => {
             cntImgData.push({
               name: item.name,
               img: item.img_src,
@@ -380,9 +380,9 @@ const ChooseDevice = ({
         await getRepairsOfferedDeviceAPI(repairWidData.cntProductID, text, pg, perpg)
         cntOfferedRepairs = _.cloneDeep(repairWidData.repairsOfferedDevices.data)
 
-        if (cntOfferedRepairs != null) {
+        if (cntOfferedRepairs != null && cntOfferedRepairs.length) {
           setSliceNum(repairWidData.repairsOfferedDevices.data.length)
-          cntOfferedRepairs.map((item: any) => {
+          cntOfferedRepairs.forEach((item: any) => {
             cntTypes.push({
               name: item.title,
               bg: "white",
@@ -461,15 +461,15 @@ const ChooseDevice = ({
         : []
       const cntAvailableDeliveryMethod: any[] = _.cloneDeep(repairWidData.repairDeliveryMethod)
 
-      cntDeliverySets.map((itDeliverySet: any) => {
-        cntAvailableDeliveryMethod.map((itAvailMethod: any) => {
+      cntDeliverySets.forEach((itDeliverySet: any) => {
+        cntAvailableDeliveryMethod.forEach((itAvailMethod: any) => {
           if (itDeliverySet.code === itAvailMethod.code && itAvailMethod.is_enabled) {
             cntTypes.push(itDeliverySet)
             return
           }
         })
       })
-      cntTypes.map((item: any) => {
+      cntTypes.forEach((item: any) => {
         item.bg = "white"
         item.col = "black"
         item.selected = false
@@ -485,21 +485,25 @@ const ChooseDevice = ({
         cntTypes: any[] = repairWidData.receiveQuote.types.length
           ? _.cloneDeep(repairWidData.receiveQuote.types)
           : []
-      cntTypes.map((itType: any) => {
-        itType.bg = "white"
-        itType.col = "black"
-        itType.selected = false
-        if (itType.name === repairWidgetData.receiveQuote.method) {
-          itType.bg = repairChooseItemCol
-          itType.col = "white"
-          itType.selected = true
-        }
-        repairWidData.contactMethod.map((itMethod: any) => {
-          if (itType.code === itMethod.code && itMethod.is_enabled && itType.code !== "TEXT") {
-            cntQuote.push(itType)
+      if (cntTypes.length) {
+        cntTypes.forEach((itType: any) => {
+          itType.bg = "white"
+          itType.col = "black"
+          itType.selected = false
+          if (itType.name === repairWidgetData.receiveQuote.method) {
+            itType.bg = repairChooseItemCol
+            itType.col = "white"
+            itType.selected = true
+          }
+          if (repairWidData.contactMethod !== null && repairWidData.contactMethod.length) {
+            repairWidData.contactMethod.forEach((itMethod: any) => {
+              if (itType.code === itMethod.code && itMethod.is_enabled && itType.code !== "TEXT") {
+                cntQuote.push(itType)
+              }
+            })
           }
         })
-      })
+      }
       setItemTypes([...cntQuote])
     }
   }, [step, repairWidgetData, repairWidData])
@@ -518,39 +522,43 @@ const ChooseDevice = ({
       }
       setItemTypes([...cntTypes])
       const preChooseRepairs: any[] = []
-      cntTypes.map((item: any) => {
-        if (item.selected) {
-          preChooseRepairs.push({
-            name: item.name,
-            cost: item.cost,
-            estimate: item.estimate,
-            warranty: item.warranty,
-            warranty_unit: item.warranty_unit,
-            id: item.id,
-          })
-        }
-      })
+      if (cntTypes.length) {
+        cntTypes.forEach((item: any) => {
+          if (item.selected) {
+            preChooseRepairs.push({
+              name: item.name,
+              cost: item.cost,
+              estimate: item.estimate,
+              warranty: item.warranty,
+              warranty_unit: item.warranty_unit,
+              id: item.id,
+            })
+          }
+        })
+      }
       handleChangeChooseData(step, {
         data: preChooseRepairs,
         counter: repairWidgetData.deviceCounter,
       })
     } else {
       const cntItemTypes: any[] = itemTypes
-      cntItemTypes.map((item: any, idx: number) => {
-        if (idx === i) {
-          item.bg = repairChooseItemCol
-          item.col = "white"
-          item.selected = true
-          handleChangeChooseData(step, {
-            method: item.name,
-            code: item.code,
-          })
-        } else {
-          item.bg = "white"
-          item.col = "black"
-          item.selected = false
-        }
-      })
+      if (cntItemTypes.length) {
+        cntItemTypes.forEach((item: any, idx: number) => {
+          if (idx === i) {
+            item.bg = repairChooseItemCol
+            item.col = "white"
+            item.selected = true
+            handleChangeChooseData(step, {
+              method: item.name,
+              code: item.code,
+            })
+          } else {
+            item.bg = "white"
+            item.col = "black"
+            item.selected = false
+          }
+        })
+      }
       setItemTypes([...cntItemTypes])
       ChooseNextStep(999)
     }
@@ -559,8 +567,8 @@ const ChooseDevice = ({
   useEffect(() => {
     const cntArray: any[] = [],
       cntTypes: any[] = itemTypes
-    if (cntTypes && stepName === repairWidgetStepName.deviceRepairs) {
-      cntTypes.map((item: any) => {
+    if (cntTypes.length && stepName === repairWidgetStepName.deviceRepairs) {
+      cntTypes.forEach((item: any) => {
         if (item.bg === repairChooseItemCol) {
           cntArray.push({
             name: item.name,
@@ -583,12 +591,14 @@ const ChooseDevice = ({
     }
     if (step === 4 || step === 5) {
       const cntTypes: any[] = itemTypes
-      cntTypes.map((item: any) => {
-        if (item.selected) {
-          setDisableStatus(false)
-          return
-        }
-      })
+      if (cntTypes.length) {
+        cntTypes.forEach((item: any) => {
+          if (item.selected) {
+            setDisableStatus(false)
+            return
+          }
+        })
+      }
     }
   }, [step, estimatedTimes, itemTypes])
 

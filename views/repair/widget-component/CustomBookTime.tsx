@@ -115,7 +115,7 @@ const CustomBookTime = ({
   const handleBook = (n: number) => {
     const cntBookArray: any[] = bookArray
     if (cntBookArray[n].isPast) return
-    cntBookArray.map((item: any, idx: number) => {
+    cntBookArray.forEach((item: any, idx: number) => {
       if (idx === n) {
         item.color = "white"
         item.bgColor = repairBooktimeCol

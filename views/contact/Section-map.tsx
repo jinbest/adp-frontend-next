@@ -47,11 +47,13 @@ const SectionMap = ({
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    features.map((item) => {
-      if (item.isActive) {
-        cntFeatures.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item) => {
+        if (item.isActive) {
+          cntFeatures.push(item.flag)
+        }
+      })
+    }
     setFeatures(cntFeatures)
   }, [features])
 
@@ -66,14 +68,16 @@ const SectionMap = ({
   }
 
   useEffect(() => {
-    locations.map((item, index) => {
-      if (parseInt(item.id) === location_id) {
-        setExpanded(index)
-        setIsExpanded(true)
-        setSelectedLocation(item)
-        return
-      }
-    })
+    if (!isEmpty(locations) && locations.length) {
+      locations.forEach((item, index) => {
+        if (parseInt(item.id) === location_id) {
+          setExpanded(index)
+          setIsExpanded(true)
+          setSelectedLocation(item)
+          return
+        }
+      })
+    }
   }, [locations, location_id])
 
   const handleChange = (panel: number) => (_: React.ChangeEvent<any>, isExpanded: boolean) => {
@@ -92,7 +96,7 @@ const SectionMap = ({
 
   useEffect(() => {
     if (storesDetails.cntUserLocationSelected && locations.length) {
-      locations.map((item, index) => {
+      locations.forEach((item, index) => {
         if (
           !isEmpty(storesDetails.cntUserLocation) &&
           storesDetails.cntUserLocation[0].location_id === item.id

@@ -57,19 +57,21 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
       timezone = repairWidgetStore.timezone,
       store_tz = storesDetails.cntUserLocation[0].timezone
     for (let i = 0; i < repairWidgetStore.deviceCounter; i++) {
-      repairWidgetStore.chooseRepair[i].map((item: any) => {
-        repairs.push({
-          repair_id: item.id,
-          product_id: repairWidgetStore.deviceModel[i].id,
-          cost: item.cost,
-          duration: item.estimate,
-          product_name:
-            repairWidgetStore.deviceBrand[i].name + " " + repairWidgetStore.deviceModel[i].name,
-          repair_name: item.name,
-          warranty: item.warranty,
-          warranty_unit: item.warranty_unit,
+      if (repairWidgetStore.chooseRepair.length > i && repairWidgetStore.chooseRepair[i].length) {
+        repairWidgetStore.chooseRepair[i].forEach((item: any) => {
+          repairs.push({
+            repair_id: item.id,
+            product_id: repairWidgetStore.deviceModel[i].id,
+            cost: item.cost,
+            duration: item.estimate,
+            product_name:
+              repairWidgetStore.deviceBrand[i].name + " " + repairWidgetStore.deviceModel[i].name,
+            repair_name: item.name,
+            warranty: item.warranty,
+            warranty_unit: item.warranty_unit,
+          })
         })
-      })
+      }
     }
     const params = {} as PostAppointParams
     params.store_id = storesDetails.store_id
@@ -130,7 +132,7 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
         } else {
           setToastParams({
             msg: t("Something went wrong, please try again or contact us."),
-            isWarning: true,
+            isError: true,
           })
           setDisableStatus(false)
           setIsSubmitting(false)

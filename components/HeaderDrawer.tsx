@@ -196,8 +196,8 @@ const HeaderDrawer = (props: Props) => {
           storesDetails.changeLocationID(res[0].id)
         } else {
           setToastParams({
-            msg: "Response is an empty data, please check your infos.",
-            isWarning: true,
+            msg: "Failed to load locations.",
+            isError: true,
           })
         }
         setRequireUserInfo(false)
@@ -216,19 +216,20 @@ const HeaderDrawer = (props: Props) => {
       })
   }
 
-  const toggleDrawer =
-    (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return
-      }
-
-      setState({ ...state, [anchor]: open })
-      toggleMenuStatus(open)
+  const toggleDrawer = (anchor: Anchor, open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent
+  ) => {
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return
     }
+
+    setState({ ...state, [anchor]: open })
+    toggleMenuStatus(open)
+  }
 
   const resetStatuses = () => {
     setToastParams({

@@ -246,7 +246,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         const hits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score))
         if (hits.length) {
           const cntSearchData = searchData
-          hits.map((item: any) => {
+          hits.forEach((item: any) => {
             if (
               item._source.type === "product" ||
               item._source.type === "brand" ||
@@ -333,7 +333,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     if (!isEmpty(val) && !isEmpty(val.hits)) {
       const preHits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score)),
         hits = [] as any[]
-      preHits.map((item: any) => {
+      preHits.forEach((item: any) => {
         if (
           item._source.type === "product" ||
           item._source.type === "brand" ||
@@ -457,11 +457,13 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    features.map((item: any) => {
-      if (item.isActive) {
-        cntFeatures.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item: any) => {
+        if (item.isActive) {
+          cntFeatures.push(item.flag)
+        }
+      })
+    }
     setFeatures(cntFeatures)
   }, [data, features])
 

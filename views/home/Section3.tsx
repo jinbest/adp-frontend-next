@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails } from "../../store"
 import { featureToggleKeys } from "../../const/_variables"
+import { isEmpty } from "lodash"
 
 type Props = {
   features: any[]
@@ -21,11 +22,13 @@ const Section3 = ({ features }: Props) => {
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    features.map((item) => {
-      if (item.isActive) {
-        cntFeatures.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item) => {
+        if (item.isActive) {
+          cntFeatures.push(item.flag)
+        }
+      })
+    }
     setFeatures(cntFeatures)
   }, [features, data])
 

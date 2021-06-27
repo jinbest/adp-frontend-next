@@ -9,7 +9,7 @@ import { repairWidgetStore, storesDetails } from "../../store"
 import { useTranslation } from "react-i18next"
 import { isExternal } from "../../services/helper"
 import { observer } from "mobx-react"
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 import { featureToggleKeys } from "../../const/_variables"
 
 type Props = {
@@ -32,14 +32,16 @@ const Section1 = ({ features, handleStatus }: Props) => {
     const cntFeature: any[] = [],
       cntFeatSearch: any[] = []
 
-    features.map((item) => {
-      if (item.flag === "SEARCH" && item.isActive) {
-        cntFeatSearch.push(item.flag)
-      }
-      if (item.isActive) {
-        cntFeature.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item) => {
+        if (item.flag === "SEARCH" && item.isActive) {
+          cntFeatSearch.push(item.flag)
+        }
+        if (item.isActive) {
+          cntFeature.push(item.flag)
+        }
+      })
+    }
     // const cntGridMD = Math.round(12 / cntFeature.length)
     // setFeatures(cntFeature)
     setFeatSearch(cntFeatSearch)

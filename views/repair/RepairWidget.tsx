@@ -18,7 +18,7 @@ import {
 import { storesDetails, repairWidgetStore } from "../../store"
 import Head from "next/head"
 import { useQuery } from "../../services/helper"
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 import { stepList, featureToggleKeys } from "../../const/_variables"
 
 interface Props {
@@ -45,11 +45,13 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
     setPageTitle("Quotes | " + storesDetails.storesDetails.name)
 
     const cntFeatures: any[] = []
-    features.map((item) => {
-      if (item.isActive) {
-        cntFeatures.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item) => {
+        if (item.isActive) {
+          cntFeatures.push(item.flag)
+        }
+      })
+    }
     setFeats([...cntFeatures])
 
     getRepairLookupAPI()

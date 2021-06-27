@@ -233,8 +233,8 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
           setRequireUserInfo(false)
         } else {
           setToastParams({
-            msg: "Response is an empty data, please check your infos.",
-            isWarning: true,
+            msg: "Failed to load locations.",
+            isError: true,
           })
           setIsRequest(false)
         }

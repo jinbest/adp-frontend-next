@@ -45,7 +45,11 @@ const ContactDetails = ({
 }: Props) => {
   const mainData = storesDetails.storeCnts
   const themeCol = mainData.general.colorPalle.themeColor
-
+  const codeArray = [
+    deliveryMethodCode.mailin,
+    deliveryMethodCode.onsite,
+    deliveryMethodCode.pickup,
+  ]
   const [t] = useTranslation()
 
   const [firstName, setFirstName] = useState("")
@@ -78,19 +82,21 @@ const ContactDetails = ({
       const repairs: any[] = []
 
       for (let i = 0; i < repairWidgetStore.deviceCounter; i++) {
-        repairWidgetStore.chooseRepair[i].map((item: any) => {
-          repairs.push({
-            repair_id: item.id,
-            product_id: repairWidgetStore.deviceModel[i].id,
-            cost: item.cost,
-            duration: item.estimate,
-            product_name:
-              repairWidgetStore.deviceBrand[i].name + " " + repairWidgetStore.deviceModel[i].name,
-            repair_name: item.name,
-            warranty: item.warranty,
-            warranty_unit: item.warranty_unit,
+        if (repairWidgetStore.chooseRepair.length > i && repairWidgetStore.chooseRepair[i].length) {
+          repairWidgetStore.chooseRepair[i].forEach((item: any) => {
+            repairs.push({
+              repair_id: item.id,
+              product_id: repairWidgetStore.deviceModel[i].id,
+              cost: item.cost,
+              duration: item.estimate,
+              product_name:
+                repairWidgetStore.deviceBrand[i].name + " " + repairWidgetStore.deviceModel[i].name,
+              repair_name: item.name,
+              warranty: item.warranty,
+              warranty_unit: item.warranty_unit,
+            })
           })
-        })
+        }
       }
       const params = {} as PostAppointParams
       params.store_id = storesDetails.store_id
@@ -165,12 +171,7 @@ const ContactDetails = ({
       ((repairWidgetStore.receiveQuote.code === contactMethodCode.phone && phone) ||
         repairWidgetStore.receiveQuote.code !== contactMethodCode.phone) &&
       ((storesDetails.location_id < 0 && postalCode) || storesDetails.location_id > 0) &&
-      ((code === deliveryMethodCode.mailin && address1 && city) ||
-        (code === deliveryMethodCode.onsite && address1 && city) ||
-        (code === deliveryMethodCode.pickup && address1 && city) ||
-        (code !== deliveryMethodCode.mailin &&
-          code !== deliveryMethodCode.onsite &&
-          code !== deliveryMethodCode.pickup))
+      ((codeArray.includes(code) && address1 && city) || !codeArray.includes(code))
     ) {
       setDisableStatus(false)
     } else {
@@ -189,12 +190,7 @@ const ContactDetails = ({
         ValidatePhoneNumber(phone)) ||
         repairWidgetStore.receiveQuote.code !== contactMethodCode.phone) &&
       ((storesDetails.location_id < 0 && postalCode) || storesDetails.location_id > 0) &&
-      ((code === deliveryMethodCode.mailin && address1 && city) ||
-        (code === deliveryMethodCode.onsite && address1 && city) ||
-        (code === deliveryMethodCode.pickup && address1 && city) ||
-        (code !== deliveryMethodCode.mailin &&
-          code !== deliveryMethodCode.onsite &&
-          code !== deliveryMethodCode.pickup))
+      ((codeArray.includes(code) && address1 && city) || !codeArray.includes(code))
     ) {
       return true
     }
@@ -405,17 +401,7 @@ const ContactDetails = ({
                     border="rgba(0,0,0,0.1)"
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={
-                    storesDetails.location_id < 0 &&
-                    code !== deliveryMethodCode.mailin &&
-                    code !== deliveryMethodCode.onsite &&
-                    code !== deliveryMethodCode.pickup
-                      ? 6
-                      : 12
-                  }
-                >
+                <Grid item xs={storesDetails.location_id < 0 && !codeArray.includes(code) ? 6 : 12}>
                   <PhoneInput
                     handleSetPhone={setPhone}
                     val={phone}
@@ -423,27 +409,22 @@ const ContactDetails = ({
                     errorText={phErrTxt}
                   />
                 </Grid>
-                {storesDetails.location_id < 0 &&
-                  code !== deliveryMethodCode.mailin &&
-                  code !== deliveryMethodCode.onsite &&
-                  code !== deliveryMethodCode.pickup && (
-                    <Grid item xs={6}>
-                      <InputComponent
-                        value={postalCode}
-                        placeholder={t(data.placeholder.postalCode)}
-                        handleChange={(e) => {
-                          handleChangePostalCode(e.target.value)
-                        }}
-                        errorText={psErrTxt}
-                        border="rgba(0,0,0,0.1)"
-                      />
-                    </Grid>
-                  )}
+                {storesDetails.location_id < 0 && !codeArray.includes(code) && (
+                  <Grid item xs={6}>
+                    <InputComponent
+                      value={postalCode}
+                      placeholder={t(data.placeholder.postalCode)}
+                      handleChange={(e) => {
+                        handleChangePostalCode(e.target.value)
+                      }}
+                      errorText={psErrTxt}
+                      border="rgba(0,0,0,0.1)"
+                    />
+                  </Grid>
+                )}
               </Grid>
             </div>
-            {(code === deliveryMethodCode.mailin ||
-              code === deliveryMethodCode.onsite ||
-              code === deliveryMethodCode.pickup) && (
+            {codeArray.includes(code) && (
               <div className="service-choose-device-container">
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -498,57 +479,53 @@ const ContactDetails = ({
                 </Grid>
               </div>
             )}
-            {code !== deliveryMethodCode.mailin &&
-              code !== deliveryMethodCode.onsite &&
-              code !== deliveryMethodCode.pickup && (
-                <div className="service-choose-device-container">
-                  <FeatureToggles features={features}>
-                    <Feature
-                      name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
-                      inactiveComponent={() => <></>}
-                      activeComponent={() => (
-                        <Button
-                          title={t("Book Appointment")}
-                          bgcolor={mainData.general.colorPalle.nextButtonCol}
-                          borderR="20px"
-                          maxWidth="300px"
-                          height="30px"
-                          fontSize="17px"
-                          margin="0 auto 10px"
-                          onClick={() => handleButton("appointment")}
-                          disable={disableStatus}
-                        >
-                          {isSubmiting[0] && <Loading />}
-                        </Button>
-                      )}
-                    />
-                  </FeatureToggles>
-                  <FeatureToggles features={features}>
-                    <Feature
-                      name={featureToggleKeys.FRONTEND_REPAIR_QUOTE}
-                      inactiveComponent={() => <></>}
-                      activeComponent={() => (
-                        <Button
-                          title={t("Request a Quote")}
-                          bgcolor={mainData.general.colorPalle.nextButtonCol}
-                          borderR="20px"
-                          maxWidth="300px"
-                          height="30px"
-                          fontSize="17px"
-                          margin="0 auto"
-                          onClick={() => handleButton("quote")}
-                          disable={disableStatus}
-                        >
-                          {isSubmiting[1] && <Loading />}
-                        </Button>
-                      )}
-                    />
-                  </FeatureToggles>
-                </div>
-              )}
-            {(code === deliveryMethodCode.mailin ||
-              code === deliveryMethodCode.onsite ||
-              code === deliveryMethodCode.pickup) && (
+            {!codeArray.includes(code) && (
+              <div className="service-choose-device-container">
+                <FeatureToggles features={features}>
+                  <Feature
+                    name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
+                    inactiveComponent={() => <></>}
+                    activeComponent={() => (
+                      <Button
+                        title={t("Book Appointment")}
+                        bgcolor={mainData.general.colorPalle.nextButtonCol}
+                        borderR="20px"
+                        maxWidth="300px"
+                        height="30px"
+                        fontSize="17px"
+                        margin="0 auto 10px"
+                        onClick={() => handleButton("appointment")}
+                        disable={disableStatus}
+                      >
+                        {isSubmiting[0] && <Loading />}
+                      </Button>
+                    )}
+                  />
+                </FeatureToggles>
+                <FeatureToggles features={features}>
+                  <Feature
+                    name={featureToggleKeys.FRONTEND_REPAIR_QUOTE}
+                    inactiveComponent={() => <></>}
+                    activeComponent={() => (
+                      <Button
+                        title={t("Request a Quote")}
+                        bgcolor={mainData.general.colorPalle.nextButtonCol}
+                        borderR="20px"
+                        maxWidth="300px"
+                        height="30px"
+                        fontSize="17px"
+                        margin="0 auto"
+                        onClick={() => handleButton("quote")}
+                        disable={disableStatus}
+                      >
+                        {isSubmiting[1] && <Loading />}
+                      </Button>
+                    )}
+                  />
+                </FeatureToggles>
+              </div>
+            )}
+            {codeArray.includes(code) && (
               <div className="service-card-button">
                 <Button
                   title={t("Next")}

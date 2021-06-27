@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { useHistory } from "react-router-dom"
 import { repairWidgetStore, storesDetails } from "../../store"
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 import { featureToggleKeys } from "../../const/_variables"
 
 const categoryFilterName = [
@@ -48,11 +48,13 @@ const Section2 = ({ features }: Props) => {
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    features.map((item) => {
-      if (item.isActive) {
-        cntFeatures.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item) => {
+        if (item.isActive) {
+          cntFeatures.push(item.flag)
+        }
+      })
+    }
     setFeatures(cntFeatures)
   }, [features, data])
 

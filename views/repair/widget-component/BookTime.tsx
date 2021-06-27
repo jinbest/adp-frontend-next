@@ -93,7 +93,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
     const storeLocs: any[] = storesDetails.findAddLocation
     const i: number = mailInChecked
     if (storeLocs.length > i && storeLocs[i].location_hours.length) {
-      storeLocs[i].location_hours.map((item: any) => {
+      storeLocs[i].location_hours.forEach((item: any) => {
         if (item.type === "REGULAR") {
           let hour = ""
           if (!item.open || !item.close) {

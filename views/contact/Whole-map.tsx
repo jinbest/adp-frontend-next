@@ -120,14 +120,14 @@ const WholeMap = ({
           storesDetails.changeCntUserLocationSelected(true)
         } else {
           setToastParams({
-            msg: "Response is an empty data, please check your infos.",
-            isWarning: true,
+            msg: "Failed to load locations.",
+            isError: true,
           })
         }
       })
       .catch(() => {
         setToastParams({
-          msg: t("Error to find location with Postal Code, please check your postcode."),
+          msg: t("Something went wrong, failed to fetch locations."),
           isError: true,
         })
       })

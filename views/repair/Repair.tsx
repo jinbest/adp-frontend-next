@@ -9,6 +9,7 @@ import { storesDetails } from "../../store"
 import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
 import { featureToggleKeys } from "../../const/_variables"
+import { isEmpty } from "lodash"
 
 type Props = {
   handleStatus: (status: boolean) => void
@@ -25,11 +26,13 @@ const Repair = ({ handleStatus, features }: Props) => {
 
   useEffect(() => {
     const cntFeatures: any[] = []
-    features.map((item) => {
-      if (item.isActive) {
-        cntFeatures.push(item.flag)
-      }
-    })
+    if (!isEmpty(features) && features.length) {
+      features.forEach((item) => {
+        if (item.isActive) {
+          cntFeatures.push(item.flag)
+        }
+      })
+    }
     setFeatures(cntFeatures)
   }, [features])
 
