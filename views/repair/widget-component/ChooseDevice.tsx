@@ -22,7 +22,7 @@ import CustomSelect from "../../../components/CustomSelect"
 import { SelectParams, FilterParams } from "../../../model/select-dropdown-param"
 import Config from "../../../config/config"
 import ApiClient from "../../../services/api-client"
-import _, { isEmpty } from "lodash"
+import _, { capitalize, isEmpty } from "lodash"
 import { GetProductsParam } from "../../../model/get-products-params"
 import { GetBrandsParam } from "../../../model/get-brands-params"
 
@@ -674,7 +674,8 @@ const ChooseDevice = ({
                             key={index}
                             onClick={() => ChooseNextStep(index)}
                           >
-                            <LazyImg src={item.img} style={{ width: "80%" }} alt={item.alt} />
+                            {/* <LazyImg src={item.img} style={{ width: "80%" }} alt={item.alt} /> */}
+                            <p className="repair-widget-brand-name">{capitalize(item.name)}</p>
                           </div>
                         )
                       })}

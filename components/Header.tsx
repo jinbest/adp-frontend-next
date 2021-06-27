@@ -156,7 +156,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
     searchPlaceholder = data.homepage.section1.searchPlaceholder
 
   const [t] = useTranslation()
-  const [blockScroll, allowScroll] = useScrollBlock();
+  const [blockScroll, allowScroll] = useScrollBlock()
 
   const [menuStatus, setMenuStatus] = useState(false)
   const [feats, setFeatures] = useState<any[]>([])
@@ -169,29 +169,26 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [total, setTotal] = useState(0)
   const [selectList, setSelectList] = useState(0)
   const [hover, setHover] = useState(false)
-  const [viewFilterList, setViewFilterList] = useState(false);
-  const [searching, setSearching] = useState(false);
+  const [viewFilterList, setViewFilterList] = useState(false)
+  const [searching, setSearching] = useState(false)
 
-  const customRef = useRef(null);
-  useOutsideHit(customRef);
+  const customRef = useRef(null)
+  useOutsideHit(customRef)
 
   function useOutsideHit(ref: any) {
-    useEffect(
-      () => {
-        function handleClickOutside(event: any) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            setViewFilterList(false);
-            setSelectList(0);
-            setHover(false);
-          }
+    useEffect(() => {
+      function handleClickOutside(event: any) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setViewFilterList(false)
+          setSelectList(0)
+          setHover(false)
         }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
-      },
-      [ref]
-    );
+      }
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+      }
+    }, [ref])
   }
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -575,9 +572,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         <Logo type="header" handleStatus={handleStatus} />
 
         {feats.includes("FRONTEND_GLOBAL_SEARCH") && (
-          <div className="search-div" id="header-search" ref={customRef} onFocus={() => {
-            setViewFilterList(true);
-          }}>
+          <div
+            className="search-div"
+            id="header-search"
+            ref={customRef}
+            onFocus={() => {
+              setViewFilterList(true)
+            }}
+          >
             <Search
               placeholder={searchPlaceholder}
               color="rgba(0,0,0,0.8)"
@@ -618,13 +620,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                           background: selectList === index && !hover ? "#f5f5f5" : "",
                         }}
                       >
-                        {item._source.img_src && (
+                        {item._source.img_src && item._source.type !== "brand" && (
                           <img src={item._source.img_src} alt={`search-item-${index}`} />
                         )}
                         <p>
                           {item._source.name ||
-                            `${item._source.product ? item._source.product.name : ""} ${item._source.title
-                              }`.trim()}
+                            `${item._source.product ? item._source.product.name : ""} ${
+                              item._source.title
+                            }`.trim()}
                         </p>
                       </div>
                     )
