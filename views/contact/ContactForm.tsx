@@ -115,39 +115,40 @@ const ContactForm = ({ locations, locationID, handleLocationID }: Props) => {
     if (firstName && lastName && email && ValidateEmail(email) && loc.name && message.length > 5) {
       return true
     }
+    const delayTime = 2000
     if (!firstName) {
       setFirstNameErr(t("Required."))
       setTimeout(() => {
         setFirstNameErr("")
-      }, 3000)
+      }, delayTime)
     }
     if (!lastName) {
       setLastNameErr(t("Required."))
       setTimeout(() => {
         setLastNameErr("")
-      }, 3000)
+      }, delayTime)
     }
     if (!email) {
       setEmailErr(t("Required."))
       setTimeout(() => {
         setEmailErr("")
-      }, 3000)
+      }, delayTime)
     } else if (!ValidateEmail(email)) {
       setEmailErr(t("Enter a valid email."))
       setTimeout(() => {
         setEmailErr("")
-      }, 3000)
+      }, delayTime)
     }
     if (!message) {
       setMsgErrTxt(t("Required."))
       setTimeout(() => {
         setMsgErrTxt("")
-      }, 3000)
+      }, delayTime)
     } else if (message.length <= 5) {
       setMsgErrTxt(t("Text is too less."))
       setTimeout(() => {
         setMsgErrTxt("")
-      }, 3000)
+      }, delayTime)
     }
     return false
   }

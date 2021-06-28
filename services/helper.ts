@@ -449,8 +449,7 @@ export function ConvertWarrantyUnit(val: string, warnt: number) {
 }
 
 export function ValidateEmail(e: string) {
-  const re =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return re.test(e)
 }
 
@@ -571,4 +570,19 @@ export function convertTimezone(
 
 export function makeAddressValue(val: any) {
   return val.address_1 + (val.address_2 ? ", " + val.address_2 : "") + ", " + val.city
+}
+
+export function validSearchItemData(item: any) {
+  if (
+    !isEmpty(item) &&
+    item._source &&
+    item._source.type &&
+    (item._source.type === "product" ||
+      item._source.type === "brand" ||
+      (item._source.type === "service" && item._source.product && !isEmpty(item._source.product)))
+  ) {
+    return true
+  } else {
+    return false
+  }
 }

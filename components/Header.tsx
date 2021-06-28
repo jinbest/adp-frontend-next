@@ -16,6 +16,7 @@ import {
   getWidth,
   isOriginSameAsLocation,
   isSlugLink,
+  validSearchItemData,
 } from "../services/helper"
 import _, { isEmpty } from "lodash"
 import SearchService from "../services/api/search-service"
@@ -247,13 +248,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         if (hits.length) {
           const cntSearchData = searchData
           hits.forEach((item: any) => {
-            if (
-              item._source.type === "product" ||
-              item._source.type === "brand" ||
-              (item._source.type === "service" &&
-                item._source.product &&
-                !isEmpty(item._source.product))
-            ) {
+            if (validSearchItemData(item)) {
               cntSearchData.push(item)
             }
           })
@@ -334,13 +329,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       const preHits = _.reverse(_.sortBy(val.hits.hits, (o) => o._score)),
         hits = [] as any[]
       preHits.forEach((item: any) => {
-        if (
-          item._source.type === "product" ||
-          item._source.type === "brand" ||
-          (item._source.type === "service" &&
-            item._source.product &&
-            !isEmpty(item._source.product))
-        ) {
+        if (validSearchItemData(item)) {
           hits.push(item)
         }
       })
