@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { repairWidgetStore, storesDetails } from "../../../store"
 import { repairWidgetAPI } from "../../../services"
-import { PostAppointParams } from "../../../model/post-appointment-params"
+import { PostAppointParams, AppointmentRepair } from "../../../model/post-appointment-params"
 import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
@@ -17,6 +17,7 @@ import {
   appointmentQuoteType,
   featureToggleKeys,
 } from "../../../const/_variables"
+import { ConvertedQuoteParam } from "../../../model/converted-quote-params"
 
 type Props = {
   repairWidgetData: any
@@ -48,7 +49,7 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     setIsSubmitting(true)
 
     const tp = appointmentQuoteType.appointment
-    const repairs: any[] = [],
+    const repairs: AppointmentRepair[] = [],
       select_date =
         repairWidgetStore.repairWidgetInitialValue.selectDate || moment().format("YYYY-MM-DD"),
       selected_start_time =
@@ -99,7 +100,7 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     params.repairs = repairs
     params.booking_date = moment().format("YYYY-MM-DD")
     params.customer_timezone = timezone
-    params.converted = repairWidgetStore.converted
+    params.converted = false
 
     // params.selected_date = select_date
     // params.selected_start_time = selected_start_time
@@ -130,6 +131,9 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
           features.includes(featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT)
         ) {
           ChooseNextStep()
+          if (repairWidgetStore.converted.status) {
+            updateQuote(params, repairWidgetStore.converted)
+          }
         } else {
           setToastParams({
             msg: t("Something went wrong, please try again or contact us."),
@@ -139,6 +143,25 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
           setIsSubmitting(false)
           return
         }
+      })
+      .catch(() => {
+        setToastParams({
+          msg: t("Something went wrong, please try again or contact us."),
+          isError: true,
+        })
+        setDisableStatus(false)
+        setIsSubmitting(false)
+      })
+  }
+
+  const updateQuote = async (param: PostAppointParams, converted: ConvertedQuoteParam) => {
+    param.type = appointmentQuoteType.quote
+    param.converted = true
+    param.id = converted.id
+    repairWidgetAPI
+      .putUpdateQuote(param)
+      .then((res: any) => {
+        console.log("updated-quote", res)
       })
       .catch(() => {
         setToastParams({

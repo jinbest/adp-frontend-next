@@ -1,5 +1,6 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { Customer_timezone } from "../services/helper"
+import { ConvertedQuoteParam } from "../model/converted-quote-params"
 
 configure({ enforceActions: "always" })
 
@@ -71,7 +72,11 @@ export class RepairWidgetStore {
   }
   @observable appointResponse: any = {}
   @observable timezone: string | null = Customer_timezone()
-  @observable converted = false
+  @observable converted = {
+    id: -1,
+    lid: -1,
+    status: false,
+  } as ConvertedQuoteParam
 
   constructor() {
     this.load()
@@ -267,7 +272,7 @@ export class RepairWidgetStore {
   }
 
   @action
-  changeConverted = (val: boolean) => {
+  changeConverted = (val: ConvertedQuoteParam) => {
     this.converted = val
     this.save()
   }
@@ -341,7 +346,11 @@ export class RepairWidgetStore {
     }
     this.appointResponse = {}
     this.timezone = Customer_timezone()
-    this.converted = false
+    this.converted = {
+      id: -1,
+      lid: -1,
+      status: false,
+    } as ConvertedQuoteParam
     this.save()
   }
 

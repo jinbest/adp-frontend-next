@@ -8,11 +8,7 @@ import { GetBrandsParam } from "../../model/get-brands-params"
 
 const apiClient = ApiClient.getInstance()
 class RepairWidgetAPI {
-
-  getDeviceBrands = async (
-    store_id: number,
-    val: GetBrandsParam
-  ) => {
+  getDeviceBrands = async (store_id: number, val: GetBrandsParam) => {
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/brands`
     const params: GetBrandsParam = {
       per_page: val.per_page,
@@ -20,21 +16,18 @@ class RepairWidgetAPI {
       is_enabled: val.is_enabled,
       has_products: true,
       include_voided: false,
-      display_sort_order: "asc"
+      display_sort_order: "asc",
     }
     if (val.category_id && val.category_id > 0) {
       params.category_ids = [val.category_id]
     }
     if (val.name) {
       params.name = val.name
-    }    
+    }
     return await apiClient.get<GetManyResponse>(apiURL, params)
-  }  
+  }
 
-  getBrandProducts = async (
-    store_id: number,
-    val: GetProductsParam
-  ) => {
+  getBrandProducts = async (store_id: number, val: GetProductsParam) => {
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/products`
     const params: GetProductsParam = {
       per_page: val.per_page,
@@ -42,7 +35,7 @@ class RepairWidgetAPI {
       include_voided: val.include_voided,
       brand_id: val.brand_id,
       status: "PUBLISHED",
-      display_sort_order: "asc"
+      display_sort_order: "asc",
     }
     if (val.name) {
       params.name = val.name
@@ -85,6 +78,11 @@ class RepairWidgetAPI {
   postAppointmentQuote = async (data: PostAppointParams) => {
     const apiURL = `${Config.REPAIR_SERVICE_API_URL}dc/store/${data.store_id}/repair/location/${data.location_id}/appointment`
     return await apiClient.post(apiURL, data)
+  }
+
+  putUpdateQuote = async (data: PostAppointParams) => {
+    const apiURL = `${Config.REPAIR_SERVICE_API_URL}dc/store/${data.store_id}/repair/location/${data.location_id}/appointment`
+    return await apiClient.put(apiURL, data)
   }
 
   getContactMethods = async (store_id: number) => {
