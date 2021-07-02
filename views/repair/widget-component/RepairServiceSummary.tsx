@@ -157,19 +157,14 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     const param: AppointmentParams = repairWidgetStore.quote
     param.converted = true
 
-    repairWidgetAPI
-      .putUpdateQuote(param)
-      .then((res: any) => {
-        console.log("updated-quote", res)
+    repairWidgetAPI.putUpdateQuote(param).catch(() => {
+      setToastParams({
+        msg: t("Something went wrong, please try again or contact us."),
+        isError: true,
       })
-      .catch(() => {
-        setToastParams({
-          msg: t("Something went wrong, please try again or contact us."),
-          isError: true,
-        })
-        setDisableStatus(false)
-        setIsSubmitting(false)
-      })
+      setDisableStatus(false)
+      setIsSubmitting(false)
+    })
   }
 
   const ChooseNextStep = () => {
