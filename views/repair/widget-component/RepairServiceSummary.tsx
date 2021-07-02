@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { repairWidgetStore, storesDetails } from "../../../store"
 import { repairWidgetAPI } from "../../../services"
-import { PostAppointParams, AppointmentRepair } from "../../../model/post-appointment-params"
+import { AppointmentParams, AppointmentRepair } from "../../../model/post-appointment-params"
 import { ToastMsgParams } from "../../../model/toast-msg-param"
 import Toast from "../../../components/toast/toast"
 import moment from "moment"
@@ -17,7 +17,6 @@ import {
   appointmentQuoteType,
   featureToggleKeys,
 } from "../../../const/_variables"
-import { ConvertedQuoteParam } from "../../../model/converted-quote-params"
 
 type Props = {
   repairWidgetData: any
@@ -74,7 +73,7 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
         })
       }
     }
-    const params = {} as PostAppointParams
+    const params = {} as AppointmentParams
     params.store_id = storesDetails.store_id
     params.location_id = storesDetails.location_id
     params.customer_id = 1
@@ -131,8 +130,8 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
           features.includes(featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT)
         ) {
           ChooseNextStep()
-          if (repairWidgetStore.converted.status) {
-            updateQuote(params, repairWidgetStore.converted)
+          if (repairWidgetStore.converted) {
+            updateQuote()
           }
         } else {
           setToastParams({
@@ -154,10 +153,10 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
       })
   }
 
-  const updateQuote = async (param: PostAppointParams, converted: ConvertedQuoteParam) => {
-    param.type = appointmentQuoteType.quote
+  const updateQuote = async () => {
+    const param: AppointmentParams = repairWidgetStore.quote
     param.converted = true
-    param.id = converted.id
+
     repairWidgetAPI
       .putUpdateQuote(param)
       .then((res: any) => {

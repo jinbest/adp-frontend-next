@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { repairWidgetStore, storesDetails } from "../../../store"
 import { repairWidgetAPI, findLocationAPI } from "../../../services"
-import { PostAppointParams } from "../../../model/post-appointment-params"
+import { AppointmentParams } from "../../../model/post-appointment-params"
 import { countriesData } from "../../../const"
 import { makeLocations } from "../../../services/helper"
 import { ToastMsgParams } from "../../../model/toast-msg-param"
@@ -98,7 +98,7 @@ const ContactDetails = ({
           })
         }
       }
-      const params = {} as PostAppointParams
+      const params = {} as AppointmentParams
       params.store_id = storesDetails.store_id
       params.location_id = storesDetails.location_id
       params.customer_id = 1
@@ -122,7 +122,7 @@ const ContactDetails = ({
       params.selected_start_time = repairWidgetStore.repairWidgetInitialValue.selected_start_time
       params.selected_end_time = repairWidgetStore.repairWidgetInitialValue.selected_end_time
       params.booking_date = moment().format("YYYY-MM-DD")
-      params.converted = repairWidgetStore.converted.status
+      params.converted = repairWidgetStore.converted
 
       repairWidgetAPI
         .postAppointmentQuote(params)

@@ -1,5 +1,5 @@
 import Config from "../../config/config"
-import { PostAppointParams } from "../../model/post-appointment-params"
+import { AppointmentParams } from "../../model/post-appointment-params"
 import ApiClient from "../api-client"
 import { GetManyResponse } from "../../model/get-many-response"
 import { FilterParams } from "../../model/select-dropdown-param"
@@ -75,12 +75,12 @@ class RepairWidgetAPI {
     return await apiClient.get<GetManyResponse>(apiURL)
   }
 
-  postAppointmentQuote = async (data: PostAppointParams) => {
+  postAppointmentQuote = async (data: AppointmentParams) => {
     const apiURL = `${Config.REPAIR_SERVICE_API_URL}dc/store/${data.store_id}/repair/location/${data.location_id}/appointment`
     return await apiClient.post(apiURL, data)
   }
 
-  putUpdateQuote = async (data: PostAppointParams) => {
+  putUpdateQuote = async (data: AppointmentParams) => {
     const apiURL = `${Config.REPAIR_SERVICE_API_URL}dc/store/${data.store_id}/repair/location/${data.location_id}/appointment`
     return await apiClient.put(apiURL, data)
   }

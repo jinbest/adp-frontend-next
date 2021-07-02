@@ -1,14 +1,18 @@
 import { repairWidgetAPI } from "../../services/"
-import { repairWidData, storesDetails } from "../../store/"
+import { repairWidData, repairWidgetStore, storesDetails } from "../../store/"
 import { setQuotesStore } from "../../services/helper"
 import _ from "lodash"
-import { GetProductsParam} from "../../model/get-products-params"
+import { GetProductsParam } from "../../model/get-products-params"
 import { GetBrandsParam } from "../../model/get-brands-params"
 
 function getRepairLookupAPI() {
   const lookupTypes: any[] = ["repair_delivery_method", "repair_contact_method", "warranty_unit"]
-  const locale: string = (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") ? 
-    window.localStorage.getItem("cntLang") || "en" : "en"
+  const locale: string =
+    typeof window !== "undefined" &&
+    window.localStorage !== null &&
+    typeof window.localStorage !== "undefined"
+      ? window.localStorage.getItem("cntLang") || "en"
+      : "en"
 
   repairWidgetAPI
     .getRepairLookup(locale, lookupTypes)
@@ -89,7 +93,7 @@ async function getDeviceBrandsAPI(val: GetBrandsParam) {
     page: val.page,
     is_enabled: true,
     name: val.name,
-    category_id: val.category_id
+    category_id: val.category_id,
   }
 
   await repairWidgetAPI
@@ -110,7 +114,7 @@ async function addMoreDeviceBrandsAPI(val: GetBrandsParam) {
     page: val.page,
     name: val.name,
     category_id: val.category_id,
-    is_enabled: true
+    is_enabled: true,
   }
 
   await repairWidgetAPI
@@ -127,10 +131,7 @@ async function addMoreDeviceBrandsAPI(val: GetBrandsParam) {
     })
 }
 
-async function getBrandProductsAPI(
-  val: GetProductsParam
-) {
-
+async function getBrandProductsAPI(val: GetProductsParam) {
   const store_id = storesDetails.store_id
 
   const param: GetProductsParam = {
@@ -139,7 +140,7 @@ async function getBrandProductsAPI(
     include_voided: false,
     brand_id: val.brand_id,
     name: val.name,
-    category_id: val.category_id
+    category_id: val.category_id,
   }
 
   await repairWidgetAPI
@@ -152,9 +153,7 @@ async function getBrandProductsAPI(
     })
 }
 
-async function addMoreBrandProductsAPI(
-  val: GetProductsParam
-) {
+async function addMoreBrandProductsAPI(val: GetProductsParam) {
   const store_id: number = storesDetails.store_id
 
   const param: GetProductsParam = {
@@ -163,7 +162,7 @@ async function addMoreBrandProductsAPI(
     include_voided: false,
     brand_id: val.brand_id,
     name: val.name,
-    category_id: val.category_id
+    category_id: val.category_id,
   }
 
   await repairWidgetAPI
@@ -186,8 +185,12 @@ async function getRepairsOfferedDeviceAPI(
   page: number,
   per_page: number
 ) {
-  const locale: string = (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") ? 
-    window.localStorage.getItem("cntLang") || "en" : "en"
+  const locale: string =
+    typeof window !== "undefined" &&
+    window.localStorage !== null &&
+    typeof window.localStorage !== "undefined"
+      ? window.localStorage.getItem("cntLang") || "en"
+      : "en"
   const store_id: number = storesDetails.store_id
   const included_voided = false
   const is_active = true
@@ -220,8 +223,12 @@ async function addMoreRepairsOfferedDeviceAPI(
   page: number,
   per_page: number
 ) {
-  const locale: string = (typeof window !== "undefined" && window.localStorage  !== null && typeof window.localStorage  !== "undefined") ? 
-    window.localStorage.getItem("cntLang") || "en" : "en"
+  const locale: string =
+    typeof window !== "undefined" &&
+    window.localStorage !== null &&
+    typeof window.localStorage !== "undefined"
+      ? window.localStorage.getItem("cntLang") || "en"
+      : "en"
   const store_id: number = storesDetails.store_id
   const included_voided = false
   const is_active = true
@@ -258,6 +265,7 @@ async function getQuotesByLocAppointmentID(location_id: number, appointment_id: 
   await repairWidgetAPI
     .getQuotesByID(store_id, location_id, appointment_id)
     .then(async (res: any) => {
+      repairWidgetStore.changeQuote(res)
       await setQuotesStore(res)
     })
     .catch((error) => {
