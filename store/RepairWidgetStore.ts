@@ -71,6 +71,7 @@ export class RepairWidgetStore {
   }
   @observable appointResponse: any = {}
   @observable timezone: string | null = Customer_timezone()
+  @observable converted = false
 
   constructor() {
     this.load()
@@ -101,6 +102,7 @@ export class RepairWidgetStore {
           repairWidgetInitialValue: this.repairWidgetInitialValue,
           appointResponse: this.appointResponse,
           timezone: this.timezone,
+          converted: this.converted,
         })
       )
     }
@@ -265,6 +267,12 @@ export class RepairWidgetStore {
   }
 
   @action
+  changeConverted = (val: boolean) => {
+    this.converted = val
+    this.save()
+  }
+
+  @action
   init = () => {
     this.deviceBrand = []
     this.deviceModel = []
@@ -333,6 +341,7 @@ export class RepairWidgetStore {
     }
     this.appointResponse = {}
     this.timezone = Customer_timezone()
+    this.converted = false
     this.save()
   }
 

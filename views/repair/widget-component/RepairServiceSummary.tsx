@@ -99,6 +99,7 @@ const RepairServiceSummary = ({ repairWidgetData, code, step, handleStep, featur
     params.repairs = repairs
     params.booking_date = moment().format("YYYY-MM-DD")
     params.customer_timezone = timezone
+    params.converted = repairWidgetStore.converted
 
     // params.selected_date = select_date
     // params.selected_start_time = selected_start_time

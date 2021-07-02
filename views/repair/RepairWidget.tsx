@@ -73,6 +73,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
   const handleGetQuote = async (loc_id: number, id: number) => {
     repairWidgetStore.init()
     await getQuotesByLocAppointmentID(loc_id, id)
+    repairWidgetStore.changeConverted(true)
     setStep(repairWidgetStore.cntStep)
     setLoading(true)
   }

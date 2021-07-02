@@ -122,6 +122,7 @@ const ContactDetails = ({
       params.selected_start_time = repairWidgetStore.repairWidgetInitialValue.selected_start_time
       params.selected_end_time = repairWidgetStore.repairWidgetInitialValue.selected_end_time
       params.booking_date = moment().format("YYYY-MM-DD")
+      params.converted = repairWidgetStore.converted
 
       repairWidgetAPI
         .postAppointmentQuote(params)
