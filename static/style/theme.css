@@ -1224,6 +1224,7 @@ p {
   align-items: center;
   text-decoration: none;
   color: #000000;
+  width: 100%;
 }
 
 .container-header .search-div .search-data-viewer .search-item img {
@@ -1246,12 +1247,33 @@ p {
   background-color: #e6e6e6;
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .container-header .search-div .search-data-viewer .search-item {
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+    width: calc(50% - 30px);
+    max-width: 150px;
+  }
+  .container-header .search-div .search-data-viewer .search-item p {
+    text-align: center;
+  }
+  .container-header .search-div .search-data-viewer .search-item img {
+    max-width: 60px;
+    max-height: inherit;
+  }
 }
 
 @media (max-width: 425px) {
   .container-header .search-div .search-data-viewer .search-item {
     font-size: 12px;
-    padding: 3px 7px;
+    padding: 5px 0;
+    width: 100%;
+    max-width: 150px;
+    margin: auto;
   }
   .container-header .search-div .search-data-viewer .search-type {
     font-size: 13px;

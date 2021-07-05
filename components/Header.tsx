@@ -596,7 +596,14 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                   setHover(false)
                 }}
               >
-                <div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
                   <p className="search-type">{t("Services")}</p>
                   {searchData.map((item: any, index: number) => {
                     return (

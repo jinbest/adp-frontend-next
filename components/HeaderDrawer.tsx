@@ -647,7 +647,8 @@ const useStyles = makeStyles((theme: Theme) =>
       "& img": {
         width: "auto",
         maxWidth: "100%",
-        height: "100px",
+        // height: "100px",
+        maxHeight: "100px",
       },
     },
     modal: {
