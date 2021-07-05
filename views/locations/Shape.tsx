@@ -44,17 +44,17 @@ const useStyles = makeStyles(() =>
       },
       ["@media (max-width:600px)"]: {
         "& > img": {
-          minWidth: "180vw",
+          minWidth: "190vw",
         },
       },
       ["@media (max-width:500px)"]: {
         "& > img": {
-          minWidth: "200vw",
+          minWidth: "210vw",
         },
       },
       ["@media (max-width:425px)"]: {
         "& > img": {
-          minWidth: "1000px",
+          minWidth: "1050px",
         },
       },
       ["@media (max-width:375px)"]: {

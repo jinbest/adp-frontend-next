@@ -214,7 +214,7 @@ const useStyles = makeStyles(() =>
         paddingTop: "210px !important",
       },
       ["@media (max-width:600px)"]: {
-        paddingTop: "150px !important",
+        paddingTop: "160px !important",
       },
       ["@media (max-width:425px)"]: {
         paddingTop: "200px !important",

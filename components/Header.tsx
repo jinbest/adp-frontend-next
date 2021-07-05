@@ -718,6 +718,86 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         </div>
       </div>
 
+      <div className="container-mobile">
+        {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
+          <div
+            className="mobile-search-div"
+            id="header-search"
+            ref={customRef}
+            onFocus={() => {
+              setViewFilterList(true)
+            }}
+          >
+            <div className="mobile-child-search">
+              <Search
+                placeholder={searchPlaceholder}
+                color="rgba(0,0,0,0.8)"
+                bgcolor="white"
+                border="rgba(0,0,0,0.2)"
+                value={searchKey}
+                handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChangeSearch(e)
+                }}
+                handleIconClick={() => {
+                  // EMPTY
+                }}
+              />
+              {viewFilterList && searchData.length ? (
+                <div
+                  className="search-data-viewer custom-scroll-bar"
+                  onScroll={handleScroll}
+                  onMouseOver={() => {
+                    setHover(true)
+                  }}
+                  onMouseLeave={() => {
+                    setHover(false)
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <p className="search-type">{t("Services")}</p>
+                    {searchData.map((item: any, index: number) => {
+                      return (
+                        <div
+                          className="search-item"
+                          key={index}
+                          onClick={() => {
+                            setHover(false)
+                            setSelectList(0)
+                            handleSearchItem(item)
+                          }}
+                          style={{
+                            background: selectList === index && !hover ? "#f5f5f5" : "",
+                          }}
+                        >
+                          {item._source.img_src && item._source.type !== "brand" && (
+                            <img src={item._source.img_src} alt={`search-item-${index}`} />
+                          )}
+                          <p>
+                            {item._source.name ||
+                              `${item._source.product ? item._source.product.name : ""} ${
+                                item._source.title
+                              }`.trim()}
+                          </p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* <div className={ "container-mobile"}>
         {userStatus && menuStatus ? (
           <FeatureToggles features={feats}>
