@@ -174,13 +174,19 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   const [viewFilterList, setViewFilterList] = useState(false)
   const [searching, setSearching] = useState(false)
 
-  const customRef = useRef(null)
-  useOutsideHit(customRef)
+  const customRef = useRef<HTMLDivElement>({} as HTMLDivElement)
+  const customRefMobile = useRef<HTMLDivElement>({} as HTMLDivElement)
+  useOutsideHit()
 
-  function useOutsideHit(ref: any) {
+  function useOutsideHit() {
     useEffect(() => {
       function handleClickOutside(event: any) {
-        if (ref.current && !ref.current.contains(event.target)) {
+        if (
+          customRef.current &&
+          !customRef.current.contains(event.target) &&
+          customRefMobile.current &&
+          !customRefMobile.current.contains(event.target)
+        ) {
           setViewFilterList(false)
           setSelectList(0)
           setHover(false)
@@ -190,7 +196,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
       return () => {
         document.removeEventListener("mousedown", handleClickOutside)
       }
-    }, [ref])
+    }, [customRef, customRefMobile])
   }
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -339,7 +345,6 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
   }
 
   const handleSearchItem = (item: any) => {
-    console.log("search-item", item)
     repairWidgetStore.init()
     handleStatus(false)
     if (item._source.type === "product") {
@@ -611,9 +616,9 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                         className="search-item"
                         key={index}
                         onClick={() => {
-                          setHover(false)
-                          setSelectList(0)
                           handleSearchItem(item)
+                          setSelectList(0)
+                          setHover(false)
                         }}
                         style={{
                           background: selectList === index && !hover ? "#f5f5f5" : "",
@@ -722,8 +727,8 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
           <div
             className="mobile-search-div"
-            id="header-search"
-            ref={customRef}
+            id="header-search-mobile"
+            ref={customRefMobile}
             onFocus={() => {
               setViewFilterList(true)
             }}
@@ -768,9 +773,9 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                           className="search-item"
                           key={index}
                           onClick={() => {
-                            setHover(false)
-                            setSelectList(0)
                             handleSearchItem(item)
+                            setSelectList(0)
+                            setHover(false)
                           }}
                           style={{
                             background: selectList === index && !hover ? "#f5f5f5" : "",
