@@ -190,8 +190,8 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
     subDomainID = -2
 
   /* Local Prod Mode */
-  /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), prado(6), repar(7), wireless(8), device(11)] */
-  // const siteNum = 11,
+  /* siteNum: [bana(0), geeb(1), mobi(2), nano(3), north(4), phon(5), black(6), repar(7), wireless(8), sourapple(11)] */
+  // const siteNum = 3,
   //   subDomainID = SubDomains.DEVICE_ADP_LISTS[siteNum].storeID
 
   let apexDomain = ""

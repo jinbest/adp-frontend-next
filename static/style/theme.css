@@ -1175,7 +1175,7 @@ p {
 }
 
 .container-header > a > img {
-  height: 40px !important;
+  height: 35px !important;
 }
 
 .container-header .text-1 {
@@ -1197,7 +1197,7 @@ p {
   position: relative;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .container-header .search-div {
     display: none;
   }
@@ -1332,10 +1332,10 @@ p {
 .mobile-search-div {
   display: none;
   width: 100%;
-  padding: 0 0 13px;
+  padding: 0 0 10px;
   position: absolute;
   height: 40px;
-  top: 95px;
+  top: 100px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   flex-grow: 1;
   background-color: white;
@@ -1592,7 +1592,7 @@ p {
     margin-right: 2%;
   }
   .container-header {
-    height: 70px;
+    height: 65px;
   }
 }
 

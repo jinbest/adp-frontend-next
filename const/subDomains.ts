@@ -77,8 +77,8 @@ export default class SubDomains {
       ],
     },
     {
-      name: "blackapplecellularvictoria",
-      domain: "blackapplecellularvictoria.com",
+      name: "blackapplecellular",
+      domain: "blackapplecellular.com",
       storeID: 10,
       locations: [
         {
@@ -123,7 +123,7 @@ export default class SubDomains {
     },
     {
       name: "devicelist",
-      domain: "mtlcmtx.com",
+      domain: "sourapplerepair.com",
       storeID: 0,
       locations: [],
     },
