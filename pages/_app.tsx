@@ -32,6 +32,7 @@ interface DataProps extends AppProps {
   locations: any
   storeCnts: any
   commonCnts: any
+  apexDomain: string
 }
 
 const App = ({
@@ -42,6 +43,7 @@ const App = ({
   locations,
   storeCnts,
   commonCnts,
+  apexDomain,
 }: DataProps) => {
   const [theme, setTheme] = useState("")
   const [favIcon, setFavIcon] = useState("")
@@ -175,7 +177,7 @@ const App = ({
           <Router>
             <Header handleStatus={handleFooterStatus} features={features} />
             <Component {...pageProps} handleStatus={handleFooterStatus} features={features} />
-            <Badge />
+            {apexDomain !== "devicelist.ca" && <Badge />}
             {footerStatus && <Footer />}
           </Router>
         </React.Fragment>
@@ -236,6 +238,7 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
     locations: locations,
     storeCnts: storeConfig,
     commonCnts: commonConfig,
+    apexDomain: apexDomain,
   }
 }
 
