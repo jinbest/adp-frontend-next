@@ -630,6 +630,9 @@ const ChooseDevice = ({
         <Grid item xs={12} md={7}>
           <Card>
             <div className="service-choose-device-container">
+              {stepName === repairWidgetStepName.deviceRepairs && (
+                <p className="info-text-for-services">{t("You can select multiple services")}</p>
+              )}
               {stepName !== repairWidgetStepName.deviceBrand && step < 3 && (
                 <div className="search-bar-container">
                   {stepName === repairWidgetStepName.deviceModel && filterList.length ? (

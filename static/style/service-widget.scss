@@ -76,6 +76,7 @@
 
 .device-item-container {
   width: 17%;
+  max-width: 125px;
   margin: 1%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -672,5 +673,14 @@
   }
   @media (max-width: 425px) {
     font-size: 3vw !important;
+  }
+}
+
+.info-text-for-services {
+  margin: -20px 0 5px;
+  text-align: center;
+  font-size: 18px;
+  @media (max-width: 500px) {
+    font-size: 14px;
   }
 }
