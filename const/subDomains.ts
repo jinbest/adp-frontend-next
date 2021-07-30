@@ -106,7 +106,7 @@ export default class SubDomains {
     },
     {
       name: "dccmtx",
-      domain: "https://dev.mtlcmtx.com/",
+      domain: "dev.dccmtx.com",
       storeID: 1,
       locations: [
         {
@@ -122,9 +122,21 @@ export default class SubDomains {
       locations: [],
     },
     {
-      name: "devicelist",
+      name: "sourapplerepair",
       domain: "sourapplerepair.com",
-      storeID: 0,
+      storeID: 17,
+      locations: [],
+    },
+    {
+      name: "devicelist",
+      domain: "devicelist.ca",
+      storeID: 19,
+      locations: [],
+    },
+    {
+      name: "i-wav",
+      domain: "i-wave.ca",
+      storeID: 12,
       locations: [],
     },
   ]
