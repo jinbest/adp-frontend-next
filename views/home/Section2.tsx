@@ -9,29 +9,6 @@ import { repairWidgetStore, storesDetails } from "../../store"
 import _, { isEmpty } from "lodash"
 import { featureToggleKeys } from "../../const/_variables"
 
-const categoryFilterName = [
-  {
-    name: "Cellphone",
-    slug: "Phones",
-  },
-  {
-    name: "Tablet",
-    slug: "Tablets",
-  },
-  {
-    name: "Computer",
-    slug: "Laptops",
-  },
-  {
-    name: "Console",
-    slug: "Console",
-  },
-  {
-    name: "Other",
-    slug: "Other",
-  },
-]
-
 type Props = {
   features: any[]
 }
@@ -60,14 +37,7 @@ const Section2 = ({ features }: Props) => {
 
   const handleRepairWidget = (title: string) => {
     repairWidgetStore.init()
-    const slugIndex = _.findIndex(categoryFilterName, (o) => o.name === title)
-    if (slugIndex > -1) {
-      history.push(
-        `${data.general.routes.repairWidgetPage}?c=${categoryFilterName[slugIndex].slug}`
-      )
-    } else {
-      history.push(data.general.routes.repairWidgetPage)
-    }
+    history.push(`${data.general.routes.repairWidgetPage}?c=${title}`)
   }
 
   return (
@@ -78,45 +48,51 @@ const Section2 = ({ features }: Props) => {
         activeComponent={() => (
           <section className="Container">
             <h2 className="section-title">{t(thisPage.title)}</h2>
-            <div className="card-customized-container-desktop">
-              {cards.map((item: any, index: number) => {
-                return (
-                  <div
-                    className="card-customized-item"
-                    key={index}
-                    onClick={() => handleRepairWidget(item.title)}
-                  >
-                    <CardFix title={t(item.title)} img={item.img} key={index} />
-                  </div>
-                )
-              })}
-            </div>
-            <div className="card-customized-container-mobile">
-              {cards.slice(0, 3).map((item: any, index: number) => {
-                return (
-                  <div
-                    className="card-customized-item"
-                    key={index}
-                    onClick={() => handleRepairWidget(item.title)}
-                  >
-                    <CardFix title={t(item.title)} img={item.img} key={index} />
-                  </div>
-                )
-              })}
-            </div>
-            <div className="card-customized-container-mobile">
-              {cards.slice(3, 5).map((item: any, index: number) => {
-                return (
-                  <div
-                    className="card-customized-item"
-                    key={index}
-                    onClick={() => handleRepairWidget(item.title)}
-                  >
-                    <CardFix title={t(item.title)} img={item.img} key={index} />
-                  </div>
-                )
-              })}
-            </div>
+            {cards.length && (
+              <div className="card-customized-container-desktop">
+                {cards.map((item: any, index: number) => {
+                  return (
+                    <div
+                      className="card-customized-item"
+                      key={index}
+                      onClick={() => handleRepairWidget(item.title)}
+                    >
+                      <CardFix title={t(item.title)} img={item.img} key={index} />
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+            {cards.length && (
+              <div className="card-customized-container-mobile">
+                {cards.slice(0, 3).map((item: any, index: number) => {
+                  return (
+                    <div
+                      className="card-customized-item"
+                      key={index}
+                      onClick={() => handleRepairWidget(item.title)}
+                    >
+                      <CardFix title={t(item.title)} img={item.img} key={index} />
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+            {cards.length && (
+              <div className="card-customized-container-mobile">
+                {cards.slice(3, 5).map((item: any, index: number) => {
+                  return (
+                    <div
+                      className="card-customized-item"
+                      key={index}
+                      onClick={() => handleRepairWidget(item.title)}
+                    >
+                      <CardFix title={t(item.title)} img={item.img} key={index} />
+                    </div>
+                  )
+                })}
+              </div>
+            )}
             <Grid container item xs={12} spacing={2}>
               {contents.map((item: any, index: number) => {
                 return (

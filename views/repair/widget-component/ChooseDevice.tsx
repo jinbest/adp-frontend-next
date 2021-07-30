@@ -35,6 +35,7 @@ type Props = {
   repairWidgetData: any
   features: any[]
   categoryName: string | null
+  categoryID: number
 }
 
 type ArrayProps = {
@@ -50,6 +51,7 @@ const ChooseDevice = ({
   repairWidgetData,
   features,
   categoryName,
+  categoryID,
 }: Props) => {
   const mainData = storesDetails.storeCnts
   const themeCol = mainData.general.colorPalle.themeColor
@@ -68,13 +70,14 @@ const ChooseDevice = ({
   const [openContactModal, setOpenContactModal] = useState(false)
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<SelectParams>({ name: "All", code: "0" } as SelectParams)
+  const [category_id, setCategoryID] = useState(categoryID)
   const [filterList, setFileterList] = useState<SelectParams[]>([
     { name: "All", code: "0" },
   ] as SelectParams[])
 
   const getFilterList = async (cateName?: string) => {
     const result = {
-      category_id: -1,
+      category_id: category_id,
       filter: { code: "0", name: "All" } as SelectParams,
     }
     const params: FilterParams = {
@@ -103,6 +106,7 @@ const ChooseDevice = ({
       const cateIndex = _.findIndex(tmpFilterList, (o) => o.name === categoryName)
       if (cateIndex > -1) {
         setFilter(tmpFilterList[cateIndex])
+        setCategoryID(Number(tmpFilterList[cateIndex].code))
         result.filter = tmpFilterList[cateIndex]
       }
     }
@@ -125,8 +129,8 @@ const ChooseDevice = ({
           page: page + 1,
           per_page: perPage,
         }
-        if (Number(filter.code) > 0) {
-          paramsBrand.category_id = Number(filter.code)
+        if (category_id > 0) {
+          paramsBrand.category_id = category_id
         }
         await addMoreDeviceBrandsAPI(paramsBrand)
         if (repairWidData.repairDeviceBrands.data && repairWidData.repairDeviceBrands.data.length) {
@@ -153,8 +157,8 @@ const ChooseDevice = ({
           page: page + 1,
           per_page: perPage,
         }
-        if (Number(filter.code) > 0) {
-          paramsModel.category_id = Number(filter.code)
+        if (category_id > 0) {
+          paramsModel.category_id = category_id
         }
         await addMoreBrandProductsAPI(paramsModel)
         if (
@@ -248,7 +252,7 @@ const ChooseDevice = ({
 
   const onKeyPress = async (event: any) => {
     if (event.key === "Enter" && (step === 0 || step === 1 || step === 2)) {
-      await loadFilterData(event.target.value, 1, page * perPage, filter.code)
+      await loadFilterData(event.target.value, 1, page * perPage, category_id)
     }
     if (event.key === "Enter" && !disableStatus && (step === 2 || step === 4 || step === 5)) {
       handleStep(step + 1)
@@ -263,10 +267,10 @@ const ChooseDevice = ({
   const handleClickSearchIcon = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (step >= 3) return
     e.preventDefault()
-    await loadFilterData(searchText, 1, page * perPage, filter.code)
+    await loadFilterData(searchText, 1, page * perPage, category_id)
   }
 
-  const loadFilterData = async (text: string, pg: number, perpg: number, code: string) => {
+  const loadFilterData = async (text: string, pg: number, perpg: number, code: number) => {
     setLoading(true)
     const cntImgData: any[] = []
     const paramModel: GetProductsParam = {
@@ -276,7 +280,7 @@ const ChooseDevice = ({
       per_page: perpg,
     }
     if (Number(code) > 0) {
-      paramModel.category_id = Number(code)
+      paramModel.category_id = code
     }
     await getBrandProductsAPI(paramModel)
     if (repairWidData.repairBrandProducts.data && repairWidData.repairBrandProducts.data.length) {
@@ -301,7 +305,7 @@ const ChooseDevice = ({
 
   const loadStepData = async (name: string, text: string, pg: number, perpg: number) => {
     setLoading(true)
-    let catID = -1,
+    let catID = category_id,
       result = {} as any
     if (name === repairWidgetStepName.deviceBrand && categoryName) {
       result = await getFilterList(categoryName)
@@ -349,8 +353,8 @@ const ChooseDevice = ({
           page: pg,
           per_page: perpg,
         }
-        if (Number(filter.code) > 0) {
-          paramModel.category_id = Number(filter.code)
+        if (category_id > 0) {
+          paramModel.category_id = category_id
           await getBrandProductsAPI(paramModel)
         } else {
           paramModel.category_id = catID
@@ -641,7 +645,8 @@ const ChooseDevice = ({
                         value={filter}
                         handleSetValue={(value: SelectParams) => {
                           setFilter({ name: value.name, code: value.code })
-                          loadFilterData(searchText, 1, 10, value.code)
+                          setCategoryID(Number(value.code))
+                          loadFilterData(searchText, 1, 10, Number(value.code))
                         }}
                         options={filterList}
                       />

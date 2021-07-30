@@ -43,8 +43,8 @@ const App = ({
   locations,
   storeCnts,
   commonCnts,
-  apexDomain,
-}: DataProps) => {
+}: // apexDomain,
+DataProps) => {
   const [theme, setTheme] = useState("")
   const [favIcon, setFavIcon] = useState("")
   const [pageTitle, setPageTitle] = useState("")
@@ -177,7 +177,8 @@ const App = ({
           <Router>
             <Header handleStatus={handleFooterStatus} features={features} />
             <Component {...pageProps} handleStatus={handleFooterStatus} features={features} />
-            {apexDomain !== "devicelist.ca" && <Badge />}
+            {(storeCnts.isDeviceListBadgeVisible ||
+              !storeCnts.hasOwnProperty("isDeviceListBadgeVisible")) && <Badge />}
             {footerStatus && <Footer />}
           </Router>
         </React.Fragment>

@@ -109,6 +109,11 @@ class RepairWidgetAPI {
     const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/categories`
     return await apiClient.get<any>(apiURL, params)
   }
+
+  getCategories = async (store_id: number) => {
+    const apiURL = `${Config.PRODUCT_SERVICE_API_URL}dc/store/${store_id}/categories`
+    return await apiClient.get<any>(apiURL)
+  }
 }
 
 const instance = new RepairWidgetAPI()

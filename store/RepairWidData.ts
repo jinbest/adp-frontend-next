@@ -13,6 +13,7 @@ export class RepairWidData {
   @observable cntBrandID = 0
   @observable cntProductID = 0
   @observable contactMethod: any[] = []
+  @observable categories: any[] = []
 
   constructor() {
     this.load()
@@ -39,6 +40,7 @@ export class RepairWidData {
           cntBrandID: this.cntBrandID,
           cntProductID: this.cntProductID,
           contactMethod: this.contactMethod,
+          categories: this.categories,
         })
       )
     }
@@ -60,6 +62,12 @@ export class RepairWidData {
   @action
   changeRepairDeviceBrands = (repairDeviceBrands: any) => {
     this.repairDeviceBrands = repairDeviceBrands
+    this.save()
+  }
+
+  @action
+  changeCategories = (categories: any) => {
+    this.categories = categories
     this.save()
   }
 

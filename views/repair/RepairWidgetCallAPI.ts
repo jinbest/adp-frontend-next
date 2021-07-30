@@ -85,6 +85,19 @@ function getContactMethodsAPI() {
     })
 }
 
+function getCategoriesAPI() {
+  const store_id: number = storesDetails.store_id
+
+  repairWidgetAPI
+    .getCategories(store_id)
+    .then((res: any) => {
+      repairWidData.changeCategories(res.data)
+    })
+    .catch((error) => {
+      console.log("Error in get Categories", error)
+    })
+}
+
 async function getDeviceBrandsAPI(val: GetBrandsParam) {
   const store_id: number = storesDetails.store_id
 
@@ -284,4 +297,5 @@ export {
   addMoreBrandProductsAPI,
   getContactMethodsAPI,
   getQuotesByLocAppointmentID,
+  getCategoriesAPI,
 }
