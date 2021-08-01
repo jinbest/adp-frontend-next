@@ -13,10 +13,9 @@ import {
   getRepairLookupAPI,
   getDeliveryMethodsAPI,
   getContactMethodsAPI,
-  getCategoriesAPI,
   getQuotesByLocAppointmentID,
 } from "./RepairWidgetCallAPI"
-import { storesDetails, repairWidgetStore, repairWidData } from "../../store"
+import { storesDetails, repairWidgetStore } from "../../store"
 import Head from "next/head"
 import { useQuery } from "../../services/helper"
 import _, { isEmpty } from "lodash"
@@ -59,7 +58,6 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
     getRepairLookupAPI()
     getDeliveryMethodsAPI()
     getContactMethodsAPI()
-    getCategoriesAPI()
   }, [])
 
   useEffect(() => {
@@ -67,8 +65,8 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
       handleGetQuote(Number(query.get("lid")), Number(query.get("id")))
     } else if (query.get("c")) {
       setCategoryName(query.get("c"))
-      const categories = repairWidData.categories,
-        cateIndex = _.findIndex(categories, { name: query.get("c") })
+      const categories = _.cloneDeep(mainData.homepage.section2.cards),
+        cateIndex = _.findIndex(categories, { title: query.get("c") })
       if (cateIndex > -1) {
         setCategoryID(categories[cateIndex].id)
       }

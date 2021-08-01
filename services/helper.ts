@@ -587,22 +587,22 @@ export function validSearchItemData(item: any) {
   }
 }
 
-export function filterCategories(name: string | undefined) {
-  const categories = repairWidData.categories
-  const result = {
-    data: categories,
-  }
-  if (!name) {
-    return result
-  }
-  const filter = _.find(
-    categories,
-    (o) => o.name === name || o.name.toLowerCase().includes(name.toLowerCase())
-  )
-  if (!isEmpty(filter)) {
-    result.data = [filter]
-  } else {
-    result.data = []
-  }
-  return result
-}
+// export function filterCategories(name: string | undefined) {
+//   const categories = repairWidData.categories
+//   const result = {
+//     data: categories,
+//   }
+//   if (!name) {
+//     return result
+//   }
+//   const filter = _.find(
+//     categories,
+//     (o) => o.name === name || o.name.toLowerCase().includes(name.toLowerCase())
+//   )
+//   if (!isEmpty(filter)) {
+//     result.data = [filter]
+//   } else {
+//     result.data = []
+//   }
+//   return result
+// }
