@@ -149,49 +149,51 @@ const Locations = ({ handleStatus }: Props) => {
             </>
           ) : (
             <Grid container spacing={5}>
-              {storesDetails.allLocations.map((item: any, index: number) => {
-                return (
-                  <Grid item xs={12} md={6} key={index}>
-                    <div className={classes.item}>
-                      <Grid container spacing={1}>
-                        <Grid
-                          item
-                          xs={12}
-                          sm={6}
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            flexDirection: "column",
-                          }}
-                        >
-                          {item.image_url ? (
-                            <img
-                              src={item.image_url}
-                              alt={`${index}-location`}
-                              className={classes.location}
+              {_.sortBy(storesDetails.allLocations, (o) => o.display_order).map(
+                (item: any, index: number) => {
+                  return (
+                    <Grid item xs={12} md={6} key={index}>
+                      <div className={classes.item}>
+                        <Grid container spacing={1}>
+                          <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              flexDirection: "column",
+                            }}
+                          >
+                            {item.image_url ? (
+                              <img
+                                src={item.image_url}
+                                alt={`${index}-location`}
+                                className={classes.location}
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            <div>
+                              <Typography className={classes.cardTitle}>
+                                {item.location_name}
+                              </Typography>
+                              <AddressViewer location={item} />
+                            </div>
+                            <CustomButtons
+                              location={item}
+                              color={data.general.colorPalle.repairButtonCol}
                             />
-                          ) : (
-                            <></>
-                          )}
-                          <div>
-                            <Typography className={classes.cardTitle}>
-                              {item.location_name}
-                            </Typography>
-                            <AddressViewer location={item} />
-                          </div>
-                          <CustomButtons
-                            location={item}
-                            color={data.general.colorPalle.repairButtonCol}
-                          />
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                            <HoursViewer location={item} />
+                          </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <HoursViewer location={item} />
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </Grid>
-                )
-              })}
+                      </div>
+                    </Grid>
+                  )
+                }
+              )}
             </Grid>
           )}
         </div>

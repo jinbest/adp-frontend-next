@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 import PhoneIcon from "@material-ui/icons/Phone"
 import CallSplitIcon from "@material-ui/icons/CallSplit"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
-import { isEmpty, findIndex } from "lodash"
+import _, { isEmpty, findIndex } from "lodash"
 import { getAddress, makeLocations, phoneFormatString } from "../../services/helper"
 import HoursViewer from "../specific-location/component/hours-viewer"
 import ContactModal from "../business/ContactModal"
@@ -23,7 +23,9 @@ type Props = {
 }
 
 const LocationsAccordion = ({ features, handleStatus, handleLocationID, location_id }: Props) => {
-  const locations = storesDetails.findAddLocation
+  const locations = _.sortBy(storesDetails.findAddLocation, (o) =>
+    o.distance ? o.distance : o.display_order
+  )
   const data = storesDetails.storeCnts
   const [t] = useTranslation()
   const classes = useStyles()

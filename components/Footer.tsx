@@ -29,7 +29,7 @@ const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponent
   }
   return (
     <React.Fragment>
-      {data.map((item: any, index: number) => {
+      {_.sortBy(data, (o) => o.display_order).map((item: any, index: number) => {
         return (
           <React.Fragment key={index}>
             {item.is_main === isMain && (
