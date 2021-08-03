@@ -29,7 +29,7 @@ RUN npm run build
 
 FROM nginx:1.19.10-alpine
 
-RUN apk add --no-cache libc6-compat nodejs=14.16.1-r1 npm supervisor
+RUN apk add --no-cache libc6-compat nodejs=14.17.4-r0 npm supervisor
 
 WORKDIR /app
 
