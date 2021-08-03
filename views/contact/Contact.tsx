@@ -4,7 +4,7 @@ import { observer } from "mobx-react"
 import { useQuery } from "../../services/helper"
 import { storesDetails } from "../../store"
 import { MetaParams } from "../../model/meta-params"
-import { findIndex, isEmpty } from "lodash"
+import { findIndex } from "lodash"
 import dynamic from "next/dynamic"
 
 const DynamicWholeMap = dynamic(() => import("./Whole-map"), { ssr: false })
@@ -46,10 +46,6 @@ const Contact = ({ handleStatus, features }: Props) => {
       })
       setSelectLocation(locIndex > -1 ? storesDetails.findAddLocation[locIndex] : ({} as any))
       setLocationID(locIndex > -1 ? storesDetails.findAddLocation[locIndex].id : -1)
-    } else {
-      const locMain = findIndex(storesDetails.findAddLocation, { is_main: true })
-      setSelectLocation(locMain > -1 ? storesDetails.findAddLocation[locMain] : ({} as any))
-      setLocationID(locMain > -1 ? storesDetails.findAddLocation[locMain].id : -1)
     }
   }, [])
 
@@ -71,15 +67,15 @@ const Contact = ({ handleStatus, features }: Props) => {
         <link rel="icon" id="favicon" href={mainData.homepage.headData.fav.img} />
         <link rel="apple-touch-icon" href={mainData.homepage.headData.fav.img} />
       </Head>
-      {!isEmpty(selectLocation) && (
-        <DynamicWholeMap
-          selectedLocation={selectLocation}
-          features={features}
-          handleStatus={handleStatus}
-          handleLocationID={handleLocationID}
-          location_id={locationID}
-        />
-      )}
+      <DynamicWholeMap
+        selectedLocation={selectLocation}
+        setSelectLocation={setSelectLocation}
+        features={features}
+        handleStatus={handleStatus}
+        handleLocationID={handleLocationID}
+        location_id={locationID}
+        setLocationID={setLocationID}
+      />
     </div>
   )
 }

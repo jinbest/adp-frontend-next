@@ -13,15 +13,16 @@ import Toast from "../../components/toast/toast"
 import "leaflet/dist/leaflet.css"
 import L from "leaflet"
 import { findLocationAPI } from "../../services"
-
-const icon = L.icon({ iconUrl: "/img/marker-icon.png" })
+import { isEmpty } from "lodash"
 
 type Props = {
   selectedLocation: any
+  setSelectLocation: (val: any) => void
   features: any[]
   handleStatus: (status: boolean) => void
   handleLocationID: (id: number) => void
   location_id: number
+  setLocationID: (val: number) => void
 }
 
 const WholeMap = ({
@@ -30,50 +31,70 @@ const WholeMap = ({
   handleStatus,
   handleLocationID,
   location_id,
+  setSelectLocation,
+  setLocationID,
 }: Props) => {
   const [t] = useTranslation()
   const locations = storesDetails.findAddLocation
   const buttonCol = storesDetails.storeCnts.general.colorPalle.themeColor
 
+  const store_id = storesDetails.store_id
+
+  const icon = L.icon({
+    iconUrl: `https://storage.googleapis.com/adp_assets/images/${store_id}/marker-icon.png`,
+  })
+
   const classes = useStyles()
   let centerX = 49.865759
   let centerY = -97.211811
-  let zoom = 6
+
   const [map, setMap] = useState<null | Map>(null)
   const [postCode, setPostCode] = useState("")
   const [isFinding, setIsFinding] = useState(false)
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
+  const [mapLocations, setMapLocations] = useState<any[]>(locations)
+  const [centerMap, setCenterMap] = useState<L.LatLngExpression | undefined>([centerX, centerY])
+  const [zoom, setZoom] = useState(6)
 
   useEffect(() => {
-    if (selectedLocation) {
+    let zm = 4
+    if (!isEmpty(selectedLocation)) {
       centerX = selectedLocation.latitude
       centerY = selectedLocation.longitude
-      zoom = 14
+      zm = 10
+      setMapLocations([selectedLocation])
     } else if (locations && locations.length > 0) {
       const longitudes = locations.map((v) => v.longitude)
       const latitudes = locations.map((v) => v.latitude)
-      const pCenterX = latitudes.reduce((a, b) => a + b, 0) / 5
-      const pCenterY = longitudes.reduce((a, b) => a + b, 0) / 5
+      const pCenterX = latitudes.reduce((a, b) => a + b, 0) / locations.length
+      const pCenterY = longitudes.reduce((a, b) => a + b, 0) / locations.length
       const maxRadiusX = Math.max(...latitudes.map((v) => v - centerX))
       const maxRadiusY = Math.max(...longitudes.map((v) => v - centerY))
-      const pZoom = 17 / (Math.max(maxRadiusX, maxRadiusY) / 5 + 3)
+      const pZoom = 12 / (Math.max(maxRadiusX, maxRadiusY) / 5 + 3)
       centerX = pCenterX
       centerY = pCenterY
-      zoom = pZoom
+      zm = pZoom
     } else {
       centerX = 49.865759
       centerY = -97.211811
-      zoom = 6
+      zm = 6
     }
+    setCenterMap([centerX, centerY])
+    setZoom(zm)
     if (map) {
-      map.setView([centerX, centerY], zoom)
+      // map.setView([centerX, centerY], zm)
+      map.flyTo([centerX, centerY], zm)
     }
   }, [selectedLocation, map])
 
   const openPopup = (marker: any) => {
-    if (marker && typeof window !== "undefined") {
+    if (marker && typeof window !== "undefined" && !isEmpty(selectedLocation)) {
       window.setTimeout(() => {
         marker.openPopup()
+      }, 1000)
+    } else if (marker && typeof window !== "undefined") {
+      window.setTimeout(() => {
+        marker.closePopup()
       }, 1000)
     }
   }
@@ -157,6 +178,8 @@ const WholeMap = ({
               handleStatus={handleStatus}
               handleLocationID={handleLocationID}
               location_id={location_id}
+              setSelectLocation={setSelectLocation}
+              setLocationID={setLocationID}
             />
           </Grid>
           <Grid item xs={12} md={8} className={classes.item2}>
@@ -182,7 +205,7 @@ const WholeMap = ({
 
       <div className={classes.map}>
         <MapContainer
-          center={[centerX, centerY]}
+          center={centerMap}
           zoom={zoom}
           scrollWheelZoom={false}
           whenCreated={setMap}
@@ -192,8 +215,8 @@ const WholeMap = ({
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {[selectedLocation].length &&
-            [selectedLocation].map((element, index) => {
+          {mapLocations.length &&
+            mapLocations.map((element, index) => {
               return (
                 <Marker
                   position={[element.latitude, element.longitude]}

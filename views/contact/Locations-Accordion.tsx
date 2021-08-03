@@ -20,9 +20,18 @@ type Props = {
   handleStatus: (status: boolean) => void
   location_id: number
   handleLocationID: (id: number) => void
+  setSelectLocation: (val: any) => any
+  setLocationID: (val: number) => any
 }
 
-const LocationsAccordion = ({ features, handleStatus, handleLocationID, location_id }: Props) => {
+const LocationsAccordion = ({
+  features,
+  handleStatus,
+  handleLocationID,
+  location_id,
+  setSelectLocation,
+  setLocationID,
+}: Props) => {
   const locations = _.sortBy(storesDetails.findAddLocation, (o) =>
     o.distance ? o.distance : o.display_order
   )
@@ -62,6 +71,9 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
   }
 
   useEffect(() => {
+    if (location_id < 1) {
+      return
+    }
     for (let i = 0; i < locations.length; i++) {
       if (parseInt(locations[i].id) === location_id) {
         setExpanded(i)
@@ -71,6 +83,12 @@ const LocationsAccordion = ({ features, handleStatus, handleLocationID, location
   }, [locations, location_id])
 
   const handleChange = (panel: number) => (_: React.ChangeEvent<any>, isExpanded: boolean) => {
+    if (panel === expanded) {
+      setExpanded(false)
+      setSelectLocation({} as any)
+      setLocationID(0)
+      return
+    }
     if (storesDetails.cntUserLocationSelected) {
       handleLocSelect(locations[panel])
     }
@@ -266,6 +284,10 @@ const useStyles = makeStyles(() =>
     accordionSummary: {
       borderTop: "1px solid rgba(0,0,0,0.1)",
       padding: "0 20px 10px",
+      "& .MuiSvgIcon-root": {
+        width: "35px",
+        height: "35px",
+      },
       ["@media (max-width:1200px)"]: {
         padding: "0 15px 10px",
         "& .MuiButtonBase-root": {
