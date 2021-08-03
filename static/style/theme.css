@@ -779,7 +779,7 @@
 .card-customized-container-desktop {
   display: flex;
   align-content: space-between;
-  justify-content: space-around;
+  justify-content: center;
   margin: auto;
   width: 100%;
 }
@@ -802,7 +802,7 @@
 
 .card-customized-item {
   width: 15%;
-  margin: 20px 0;
+  margin: 20px 15px;
   cursor: pointer;
 }
 
@@ -1575,7 +1575,7 @@ p {
   }
   .card-customized-item {
     width: 120px;
-    margin: 20px 10px;
+    margin: 10px;
     max-width: 28%;
   }
   .container-mobile {
