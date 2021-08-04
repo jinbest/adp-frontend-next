@@ -55,6 +55,12 @@ const WholeMap = ({
   const [mapLocations, setMapLocations] = useState<any[]>(locations)
   const [centerMap, setCenterMap] = useState<L.LatLngExpression | undefined>([centerX, centerY])
   const [zoom, setZoom] = useState(6)
+  const [longitudes, setLongitudes] = useState(locations.map((v) => v.longitude))
+  const [latitudes, setLatitudes] = useState(locations.map((v) => v.latitude))
+
+  useEffect(() => {
+    _replaceLatLngCode_()
+  }, [longitudes, latitudes])
 
   useEffect(() => {
     let zm = 4
@@ -63,13 +69,18 @@ const WholeMap = ({
       centerY = selectedLocation.longitude
       zm = 10
       setMapLocations([selectedLocation])
+      setLongitudes([selectedLocation.longitude])
+      setLatitudes([selectedLocation.latitude])
     } else if (locations && locations.length > 0) {
-      const longitudes = locations.map((v) => v.longitude)
-      const latitudes = locations.map((v) => v.latitude)
-      const pCenterX = latitudes.reduce((a, b) => a + b, 0) / locations.length
-      const pCenterY = longitudes.reduce((a, b) => a + b, 0) / locations.length
-      const maxRadiusX = Math.max(...latitudes.map((v) => v - centerX))
-      const maxRadiusY = Math.max(...longitudes.map((v) => v - centerY))
+      const lngs = locations.map((v) => v.longitude)
+      const lats = locations.map((v) => v.latitude)
+      setMapLocations(locations)
+      setLongitudes(lngs)
+      setLatitudes(lats)
+      const pCenterX = lats.reduce((a, b) => a + b, 0) / locations.length
+      const pCenterY = lngs.reduce((a, b) => a + b, 0) / locations.length
+      const maxRadiusX = Math.max(...lats.map((v) => v - centerX))
+      const maxRadiusY = Math.max(...lngs.map((v) => v - centerY))
       const pZoom = 12 / (Math.max(maxRadiusX, maxRadiusY) / 5 + 3)
       centerX = pCenterX
       centerY = pCenterY
@@ -168,6 +179,33 @@ const WholeMap = ({
     })
   }
 
+  const _replaceLatLngCode_ = () => {
+    for (let idx = 1; idx < locations.length; idx++) {
+      let closetX = false,
+        closetY = false
+      latitudes.forEach((item: number, index: number) => {
+        if (index < idx && Math.abs(latitudes[idx] - item) < 0.2) {
+          closetX = true
+          return
+        }
+      })
+      longitudes.forEach((item: number, index: number) => {
+        if (index < idx && Math.abs(longitudes[idx] - item) < 0.2) {
+          closetY = true
+          return
+        }
+      })
+      if (closetX) {
+        latitudes[idx] += 1
+        setLatitudes([...latitudes])
+      }
+      if (closetY) {
+        longitudes[idx] += 1
+        setLongitudes([...longitudes])
+      }
+    }
+  }
+
   return (
     <div>
       <div className={classes.customContainer}>
@@ -219,7 +257,8 @@ const WholeMap = ({
             mapLocations.map((element, index) => {
               return (
                 <Marker
-                  position={[element.latitude, element.longitude]}
+                  // position={[element.latitude, element.longitude]}
+                  position={[latitudes[index], longitudes[index]]}
                   key={index}
                   ref={openPopup}
                   icon={icon}
