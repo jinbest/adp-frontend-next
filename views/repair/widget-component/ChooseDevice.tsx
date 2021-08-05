@@ -25,6 +25,7 @@ import { GetProductsParam } from "../../../model/get-products-params"
 import { GetBrandsParam } from "../../../model/get-brands-params"
 import { repairWidgetStepName } from "../../../const/_variables"
 import { repairWidgetAPI } from "../../../services"
+import ReactTooltip from "react-tooltip"
 
 type Props = {
   data: any
@@ -206,6 +207,7 @@ const ChooseDevice = ({
             warranty: item.warranty,
             warranty_unit: item.warranty_unit,
             id: item.id,
+            img_src: item.img_src,
           })
         })
         cntTypes.forEach((itType: any) => {
@@ -397,6 +399,7 @@ const ChooseDevice = ({
               warranty: item.warranty,
               warranty_unit: item.warranty_unit,
               id: item.id,
+              img_src: item.img_src,
             })
           })
           if (!isEmpty(repairWidgetStore.repairBySearch)) {
@@ -536,6 +539,7 @@ const ChooseDevice = ({
               warranty: item.warranty,
               warranty_unit: item.warranty_unit,
               id: item.id,
+              img_src: item.img_src,
             })
           }
         })
@@ -581,6 +585,7 @@ const ChooseDevice = ({
             warranty: item.warranty,
             warranty_unit: item.warranty_unit,
             id: item.id,
+            img_src: item.img_src,
           })
         }
       })
@@ -764,9 +769,26 @@ const ChooseDevice = ({
                             style={{ backgroundColor: item.bg }}
                             onClick={() => toggleItemTypes(index, stepName)}
                           >
-                            <div className="device-service-item">
-                              <p style={{ color: item.col }}>{t(item.name)}</p>
+                            <div
+                              className="device-service-item"
+                              data-tip
+                              data-for={`repair-${item.id}`}
+                            >
+                              {item.img_src ? (
+                                <img
+                                  src={item.img_src}
+                                  alt={item.name}
+                                  style={{ maxWidth: "100%" }}
+                                />
+                              ) : (
+                                <p style={{ color: item.col }}>{t(item.name)}</p>
+                              )}
                             </div>
+                            {item.img_src && (
+                              <ReactTooltip id={`repair-${item.id}`} place="top" effect="solid">
+                                {item.name}
+                              </ReactTooltip>
+                            )}
                           </div>
                         )
                       })}
