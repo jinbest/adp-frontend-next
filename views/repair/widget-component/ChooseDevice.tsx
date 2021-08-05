@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import Card from "./Card"
-import PlusSVG from "./PlusSVG"
 import LazyImg from "./LazyImg"
 import { Grid, Typography } from "@material-ui/core"
 import Search from "../../../components/Search"
@@ -66,7 +65,7 @@ const ChooseDevice = ({
   const [imageData, setImageData] = useState<any[]>([])
   const [searchText, setSearchText] = useState("")
   const [page, setPage] = useState(1)
-  const [perPage, setPerPage] = useState(10)
+  const [perPage, setPerPage] = useState(20)
   const [openContactModal, setOpenContactModal] = useState(false)
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<SelectParams>({ name: "All", code: "0" } as SelectParams)
@@ -74,6 +73,7 @@ const ChooseDevice = ({
   const [filterList, setFileterList] = useState<SelectParams[]>([
     { name: "All", code: "0" },
   ] as SelectParams[])
+  const [addMore, setAddMore] = useState(false)
 
   const getFilterList = async (cateName?: string) => {
     const result = {
@@ -118,10 +118,21 @@ const ChooseDevice = ({
 
   const [t] = useTranslation()
 
+  const handleScroll = (e: any) => {
+    if (!plusVisible || addMore) {
+      return
+    }
+    const target = e.target
+    if (Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) < 10) {
+      handlePlus()
+    }
+  }
+
   const handlePlus = async () => {
     const cntImgData: any[] = [],
       cntTypes: any[] = []
     let cntOfferedRepairs: any[] = []
+    setAddMore(true)
     switch (stepName) {
       case repairWidgetStepName.deviceBrand:
         const paramsBrand: GetBrandsParam = {
@@ -149,6 +160,7 @@ const ChooseDevice = ({
             })
           })
         }
+        setAddMore(false)
         break
       case repairWidgetStepName.deviceModel:
         const paramsModel: GetProductsParam = {
@@ -180,6 +192,7 @@ const ChooseDevice = ({
             })
           })
         }
+        setAddMore(false)
         break
       case repairWidgetStepName.deviceRepairs:
         await addMoreRepairsOfferedDeviceAPI(
@@ -218,6 +231,7 @@ const ChooseDevice = ({
           })
         })
         setItemTypes([...cntTypes])
+        setAddMore(false)
         break
       default:
         break
@@ -435,7 +449,7 @@ const ChooseDevice = ({
 
   useEffect(() => {
     const initPage = 1,
-      initPerPage = 10
+      initPerPage = 20
     setPage(initPage)
     setPerPage(initPerPage)
     loadStepData(stepName, searchText, initPage, initPerPage)
@@ -671,7 +685,7 @@ const ChooseDevice = ({
                   )}
                 </div>
               )}
-              <div className="widget-main-container">
+              <div className="widget-main-container" onScroll={handleScroll}>
                 {stepName === repairWidgetStepName.deviceBrand && (
                   <>
                     {imageData &&
@@ -690,11 +704,6 @@ const ChooseDevice = ({
                           </div>
                         )
                       })}
-                    {plusVisible && (
-                      <div className="device-item-container" onClick={handlePlus}>
-                        <PlusSVG color="#BDBFC3" />
-                      </div>
-                    )}
                     {!imageData.length && !loading && <NoDataComponent />}
                   </>
                 )}
@@ -719,11 +728,6 @@ const ChooseDevice = ({
                           </div>
                         )
                       })}
-                    {plusVisible && (
-                      <div className="device-item-container" onClick={handlePlus}>
-                        <PlusSVG color="#BDBFC3" />
-                      </div>
-                    )}
                     {!imageData.length && !loading && <NoDataComponent />}
                   </>
                 )}
@@ -770,11 +774,6 @@ const ChooseDevice = ({
                           </div>
                         )
                       })}
-                    {plusVisible && (
-                      <div className="device-item-container" onClick={handlePlus}>
-                        <PlusSVG color="#BDBFC3" />
-                      </div>
-                    )}
                     {!itemTypes.length && !loading && <NoDataComponent />}
                   </>
                 )}
