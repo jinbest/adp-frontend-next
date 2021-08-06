@@ -67,7 +67,7 @@ const WholeMap = ({
     if (!isEmpty(selectedLocation)) {
       centerX = selectedLocation.latitude
       centerY = selectedLocation.longitude
-      zm = 10
+      zm = 14
       setMapLocations([selectedLocation])
       setLongitudes([selectedLocation.longitude])
       setLatitudes([selectedLocation.latitude])
@@ -246,8 +246,15 @@ const WholeMap = ({
           center={centerMap}
           zoom={zoom}
           scrollWheelZoom={false}
+          touchZoom={false}
           whenCreated={setMap}
           className={classes.mapContainer}
+          doubleClickZoom={false}
+          dragging={false}
+          closePopupOnClick={false}
+          // zoomSnap={false}
+          // zoomDelta={false}
+          trackResize={false}
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
