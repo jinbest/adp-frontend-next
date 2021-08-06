@@ -67,7 +67,7 @@ const WholeMap = ({
     if (!isEmpty(selectedLocation)) {
       centerX = selectedLocation.latitude
       centerY = selectedLocation.longitude
-      zm = 14
+      zm = 17
       setMapLocations([selectedLocation])
       setLongitudes([selectedLocation.longitude])
       setLatitudes([selectedLocation.latitude])
