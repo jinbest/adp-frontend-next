@@ -5,7 +5,7 @@ const Shape = () => {
   const data = storesDetails.storeCnts
 
   return (
-    <div>
+    <div style={{margin: "auto"}}>
       <div className="corner-shape">
         <img
           src={data.homepage.section1.bannerImg}

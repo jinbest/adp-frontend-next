@@ -1,0 +1,1712 @@
+{
+  "storesCnts": {
+    "homepage": {
+      "headData": {
+        "title": "Cell Phone, iPhone & iPad Repair Thunder bay | Marnics Mobile",
+        "fav": {
+          "img": "https://storage.googleapis.com/adp_assets/images/21/store-favicon.ico"
+        },
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ],
+        "scripts": []
+      },
+      "bodyData": {
+        "tags": []
+      },
+      "sectionDecoration": true,
+      "section1": {
+        "decorationBar": true,
+        "title": "Repair, Buy, Trade-In & Protect your essential mobile devices",
+        "subtitle": "Thunder Bay & area's certified device specialists.",
+        "searchPlaceholder": "Search",
+        "buttons": [
+          {
+            "type": "quote",
+            "title": "Repair Quote",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "type": "appointment",
+            "title": "Shop Devices",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 2
+          }
+        ],
+        "cards": {
+          "gridMD": 3,
+          "data": [
+            {
+              "img": "https://storage.googleapis.com/adp_assets/images/21/store-trade.png",
+              "title": "Trade",
+              "btnTitle": "Trade-In",
+              "flag": "FRONTEND_TRADE",
+              "href": "#",
+              "order": 1
+            },
+            {
+              "img": "https://storage.googleapis.com/adp_assets/images/21/store-repair.png",
+              "title": "Repair",
+              "btnTitle": "Repair",
+              "flag": "FRONTEND_REPAIR",
+              "href": "/quote",
+              "order": 2
+            },
+            {
+              "img": "https://storage.googleapis.com/adp_assets/images/21/store-buy.png",
+              "title": "Shop",
+              "btnTitle": "Shop",
+              "flag": "FRONTEND_BUY",
+              "href": "#",
+              "order": 3
+            },
+            {
+              "img": "https://storage.googleapis.com/adp_assets/images/21/store-protect.png",
+              "title": "Insure",
+              "btnTitle": "Insure",
+              "flag": "FRONTEND_INSURE",
+              "href": "#",
+              "order": 4
+            }
+          ]
+        },
+        "bannerImg": "/img/store-banner.png"
+      },
+      "services": [
+        {
+          "img": "/img/refresh.png",
+          "title": "trade in your device",
+          "href": "#",
+          "btnTitle": "Trade Quote"
+        },
+        {
+          "img": "/img/wrench.png",
+          "title": "Repair your device",
+          "href": "#",
+          "btnTitle": "Repair Quote"
+        },
+        {
+          "img": "/img/shopping-bag.png",
+          "title": "Shop new devices",
+          "href": "#",
+          "btnTitle": "Shop"
+        },
+        {
+          "img": "/img/text-scan.png",
+          "title": "Activate your device",
+          "href": "#",
+          "btnTitle": "Activate"
+        }
+      ],
+      "section2": {
+        "title": "What can we fix for you today?",
+        "bgImg": "/img/section2-bg.png",
+        "cards": [
+          {
+            "img": "/img/store-mobile.png",
+            "title": "Cellphone",
+            "order": 1
+          },
+          {
+            "img": "/img/store-tablet.png",
+            "title": "Tablet",
+            "order": 2
+          },
+          {
+            "img": "/img/store-computer.png",
+            "title": "Computer",
+            "order": 3
+          },
+          {
+            "img": "/img/store-game.png",
+            "title": "Console",
+            "order": 4
+          },
+          {
+            "img": "/img/store-other.png",
+            "title": "Other",
+            "order": 5
+          }
+        ],
+        "contents": [
+          {
+            "title": "Factory Original Parts",
+            "content": "We are proud to offer the absolute highest quality products and factory original parts on our repair services;",
+            "order": 1
+          },
+          {
+            "title": "Low Price Guarantee",
+            "content": "A lifttime guarantee in the electronics repair industry is unheard of.",
+            "order": 2
+          },
+          {
+            "title": "Free Diagnostics",
+            "content": "Feel free to bring your device to us for a free diagnostic & repair estimate with no strings attached.",
+            "order": 3
+          },
+          {
+            "title": "No Fix No Fee Guarantee",
+            "content": "In the event that your device cannot be repaired we are proud to offer our [customer favourite] no fix no fee guarantee.",
+            "order": 4
+          }
+        ]
+      },
+      "section3": {
+        "title": "Popular Devices",
+        "subtitle": [
+          "Buy now. Pay later.",
+          "Whatever works for you."
+        ],
+        "content": "We’ve partnered with Flexiti to offer 0% financing on repairs, devices, and accessories.",
+        "color": "#072040",
+        "bgImg": "https://storage.googleapis.com/adp_assets/images/21/store-section3-bg.png",
+        "deviceCard": {
+          "img": "https://storage.googleapis.com/adp_assets/images/21/store-device-card.png"
+        },
+        "visible": true
+      },
+      "sectionWave": {
+        "title": "Ontario's trusted mobile device services provider.",
+        "buttons": [
+          {
+            "link": "/",
+            "visible": true,
+            "title": "Shop Devices"
+          }
+        ],
+        "bgImg": "/img/store-wave-bg.svg",
+        "data": [
+          {
+            "title": "Free Delivery",
+            "content": "Canada Wide on Orders over $200",
+            "order": 1,
+            "img": "/img/card.png",
+            "visible": true
+          },
+          {
+            "title": "Free Returns",
+            "content": "Satisfaction Guarantee",
+            "order": 2,
+            "img": "/img/receipt.png",
+            "visible": true
+          },
+          {
+            "title": "Top-nortch support",
+            "content": "Our Team is Ready to Help",
+            "order": 3,
+            "img": "/img/square-chat-dot.png",
+            "visible": true
+          },
+          {
+            "title": "Secure Payments",
+            "content": "Fast & Protected",
+            "order": 4,
+            "img": "/img/package-close.png",
+            "visible": true
+          }
+        ]
+      },
+      "section4": {
+        "title": "Thunder bay's trusted mobile device shop",
+        "contentVisible": true,
+        "btnTitle": "Our quality charter",
+        "data": [
+          {
+            "order": 1,
+            "type": "competitive",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/best.png",
+            "title": "Competitive Pricing",
+            "content": "We’re proud to offer the largest selection of fully tested and graded pre-owned devices in Thunder bay. All backed by a one year warranty and lifetime IMEI guarantee"
+          },
+          {
+            "order": 2,
+            "type": "warranty",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/warranty.png",
+            "title": "1 Year Warranty",
+            "content": "We stand behind all our devices with an iron-clad one year warranty that covers everything except physical or liquid damage."
+          },
+          {
+            "order": 3,
+            "type": "amazing",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/amazing.png",
+            "title": "Amazing Service",
+            "content": "Secure shopping experience."
+          },
+          {
+            "order": 4,
+            "type": "trade-in",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/positive.png",
+            "title": "Trade-In Your Device",
+            "content": "Trade in your existing device - broken or not - for credit towards a repair, product or a newer phone. We buy almost every device, no matter the condition."
+          },
+          {
+            "order": 5,
+            "type": "proudly",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/proudly.png",
+            "title": "Proudly Canadian",
+            "content": "Canadian owned and Canadian based."
+          }
+        ]
+      },
+      "section5": {
+        "title": "Protect Your Device with Bounce",
+        "content": "We've partnered with Bounce to offer you a low cost high value protection plan for your new and used devices.",
+        "subtitle": "As low as $39/year!",
+        "subcontent": "24 Hour Refunds",
+        "subcontentData": [
+          "No Deductible",
+          "Covers New and Used Phones"
+        ],
+        "btnTitle": "Insure My Device",
+        "visible": true
+      },
+      "section6": {
+        "title": "Look at a few of our recent reviews.",
+        "overAllRating": {
+          "averScore": 4.9,
+          "score": 5,
+          "totalReviews": 250,
+          "visible": true
+        },
+        "reviews": [
+          {
+            "score": 5,
+            "day": "October 22, 2020",
+            "reviewer": "Pepo",
+            "content": "I needed a new battery for my iphone 6. After contacting several places who all told me the next available appointment was more than a week away, I called Mobile Tech on Corydon. Within 2 hours, my new battery was installed and ready for pickup. Great service and friendly staff."
+          },
+          {
+            "score": 4,
+            "day": "November 9, 2020",
+            "reviewer": "Elena Kurakin",
+            "content": "Very glad I found this place! I send a request through FB to couple places asking for an estimate of the screen replacement and Mobile Tech Lab not only has automated estimation but they gave me a call almost right away to confirm that they have a part and it would be done in"
+          },
+          {
+            "score": 5,
+            "day": "November 2, 2020",
+            "reviewer": "Jessica Johnson",
+            "content": "My experience was excepion really amazing people working there with reasonable prices for fixing electronics, they fix your electronics with a super reasonable time frame,.would highly recommend this company!"
+          }
+        ]
+      },
+      "footer": {
+        "title": {
+          "text": "",
+          "color": ""
+        },
+        "copyRight": "© 2022 Marnics Mobile. All Rights Reserved.",
+        "bottomLinks": {
+          "privacyPolicy": {
+            "text": "Privacy Policy",
+            "href": "",
+            "externalLink": ""
+          },
+          "covidPage": {
+            "text": "COVID-19",
+            "link": "",
+            "visible": false
+          }
+        },
+        "footerLinks": [
+          {
+            "name": "Resources",
+            "lists": [
+              {
+                "href": "/contact",
+                "text": "Contact Us",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/warranty-returns",
+                "text": "Warranty & Returns",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/shipping",
+                "text": "Shipping",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/faqs",
+                "text": "FAQs",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "visible": true,
+            "order": 1
+          },
+          {
+            "name": "About",
+            "lists": [
+              {
+                "href": "/who-we-are",
+                "text": "Who We Are?",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/financing",
+                "text": "Financing",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/blog",
+                "text": "Blog",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/terms",
+                "text": "Terms of Service",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "order": 2,
+            "visible": true
+          },
+          {
+            "name": "Business",
+            "lists": [
+              {
+                "href": "/authorized-dealer",
+                "text": "Authorized Dealer Program",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/sell-with-us",
+                "text": "Sell With Us",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/find-location",
+                "text": "Find a Location",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/business-solutions",
+                "text": "Business Solutions",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "order": 3,
+            "visible": true
+          },
+          {
+            "name": "Quality",
+            "lists": [
+              {
+                "href": "/device-grading",
+                "text": "Device Grading",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/quality-control",
+                "text": "Quality Control",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/quality-check",
+                "text": "60 Point Quality Check",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/phonecheck",
+                "text": "What is PhoneCheck?",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "order": 4,
+            "visible": true
+          }
+        ],
+        "imageData": {
+          "visible": true,
+          "logoBeside": [{"visible": true, "link": "#", "img_src": "/img/flexiti.png"}, {"visible": true, "link": "#", "img_src": "/img/Buy Now Pay Later.png"}],
+          "others": [
+            {"visible": true, "link": "#", "img_src": "/img/VISA.png"},
+            {"visible": true, "link": "#", "img_src": "/img/MC.png"},
+            {"visible": true, "link": "#", "img_src": "/img/AMEX.png"},
+            {"visible": true, "link": "#", "img_src": "/img/INTERAC.png"},
+            {"visible": true, "link": "#", "img_src": "/img/PAYPAL.png"}
+          ]
+        }
+      },
+      "header": {
+        "navItems": [
+          {
+            "href": "/quote",
+            "text": "Repair",
+            "flag": "FRONTEND_REPAIR",
+            "order": 1,
+            "visible": true
+          },
+          {
+            "href": "/shop",
+            "text": "Shop",
+            "flag": "ALWAYS_TRUE",
+            "order": 2,
+            "visible": true
+          },
+          {
+            "href": "/protect",
+            "text": "Protect",
+            "flag": "ALWAYS_TRUE",
+            "order": 3,
+            "visible": true
+          },
+          {
+            "href": "/contact",
+            "text": "Contact",
+            "flag": "ALWAYS_TRUE",
+            "order": 4,
+            "visible": true
+          }
+        ],
+        "mobileNavData": {
+          "avatarData": {
+            "userActive": "https://storage.googleapis.com/adp_assets/images/21/store-user-active.png",
+            "userDeactive": "https://storage.googleapis.com/adp_assets/images/21/store-user-deactive.png",
+            "cancel": "https://storage.googleapis.com/adp_assets/images/21/store-cancel.png",
+            "store": {
+              "img": "https://storage.googleapis.com/adp_assets/images/21/store-store.png",
+              "link": "#"
+            },
+            "storeBlue": "https://storage.googleapis.com/adp_assets/images/21/store-store-blue.png",
+            "menu": "https://storage.googleapis.com/adp_assets/images/21/store-menu.png"
+          },
+          "userNavItems": [
+            {
+              "text": "My Account",
+              "href": "#",
+              "flag": "FRONTEND_USER_ACCOUNT"
+            },
+            {
+              "text": "Track Repair",
+              "href": "/quote",
+              "flag": "FRONTEND_REPAIR"
+            },
+            {
+              "text": "File a Claim",
+              "href": "#",
+              "flag": "ALWAYS_TRUE"
+            },
+            {
+              "text": "Orders",
+              "href": "#",
+              "flag": "ALWAYS_TRUE"
+            },
+            {
+              "text": "Trade-In",
+              "href": "#",
+              "flag": "FRONTEND_TRADE"
+            }
+          ]
+        },
+        "brandItems": [
+          {
+            "text": "Business",
+            "href": "/business",
+            "order": 1,
+            "visible": true
+          },
+          {
+            "text": "Locations",
+            "href": "/locations",
+            "order": 2,
+            "visible": true
+          }
+        ],
+        "brandData": {
+          "brandCol": "white",
+          "brandThemeCol": "#235B89"
+        },
+        "megaMenu": {
+          "mainList": [],
+          "otherList": []
+        },
+        "button": {
+          "title": "Find a Store",
+          "width": "170px"
+        },
+        "visibility": {
+          "lang": true,
+          "phone": true,
+          "covidPage": false,
+          "loginPage": false
+        }
+      }
+    },
+    "logoData": {
+      "logoHeaderImg": "/img/store-logo-header.png",
+      "logoFooterImg": "/img/store-logo-footer.png"
+    },
+    "general": {
+      "themeType": "marnics",
+      "colorPalle": {
+        "orange": "#235B89",
+        "themeColor": "#DC7700",
+        "underLineCol": "#153863",
+        "priceCol": "#153863",
+        "repairButtonCol": "#DC7700",
+        "nextButtonCol": "#153863",
+        "repairChooseItemCol": "#153863",
+        "repairBooktimeCol": "#153863",
+        "textThemeCol": "#153863",
+        "heartCol": "#153863",
+        "chatBgCol": "#153863",
+        "sec2SvgCol": "#153863",
+        "ratingCol": "#DC7700"
+      },
+      "condition": {
+        "hasShopLink": true,
+        "googleVerification": {
+          "status": false,
+          "metaData": {
+            "name": "google-site-verification",
+            "content": ""
+          }
+        },
+        "defaultLang": "en"
+      },
+      "routes": {
+        "homePage": "/",
+        "repairPage": "/quote",
+        "repairWidgetPage": "/get-quote",
+        "businessPage": "/business",
+        "locationsPage": "/locations",
+        "contactPage": "/contact",
+        "covidPage": "/coronavirus",
+        "privacyPolicy": "/privacy_policy"
+      },
+      "themes": {
+        "normal": "https://storage.googleapis.com/adp_assets/themes/0/theme.css",
+        "minified": "https://storage.googleapis.com/adp_assets/themes/0/theme.min.css"
+      }
+    }
+  },
+  "storesDetails": {
+    "id": 1,
+    "name": "NorthTech Cell Solutions Inc",
+    "email": "test@dccmtx.com",
+    "phone": "2045555555",
+    "domain": "dccmtx.com",
+    "tenant_id": "Device-List-171eh",
+    "is_voided": false,
+    "created_by": "admin",
+    "created_date": "2022-05-01T21:07:01+00:00",
+    "modified_by": "admin",
+    "modified_date": "2022-05-01T21:07:01+00:00",
+    "deleted_by": null,
+    "deleted_date": null,
+    "slogan": null,
+    "business_name": "NorthTech Cell Solutions Inc",
+    "merchant_id": null,
+    "subscription_id": null,
+    "has_custom_domain": false,
+    "is_subscribed": false,
+    "settings": {
+      "store_id": 1,
+      "display_repair_cost": false,
+      "send_quote_email": true,
+      "send_appointment_email": true
+    },
+    "phoneFormat": 2
+  },
+  "allLocations": [
+    {
+      "id": 1,
+      "store_id": 1,
+      "location_name": "Marnics Mobile / Repair Centre / Warehouse",
+      "is_main": true,
+      "description": null,
+      "phone": "8072867444",
+      "is_voided": false,
+      "address_1": "910 Memorial Ave",
+      "address_2": null,
+      "address_3": null,
+      "city": "Thunder Bay",
+      "state": "Ontario",
+      "postcode": "R3P0N2",
+      "country": "CA",
+      "longitude": -97.211811,
+      "latitude": 49.865759,
+      "created_by": "admin",
+      "created_date": "2022-05-10T17:36:55+00:00",
+      "modified_by": "admin",
+      "modified_date": "2022-05-10T17:36:55+00:00",
+      "deleted_by": null,
+      "deleted_date": null,
+      "business_page_link": null,
+      "timezone": "America/Winnipeg",
+      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "display_order": 1,
+      "location_hours": [
+        {
+          "id": 22,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 1,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": null,
+          "close": null,
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 23,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 2,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 24,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 3,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 25,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 4,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 5,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 26,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 6,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 27,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 7,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": null,
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 28,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "store_id": 1,
+      "location_name": "Marnics Mobile Sault Ste Marie",
+      "is_main": true,
+      "description": null,
+      "phone": "7055740303",
+      "is_voided": false,
+      "address_1": "683A Great Northern Rd",
+      "address_2": null,
+      "address_3": null,
+      "city": "Sault Ste Marie",
+      "state": "Ontario",
+      "postcode": "R3P0N2",
+      "country": "CA",
+      "longitude": -97.211811,
+      "latitude": 49.865759,
+      "created_by": "admin",
+      "created_date": "2022-05-10T17:36:55+00:00",
+      "modified_by": "admin",
+      "modified_date": "2022-05-10T17:36:55+00:00",
+      "deleted_by": null,
+      "deleted_date": null,
+      "business_page_link": null,
+      "timezone": "America/Winnipeg",
+      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "display_order": 1,
+      "location_hours": [
+        {
+          "id": 22,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 1,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": null,
+          "close": null,
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 23,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 2,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 24,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 3,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 25,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 4,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 5,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 26,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 6,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 27,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 7,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": null,
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 28,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "store_id": 1,
+      "location_name": "Marnicss Mobile Fort Frances",
+      "is_main": true,
+      "description": null,
+      "phone": "8072010013",
+      "is_voided": false,
+      "address_1": "225 Scott St",
+      "address_2": null,
+      "address_3": null,
+      "city": "Fort Frances",
+      "state": "Ontario",
+      "postcode": "R3P0N2",
+      "country": "CA",
+      "longitude": -97.211811,
+      "latitude": 49.865759,
+      "created_by": "admin",
+      "created_date": "2022-05-10T17:36:55+00:00",
+      "modified_by": "admin",
+      "modified_date": "2022-05-10T17:36:55+00:00",
+      "deleted_by": null,
+      "deleted_date": null,
+      "business_page_link": null,
+      "timezone": "America/Winnipeg",
+      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "display_order": 1,
+      "location_hours": [
+        {
+          "id": 22,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 1,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": null,
+          "close": null,
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 23,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 2,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 24,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 3,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 25,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 4,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 5,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 26,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 6,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 27,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 7,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": null,
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 28,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "store_id": 1,
+      "location_name": "Marnicss Mobile Dryden",
+      "is_main": true,
+      "description": null,
+      "phone": "8079374424",
+      "is_voided": false,
+      "address_1": "325 Government St",
+      "address_2": null,
+      "address_3": null,
+      "city": "Dryden",
+      "state": "Ontario",
+      "postcode": "R3P0N2",
+      "country": "CA",
+      "longitude": -97.211811,
+      "latitude": 49.865759,
+      "created_by": "admin",
+      "created_date": "2022-05-10T17:36:55+00:00",
+      "modified_by": "admin",
+      "modified_date": "2022-05-10T17:36:55+00:00",
+      "deleted_by": null,
+      "deleted_date": null,
+      "business_page_link": null,
+      "timezone": "America/Winnipeg",
+      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "display_order": 1,
+      "location_hours": [
+        {
+          "id": 22,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 1,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 0,
+          "open": null,
+          "close": null,
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 23,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 2,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 1,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 24,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "17:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 3,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 2,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 25,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 4,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 3,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 5,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 26,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 4,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 6,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 27,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 5,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 7,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": null,
+          "close": "20:00:00",
+          "type": "REGULAR",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        },
+        {
+          "id": 28,
+          "store_id": 1,
+          "location_id": 1,
+          "day": 6,
+          "open": "09:00:00",
+          "close": "20:00:00",
+          "type": "HOLIDAY",
+          "is_voided": false,
+          "created_by": "admin",
+          "created_date": "2022-05-10T17:36:55+00:00",
+          "modified_by": "admin",
+          "modified_date": "2022-05-10T17:36:55+00:00",
+          "deleted_by": null,
+          "deleted_date": null,
+          "by_appointment_only": false
+        }
+      ]
+    }
+  ],
+  "commonCnts": {
+    "badgeImg": ["https://storage.googleapis.com/adp_assets/images/common/Badge.svg", "/img/bell-mark.png"]
+  }
+}

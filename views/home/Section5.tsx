@@ -7,13 +7,14 @@ import { storesDetails } from "../../store"
 const Section5 = () => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section5
+  const themeType = data.general.themeType
   const [t] = useTranslation()
-
+  if (!thisPage.visible) return null
   return (
-    <section className="sec5-Back" style={{ display: "none" }}>
+    <section className="sec5-Back">
       <Box className="Container sec5-container">
-        <Typography className="f40 bold mg-t-1">{t(thisPage.title)}</Typography>
-        <Typography className="f18">{t(thisPage.content)}</Typography>
+        <Typography className="f40 bold mg-t-1 sec5-title">{t(thisPage.title)}</Typography>
+        <Typography className="f18 sec5-content">{t(thisPage.content)}</Typography>
         <img
           className="mg-t-1 section5-img"
           src={storesDetails.commonCnts.bounceImg}
@@ -21,7 +22,7 @@ const Section5 = () => {
           height="auto"
           alt="bounce-img"
         />
-        <Typography className="f24 bold">{t(thisPage.subtitle)}</Typography>
+        <Typography className="f24 bold sec5-title">{t(thisPage.subtitle)}</Typography>
         <Box className="col_center">
           <ul>
             <Typography className="protect-content">{t(thisPage.subcontent)}</Typography>
@@ -39,7 +40,7 @@ const Section5 = () => {
           <Button
             title={t(thisPage.btnTitle)}
             bgcolor={data.general.colorPalle.themeColor}
-            borderR="20px"
+            borderR={themeType==="marnics" ? "0px" : "20px"}
           />
         </Box>
       </Box>

@@ -9,9 +9,12 @@ type Props = {
 const ContentFix = ({ title, content, themeCol }: Props) => {
   return (
     <div className="content-fix">
-      <p className="title">{title}</p>
-      <hr className="horzon-line" style={{ borderColor: themeCol }} />
-      <p className="content">{content}</p>
+      <div className="vertical-line" />
+      <div style={{flex: 1}}>
+        <p className="title">{title}</p>
+        <hr className="horzon-line" style={{ borderColor: themeCol }} />
+        <p className="content">{content}</p>
+      </div>
     </div>
   )
 }

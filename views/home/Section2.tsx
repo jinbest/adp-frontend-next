@@ -16,6 +16,7 @@ type Props = {
 const Section2 = ({ features }: Props) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section2
+  const themeType = data.general.themeType
   const cards = _.sortBy(thisPage.cards, (o) => o.order) || []
   const contents = _.sortBy(thisPage.contents, (o) => o.order)
   const [t] = useTranslation()
@@ -40,82 +41,54 @@ const Section2 = ({ features }: Props) => {
     history.push(`${data.general.routes.repairWidgetPage}?c=${title}`)
   }
 
+  const Container: React.FC = ({ children }) => (
+    themeType === "marnics" ? <div className="section2-container" style={{ backgroundImage: `url(${thisPage.bgImg})` }}>{children}</div> : <>{children}</>
+  )
+
   return (
     <FeatureToggles features={feats}>
       <Feature
         name={featureToggleKeys.FRONTEND_REPAIR}
         inactiveComponent={() => <></>}
         activeComponent={() => (
-          <section className="Container">
-            <h2 className="section-title">{t(thisPage.title)}</h2>
-            {cards.length ? (
-              <div className="card-customized-container-desktop">
-                {cards.map((item: any, index: number) => {
-                  return (
-                    <div
-                      className="card-customized-item"
-                      key={index}
-                      onClick={() => handleRepairWidget(item.title)}
-                    >
-                      <CardFix title={t(item.title)} img={item.img} key={index} />
-                    </div>
-                  )
-                })}
-              </div>
-            ) : (
-              <></>
-            )}
-            {cards.length ? (
-              <div className="card-customized-container-mobile">
-                {cards.slice(0, 3).map((item: any, index: number) => {
-                  return (
-                    <div
-                      className="card-customized-item"
-                      key={index}
-                      onClick={() => handleRepairWidget(item.title)}
-                    >
-                      <CardFix title={t(item.title)} img={item.img} key={index} />
-                    </div>
-                  )
-                })}
-              </div>
-            ) : (
-              <></>
-            )}
-            {cards.length ? (
-              <div className="card-customized-container-mobile">
-                {cards.slice(3, 5).map((item: any, index: number) => {
-                  return (
-                    <div
-                      className="card-customized-item"
-                      key={index}
-                      onClick={() => handleRepairWidget(item.title)}
-                    >
-                      <CardFix title={t(item.title)} img={item.img} key={index} />
-                    </div>
-                  )
-                })}
-              </div>
-            ) : (
-              <></>
-            )}
-            <Grid container item xs={12} spacing={2}>
-              {contents.map((item: any, index: number) => {
-                return (
-                  <Grid item xs={12} sm={6} md={3} key={index}>
-                    <Box className="cart-contentfix-container">
-                      <ContentFix
-                        title={t(item.title)}
-                        content={t(item.content)}
-                        themeCol={data.general.colorPalle.underLineCol}
+          <Container>
+            <section className="Container">
+              <h2 className="section-title">{t(thisPage.title)}</h2>
+              {cards.length ? (
+                <div className="card-customized-container-desktop">
+                  {cards.map((item: any, index: number) => {
+                    return (
+                      <div
+                        className="card-customized-item"
                         key={index}
-                      />
-                    </Box>
-                  </Grid>
-                )
-              })}
-            </Grid>
-          </section>
+                        onClick={() => handleRepairWidget(item.title)}
+                      >
+                        <CardFix title={t(item.title)} img={item.img} key={index} />
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <></>
+              )}
+              <Grid container item xs={12} spacing={2}>
+                {contents.map((item: any, index: number) => {
+                  return (
+                    <Grid item xs={12} sm={6} md={3} key={index}>
+                      <Box className="cart-contentfix-container">
+                        <ContentFix
+                          title={t(item.title)}
+                          content={t(item.content)}
+                          themeCol={data.general.colorPalle.underLineCol}
+                          key={index}
+                        />
+                      </Box>
+                    </Grid>
+                  )
+                })}
+              </Grid>
+            </section>
+          </Container>
         )}
       />
     </FeatureToggles>

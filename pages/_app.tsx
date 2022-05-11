@@ -22,6 +22,8 @@ import { GeneralData } from "../model/general-data"
 import { enableStaticRendering } from "mobx-react"
 import { GetDomain } from "../services/helper"
 
+import "../styles/theme.css"
+
 enableStaticRendering(typeof window === "undefined")
 
 const apiClient = ApiClient.getInstance()
@@ -58,7 +60,7 @@ DataProps) => {
     setFooterStatus(status)
     const footer = document.getElementById("footer") as HTMLElement
     if (footer) {
-      if (window.location.pathname === storeCnts.general.routes.contactPage) {
+      if (typeof window !== "undefined" && window.location.pathname === storeCnts.general.routes.contactPage) {
         footer.classList.add("new-contact-footer")
       } else {
         footer.classList.remove("new-contact-footer")
@@ -201,7 +203,7 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
   if (subDomainID > -1) {
     apexDomain = SubDomains.DEVICE_ADP_LISTS[siteNum].domain
   } else {
-    apexDomain = GetDomain(ctx.req.headers.host)
+    apexDomain = GetDomain(ctx.req?.headers?.host)
     // apexDomain = domainMatch ? domainMatch[0] : "mtlcmtx.com"
   }
 

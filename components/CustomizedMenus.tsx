@@ -57,6 +57,7 @@ interface Props {
 const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const data = storesDetails.storeCnts
   const themeColor = data.general.colorPalle.themeColor
+  const themeType = data.general.themeType
   const underLineCol = data.general.colorPalle.underLineCol
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [t] = useTranslation()
@@ -116,22 +117,22 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
       }
       navigator.permissions
         ? navigator.permissions.query({ name: "geolocation" }).then(function (PermissionStatus) {
-            if (PermissionStatus.state == "granted") {
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(setCoords)
-                setRequireUserInfo(false)
-              } else {
-                console.log("Geolocation is not supported by this browser.")
-                setRequireUserInfo(true)
-              }
-            } else if (PermissionStatus.state == "prompt") {
-              console.log("not yet grated or denied")
-              setRequireUserInfo(true)
+          if (PermissionStatus.state == "granted") {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(setCoords)
+              setRequireUserInfo(false)
             } else {
+              console.log("Geolocation is not supported by this browser.")
               setRequireUserInfo(true)
-              setPos({ latitude: "", longitude: "" })
             }
-          })
+          } else if (PermissionStatus.state == "prompt") {
+            console.log("not yet grated or denied")
+            setRequireUserInfo(true)
+          } else {
+            setRequireUserInfo(true)
+            setPos({ latitude: "", longitude: "" })
+          }
+        })
         : setRequireUserInfo(true)
     }
   }, [anchorEl])
@@ -260,17 +261,18 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
             : storesDetails.cntUserLocation[0] && AddFormat12(storesDetails.cntUserLocation[0])
         }
         bgcolor={!locSelStatus ? themeColor : "transparent"}
-        txcolor={!locSelStatus ? "white" : "black"}
-        border={!locSelStatus ? "1px solid rgba(0,0,0,0.1)" : "none"}
+        txcolor={!locSelStatus ? (themeType === "marnics" ? "#F3F5F6" : "white") : "black"}
+        border={!(locSelStatus && themeType === "marnics") ? "1px solid rgba(0,0,0,0.1)" : "none"}
         textDecorator={!locSelStatus ? "none" : "underline"}
-        borderR="20px"
+        borderR={themeType === "marnics" ? "0" : "20px"}
         aria-controls="customized-menu"
         aria-haspopup="true"
         onClick={handleOpen}
         icon={true}
-        fontSize="17px"
+        fontSize={themeType === "marnics" ? "18px" : "20px"}
         width={!locSelStatus ? width : "auto"}
         hover={!locSelStatus ? true : false}
+        fontFamily={themeType === "marnics" ? "Helvetica Neue Medium" : "Poppins Regular"}
       />
       <StyledMenu
         id="customized-menu"
@@ -326,11 +328,11 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                       >
                         {item.distance
                           ? item.location_name +
-                            ", " +
-                            AddFormat12(item) +
-                            " (" +
-                            item.distance +
-                            ")"
+                          ", " +
+                          AddFormat12(item) +
+                          " (" +
+                          item.distance +
+                          ")"
                           : item.location_name + ", " + AddFormat12(item)}
                       </p>
                     </React.Fragment>
@@ -345,7 +347,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                   style={{ color: underLineCol }}
                   href={
                     storesDetails.cntUserLocation[0] &&
-                    storesDetails.cntUserLocation[0].business_page_link
+                      storesDetails.cntUserLocation[0].business_page_link
                       ? storesDetails.cntUserLocation[0].business_page_link
                       : "https://www.google.com/business/"
                   }
@@ -366,16 +368,15 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                 <a
                   className="link"
                   style={{ color: underLineCol }}
-                  href={`${
-                    storesDetails.cntUserLocation[0] &&
-                    storesDetails.cntUserLocation[0].business_page_link != null
+                  href={`${storesDetails.cntUserLocation[0] &&
+                      storesDetails.cntUserLocation[0].business_page_link != null
                       ? storesDetails.cntUserLocation[0].business_page_link
                       : `https://www.google.com/maps/search/?api=1&query=${getAddress(
-                          storesDetails.cntUserLocation[0]
-                        )
-                          .split(" ")
-                          .join("+")}`
-                  }`}
+                        storesDetails.cntUserLocation[0]
+                      )
+                        .split(" ")
+                        .join("+")}`
+                    }`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -466,14 +467,14 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                                       {!itm.open || !itm.close
                                         ? t("Closed")
                                         : `${getConvertHourType(
-                                            itm.open,
-                                            item.timezone,
-                                            repairWidgetStore.timezone
-                                          )} - ${getConvertHourType(
-                                            itm.close,
-                                            item.timezone,
-                                            repairWidgetStore.timezone
-                                          )}`}
+                                          itm.open,
+                                          item.timezone,
+                                          repairWidgetStore.timezone
+                                        )} - ${getConvertHourType(
+                                          itm.close,
+                                          item.timezone,
+                                          repairWidgetStore.timezone
+                                        )}`}
                                     </p>
                                   )
                                 })}

@@ -7,16 +7,16 @@ const Badge = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      <a href="https://www.devicelist.ca/" target="_blank" rel="noreferrer">
-        <img
-          src={storesDetails.commonCnts.badgeImg}
-          alt="badge-img"
-          className={classes.badgeImg}
-          width="1"
-          height="auto"
-        />
-      </a>
+    <div className={`${classes.root} badge-container`}>
+      {storesDetails.commonCnts.badgeImg.map((i: any, index: number) => (
+        <a href="https://www.devicelist.ca/" target="_blank" rel="noreferrer" key={index}>
+          <img
+            src={i}
+            alt="badge-img"
+            className={`${classes.badgeImg} badge-image`}
+          />
+        </a>
+      ))}
     </div>
   )
 }
@@ -43,20 +43,19 @@ const useStyles = makeStyles(() =>
       position: "fixed",
       left: "20px",
       bottom: "20px",
+      display: "flex",
       zIndex: 15,
-      width: "50px",
-      height: "70px",
       ["@media (max-width:500px)"]: {
         display: "none",
       },
     },
     badgeImg: {
-      width: "100%",
-      height: "100%",
       animationName: "$blinker",
       animationDuration: "20s",
       animationTimingFunction: "linear",
       animationIterationCount: "infinite",
+      minWidth: 67,
+      marginRight: 13,
     },
   })
 )

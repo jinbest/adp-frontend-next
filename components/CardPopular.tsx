@@ -14,10 +14,11 @@ const CardPopular = ({ title, img, price, subtitle, priceCol }: Props) => {
       <img src={img} width="1" height="auto" alt={`${title}-card-popular-img`} />
       <p className="title">{title}</p>
       <div className="price-div">
-        <p className="subtitle">{subtitle + " /"}</p>
+        <p className="subtitle">{subtitle + " / "}<span className="price" style={{color: priceCol}}>{price}</span></p>
+        {/* <p className="subtitle">{subtitle + " /"}</p>
         <p className="price" style={{ color: priceCol }}>
           {price}
-        </p>
+        </p> */}
       </div>
     </div>
   )

@@ -17,3 +17,19 @@
   advance-override: 10;
   font-display: fallback;
 }
+
+@font-face {
+  font-family: "Helvetica Neue Bold";
+  src: url("/fonts/Helvetica Neu Bold.ttf") format("truetype");
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Helvetica Neue Regular";
+  src: url("/fonts/HelveticaNeue Light.ttf") format("truetype");
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Helvetica Neue Medium";
+  src: url("/fonts/HelveticaNeue Medium.ttf") format("truetype");
+  font-display: fallback;
+}

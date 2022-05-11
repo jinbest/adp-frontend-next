@@ -20,6 +20,8 @@ type Props = {
   textDecorator?: string
   hover?: boolean
   children?: any
+  padding?: string
+  fontFamily?: string
 }
 
 const Button = ({
@@ -34,6 +36,8 @@ const Button = ({
   height,
   margin,
   fontSize,
+  padding,
+  fontFamily,
   icon,
   disable,
   border,
@@ -60,6 +64,8 @@ const Button = ({
           maxWidth: maxWidth,
           opacity: disable ? 0.5 : 1,
           lineHeight: "10px",
+          fontFamily,
+          padding
         }}
         disabled={disable}
       >

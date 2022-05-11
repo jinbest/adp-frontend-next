@@ -14,7 +14,7 @@ type RatingStyleProps = {
   color: string
 }
 
-const CardWhyCustomer = ({ score, content, reviewer }: Props) => {
+const CardWhyCustomer = ({ score, content, days, reviewer }: Props) => {
   const data = storesDetails.storeCnts
   const styleProps = { color: data.general.colorPalle.ratingCol } as RatingStyleProps
   const classes = useStyles(styleProps)
@@ -31,10 +31,15 @@ const CardWhyCustomer = ({ score, content, reviewer }: Props) => {
             readOnly
           />
         </div>
-        {/* <p>{days}</p> */}
+        <p>{days}</p>
       </div>
       <p className="content">{content}</p>
-      <p className="reviewer">{reviewer}</p>
+      <div className="space-between">
+        <p className="reviewer">{reviewer}</p>
+        <div>
+          <img src="img/google.svg" alt="google" />
+        </div>
+      </div>
     </div>
   )
 }

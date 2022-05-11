@@ -14,6 +14,7 @@ type RatingStyleProps = {
 const Section6 = () => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section6
+  const themeType = data.general.themeType
   const businessLink = getBusinessLink(storesDetails.allLocations)
   const [t] = useTranslation()
   const overAllRating = thisPage.overAllRating
@@ -23,55 +24,53 @@ const Section6 = () => {
 
   return (
     <section className="Container center sec6-container">
-      <Typography className="section-review-title">{t(thisPage.title)}</Typography>
-      {overAllRating.visible && (
-        <>
-          {businessLink ? (
-            <a
-              href={businessLink}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                textDecoration: "none",
-                width: "fit-content",
-                color: "black",
-              }}
-            >
-              <Rating
-                name="read-only"
-                value={5}
-                max={5}
-                readOnly
-                style={{ transform: "scale(1.2)" }}
-                className={classes.rating}
-              />
-              <Typography className={classes.subTitle}>{`${overAllRating.averScore} ${t("of")} ${
-                overAllRating.score
-              } ${t("stars")}`}</Typography>
-              <Typography className={classes.subContent}>{`${t("Based on")} ${
-                overAllRating.totalReviews
-              }+ ${t("Reviews")}`}</Typography>
-            </a>
-          ) : (
-            <>
-              <Rating
-                name="read-only"
-                value={5}
-                max={5}
-                readOnly
-                style={{ transform: "scale(1.2)" }}
-                className={classes.rating}
-              />
-              <Typography className={classes.subTitle}>{`${overAllRating.averScore} ${t("of")} ${
-                overAllRating.score
-              } ${t("stars")}`}</Typography>
-              <Typography className={classes.subContent}>{`${t("Based on")} ${
-                overAllRating.totalReviews
-              }+ ${t("Reviews")}`}</Typography>
-            </>
-          )}
-        </>
-      )}
+      <div className="sec6-left">
+        <Typography className="section-review-title">{t(thisPage.title)}</Typography>
+        {overAllRating.visible && (
+          <>
+            {businessLink ? (
+              <a
+                href={businessLink}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  textDecoration: "none",
+                  width: "fit-content",
+                  color: "black",
+                }}
+              >
+                <Rating
+                  name="read-only"
+                  value={5}
+                  max={5}
+                  readOnly
+                  style={{ transform: "scale(1.2)" }}
+                  className={classes.rating}
+                />
+                <Typography className={`${classes.subTitle} sec6-subtitle`}>{`${overAllRating.averScore} ${t("of")} ${overAllRating.score
+                  } ${t("stars")}`}</Typography>
+                <Typography className={`${classes.subContent} sec6-subContent`}>{`${t("Based on")} ${overAllRating.totalReviews
+                  }+ ${t("Reviews")}`}</Typography>
+              </a>
+            ) : (
+              <>
+                <Rating
+                  name="read-only"
+                  value={5}
+                  max={5}
+                  readOnly
+                  style={{ transform: "scale(1.2)" }}
+                  className={classes.rating}
+                />
+                <Typography className={`${classes.subTitle} sec6-subtitle`}>{`${overAllRating.averScore} ${t("of")} ${overAllRating.score
+                  } ${t("stars")}`}</Typography>
+                <Typography className={`${classes.subContent} sec6-subContent`}>{`${t("Based on")} ${overAllRating.totalReviews
+                  }+ ${t("Reviews")}`}</Typography>
+              </>
+            )}
+          </>
+        )}
+      </div>
       <Grid
         container
         item
@@ -82,7 +81,7 @@ const Section6 = () => {
       >
         {thisPage.reviews.map((item: any, index: number) => {
           return (
-            <Grid item xs={12} md={4} key={index}>
+            <Grid item xs={12} md={themeType === "marnics" ? 12 : 4} key={index}>
               <Box className={`sec6-card ${classes.reviewCard}`}>
                 <CardWhyCustomer
                   key={index}
@@ -121,9 +120,12 @@ const useStyles = makeStyles(() =>
       ["@media (max-width:960px)"]: {
         margin: "auto !important",
       },
+      ["@media (max-width:768px)"]: {
+        maxWidth: "fit-content"
+      },
     },
     rating: (props: RatingStyleProps) => ({
-      color: `${props.color} !important`,
+      color: `${props.color}`,
     }),
   })
 )

@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react"
-import Shape from "./Shape"
-import Section1 from "./Section1"
-import Section2 from "./Section2"
-import SectionWave from "./SectionWave"
-import Section6 from "./Section6"
+import { Shape, Section1, Section2, Section3, SectionWave, SectionDecoration, Section6, SectionService, Section5 } from "."
 import { storesDetails } from "../../store"
 import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
@@ -15,6 +11,7 @@ type Props = {
 
 const Home = ({ features, handleStatus }: Props) => {
   const mainData = storesDetails.storeCnts.homepage
+  const themeType = storesDetails.storeCnts.general.themeType
 
   const [pageTitle, setPageTitle] = useState("Store")
   const [metaList, setMetaList] = useState<MetaParams[]>([])
@@ -44,9 +41,27 @@ const Home = ({ features, handleStatus }: Props) => {
       </Head>
 
       <Shape />
+      <SectionDecoration />
       <Section1 features={features} handleStatus={handleStatus} />
+      {themeType === "marnics" &&
+        <div className="mobile-decoration">
+          <Shape />
+          <div className="decoration-circle-right">
+            {[1, 2, 3, 4, 5, 6, 7].map(i => (
+              <div className="d-flex mb-48 flex-end" key={`right${i}`}>
+                {new Array(i).fill(1).map((_, index) => (
+                  <div key={index} className="decoration-circle" style={{ marginRight: 0, marginLeft: 48 }} />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      }
+      <SectionService />
       <Section2 features={features} />
+      <Section3 features={features} />
       <SectionWave handleStatus={handleStatus} />
+      <Section5 />
       <Section6 />
     </div>
   )

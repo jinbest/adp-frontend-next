@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails, repairWidgetStore, repairWidData } from "../store"
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
+import { AccountCircleOutlined, ShoppingCartOutlined } from "@material-ui/icons"
 import {
   phoneFormatString,
   isExternal,
@@ -79,7 +80,7 @@ const NavItemLink = ({ item: { href, text }, handleStatus }: PropsNavItemLink) =
 type PropsBrand = {
   item: string
   color: string
-  phoneNumber?: boolean
+  phoneNumber?: number
   href: string
 }
 
@@ -94,7 +95,7 @@ const BrandItemLink = ({ item, color, phoneNumber, href }: PropsBrand) => {
           className="brand-nav-item"
           href={`tel:${item}`}
         >
-          {phoneFormatString(item).toLocaleUpperCase()}
+          {phoneFormatString(item, phoneNumber).toLocaleUpperCase()}
         </a>
       ) : (
         <>
@@ -149,6 +150,7 @@ type PropsHeader = {
 const Header = ({ handleStatus, features }: PropsHeader) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.header
+  const themeType = data.general.themeType
   const history = useHistory()
   const location = useLocation()
 
@@ -508,7 +510,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               <BrandItemLink
                 item={storesDetails.storesDetails.phone}
                 color={brandData.brandCol}
-                phoneNumber={true}
+                phoneNumber={storesDetails.storesDetails.phoneFormat}
                 href="#"
               />
             )}
@@ -517,11 +519,11 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
               <BrandItemLink
                 item={data.homepage.footer.bottomLinks.covidPage.text}
                 color={brandData.brandCol}
-                phoneNumber={false}
+                phoneNumber={storesDetails.storesDetails.phoneFormat}
                 href={data.homepage.footer.bottomLinks.covidPage.link}
               />
             )}
-            {!mobile && (
+            {!mobile && thisPage.visibility.loginPage && (
               <FeatureToggles features={feats}>
                 <Feature
                   name={featureToggleKeys.FRONTEND_USER_ACCOUNT}
@@ -579,10 +581,11 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
           >
             <Search
               placeholder={searchPlaceholder}
-              color="rgba(0,0,0,0.8)"
+              color={themeType === "marnics" ? "#235B89" : "rgba(0,0,0,0.8)"}
               bgcolor="white"
               border="rgba(0,0,0,0.2)"
               value={searchKey}
+              iconPosition={themeType === "marnics" ? "left" : "right"}
               handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 handleChangeSearch(e)
               }}
@@ -629,9 +632,8 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                         )}
                         <p>
                           {item._source.name ||
-                            `${item._source.product ? item._source.product.name : ""} ${
-                              item._source.title
-                            }`.trim()}
+                            `${item._source.product ? item._source.product.name : ""} ${item._source.title
+                              }`.trim()}
                         </p>
                       </div>
                     )
@@ -684,6 +686,8 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
           </FeatureToggles> */}
         </div>
         <div className="avatar-div">
+          <div className="marnics-header-icon"><AccountCircleOutlined /></div>
+          <div className="marnics-header-icon"><ShoppingCartOutlined /></div>
           <HeaderDrawer
             toggleMenuStatus={toggleMenuStatus}
             handleStatus={handleStatus}
@@ -722,11 +726,10 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
           </FeatureToggles> */}
         </div>
       </div>
-
-      <div className="container-mobile">
+      <div className="marnics-container-mobile">
         {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
           <div
-            className="mobile-search-div"
+            className="mobile-search-div marnics-search-div"
             id="header-search-mobile"
             ref={customRefMobile}
             onFocus={() => {
@@ -736,9 +739,10 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             <div className="mobile-child-search">
               <Search
                 placeholder={searchPlaceholder}
-                color="rgba(0,0,0,0.8)"
+                color="#143663"
                 bgcolor="white"
                 border="rgba(0,0,0,0.2)"
+                iconPosition={"left"}
                 value={searchKey}
                 handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   handleChangeSearch(e)
@@ -786,9 +790,8 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
                           )}
                           <p>
                             {item._source.name ||
-                              `${item._source.product ? item._source.product.name : ""} ${
-                                item._source.title
-                              }`.trim()}
+                              `${item._source.product ? item._source.product.name : ""} ${item._source.title
+                                }`.trim()}
                           </p>
                         </div>
                       )
@@ -802,7 +805,86 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
           </div>
         )}
       </div>
-
+      {themeType !== "marnics" &&
+        <div className="container-mobile">
+          {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
+            <div
+              className="mobile-search-div"
+              id="header-search-mobile"
+              ref={customRefMobile}
+              onFocus={() => {
+                setViewFilterList(true)
+              }}
+            >
+              <div className="mobile-child-search">
+                <Search
+                  placeholder={searchPlaceholder}
+                  color="rgba(0,0,0,0.8)"
+                  bgcolor="white"
+                  border="rgba(0,0,0,0.2)"
+                  value={searchKey}
+                  handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChangeSearch(e)
+                  }}
+                  handleIconClick={() => {
+                    // EMPTY
+                  }}
+                />
+                {viewFilterList && searchData.length ? (
+                  <div
+                    className="search-data-viewer custom-scroll-bar"
+                    onScroll={handleScroll}
+                    onMouseOver={() => {
+                      setHover(true)
+                    }}
+                    onMouseLeave={() => {
+                      setHover(false)
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <p className="search-type">{t("Services")}</p>
+                      {searchData.map((item: any, index: number) => {
+                        return (
+                          <div
+                            className="search-item"
+                            key={index}
+                            onClick={() => {
+                              handleSearchItem(item)
+                              setSelectList(0)
+                              setHover(false)
+                            }}
+                            style={{
+                              background: selectList === index && !hover ? "#f5f5f5" : "",
+                            }}
+                          >
+                            {item._source.img_src && item._source.type !== "brand" && (
+                              <img src={item._source.img_src} alt={`search-item-${index}`} />
+                            )}
+                            <p>
+                              {item._source.name ||
+                                `${item._source.product ? item._source.product.name : ""} ${item._source.title
+                                  }`.trim()}
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      }
       {/* <div className={ "container-mobile"}>
         {userStatus && menuStatus ? (
           <FeatureToggles features={feats}>

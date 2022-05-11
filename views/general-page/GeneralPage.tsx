@@ -61,7 +61,7 @@ const GeneralPage = ({ handleStatus, slug, pageData }: Props) => {
           const el = window.document.getElementById(id) as HTMLElement
           if (el) {
             const r = el.getBoundingClientRect()
-            window.top.scroll({
+            window.top?.scroll({
               top: pageYOffset + r.top - 150,
               behavior: "smooth",
             })

@@ -9,6 +9,7 @@ type Props = {
   border?: string
   height?: string
   placeholder: string
+  iconPosition?: string
   value?: string
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleIconClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
@@ -34,6 +35,7 @@ const Search = ({
   height,
   placeholder,
   value,
+  iconPosition = "right",
   handleChange,
   handleIconClick,
 }: Props) => {
@@ -45,6 +47,11 @@ const Search = ({
       className="search-container"
       style={{ background: bgcolor, border: `1px solid ${border}`, height: height }}
     >
+      {iconPosition === "left" &&
+        <div onClick={handleIconClick} className={classes.searchIconDiv}>
+          <SearchIcon className="search-icon" style={{ color: color }} />
+        </div>
+      }
       <InputBase
         className="search-input"
         style={{ color: color }}
@@ -52,9 +59,11 @@ const Search = ({
         value={value ?? ""}
         onChange={handleChange}
       />
-      <div onClick={handleIconClick} className={classes.searchIconDiv}>
-        <SearchIcon className="search-icon" style={{ color: color }} />
-      </div>
+      {iconPosition === "right" &&
+        <div onClick={handleIconClick} className={classes.searchIconDiv}>
+          <SearchIcon className="search-icon" style={{ color: color }} />
+        </div>
+      }
     </Box>
   )
 }

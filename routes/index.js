@@ -1,4 +1,4 @@
-import Home from "../views/home/Home"
+import dynamic from "next/dynamic"
 import Business from "../views/business/Business"
 import Locations from "../views/locations/Locations"
 import Contact from "../views/contact/Contact"
@@ -9,6 +9,8 @@ import GeneralPage from "../views/general-page/GeneralPage"
 import SpecificLocation from "../views/specific-location/SpecificLocation"
 
 import { Redirect } from "react-router-dom"
+
+const Home = dynamic(() => import("../views/home/Home"))
 
 const pageRoutes = (data, specLoc) => {
   const routes = data.general.routes

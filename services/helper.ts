@@ -84,15 +84,13 @@ export function getHourType(hourStr: string) {
 
 export function getAddress(location: any) {
   if (!location) return ""
-  return `${location.address_1}, ${location.address_2 ? location.address_2 + ", " : ""}${
-    location.city ? location.city + ", " : ""
-  } ${location.state ? location.state + " " : ""} ${
-    location.postcode
+  return `${location.address_1}, ${location.address_2 ? location.address_2 + ", " : ""}${location.city ? location.city + ", " : ""
+    } ${location.state ? location.state + " " : ""} ${location.postcode
       ? location.postcode.substring(0, 3) +
-        " " +
-        location.postcode.substring(3, location.postcode.length)
+      " " +
+      location.postcode.substring(3, location.postcode.length)
       : ""
-  }`
+    }`
 }
 
 export function makeLocations(data: any[]) {
@@ -256,7 +254,7 @@ export function convertStrToStamp(val: string, open: boolean) {
   }
 }
 
-export function phoneFormatString(phnumber: string) {
+export function phoneFormatString(phnumber: string, format: number) {
   let formatPhnumber: string = phnumber,
     countrycode = "",
     Areacode = "",
@@ -265,12 +263,14 @@ export function phoneFormatString(phnumber: string) {
     countrycode = phnumber.substring(0, 3)
     Areacode = phnumber.substring(3, 6)
     number = phnumber.substring(6, phnumber.length)
-    formatPhnumber = "(" + countrycode + ") " + Areacode + "-" + number
+    if (format === 2) formatPhnumber = [countrycode, Areacode, number].join(".")
+    else formatPhnumber = "(" + countrycode + ") " + Areacode + "-" + number
   } else if (phnumber.length > 10) {
     countrycode = phnumber.substring(phnumber.length - 10, phnumber.length - 7)
     Areacode = phnumber.substring(phnumber.length - 7, phnumber.length - 4)
     number = phnumber.substring(phnumber.length - 4, phnumber.length)
-    formatPhnumber =
+    if (format === 2) formatPhnumber = [countrycode, Areacode, number].join(".")
+    else formatPhnumber =
       phnumber.substring(0, phnumber.length - 10) +
       " (" +
       countrycode +
@@ -307,6 +307,7 @@ export function isExternal(url: string) {
 }
 
 export function isOriginSameAsLocation(url: string) {
+  if (typeof window === "undefined") return null
   const pageLocation = window.location
   const URL_HOST_PATTERN = /(\w+:)?(?:\/\/)([\w.-]+)?(?::(\d+))?\/?/
   const urlMatch = URL_HOST_PATTERN.exec(url) || []
@@ -468,8 +469,7 @@ export function AddressFormatViewer(address: GetAddressFormat) {
   return (
     `${address.address_1 ? address.address_1 : ""} ` +
     `${address.address_2 ? address.address_2 : ""} ` +
-    `${address.city ? address.city + "," : ""} ${address.state ? address.state : ""} ${
-      address.postcode ? address.postcode : ""
+    `${address.city ? address.city + "," : ""} ${address.state ? address.state : ""} ${address.postcode ? address.postcode : ""
     }`
   )
 }

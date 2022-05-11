@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react"
 // import { CardMobile } from "../../components"
+import { Button, Search } from "../../components"
 import { Grid, Box } from "@material-ui/core"
-import Search from "../../components/Search"
-import Button from "../../components/Button"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { Link } from "react-router-dom"
 import { repairWidgetStore, storesDetails } from "../../store"
@@ -20,6 +19,7 @@ type Props = {
 const Section1 = ({ features, handleStatus }: Props) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section1
+  const themeType = data.general.themeType
   const buttons = _.sortBy(thisPage.buttons, (o) => o.order)
   const [t] = useTranslation()
 
@@ -57,9 +57,10 @@ const Section1 = ({ features, handleStatus }: Props) => {
   return (
     <section className="Container">
       <Grid item xs={12} sm={12} className="section1-top">
+        {thisPage.decorationBar && <div className="decoration-bar" />}
         <h1 className="section1-title align-center">{t(thisPage.title)}</h1>
         <p className="section1-subtitle align-center">{t(thisPage.subtitle)}</p>
-        <div className="align-center d-flex">
+        <div className={`${themeType === "marnics" ? "" : "align-center"} d-flex`}>
           {buttons.map((item: any, index: number) => {
             return (
               <React.Fragment key={index}>
@@ -70,8 +71,10 @@ const Section1 = ({ features, handleStatus }: Props) => {
                         <Button
                           title={t(item.title)}
                           bgcolor={data.general.colorPalle.repairButtonCol}
-                          borderR="20px"
-                          width="95%"
+                          borderR={themeType === "marnics" ? "0" : "20px"}
+                          width={themeType === "marnics" ? "fit-content" : "95%"}
+                          fontSize={themeType === "marnics" ? "20px" : "18px"}
+                          fontFamily={themeType === "marnics" ? "Helvetica Neue Medium" : "Poppins Regular"}
                         />
                       </a>
                     ) : (
@@ -79,8 +82,11 @@ const Section1 = ({ features, handleStatus }: Props) => {
                         <Button
                           title={t(item.title)}
                           bgcolor={data.general.colorPalle.repairButtonCol}
-                          borderR="20px"
-                          width="95%"
+                          borderR={themeType === "marnics" ? "0" : "20px"}
+                          width={themeType === "marnics" ? "fit-content" : "95%"}
+                          fontSize={themeType === "marnics" ? "20px" : "18px"}
+                          padding={themeType === "marnics" ? "8px 16px" : "3px 6px"}
+                          fontFamily={themeType === "marnics" ? "Helvetica Neue Medium" : "Poppins Regular"}
                         />
                       </Link>
                     )}
@@ -116,7 +122,6 @@ const Section1 = ({ features, handleStatus }: Props) => {
           />
         </FeatureToggles>
       </Grid>
-
       {/* <Grid container item xs={12} spacing={3} className="sec1-card-mobile-data">
         {thisPage.cards.data.map((item: any, index: number) => {
           return (

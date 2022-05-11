@@ -5,12 +5,10 @@
 body,
 p,
 div,
-a,
-button {
+a {
   margin: 0;
   overflow: visible !important;
   font-family: "Poppins Regular" !important;
-  font-display: optional;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

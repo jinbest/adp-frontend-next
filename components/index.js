@@ -26,6 +26,7 @@ import CardRepairSec3 from "./CardRepairSec3"
 import CustomizedMenus from "./CustomizedMenus"
 import CardWhyCustomer from "./CardWhyCustomer"
 import DeviceListComponent from "./DeviceListComponent"
+import ServiceCard from "./ServiceCard"
 
 export {
   Badge,
@@ -43,6 +44,7 @@ export {
   CustomCalendar,
   GetUserLocation,
   CustomDatePicker,
+  ServiceCard,
   Logo,
   Button,
   Footer,

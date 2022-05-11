@@ -8,6 +8,8 @@ import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { GridMDInterface } from "../model/grid-params"
 import _ from "lodash"
+import Link from "next/link"
+import Badge from "./Badge"
 
 type FooterLinksComponentProps = {
   data: any[]
@@ -18,6 +20,8 @@ type FooterLinksComponentProps = {
 const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponentProps) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  const storeData = storesDetails.storeCnts
+  const themeType = storeData.general.themeType
   const open = Boolean(anchorEl)
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -33,13 +37,13 @@ const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponent
         return (
           <React.Fragment key={index}>
             {item.is_main === isMain && (
-              <Grid item xs={12} sm={initGridMD}>
+              <Grid item xs={12} sm={6} md={themeType === "marnics" ? 6 : initGridMD}>
                 <Typography
                   aria-owns={open ? "mouse-over-popover" : undefined}
                   aria-haspopup="true"
                   onMouseEnter={handlePopoverOpen}
                   onMouseLeave={handlePopoverClose}
-                  className={classes.footerLocName}
+                  className={`${classes.footerLocName} footer-loc-name`}
                 >
                   <a
                     href={
@@ -55,9 +59,9 @@ const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponent
                     {item.location_name}
                   </a>
                 </Typography>
-                <div className={classes.emailPhoneContainer}>
+                <div className={`${classes.emailPhoneContainer} footer-email`}>
                   <a href={`tel:${item.phone}`} className={classes.hoverEffect}>
-                    {`${phoneFormatString(item.phone)} `}
+                    {`${phoneFormatString(item.phone, item.phoneFormat)} `}
                   </a>
                   &nbsp;
                   <a href={`mailto:${item.email}`} className={classes.hoverEffect}>
@@ -78,7 +82,7 @@ const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponent
                         .split(" ")
                         .join("+")}`
                     }
-                    className={classes.hoverEffect}
+                    className={`${classes.hoverEffect} footer-address`}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -120,6 +124,7 @@ const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponent
 const Footer = () => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
+  const themeType = data.general.themeType
   const thisPage = data.homepage.footer
   const [t] = useTranslation()
 
@@ -132,9 +137,11 @@ const Footer = () => {
 
   useEffect(() => {
     handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => {
-      window.removeEventListener("resize", handleResize)
+    if (typeof window === "undefined") {
+      window.addEventListener("resize", handleResize)
+      return () => {
+        window.removeEventListener("resize", handleResize)
+      }
     }
   }, [])
 
@@ -161,79 +168,55 @@ const Footer = () => {
 
   return (
     <footer id="footer">
-      <div className="footer-bg-container">
-        <img src={mobile ? thisPage.images.mobile : thisPage.images.desktop} />
-      </div>
+      {thisPage.images &&
+        <div className="footer-bg-container">
+          <img src={mobile ? thisPage.images.mobile : thisPage.images.desktop} />
+        </div>
+      }
       <Typography className="footer-title" style={{ color: thisPage.title.color }}>
         {t(thisPage.title.text)}
       </Typography>
       <div className="footer-box">
         <div className="footer-bgCol">
           <Box className={classes.footerContainer}>
-            <Logo
-              type="footer"
-              handleStatus={() => {
-                // EMPTY
-              }}
-            />
-            <Grid container>
-              {[true, false].map((item: any, index: number) => {
-                return (
-                  <FooterLinksComponent
-                    key={index}
-                    data={storesDetails.allLocations}
-                    isMain={item}
-                    initGridMD={4}
-                  />
-                )
-              })}
-            </Grid>
-            <Grid container className={classes.footerlinks}>
-              {footerCols.map((item: any, index: number) => {
-                return (
-                  <React.Fragment key={index}>
-                    {item.visible ? (
-                      <Grid item xs={12} sm={colSM}>
-                        <ul>
-                          <li className={classes.footerLocName}>{t(item.name)}</li>
-                          {_.sortBy(item.lists, (o) => o.order).map((it: any, idx: number) => (
-                            <React.Fragment key={idx}>
-                              {it.visible ? (
-                                <li className={classes.footerLocAddress}>
-                                  {isOriginSameAsLocation(it.href) ? (
-                                    <a href={it.href}>{t(it.text)}</a>
-                                  ) : (
-                                    <a href={it.href} target="_blank" rel="noreferrer">
-                                      {t(it.text)}
-                                    </a>
-                                  )}
-                                </li>
-                              ) : (
-                                <></>
-                              )}
-                            </React.Fragment>
-                          ))}
-                        </ul>
-                      </Grid>
-                    ) : (
-                      <></>
-                    )}
-                  </React.Fragment>
-                )
-              })}
-            </Grid>
-
-            {imageVisible ? (
-              <Grid container>
-                <Grid item xs={12} lg={4}>
-                  <p
-                    className="device-list-grid copyright"
-                    style={{ color: "grey", marginBottom: 0 }}
-                  >
-                    {t(thisPage.copyRight)}
-                  </p>
-                </Grid>
-                <Grid item xs={12} lg={8}>
+            <div className="footer-links">
+              <div className="footer-desktop-logo">
+                <Logo
+                  type="footer"
+                  handleStatus={() => {
+                    // EMPTY
+                  }}
+                />
+              </div>
+              <Grid className="d-flex" container spacing={1}>
+                {themeType === "marnics" &&
+                  thisPage.footerLinks.map((i: any) => (
+                    <Grid item sm={3} key={i.order} className="footer-links-item">
+                      <div className="footer-links-name">{i.name}</div>
+                      {i.lists?.map((item: any) => (
+                        <Link href={item.href ?? "/"} key={item.text}><div className="footer-link-text">{item.text}</div></Link>
+                      ))}
+                    </Grid>
+                  ))
+                }
+              </Grid>
+              <div className="footer-mobile-logo">
+                <Badge />
+              </div>
+              <div className="footer-mobile-logo">
+                <div className={classes.footerImagesContainer}>
+                  <div className={classes.footerBesideImages}>
+                    {footerImageData.logoBeside.map((i: any, ind: number) => (
+                      <div key={ind}>
+                        <a
+                          href={i.link}
+                          style={{ cursor: i.link ? "pointer" : "inherit" }}
+                        >
+                          <img src={i.img_src} alt={`footer-logos-${ind + 1}`} />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
                   <div className={classes.footerImages}>
                     {_.sortBy(footerImageData.others, (o) => o.order).map(
                       (item: any, index: number) => {
@@ -256,8 +239,122 @@ const Footer = () => {
                       }
                     )}
                   </div>
-                </Grid>
+                </div>
+                <div>
+                  <p
+                    className="device-list-grid copyright desktop-copyright"
+                    style={{ color: "grey", marginBottom: 0 }}
+                  >
+                    {t(thisPage.copyRight)}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="footer-mobile-logo">
+                <Logo
+                  type="footer"
+                  handleStatus={() => {
+                    // EMPTY
+                  }}
+                />
+              </div>
+              <Grid container>
+                {[true, false].map((item: any, index: number) => {
+                  return (
+                    <FooterLinksComponent
+                      key={index}
+                      data={storesDetails.allLocations}
+                      isMain={item}
+                      initGridMD={themeType === "marnics" ? 3 : 4}
+                    />
+                  )
+                })}
               </Grid>
+            </div>
+            {themeType !== "marnics" &&
+              <Grid container className={classes.footerlinks}>
+                {footerCols.map((item: any, index: number) => {
+                  return (
+                    <React.Fragment key={index}>
+                      {item.visible ? (
+                        <Grid item xs={12} sm={colSM}>
+                          <ul>
+                            <li className={classes.footerLocName}>{t(item.name)}</li>
+                            {_.sortBy(item.lists, (o) => o.order).map((it: any, idx: number) => (
+                              <React.Fragment key={idx}>
+                                {it.visible ? (
+                                  <li className={classes.footerLocAddress}>
+                                    {isOriginSameAsLocation(it.href) ? (
+                                      <a href={it.href}>{t(it.text)}</a>
+                                    ) : (
+                                      <a href={it.href} target="_blank" rel="noreferrer">
+                                        {t(it.text)}
+                                      </a>
+                                    )}
+                                  </li>
+                                ) : (
+                                  <></>
+                                )}
+                              </React.Fragment>
+                            ))}
+                          </ul>
+                        </Grid>
+                      ) : (
+                        <></>
+                      )}
+                    </React.Fragment>
+                  )
+                })}
+              </Grid>
+            }
+            {imageVisible ? (
+              <div className="footer-desktop-logo">
+                <div className={classes.footerImagesContainer}>
+                  <div className={classes.footerBesideImages}>
+                    {footerImageData.logoBeside.map((i: any, ind: number) => (
+                      <div key={ind}>
+                        <a
+                          href={i.link}
+                          style={{ cursor: i.link ? "pointer" : "inherit" }}
+                        >
+                          <img src={i.img_src} alt={`footer-logos-${ind + 1}`} />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={classes.footerImages}>
+                    {_.sortBy(footerImageData.others, (o) => o.order).map(
+                      (item: any, index: number) => {
+                        return (
+                          <React.Fragment key={index}>
+                            {item.visible ? (
+                              <div className="footer-other-images" key={index}>
+                                <a
+                                  href={item.link}
+                                  style={{ cursor: item.link ? "pointer" : "inherit" }}
+                                >
+                                  <img src={item.img_src} alt={`footer-logos-${index + 1}`} />
+                                </a>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                          </React.Fragment>
+                        )
+                      }
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <p
+                    className="device-list-grid copyright desktop-copyright"
+                    style={{ color: "grey", marginBottom: 0 }}
+                  >
+                    {t(thisPage.copyRight)}
+                  </p>
+                </div>
+              </div>
             ) : (
               <p
                 className="device-list-grid copyright"
@@ -267,22 +364,24 @@ const Footer = () => {
               </p>
             )}
 
-            <div style={{ textAlign: "center" }}>
-              {data.socials && data.socials.length ? (
-                data.socials.map(
-                  (
-                    social: { link: string | undefined; img: string | undefined },
-                    index: number
-                  ) => (
-                    <a key={index} href={social.link} target="_blank" rel="noreferrer">
-                      <img src={social.img} width="32" height="32" />
-                    </a>
+            {themeType !== "marnics" &&
+              <div style={{ textAlign: "center" }}>
+                {data.socials && data.socials.length ? (
+                  data.socials.map(
+                    (
+                      social: { link: string | undefined; img: string | undefined },
+                      index: number
+                    ) => (
+                      <a key={index} href={social.link} target="_blank" rel="noreferrer">
+                        <img src={social.img} width="32" height="32" />
+                      </a>
+                    )
                   )
-                )
-              ) : (
-                <></>
-              )}
-            </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            }
           </Box>
         </div>
       </div>
@@ -373,6 +472,8 @@ const useStyles = makeStyles(() =>
       margin: "auto",
       ["@media (max-width:600px)"]: {
         textAlign: "center",
+        display: "flex",
+        flexDirection: "column"
       },
     },
     imgContainer: {
@@ -413,18 +514,19 @@ const useStyles = makeStyles(() =>
     },
     footerImages: {
       display: "flex",
-      justifyContent: "flex-end",
-      marginTop: "25px",
-      marginBottom: "20px",
       paddingRight: "10px",
       alignItems: "center",
       flexWrap: "wrap",
       "& > div": {
         display: "flex",
         alignItems: "flex-end",
+        height: "100%"
       },
       ["@media (max-width:1280px)"]: {
         justifyContent: "center",
+      },
+      ["@media (max-width: 1024px)"]: {
+        height: 35
       },
       ["@media (max-width:600px)"]: {
         "& > div": {
@@ -433,5 +535,32 @@ const useStyles = makeStyles(() =>
         },
       },
     },
+    footerBesideImages: {
+      backgroundColor: "#0C6C7A",
+      borderRadius: 5,
+      height: 45,
+      width: 170,
+      display: "flex",
+      padding: "9px 18px",
+      boxSizing: "border-box",
+      justifyContent: "space-between",
+      marginRight: "24px",
+      ["@media (max-width:1024px)"]: {
+        height: 35,
+        width: 135,
+        padding: "7px 14px",
+        "& img": {
+          height: "100%"
+        }
+      },
+    },
+    footerImagesContainer: {
+      marginTop: "25px",
+      marginBottom: "20px",
+      display: "flex",
+      ["@media (max-width:600px)"]: {
+        marginBottom: 160
+      },
+    }
   })
 )

@@ -15,6 +15,7 @@ type Props = {
 const SectionWave = ({ handleStatus }: Props) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.sectionWave
+  const themeType = data.general.themeType
   const buttons = _.sortBy(thisPage.buttons, (o) => o.order)
   const [t] = useTranslation()
   const classes = useStyles()
@@ -27,13 +28,13 @@ const SectionWave = ({ handleStatus }: Props) => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} section-wave-container`}>
       <img src={thisPage.bgImg} alt="section-wave-bg" width="1" height="auto" />
-      <div className={classes.container}>
+      <div className={`${classes.container} section-wave-wrapper`}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} style={{ display: "flex" }}>
-            <div style={{ margin: "auto" }}>
-              <h2 className={classes.mainTitle} style={{ marginTop: "0px !important" }}>
+            <div className="section-wave-main-container">
+              <h2 className={`${classes.mainTitle} section-wave-main-title`} style={{ marginTop: "0px !important" }}>
                 {t(thisPage.title)}
               </h2>
               <div className={classes.buttonContainer}>
@@ -64,8 +65,9 @@ const SectionWave = ({ handleStatus }: Props) => {
                             >
                               <Button
                                 title={t(item.title)}
-                                bgcolor={data.general.colorPalle.repairButtonCol}
-                                borderR="20px"
+                                bgcolor={themeType === "marnics" ? "white" : data.general.colorPalle.repairButtonCol}
+                                borderR={themeType === "marnics" ? "0px" : "20px"}
+                                txcolor={themeType === "marnics" ? "#DC7700" : "white"}
                                 width="95%"
                               />
                             </Link>
@@ -85,15 +87,16 @@ const SectionWave = ({ handleStatus }: Props) => {
               return (
                 <Grid item xs={12} sm={6} key={index}>
                   {item.visible && (
-                    <div className={classes.item}>
+                    <div className={`${classes.item} section-wave-item`}>
                       <img
                         src={item.img}
                         alt={`sec-wave-img-${item.order}`}
                         width="1"
                         height="auto"
+                        className="section-wave-img"
                       />
-                      <Typography className={classes.subTitle}>{t(item.title)}</Typography>
-                      <Typography className={classes.subContent}>{t(item.content)}</Typography>
+                      <Typography className={`${classes.subTitle} section-wave-subtitle`}>{t(item.title)}</Typography>
+                      <Typography className={`${classes.subContent} section-wave-subContent`}>{t(item.content)}</Typography>
                     </div>
                   )}
                 </Grid>
@@ -164,12 +167,12 @@ const useStyles = makeStyles(() =>
     },
     mainTitle: {
       textAlign: "left",
-      fontSize: "45px !important",
+      fontSize: "45px",
       fontWeight: 800,
-      lineHeight: "115% !important",
-      fontFamily: "Poppins Bold !important",
-      padding: "30px 0 !important",
-      margin: "0 auto !important",
+      lineHeight: "115%",
+      fontFamily: "Poppins Bold",
+      padding: "30px 0",
+      margin: "0 auto",
       ["@media (max-width:1200px)"]: {
         fontSize: "3.5vw !important",
       },
@@ -212,8 +215,8 @@ const useStyles = makeStyles(() =>
       },
     },
     subTitle: {
-      fontFamily: "Poppins Bold !important",
-      fontSize: "22px !important",
+      fontFamily: "Poppins Bold",
+      fontSize: "22px",
       textAlign: "center",
       whiteSpace: "nowrap",
       ["@media (max-width:1200px)"]: {

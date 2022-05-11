@@ -9,7 +9,7 @@ const CardFix = ({ title, img }: Props) => {
   return (
     <div className="card-fix">
       <img src={img} alt={`${title}-img`} width="1" height="auto" />
-      <p>{title}</p>
+      <div className="card-fix-title">{title}</div>
     </div>
   )
 }

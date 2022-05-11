@@ -23,7 +23,7 @@ const Logo = ({ type, handleStatus }: Props) => {
       <img className="logo-header" src={logoData.logoHeaderImg} alt="header-logo" />
     </Link>
   ) : (
-    <Link to="/" onClick={handleLogoClick} className={classes.logoFooterContainer}>
+    <Link to="/" onClick={handleLogoClick} className={`${classes.logoFooterContainer} footer-logo-container`}>
       <img className="logo-footer" src={logoData.logoFooterImg} alt="footer-logo" />
     </Link>
   )
