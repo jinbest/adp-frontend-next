@@ -623,6 +623,9 @@ footer {
   .covid-section1-container {
     padding-top: 150px !important;
   }
+  .d-flex .covid-section-button {
+    margin: 0 !important;
+  }
 }
 @media (max-width: 600px) {
   .marnics-container-mobile {
@@ -711,6 +714,24 @@ footer {
   }
   .covid-vertical {
     height: 100px;
+  }
+  .covid-widget-card .covid-widget-card-main-title {
+    font-size: 24px !important;
+  }
+  .covid-card-item .covid-item-text {
+    font-size: 16px !important;
+  }
+  .covid-card-item .covid-sub-title {
+    font-size: 20px !important;
+  }
+  .covid-section1-container .covid-main-title {
+    font-size: 36px !important;
+  }
+  .covid-section1-container .covid-main-content {
+    font-size: 18px !important;
+  }
+  .covid-widget-card .covid-item-text {
+    font-size: 16px !important;
   }
 }
 @media (max-width: 425px) {

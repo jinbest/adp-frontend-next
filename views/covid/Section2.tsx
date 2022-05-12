@@ -25,7 +25,7 @@ const Section2 = () => {
             <Grid container spacing={3} className="covid-section2">
               {logoData.map((item: any, index: number) => {
                 return (
-                  <Grid item xs={12} sm={themeType === "marnics" ? 6 : 12} md={themeType === "marnics" ? 4 : 6} key={index} className={classes.item}>
+                  <Grid item xs={12} sm={themeType === "marnics" ? 6 : 12} md={themeType === "marnics" ? 4 : 6} key={index} className={`${classes.item} covid-card-item`}>
                     {item.visible && (
                       <>
                         <section className="vertical-line covid-vertical" />
