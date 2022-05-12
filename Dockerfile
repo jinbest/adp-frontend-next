@@ -1,5 +1,5 @@
 #___________________________ Dependency Installation Stage __________________________
-FROM node:14.15.1-alpine as deps
+FROM node:14.19-alpine3.14 as deps
 
 RUN apk add --no-cache libc6-compat
 
@@ -11,7 +11,7 @@ RUN npm install
 
 #_________________________________ Builder Stage ____________________________________
 
-FROM node:14.15.1-alpine as builder
+FROM node:14.19-alpine3.14 as builder
 
 RUN apk add --no-cache libc6-compat
 
