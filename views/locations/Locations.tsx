@@ -21,6 +21,7 @@ type Props = {
 const Locations = ({ handleStatus }: Props) => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
+  const themeType = data.general.themeType
   const thisPage = data.locationPage
   const [t] = useTranslation()
 
@@ -46,7 +47,6 @@ const Locations = ({ handleStatus }: Props) => {
       })
     }
   }, [])
-
   const handleGetQuote = () => {
     repairWidgetStore.init()
     handleStatus(false)
@@ -64,11 +64,12 @@ const Locations = ({ handleStatus }: Props) => {
       </Head>
 
       <Shape />
-      <div className={classes.root}>
-        <h1 className={classes.mainTitle}>{t(thisPage.section1.title)}</h1>
-        <Typography className={classes.mainContent}>{t(thisPage.section1.subtitle)}</Typography>
+      <div className={`${classes.root} location-container`}>
+        {themeType === "marnics" && <div className="decoration-bar" style={{ background: "white" }} />}
+        <h1 className={`${classes.mainTitle} marnics-location-main-title`}>{t(thisPage.section1.title)}</h1>
+        <Typography className={`${classes.mainContent} marnics-location-main-content`}>{t(thisPage.section1.subtitle)}</Typography>
         {thisPage.section1.button.visible ? (
-          <Box className={classes.buttonDiv}>
+          <Box className={`${classes.buttonDiv} quote-button`}>
             <Link
               to={thisPage.section1.button.link}
               style={{ textDecoration: "none" }}
@@ -76,68 +77,98 @@ const Locations = ({ handleStatus }: Props) => {
             >
               <Button
                 title={t(thisPage.section1.button.title)}
-                bgcolor={data.general.colorPalle.repairButtonCol}
-                borderR="20px"
+                bgcolor={themeType === "marnics" ? "white" : data.general.colorPalle.repairButtonCol}
+                borderR={themeType === "marnics" ? "0" : "20px"}
                 width="100%"
                 margin="0 auto"
+                txcolor={themeType === "marnics" ? data.general.colorPalle.repairButtonCol : "white"}
               />
             </Link>
           </Box>
         ) : (
           <></>
         )}
-        <div className={classes.locationsContainer}>
-          <Typography className={classes.subTitle}>
-            {`${t("All")} ${storesDetails.storesDetails.name} ${t("Locations")}`}
-          </Typography>
+        <div className={`${classes.locationsContainer} marnics-location-container`}>
+          {storesDetails.storesDetails.name &&
+            <Typography className={classes.subTitle}>
+              {`${t("All")} ${storesDetails.storesDetails.name} ${t("Locations")}`}
+            </Typography>
+          }
           {groupBy ? (
             <>
               {groupNames.map((it: string, idx: number) => {
                 return (
                   <React.Fragment key={idx}>
-                    <p className={classes.groupName}>{`${capitalize(it)}, ${
-                      groupByLocations[it][0].state
-                    }`}</p>
+                    <p className={classes.groupName}>{`${capitalize(it)}, ${groupByLocations[it][0].state
+                      }`}</p>
                     <Grid container spacing={5}>
                       {groupByLocations[it].map((item: any, index: number) => {
                         return (
                           <Grid item xs={12} md={6} key={index}>
-                            <div className={classes.item}>
-                              <Grid container spacing={1}>
-                                <Grid
-                                  item
-                                  xs={12}
-                                  sm={6}
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    flexDirection: "column",
-                                  }}
-                                >
-                                  {item.image_url ? (
-                                    <img
-                                      src={item.image_url}
-                                      alt={`${index}-location`}
-                                      className={classes.location}
-                                    />
-                                  ) : (
-                                    <></>
-                                  )}
-                                  <div>
-                                    <Typography className={classes.cardTitle}>
-                                      {item.location_name}
-                                    </Typography>
-                                    <AddressViewer location={item} />
-                                  </div>
-                                  <CustomButtons
-                                    location={item}
-                                    color={data.general.colorPalle.repairButtonCol}
-                                  />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                  <HoursViewer location={item} />
-                                </Grid>
-                              </Grid>
+                            <div className={`${classes.item} marnics-location-item`}>
+                              {
+                                themeType === "marnics" ?
+                                  <section>
+                                    {item.image_url ? (
+                                      <img
+                                        src={item.image_url}
+                                        alt={`${index}-location`}
+                                        className={classes.marnicsLocation}
+                                      />
+                                    ) : (
+                                      <></>
+                                    )}
+                                    <div className={classes.locationCardContent}>
+                                      <div className={classes.locationCardTitle}>{item.location_name}</div>
+                                      <Grid container>
+                                        <Grid item xs={12} sm={6}>
+                                          <div className={classes.locationCardAdd}>{item.address_1 + (item.address_2 ? ` , ${item.address_2} ` : "") + (item.address_3 ? ` , ${item.address_3}` : "") + (item.city ? ` | ${item.city}` : "") + (item.state ? ` | ${item.state}` : "")}</div>
+                                          <CustomButtons
+                                            location={item}
+                                            color={data.general.colorPalle.repairButtonCol}
+                                          />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                          <HoursViewer location={item} />
+                                        </Grid>
+                                      </Grid>
+                                    </div>
+                                  </section> :
+                                  <Grid container spacing={1}>
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      sm={6}
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        flexDirection: "column",
+                                      }}
+                                    >
+                                      {item.image_url ? (
+                                        <img
+                                          src={item.image_url}
+                                          alt={`${index}-location`}
+                                          className={classes.location}
+                                        />
+                                      ) : (
+                                        <></>
+                                      )}
+                                      <div>
+                                        <Typography className={classes.cardTitle}>
+                                          {item.location_name}
+                                        </Typography>
+                                        <AddressViewer location={item} />
+                                      </div>
+                                      <CustomButtons
+                                        location={item}
+                                        color={data.general.colorPalle.repairButtonCol}
+                                      />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                      <HoursViewer location={item} />
+                                    </Grid>
+                                  </Grid>}
                             </div>
                           </Grid>
                         )
@@ -153,42 +184,69 @@ const Locations = ({ handleStatus }: Props) => {
                 (item: any, index: number) => {
                   return (
                     <Grid item xs={12} md={6} key={index}>
-                      <div className={classes.item}>
-                        <Grid container spacing={1}>
-                          <Grid
-                            item
-                            xs={12}
-                            sm={6}
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              flexDirection: "column",
-                            }}
-                          >
+                      <div className={`${classes.item} marnics-location-item`}>
+                        {themeType === "marnics" ?
+                          <section>
                             {item.image_url ? (
                               <img
                                 src={item.image_url}
                                 alt={`${index}-location`}
-                                className={classes.location}
+                                className={classes.marnicsLocation}
                               />
                             ) : (
                               <></>
                             )}
-                            <div>
-                              <Typography className={classes.cardTitle}>
-                                {item.location_name}
-                              </Typography>
-                              <AddressViewer location={item} />
+                            <div className={classes.locationCardContent}>
+                              <div className={classes.locationCardTitle}>{item.location_name}</div>
+                              <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                  <div className={classes.locationCardAdd}>{item.address_1 + (item.address_2 ? ` , ${item.address_2} ` : "") + (item.address_3 ? ` , ${item.address_3}` : "") + (item.city ? ` | ${item.city}` : "") + (item.state ? ` | ${item.state}` : "")}</div>
+                                  <CustomButtons
+                                    location={item}
+                                    color={data.general.colorPalle.repairButtonCol}
+                                  />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                  <HoursViewer location={item} />
+                                </Grid>
+                              </Grid>
                             </div>
-                            <CustomButtons
-                              location={item}
-                              color={data.general.colorPalle.repairButtonCol}
-                            />
-                          </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <HoursViewer location={item} />
-                          </Grid>
-                        </Grid>
+                          </section> :
+                          <Grid container spacing={1}>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                flexDirection: "column",
+                              }}
+                            >
+                              {item.image_url ? (
+                                <img
+                                  src={item.image_url}
+                                  alt={`${index}-location`}
+                                  className={classes.location}
+                                />
+                              ) : (
+                                <></>
+                              )}
+                              <div>
+                                <Typography className={classes.cardTitle}>
+                                  {item.location_name}
+                                </Typography>
+                                <AddressViewer location={item} />
+                              </div>
+                              <CustomButtons
+                                location={item}
+                                color={data.general.colorPalle.repairButtonCol}
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <HoursViewer location={item} />
+                            </Grid>
+                          </Grid>}
                       </div>
                     </Grid>
                   )
@@ -208,24 +266,24 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       maxWidth: "1440px",
-      padding: "200px 30px 0 !important",
+      padding: "200px 30px 0",
       margin: "auto",
       display: "block",
       textAlign: "left",
       ["@media (max-width:1200px)"]: {
-        paddingTop: "210px !important",
+        paddingTop: "210px",
       },
       ["@media (max-width:600px)"]: {
-        paddingTop: "160px !important",
+        paddingTop: "160px",
       },
       ["@media (max-width:425px)"]: {
-        paddingTop: "200px !important",
+        paddingTop: "200px",
       },
     },
     mainTitle: {
       color: "black",
-      fontSize: "55px !important",
-      lineHeight: "70px !important",
+      fontSize: "55px",
+      lineHeight: "70px",
       fontWeight: "bold",
       fontFamily: "Poppins Bold",
       justifyContent: "center",
@@ -235,7 +293,7 @@ const useStyles = makeStyles(() =>
         fontSize: "4vw !important",
         marginBottom: "3vw !important",
         width: "75vw",
-        lineHeight: "5vw !important",
+        lineHeight: "5vw",
       },
       ["@media (max-width:768px)"]: {
         fontSize: "5vw !important",
@@ -243,16 +301,16 @@ const useStyles = makeStyles(() =>
         lineHeight: "6vw !important",
       },
       ["@media (max-width:600px)"]: {
-        fontSize: "4.5vw !important",
+        fontSize: "4.5vw",
         width: "100%",
         textAlign: "center",
       },
     },
     mainContent: {
       color: "black",
-      fontSize: "40px !important",
-      marginTop: "50px !important",
-      marginBottom: "40px !important",
+      fontSize: "40px",
+      marginTop: "50px",
+      marginBottom: "40px",
       justifyContent: "left",
       width: "80%",
       ["@media (max-width:1400px)"]: {
@@ -348,6 +406,44 @@ const useStyles = makeStyles(() =>
       marginBottom: "20px",
       ["@media (max-width:600px)"]: {
         width: "100%",
+      },
+    },
+    marnicsLocation: {
+      width: "100%",
+      height: 187,
+    },
+    locationCardContent: {
+      padding: "30px 35px",
+      ["@media (max-width:1024px)"]: {
+        padding: 30
+      },
+      ["@media (max-width:600px)"]: {
+        padding: 17
+      },
+    },
+    locationCardTitle: {
+      fontSize: 30,
+      fontFamily: "Helvetica Neue Bold !important",
+      color: "black",
+      lineHeight: "120%",
+      marginBottom: 20,
+      ["@media (max-width:600px)"]: {
+        fontSize: 24,
+        marginBottom: 0
+      },
+    },
+    locationCardAdd: {
+      fontSize: 24,
+      fontFamily: "Helvetica Neue Medium !important",
+      color: "black",
+      lineHeight: "120%",
+      marginBottom: 40,
+      ["@media (max-width:768px)"]: {
+        maxWidth: 200
+      },
+      ["@media (max-width:600px)"]: {
+        fontSize: 20,
+        marginBottom: 20
       },
     },
     groupName: {

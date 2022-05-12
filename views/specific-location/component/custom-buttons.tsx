@@ -15,7 +15,7 @@ const CustomButtons = ({ location, color }: Props) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.container}>
+    <div className={`${classes.container} location-button-container`}>
       <a
         href={`${
           location.business_page_link != null

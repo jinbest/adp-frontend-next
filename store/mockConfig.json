@@ -655,6 +655,27 @@
         ]
       }
     },
+    "locationPage": {
+      "headData": {
+        "title": "Marnics Mobile Locations in Thunder bay",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Marnics Mobile store locations"
+          }
+        ]
+      },
+      "section1": {
+        "title": "All Marnics Mobile Locations",
+        "subtitle": "Free Delivery, Top Notch Support, Free Returns, Secure Payments",
+        "button": {
+          "title": "Repair Quote",
+          "link": "/get-quote",
+          "visible": true
+        },
+        "group": false
+      }
+    },
     "logoData": {
       "logoHeaderImg": "/img/store-logo-header.png",
       "logoFooterImg": "/img/store-logo-footer.png"
@@ -705,7 +726,7 @@
   },
   "storesDetails": {
     "id": 1,
-    "name": "NorthTech Cell Solutions Inc",
+    "name": "",
     "email": "test@dccmtx.com",
     "phone": "2045555555",
     "domain": "dccmtx.com",
@@ -757,7 +778,7 @@
       "deleted_date": null,
       "business_page_link": null,
       "timezone": "America/Winnipeg",
-      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "image_url": "/img/location1.png",
       "display_order": 1,
       "location_hours": [
         {
@@ -1025,7 +1046,7 @@
       "deleted_date": null,
       "business_page_link": null,
       "timezone": "America/Winnipeg",
-      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "image_url": "/img/location2.png",
       "display_order": 1,
       "location_hours": [
         {
@@ -1293,7 +1314,7 @@
       "deleted_date": null,
       "business_page_link": null,
       "timezone": "America/Winnipeg",
-      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "image_url": "/img/location3.png",
       "display_order": 1,
       "location_hours": [
         {
@@ -1561,7 +1582,7 @@
       "deleted_date": null,
       "business_page_link": null,
       "timezone": "America/Winnipeg",
-      "image_url": "https://storage.googleapis.com/adp_dev_assets/images/1/location-1.png",
+      "image_url": "/img/location4.png",
       "display_order": 1,
       "location_hours": [
         {
@@ -1809,6 +1830,9 @@
     "badgeImg": [
       "https://storage.googleapis.com/adp_assets/images/common/Badge.svg",
       "/img/bell-mark.png"
-    ]
+    ],
+    "locationsData": {
+      "skitterMobile": ""
+    }
   }
 }

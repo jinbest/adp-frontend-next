@@ -4,19 +4,21 @@ import { storesDetails } from "../../store"
 
 const Shape = () => {
   const classes = useStyles()
+  const themeType = storesDetails.storeCnts.general.themeType
 
   return (
     <div>
-      <div className={classes.waveBg}>
-        <img src="/img/location-wave-bg.png" alt="location wave bg" />
+      <div className={`${classes.waveBg} location-waveBg`}>
+        <img src={themeType === "marnics" ? "/img/location-bg.svg" : "/img/location-wave-bg.png"} alt="location wave bg" />
       </div>
       <div className={classes.skitImg}>
-        <img
-          src={storesDetails.commonCnts.locationsData.skitterMobile}
-          width="1"
-          height="auto"
-          alt="skitter-mobile"
-        />
+        {storesDetails.commonCnts.locationsData.skitterMobile ?
+          <img
+            src={storesDetails.commonCnts.locationsData.skitterMobile}
+            width="1"
+            height="auto"
+            alt="skitter-mobile"
+          /> : null}
       </div>
     </div>
   )

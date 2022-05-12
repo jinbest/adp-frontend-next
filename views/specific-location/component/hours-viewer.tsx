@@ -18,16 +18,16 @@ const HoursViewer = ({ location }: Props) => {
 
   return (
     <>
-      <Typography className={classes.cardTitle}>{t("Hours")}</Typography>
+      <Typography className={`${classes.cardTitle} hourview-title`}>{t("Hours")}</Typography>
       {location.location_hours?.length ? (
         <>
           {getRegularHours(location.location_hours).map((it, index) => (
             <div key={index} className={classes.container}>
               <div className={classes.weekday}>
-                <Typography className={classes.cardText}>{t(DAYS_OF_THE_WEEK[it.day])}</Typography>
+                <Typography className={`${classes.cardText} hourview-cardtext`}>{t(DAYS_OF_THE_WEEK[it.day])}</Typography>
               </div>
               <div className={classes.time}>
-                <Typography className={classes.cardText}>
+                <Typography className={`${classes.cardText} hourview-cardtext`}>
                   {!it.open || !it.close
                     ? it.by_appointment_only
                       ? t("Call to book appointment")
