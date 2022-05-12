@@ -15,6 +15,7 @@ type Props = {
 const Section1 = ({ handleStatus }: Props) => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
+  const themeType = data.general?.themeType
   const thisPage = data.covidPage.section1
   const buttons = _.sortBy(thisPage.buttons, (o) => o.order)
   const [t] = useTranslation()
@@ -25,15 +26,16 @@ const Section1 = ({ handleStatus }: Props) => {
   }
 
   return (
-    <div className={classes.root}>
-      <h1 className={classes.mainTitle}>{t(thisPage.title)}</h1>
-      <Typography className={classes.mainContent}>{t(thisPage.content)}</Typography>
+    <div className={`${classes.root} covid-section1-container`}>
+      <div className="decoration-line" />
+      <h1 className={`${classes.mainTitle} covid-main-title`}>{t(thisPage.title)}</h1>
+      <Typography className={`${classes.mainContent} covid-main-content`}>{t(thisPage.content)}</Typography>
       <div className="align-center d-flex">
         {buttons.map((item: any, index: number) => {
           return (
             <React.Fragment key={index}>
               {item.visible && (
-                <Box className="service-section-button" style={{ margin: "initial" }}>
+                <Box className="service-section-button covid-section-button" style={{ margin: "initial" }}>
                   {isExternal(item.link) ? (
                     <a
                       href={item.link}
@@ -44,8 +46,8 @@ const Section1 = ({ handleStatus }: Props) => {
                       <Button
                         title={t(item.title)}
                         bgcolor={data.general.colorPalle.repairButtonCol}
-                        borderR="20px"
-                        width="95%"
+                        borderR={themeType === "marnics" ? "0" : "20px"}
+                        width={themeType === "marnics" ? "190px" : "95%"}
                       />
                     </a>
                   ) : (
@@ -57,8 +59,8 @@ const Section1 = ({ handleStatus }: Props) => {
                       <Button
                         title={t(item.title)}
                         bgcolor={data.general.colorPalle.repairButtonCol}
-                        borderR="20px"
-                        width="95%"
+                        borderR={themeType === "marnics" ? "0" : "20px"}
+                        width={themeType === "marnics" ? "190px" : "95%"}
                       />
                     </Link>
                   )}
@@ -78,24 +80,24 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       maxWidth: "1440px",
-      padding: "250px 30px 0 !important",
+      padding: "250px 30px 0",
       margin: "auto",
       display: "block",
       textAlign: "center",
       ["@media (max-width:1200px)"]: {
-        paddingTop: "210px !important",
+        paddingTop: "210px",
       },
       ["@media (max-width:500px)"]: {
-        padding: "180px 30px 0px !important",
+        padding: "180px 30px 0px",
       },
       ["@media (max-width:425px)"]: {
-        padding: "200px 30px 0px !important",
+        padding: "200px 30px 0px",
       },
     },
     mainTitle: {
       color: "black",
-      fontSize: "50px !important",
-      marginBottom: "10px !important",
+      fontSize: "50px",
+      marginBottom: "10px",
       fontFamily: "Poppins Bold",
       fontWeight: "bold",
       justifyContent: "center",
@@ -114,8 +116,8 @@ const useStyles = makeStyles(() =>
     },
     mainContent: {
       color: "black",
-      fontSize: "30px !important",
-      marginBottom: "30px !important",
+      fontSize: "30px",
+      marginBottom: "30px",
       justifyContent: "center",
       margin: "auto",
       ["@media (max-width:1400px)"]: {

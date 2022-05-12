@@ -441,13 +441,44 @@
         ],
         "imageData": {
           "visible": true,
-          "logoBeside": [{"visible": true, "link": "#", "img_src": "/img/flexiti.png"}, {"visible": true, "link": "#", "img_src": "/img/Buy Now Pay Later.png"}],
+          "logoBeside": [
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/img/flexiti.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/img/Buy Now Pay Later.png"
+            }
+          ],
           "others": [
-            {"visible": true, "link": "#", "img_src": "/img/VISA.png"},
-            {"visible": true, "link": "#", "img_src": "/img/MC.png"},
-            {"visible": true, "link": "#", "img_src": "/img/AMEX.png"},
-            {"visible": true, "link": "#", "img_src": "/img/INTERAC.png"},
-            {"visible": true, "link": "#", "img_src": "/img/PAYPAL.png"}
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/img/VISA.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/img/MC.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/img/AMEX.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/img/INTERAC.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/img/PAYPAL.png"
+            }
           ]
         }
       },
@@ -554,6 +585,74 @@
           "covidPage": false,
           "loginPage": false
         }
+      }
+    },
+    "covidPage": {
+      "headData": {
+        "title": "COVID-19 Safety Precautions | Marnics Mobile Repair",
+        "metaList": [
+          {
+            "name": "description",
+            "content": ""
+          }
+        ]
+      },
+      "section1": {
+        "title": "Marnics Mobile Repair",
+        "content": "Our goal is to provide everyone with the best quality repairs at an affordale price with the fastest possible turnaround times.",
+        "buttons": [
+          {
+            "type": "appointment",
+            "title": "Book Appointment",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          }
+        ]
+      },
+      "section2": {
+        "title": "What we’re doing to keep our customers and staff safe:",
+        "content": "Additionally, we are instructing our employees to remain home if they have any symptoms of illness and ask that our customers utilize the same level of caution. As the situation evolves, we will continue to take the actions necessary to protect our community. Our thoughts are with those that have been affected.",
+        "bottomText": "For more information or if you have any questions,",
+        "bgImg": "/img/covid-widget-card-bg.png",
+        "data": [
+          {
+            "title": "Masks",
+            "order": 1,
+            "content": "The quick brown fox jumps over the lazy dog. The quick brown fox jupms over the lazy dog.",
+            "visible": true
+          },
+          {
+            "title": "Plexi Glass",
+            "order": 2,
+            "content": "Our store has added plexi glass to keep our customers and staff safe.",
+            "visible": true
+          },
+          {
+            "title": "Contactless Payment",
+            "order": 3,
+            "content": "We support contactless payments such as Interac e-transfer and Apple Pay.",
+            "visible": true
+          },
+          {
+            "title": "Clean Repairs",
+            "order": 4,
+            "content": "We sanitize your device before and after repair and all technicians wear gloves and masks throughout the entire process.",
+            "visible": true
+          },
+          {
+            "title": "Thorough Cleaning",
+            "order": 5,
+            "content": "Our tools, work stations and counters are sanitized frequently.",
+            "visible": true
+          },
+          {
+            "title": "Contactless Services",
+            "order": 6,
+            "content": "We also offer curb side pickup and drop off, and mail in options to customers in Thunder bay.",
+            "visible": true
+          }
+        ]
       }
     },
     "logoData": {
@@ -1707,6 +1806,9 @@
     }
   ],
   "commonCnts": {
-    "badgeImg": ["https://storage.googleapis.com/adp_assets/images/common/Badge.svg", "/img/bell-mark.png"]
+    "badgeImg": [
+      "https://storage.googleapis.com/adp_assets/images/common/Badge.svg",
+      "/img/bell-mark.png"
+    ]
   }
 }

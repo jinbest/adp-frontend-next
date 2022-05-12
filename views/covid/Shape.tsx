@@ -5,18 +5,31 @@ import { createStyles, makeStyles } from "@material-ui/core/styles"
 const Shape = () => {
   const classes = useStyles()
   const data = storesDetails.commonCnts
+  const themeType = storesDetails.storeCnts.general?.themeType
 
   return (
     <div>
-      <div className={classes.shape}>
-        <img
-          className={classes.shapeImg}
-          src={data.covidBannerImg}
-          width="1"
-          height="auto"
-          alt="covid-banner"
-        />
-      </div>
+      {themeType === "marnics" ?
+        <div className="marnics-banner-container">
+          <div className="marnics-banner-bg">
+            <div className="marnics-banner1 marnics-banner-left" />
+            <div className="marnics-banner1 marnics-banner-right" />
+          </div>
+          <div className="marnics-banner-bg">
+            <div className="marnics-banner2 marnics-banner2-left" />
+            <div className="marnics-banner2 marnics-banner2-right" />
+          </div>
+        </div> :
+        <div className={classes.shape}>
+          <img
+            className={classes.shapeImg}
+            src={data.covidBannerImg}
+            width="1"
+            height="auto"
+            alt="covid-banner"
+          />
+        </div>
+      }
     </div>
   )
 }

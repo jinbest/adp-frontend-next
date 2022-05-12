@@ -274,7 +274,7 @@
 .reviewer {
   font-family: "Helvetica Neue Bold" !important;
 }
-.footer-box {
+footer .footer-box {
   background-color: #072040 !important;
   position: relative;
   padding-top: 50px !important;
@@ -340,6 +340,90 @@ footer {
 .footer-other-images img {
   height: 100%;
 }
+
+/* Covid page style */
+.covid-section1-container {
+  padding-top: 190px !important;
+}
+.decoration-line {
+  width: 86px;
+  height: 5px;
+  background-color: #235B89;
+  margin: auto;
+}
+.covid-main-title {
+  font-size: 64px !important;
+  margin-top: 19px !important;
+  color: #143663 !important;
+  line-height: 120%;
+  margin-bottom: 0 !important;
+  font-family: "Helvetica Neue Bold" !important;
+}
+.covid-main-content {
+  line-height: 150% !important;
+  font-family: "Helvetica Neue Regular" !important;
+  max-width: 660px;
+}
+.d-flex .covid-section-button {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+}
+.covid-section2-container {
+  margin-top: 230px !important;
+}
+.covid-widget-card-content {
+  position: relative;
+}
+.covid-widget-card {
+  background-color: #15386380;
+  border-radius: 0;
+  max-width: 1500px !important;
+  box-sizing: border-box;
+}
+.covid-widget-card-bg {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(8px);
+}
+.covid-widget-card-main-title {
+  font-size: 48px !important;
+  color: white !important;
+  font-family: "Helvetica Neue Medium" !important;
+  line-height: 120% !important;
+  margin-bottom: 36px !important;
+}
+.covid-section2 {
+  max-width: 1000px;
+  margin: auto !important;
+  margin-bottom: 40px !important;
+}
+.covid-vertical {
+  margin-right: 0;
+  background-color: #235B89;
+}
+.covid-sub-title {
+  font-size: 24px !important;
+  line-height: 150% !important;
+  color: #fff !important;
+  font-family: "Helvetica Neue Bold" !important;
+}
+.covid-item-text {
+  color: #fff !important;
+  font-size: 18px !important;
+  line-height: 120% !important;
+  font-family: "Helvetica Neue Regular" !important;
+  max-width: 987px;
+  margin: auto !important;
+}
+.covid-contact-us {
+  margin-top: 30px !important;
+}
+
 @media (max-width: 1280px) {
   .logo-footer {
     height: 52px !important;
@@ -535,6 +619,10 @@ footer {
   .section-wave-container {
     margin-top: 150px !important;
   }
+  
+  .covid-section1-container {
+    padding-top: 150px !important;
+  }
 }
 @media (max-width: 600px) {
   .marnics-container-mobile {
@@ -615,6 +703,15 @@ footer {
   .footer-desktop-logo {
     display: none !important;
   }
+  .covid-section2-wrapper {
+    padding: 0 !important;
+  }
+  .covid-widget-card-main-title {
+    margin-bottom: 40px !important;
+  }
+  .covid-vertical {
+    height: 100px;
+  }
 }
 @media (max-width: 425px) {
   .corner-shape > img {
@@ -624,6 +721,7 @@ footer {
     display: flex !important;
     flex-direction: column;
     position: inherit !important;
+    align-items: center;
   }
   .badge-container .badge-image {
     animation: none;

@@ -14,12 +14,17 @@
   box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
   border-radius: 20px;
   position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   @media (max-width: 600px) {
     height: auto;
     min-height: 200px;
   }
 }
-
+.covid-widget-cart-bg {
+  display: none;
+}
 .Container {
   max-width: 1440px;
   display: block !important;

@@ -4,11 +4,12 @@ type Props = {
   children?: any
   className?: string
   height?: string
+  backgroundImage?: string
 }
 
-const Card = ({ children, className, height }: Props) => {
+const Card = ({ children, className, height, backgroundImage }: Props) => {
   return (
-    <div className={`service-widget-card ${className}`} style={{ height: height }}>
+    <div className={`service-widget-card ${className}`} style={{ height: height, backgroundImage }}>
       {children}
     </div>
   )

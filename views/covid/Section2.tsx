@@ -10,45 +10,50 @@ import _ from "lodash"
 const Section2 = () => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
+  const themeType = data.general?.themeType
   const thisPage = data.covidPage.section2
   const logoData = _.sortBy(thisPage.data, (o) => o.order)
   const [t] = useTranslation()
 
   return (
-    <div className={classes.root}>
-      <div className={classes.cardContainer}>
-        <Card className={classes.card}>
-          <Typography className={classes.mainTitle}>{t(thisPage.title)}</Typography>
-          <Grid container spacing={3}>
-            {logoData.map((item: any, index: number) => {
-              return (
-                <Grid item xs={12} md={6} key={index} className={classes.item}>
-                  {item.visible && (
-                    <>
-                      <img src={item.img} alt={`covid-logo-${index}`} width="1" height="auto" />
-                      <div>
-                        <Typography className={classes.subTitle}>{t(item.title)}</Typography>
-                        <Typography className={classes.itemText}>{t(item.content)}</Typography>
-                      </div>
-                    </>
-                  )}
-                </Grid>
-              )
-            })}
-          </Grid>
-          <Typography className={classes.itemText} style={{ marginTop: "20px" }}>
-            {t(thisPage.content)}
-          </Typography>
-          <Typography
-            className={classes.itemText}
-            style={{ marginTop: "20px", fontWeight: "bold" }}
-          >
-            {`${t(thisPage.bottomText)} `}
-            <Link to={data.general.routes.contactPage} className={classes.itemText}>
-              {t("Contact Us")}.
-            </Link>
-          </Typography>
-        </Card>
+    <div className={`${classes.root} covid-section2-wrapper`}>
+      <div className={`${classes.cardContainer} covid-section2-container`}>
+        <div className="covid-widget-card-content">
+          <div className="covid-widget-card-bg" style={{backgroundImage: `url(${thisPage.bgImg})`}} />
+          <Card className={`${classes.card} covid-widget-card`}>
+            <Typography className={`${classes.mainTitle} covid-widget-card-main-title`}>{t(thisPage.title)}</Typography>
+            <Grid container spacing={3} className="covid-section2">
+              {logoData.map((item: any, index: number) => {
+                return (
+                  <Grid item xs={12} sm={themeType === "marnics" ? 6 : 12} md={themeType === "marnics" ? 4 : 6} key={index} className={classes.item}>
+                    {item.visible && (
+                      <>
+                        <section className="vertical-line covid-vertical" />
+                        {item.img && <img src={item.img} alt={`covid-logo-${index}`} width="1" height="auto" />}
+                        <div>
+                          <Typography className={`${classes.subTitle} covid-sub-title`}>{t(item.title)}</Typography>
+                          <Typography className={`${classes.itemText} covid-item-text`}>{t(item.content)}</Typography>
+                        </div>
+                      </>
+                    )}
+                  </Grid>
+                )
+              })}
+            </Grid>
+            <Typography className={`${classes.itemText} covid-item-text`} style={{ marginTop: "20px" }}>
+              {t(thisPage.content)}
+            </Typography>
+            <Typography
+              className={`${classes.itemText} covid-item-text covid-contact-us`}
+              style={{ marginTop: "20px", fontWeight: "bold" }}
+            >
+              {`${t(thisPage.bottomText)} `}
+              <Link to={data.general.routes.contactPage} className={`${classes.itemText} covid-item-text`}>
+                {t("Contact Us")}.
+              </Link>
+            </Typography>
+          </Card>
+        </div>
       </div>
     </div>
   )
@@ -83,16 +88,16 @@ const useStyles = makeStyles(() =>
     card: {
       padding: "50px 30px",
       height: "auto",
-      maxWidth: "1200px !important",
+      maxWidth: "1200px",
       ["@media (max-width:600px)"]: {
         padding: "40px 20px",
       },
     },
     mainTitle: {
-      fontSize: "40px !important",
+      fontSize: "40px",
       textAlign: "center",
       color: "black",
-      fontFamily: "Poppins Bold !important",
+      fontFamily: "Poppins Bold",
       fontWeight: "bold",
       letterSpacing: "1px",
       marginBottom: "50px",
@@ -101,7 +106,7 @@ const useStyles = makeStyles(() =>
         marginBottom: "3vw !important",
       },
       ["@media (max-width:960px)"]: {
-        marginBottom: "50px !important",
+        marginBottom: "50px",
       },
       ["@media (max-width:768px)"]: {
         fontSize: "3.5vw !important",
@@ -119,9 +124,10 @@ const useStyles = makeStyles(() =>
       "& > div": {
         textAlign: "left",
         marginLeft: "20px",
+        flex: 1
       },
       ["@media (max-width:500px)"]: {
-        padding: "8px !important",
+        padding: "8px",
         "& >img": {
           width: "15vw",
         },
@@ -131,10 +137,10 @@ const useStyles = makeStyles(() =>
       },
     },
     itemText: {
-      fontSize: "18px !important",
+      fontSize: "18px",
       color: "black",
       ["@media (max-width:1400px)"]: {
-        fontSize: "16px !important",
+        fontSize: "16px",
       },
       ["@media (max-width:500px)"]: {
         fontSize: "3vw !important",
@@ -142,10 +148,10 @@ const useStyles = makeStyles(() =>
       },
     },
     subTitle: {
-      fontSize: "19px !important",
+      fontSize: "19px",
       fontWeight: "bold",
       ["@media (max-width:1400px)"]: {
-        fontSize: "17px !important",
+        fontSize: "17px",
       },
       ["@media (max-width:500px)"]: {
         fontSize: "3.2vw !important",
