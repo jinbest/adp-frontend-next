@@ -1,5 +1,5 @@
 #___________________________ Dependency Installation Stage __________________________
-FROM node:14.19-alpine3.14 as deps
+FROM node:14.15.1-alpine as deps
 
 RUN apk add --no-cache libc6-compat
 
@@ -11,7 +11,7 @@ RUN npm install
 
 #_________________________________ Builder Stage ____________________________________
 
-FROM node:14.19-alpine3.14 as builder
+FROM node:14.15.1-alpine as builder
 
 RUN apk add --no-cache libc6-compat
 
@@ -29,7 +29,7 @@ RUN npm run build
 
 FROM nginx:1.19.10-alpine
 
-RUN apk add --no-cache libc6-compat nodejs=14.17.4-r0 npm supervisor
+RUN apk add --no-cache libc6-compat nodejs=14.19.0-r0 npm supervisor
 
 WORKDIR /app
 
