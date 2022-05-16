@@ -1,5 +1,5 @@
 import React from "react"
-import { GetDeviceUs, SelectRepair, ReceiveDevice } from "../views/repair/Sec2-SVG"
+import { GetDeviceUs, SelectRepair, ReceiveDevice, OnlineQuiz, ShipPhone, VerifyPhone } from "../views/repair/Sec2-SVG"
 import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 
@@ -17,13 +17,16 @@ const CardRepairSec2 = ({ subtitle, content, type, children }: Props) => {
   const sec2SvgCol = data.general.colorPalle.sec2SvgCol
 
   return (
-    <div className={classes.container}>
-      <div className={classes.imgContainer}>
+    <div className={`${classes.container} repair-card`}>
+      <div className={`${classes.imgContainer} repair-card-img`}>
         {type === "SelectRepair" && <SelectRepair color={sec2SvgCol} />}
         {type === "GetDeviceUs" && <GetDeviceUs color={sec2SvgCol} />}
         {type === "ReceiveDevice" && <ReceiveDevice color={sec2SvgCol} />}
+        {type === "onlineQuiz" && <OnlineQuiz />}
+        {type === "shipPhone" && <ShipPhone />}
+        {type === "verifyPhone" && <VerifyPhone />}
       </div>
-      <div className={classes.contentContainer}>
+      <div className={`${classes.contentContainer} repair-content`}>
         <p className={classes.subTitle}>{subtitle}</p>
         <p className={classes.content}>{children ? children : content}</p>
       </div>
@@ -48,11 +51,11 @@ const useStyles = makeStyles(() =>
       },
     },
     imgContainer: {
-      width: "150px !important",
+      width: "150px",
       ["@media (max-width:960px)"]: {
-        width: "13vw !important",
-        minWidth: "80px !important",
-        maxWidth: "100px !important",
+        width: "13vw",
+        minWidth: "80px",
+        maxWidth: "100px",
       },
     },
     contentContainer: {

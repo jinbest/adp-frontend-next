@@ -546,6 +546,82 @@ footer {
   padding: 0 !important;
 }
 
+/* Repair page */
+.service-section1-special-bg {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center 120px;
+}
+.Container .service-section1 {
+  padding-top: 90px !important;
+  flex-wrap: nowrap;
+  z-index: 1;
+  position: relative;
+}
+.service-section1 .service-section-title-1 {
+  font-size: 64px !important;
+  line-height: 120% !important;
+  font-family: "Helvetica Neue Bold" !important;
+  margin-top: 19px;
+}
+.service-section1 .service-section-content {
+  font-size: 36px !important;
+  line-height: 150% !important;
+  font-family: "Helvetica Neue Regular" !important;
+  margin: 0 !important;
+  margin-bottom: 60px !important;
+  max-width: 700px;
+}
+.service-section2-text-field .service-section-title-1 {
+  font-size: 64px !important;
+  font-family: "Helvetica Neue Bold" !important;
+  text-align: center;
+}
+.repair-card {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.repair-card p {
+  font-family: "Helvetica Neue Regular" !important;
+  font-size: 24px !important;
+}
+.repair-card p:nth-child(1) {
+  font-family: "Helvetica Neue Bold" !important;
+}
+.repair-section1-container {
+  padding: 0 !important;
+  max-width: 100% !important;
+  background-color: #143663;
+}
+.repair-section1-container:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: inherit;
+  z-index: -1;
+  bottom: 175px;
+  transform-origin: left bottom;
+  transform: skewY(5deg);
+  box-shadow: 0 12px 2px rgba(35, 91, 137, 0.25);
+}
+.repair-section1-content {
+  max-width: 1440px;
+  padding: 0px 32px;
+  width: 100%;
+  position: relative;
+  padding-top: 120px;
+  box-sizing: border-box;
+  margin: auto;
+}
+.repair-section1-decoration {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 210px;
+}
+
 @media (max-width: 1280px) {
   .logo-footer {
     height: 52px !important;
@@ -576,6 +652,29 @@ footer {
   .business-card {
     padding-left: 50px !important;
     padding-right: 50px !important;
+  }
+  .service-section1 .service-section-title-1 {
+    font-size: 36px !important;
+  }
+  .service-section1 .service-section-content {
+    font-size: 24px !important;
+  }
+  .repair-page .service-section2 {
+    padding-top: 450px !important;
+    height: fit-content !important;
+    margin-bottom: 0 !important;
+  }
+  .service-section2-text-field .service-section-title-1 {
+    font-size: 36px !important;
+  }
+  .repair-section1-container:after {
+    bottom: 280px;
+  }
+  .service-section2-text-field {
+    margin-top: -130px !important;
+  }
+  .repair-section1-decoration {
+    right: 32px;
   }
 }
 @media (max-width: 1200px) {
@@ -637,6 +736,33 @@ footer {
   }
   .business-main-content {
     font-size: 24px !important;
+  }
+  .service-section1 .service-section-content {
+    margin-bottom: 20px !important;
+  }
+  .repair-section1-img {
+    margin-top: 0 !important;
+  }
+  .repair-section1-container:after {
+    bottom: 270px;
+  }
+  .repair-card {
+    flex-direction: row;
+  }
+}
+@media (max-width: 960px) {
+  .repair-card-img {
+    width: 90px !important;
+  }
+  .repair-card-img svg {
+    height: 100% !important;
+    width: 100% !important;
+  }
+  .repair-content {
+    margin-left: 36px;
+  }
+  .repair-page .service-section2 {
+    padding-top: 500px !important;
   }
 }
 @media (max-width: 768px) {
@@ -776,6 +902,50 @@ footer {
   }
   .business-card .business-card-subtitle {
     font-size: 36px !important;
+  }
+  .service-section1-special-bg {
+    background-position: center 70px;
+  }
+  .Container .service-section1 {
+    height: auto !important;
+    padding-top: 0 !important;
+    flex-wrap: wrap;
+  }
+  .service-section1 .service-section-title-1 {
+    text-align: left;
+  }
+  .service-section1 .service-section-content {
+    text-align: left;
+    max-width: 400px;
+  }
+  .service-section1 .service-section-button {
+    margin-left: 0 !important;
+  }
+  .repair-section1-decoration {
+    top: 125px;
+  }
+  .mobile-repair-section1-img {
+    display: block;
+    width: 460px;
+    right: 0;
+    top: 170px;
+    position: absolute;
+  }
+  .repair-page .service-section2 {
+    padding-top: 600px !important;
+    padding-bottom: 0 !important;
+  }
+  .repair-section1-container:after {
+    bottom: 460px;
+  }
+  .service-section2-text-field .service-section-title-1 {
+    font-size: 24px !important;
+  }
+  .service-section2-text-field .repair-sec-content-div {
+    margin-top: 33px !important;
+  }
+  .repair-card p {
+    font-size: 16px !important;
   }
 }
 @media (max-width: 600px) {
@@ -944,6 +1114,24 @@ footer {
   .business-main-content {
     font-size: 18px !important;
     margin: 18px auto !important;
+  }
+  .repair-section1-decoration {
+    top: unset;
+    bottom: 0;
+  }
+  .mobile-repair-section1-img {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .repair-section1-content {
+    padding-top: 156px;
+  }
+  .repair-section1-container:after {
+    bottom: -75px;
+  }
+  .repair-page .service-section2 {
+    padding-top: 540px !important;
   }
 }
 @media (max-width: 425px) {

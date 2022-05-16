@@ -13,10 +13,12 @@ type Props = {
 
 const Section4 = ({ handleStatus }: Props) => {
   const data = storesDetails.storeCnts
+  const themeType = data.general.themeType
   const repair = data.repairPage.section4
   const [t] = useTranslation()
   const classes = useStyles()
 
+  if (themeType === "marnics") return null
   return (
     <section className="Container">
       <Grid container className="repair-sec4-grid-root" spacing={2}>

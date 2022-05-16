@@ -248,6 +248,9 @@ footer {
   transform: skewY(7deg);
   box-shadow: 0 25px 25px rgba(35, 91, 137, 0.25);
 }
+.repair-section1-decoration, .mobile-repair-section1-img {
+  display: none;
+}
 .decoration-right {
   background-color: #F3F5F6;
   width: 30%;

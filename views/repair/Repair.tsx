@@ -61,7 +61,7 @@ const Repair = ({ handleStatus, features }: Props) => {
           name={featureToggleKeys.FRONTEND_REPAIR}
           inactiveComponent={() => <Error />}
           activeComponent={() => (
-            <div>
+            <div className="repair-page">
               <Section1 handleStatus={handleStatus} />
               <Section2 />
               <Section4 handleStatus={handleStatus} />

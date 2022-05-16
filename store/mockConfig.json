@@ -734,6 +734,103 @@
         ]
       }
     },
+    "repairPage": {
+      "headData": {
+        "title": "Repair | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ]
+      },
+      "section1": {
+        "title": "Fix Your Device Fast!",
+        "subtitle": "Answer a few questions about your damaged device and we’ll help repair it.",
+        "themeCol": "#fff",
+        "hasBackground": true,
+        "buttons": [
+          {
+            "type": "quote",
+            "title": "Repair Quote",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          }
+        ]
+      },
+      "section2": {
+        "title": "How does repair work?",
+        "contents": [
+          {
+            "title": "Take our online quiz",
+            "content": "Take our fast online quiz, value your phone, opt-in and sign up for an account.",
+            "order": 1,
+            "type": "onlineQuiz"
+          },
+          {
+            "title": "Ship us your phone",
+            "content": "Print out pre-paid shipping label and ship your used phone to Mobile Tech Lab.",
+            "order": 2,
+            "type": "shipPhone"
+          },
+          {
+            "title": "We verify your phone",
+            "content": "Marnics Mobile verifies the phone matches the description you provided, and you get paid!",
+            "order": 3,
+            "type": "verifyPhone"
+          }
+        ],
+        "hasBackground": false,
+        "bgImg": "https://storage.googleapis.com/adp_assets/images/21/store-section2-bg.png"
+      },
+      "section3": {
+        "title": "From New to Reconditioned",
+        "content": "Choose your new phone among our 4 grades, with Marnics Mobile it's easy to choose for any budget!",
+        "children": [
+          {
+            "subtitle": "NEW",
+            "subcontent": "A brand new device with no signs of wear",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-new.png",
+            "order": 1
+          },
+          {
+            "subtitle": "MINT",
+            "subcontent": "No scratches or dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-mint.png",
+            "order": 2
+          },
+          {
+            "subtitle": "GOOD",
+            "subcontent": "Minor scratches or dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-good.png",
+            "order": 3
+          },
+          {
+            "subtitle": "FAIR",
+            "subcontent": "Visible scratchs and dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-fair.png",
+            "order": 4
+          }
+        ]
+      },
+      "section4": {
+        "title": "Get the Latest",
+        "subtitle": "Shop our selection of new and pre-owned devices!",
+        "btnTitle": "Shop Now",
+        "themeCol": "#000",
+        "link": "#"
+      },
+      "widget": {
+        "metaTitle": "Repair Widget | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ]
+      }
+    },
     "logoData": {
       "logoHeaderImg": "/img/store-logo-header.png",
       "logoFooterImg": "/img/store-logo-footer.png"
@@ -1891,6 +1988,7 @@
     ],
     "locationsData": {
       "skitterMobile": ""
-    }
+    },
+    "repairPhoneImg": "/img/repair-phone.png"
   }
 }

@@ -14,6 +14,7 @@ interface Props {
 
 const Section1 = ({ handleStatus }: Props) => {
   const data = storesDetails.storeCnts
+  const themeType = data.general.themeType
   const repair = data.repairPage.section1
   const buttons = _.sortBy(repair.buttons, (o) => o.order)
   const [t] = useTranslation()
@@ -30,73 +31,81 @@ const Section1 = ({ handleStatus }: Props) => {
         backgroundImage: repair.hasBackground ? "url(" + repair.bgImg + ")" : "",
       }}
     >
-      <section className="Container">
-        <Grid container className="service-section1">
-          <Grid item xs={12} sm={7}>
-            <Typography
-              className="service-section-title-1"
-              style={{
-                color: repair.themeCol,
-              }}
-            >
-              {t(repair.title)}
-            </Typography>
-            <Typography className="service-section-content" style={{ color: repair.themeCol }}>
-              {t(repair.subtitle)}
-            </Typography>
-            <div style={{ display: "flex" }}>
-              {buttons.map((item: any, index: number) => {
-                return (
-                  <React.Fragment key={index}>
-                    {item.visible ? (
-                      <Box className="service-section-button">
-                        {isExternal(item.link) ? (
-                          <a
-                            href={item.link}
-                            style={{ textDecoration: "none" }}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <Button
-                              title={t(item.title)}
-                              bgcolor={data.general.colorPalle.repairButtonCol}
-                              borderR="20px"
-                              width="90%"
-                            />
-                          </a>
-                        ) : (
-                          <Link
-                            to={item.link}
-                            style={{ textDecoration: "none" }}
-                            onClick={handleRepairWidget}
-                          >
-                            <Button
-                              title={t(item.title)}
-                              bgcolor={data.general.colorPalle.repairButtonCol}
-                              borderR="20px"
-                              width="90%"
-                            />
-                          </Link>
-                        )}
-                      </Box>
-                    ) : (
-                      <></>
-                    )}
-                  </React.Fragment>
-                )
-              })}
-            </div>
+      <section className="Container repair-section1-container">
+        <div className="repair-section1-content">
+          <img src="/img/decoration.svg" alt="decoration" className="repair-section1-decoration"/>
+          <Grid container className="service-section1">
+            <Grid item xs={12} sm={7}>
+              <div className="decoration-bar" style={{ backgroundColor: repair.themeCol }} />
+              <Typography
+                className="service-section-title-1"
+                style={{
+                  color: repair.themeCol,
+                }}
+              >
+                {t(repair.title)}
+              </Typography>
+              <Typography className="service-section-content" style={{ color: repair.themeCol }}>
+                {t(repair.subtitle)}
+              </Typography>
+              <div style={{ display: "flex" }}>
+                {buttons.map((item: any, index: number) => {
+                  return (
+                    <React.Fragment key={index}>
+                      {item.visible ? (
+                        <Box className="service-section-button">
+                          {isExternal(item.link) ? (
+                            <a
+                              href={item.link}
+                              style={{ textDecoration: "none" }}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <Button
+                                title={t(item.title)}
+                                bgcolor={themeType === "marnics" ? "#fff" : data.general.colorPalle.repairButtonCol}
+                                borderR={themeType === "marnics" ? "0" : "20px"}
+                                txcolor={themeType === "marnics" ? data.general.colorPalle.repairButtonCol : "#fff"}
+                                width={themeType === "marnics" ? "100%" : "90%"}
+                              />
+                            </a>
+                          ) : (
+                            <Link
+                              to={item.link}
+                              style={{ textDecoration: "none" }}
+                              onClick={handleRepairWidget}
+                            >
+                              <Button
+                                title={t(item.title)}
+                                bgcolor={themeType === "marnics" ? "#fff" : data.general.colorPalle.repairButtonCol}
+                                borderR={themeType === "marnics" ? "0" : "20px"}
+                                txcolor={themeType === "marnics" ? data.general.colorPalle.repairButtonCol : "#fff"}
+                                width={themeType === "marnics" ? "100%" : "90%"}
+                              />
+                            </Link>
+                          )}
+                        </Box>
+                      ) : (
+                        <></>
+                      )}
+                    </React.Fragment>
+                  )
+                })}
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={5} className="repair-section1-img-container">
+              <img
+                src={storesDetails.commonCnts.repairPhoneImg}
+                alt="repair-phone"
+                className="repair-section1-img"
+                style={{ width: "100%", marginTop: "-80px" }}
+                width="1"
+                height="auto"
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={5}>
-            <img
-              src={storesDetails.commonCnts.repairPhoneImg}
-              alt="repair-phone"
-              style={{ width: "100%", marginTop: "-80px" }}
-              width="1"
-              height="auto"
-            />
-          </Grid>
-        </Grid>
+          <img src={storesDetails.commonCnts.repairPhoneImg} alt="repair-phone" className="mobile-repair-section1-img" />
+        </div>
       </section>
     </div>
   )
