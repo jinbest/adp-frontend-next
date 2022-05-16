@@ -350,6 +350,7 @@ footer {
   height: 5px;
   background-color: #235B89;
   margin: auto;
+  display: flex;
 }
 .covid-main-title {
   font-size: 64px !important;
@@ -472,6 +473,78 @@ footer {
   font-family: "Helvetica Neue Regular" !important;
 }
 
+/* Business page */
+.business-container {
+  padding-top: 220px !important;
+  padding-bottom: 0 !important;
+}
+.business-main-title {
+  font-size: 64px !important;
+  line-height: 120%;
+  font-family: "Helvetica Neue Bold" !important;
+  font-weight: 700 !important;
+  margin: 20px 0 0 !important;
+  color: #143663 !important;
+}
+.business-main-content {
+  font-family: "Helvetica Neue Regular" !important;
+  font-size: 30px !important;
+  line-height: 150%;
+  max-width: 660px;
+}
+.business-card-container {
+  margin: 170px auto !important;
+  margin-bottom: 0 !important;
+}
+.business-card {
+  max-width: 1540px !important;
+  padding: 24px 168px !important;
+  border-radius: 0 !important;
+  box-shadow: -10px -10px 30px #E2E9ED, 10px 10px 30px rgba(226, 233, 237, 0.4);
+}
+.business-card .business-card-subtitle {
+  font-size: 45px !important;
+  font-family: "Helvetica Neue Bold" !important;
+  line-height: 55px !important;
+  position: relative;
+  z-index: 1;
+  color: #235B89 !important;
+  margin-bottom: 60px !important;
+}
+.business-svgcontainer {
+  box-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+}
+.business-card-text {
+  border: none !important;
+}
+.business-card {
+  background-color: white;
+  position: relative;
+  background-position: right;
+}
+.business-card-bg {
+  display: flex !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff90;
+}
+.business-item-card {
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+  padding: 24px 18px;
+}
+.business-card-item-text {
+  font-size: 22px !important;
+  line-height: 27px !important;
+  font-family: "Helvetica Neue Medium" !important;
+  padding: 0 !important;
+}
 
 @media (max-width: 1280px) {
   .logo-footer {
@@ -499,6 +572,10 @@ footer {
   }
   .marnics-location-container {
     padding-top: 300px !important;
+  }
+  .business-card {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
   }
 }
 @media (max-width: 1200px) {
@@ -554,6 +631,12 @@ footer {
   }
   .footer-other-images a {
     height: 100%;
+  }
+  .business-main-title {
+    font-size: 48px !important;
+  }
+  .business-main-content {
+    font-size: 24px !important;
   }
 }
 @media (max-width: 768px) {
@@ -691,6 +774,9 @@ footer {
     padding-top: 200px !important;
     padding-bottom: 0 !important;
   }
+  .business-card .business-card-subtitle {
+    font-size: 36px !important;
+  }
 }
 @media (max-width: 600px) {
   .marnics-container-mobile {
@@ -824,6 +910,41 @@ footer {
   .location-waveBg img {
     margin-top: 110px;
   }
+  .business-card {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .business-card .business-card-subtitle {
+    font-size: 24px !important;
+    margin-bottom: 40px !important;
+  }
+  .business-card-item-text {
+    font-size: 18px !important;
+    line-height: 22px !important;
+  }
+  .business-card {
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+  .business-item-card {
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  }
+  .business-container {
+    padding-top: 160px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .business-card-text {
+    height: auto !important;
+  }
+  .business-main-title {
+    font-size: 36px !important;
+  }
+  .business-main-content {
+    font-size: 18px !important;
+    margin: 18px auto !important;
+  }
 }
 @media (max-width: 425px) {
   .corner-shape > img {
@@ -840,5 +961,8 @@ footer {
     max-width: 55px;
     display: block;
     margin-top: 26px;
+  }
+  .business-card-container {
+    margin-top: 230px !important;
   }
 }

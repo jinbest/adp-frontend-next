@@ -376,7 +376,14 @@ footer {
   box-shadow: 12px 12px 12px rgba(35, 91, 137, 0.25);
   transform: skewY(-12deg);
 }
-
+.decoration-line, .business-card-bg {
+  display: none;
+}
+@media (max-width: 1280px) {
+  .marnics-banner1 {
+    padding-top: 260px;
+  }
+}
 @media (max-width: 1024px) {
   .decoration-right, .decoration-circle-left, .decoration-circle-right {
     display: none;
@@ -401,7 +408,13 @@ footer {
   }
 
   .marnics-banner2 {
-    padding: 260px 0;
+    padding: 240px 0;
+  }
+  .marnics-banner2-right::after {
+    transform: skewY(-15deg);
+  }
+  .marnics-banner2-left::after {
+    transform: skewY(15deg);
   }
 }
 @media (max-width: 768px) {
@@ -426,13 +439,13 @@ footer {
     transform: skewY(-12deg);
   }
   .marnics-banner2-left::after {
-    transform: skewY(16deg);
+    transform: skewY(20deg);
   }
   .marnics-banner2-right::after {
-    transform: skewY(-16deg);
+    transform: skewY(-20deg);
   }
   .marnics-banner1 {
-    padding: 244px 0;
+    padding: 255px 0;
   }
   .marnics-banner2 {
     padding: 230px 0;
@@ -460,14 +473,20 @@ footer {
     display: block;
   }
   .marnics-banner1 {
-    padding: 240px 0;
+    padding: 222px 0;
   }
   .marnics-banner2 {
-    padding: 230px 0;
+    padding: 205px 0;
   }
 }
 @media (max-width: 425px) {
   .decoration-left {
     padding-top: 350px;
+  }
+  .marnics-banner2 {
+    padding: 230px 0;
+  }
+  .marnics-banner1 {
+    padding: 245px 0;
   }
 }

@@ -676,6 +676,64 @@
         "group": false
       }
     },
+    "businessPage": {
+      "headData": {
+        "title": "Business Solutions | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "We provide reliable device management and repair services so you can focus on running your business. Contact Marnics Mobile today for bulk or ongoing repair services."
+          }
+        ]
+      },
+      "section1": {
+        "title": "Business Solutions",
+        "subtitle": "Our goal is to provide everyone with the best quality repairs at an affordable price with the fastest possible turnaround times.",
+        "btnTitle": "Get Started"
+      },
+      "section2": {
+        "title": "Why Businesses Choose Us?",
+        "bgImg": "/img/pexels-karsten-madsen-18105 2.png",
+        "services": [
+          {
+            "type": "freeShipping",
+            "content": "Free shipping and bulk discounts for 5+ devices",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "type": "pay",
+            "content": "Flexible payement options. You choose how and when you pay",
+            "visible": true,
+            "order": 2
+          },
+          {
+            "type": "shippingLabel",
+            "content": "Instant shipping label upon request",
+            "visible": true,
+            "order": 3
+          },
+          {
+            "type": "soldering",
+            "content": "Dedicated B2B microsoldering Techs",
+            "visible": true,
+            "order": 4
+          },
+          {
+            "type": "customerService",
+            "content": "Responsive customer support",
+            "visible": true,
+            "order": 5
+          },
+          {
+            "type": "quickTurnaround",
+            "content": "Quick turnaround",
+            "visible": true,
+            "order": 6
+          }
+        ]
+      }
+    },
     "logoData": {
       "logoHeaderImg": "/img/store-logo-header.png",
       "logoFooterImg": "/img/store-logo-footer.png"

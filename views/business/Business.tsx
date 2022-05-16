@@ -8,12 +8,7 @@ import { Grid, Typography } from "@material-ui/core"
 import Button from "../../components/Button"
 import { useTranslation } from "react-i18next"
 import Card from "../repair/widget-component/Card"
-import ShippingLabel from "./SVGs/ShippingLabel"
-import CustomerService from "./SVGs/CustomerService"
-import FreeShipping from "./SVGs/FreeShipping"
-import Pay from "./SVGs/Pay"
-import QuickTurnaround from "./SVGs/QuickTurnaround"
-import Soldering from "./SVGs/Soldering"
+import { ShippingLabelMarnics, PayMarnics, FreeShippingMarnics, SolderingMarnics, QuickTurnaroundMarnics, ShippingLabel, FreeShipping, CustomerService, Pay, QuickTurnaround, Soldering, CustomerServiceMarnics } from "./SVGs"
 import { MetaParams } from "../../model/meta-params"
 import _ from "lodash"
 
@@ -24,6 +19,7 @@ type Props = {
 const Business = ({ handleStatus }: Props) => {
   const classes = useStyles()
   const data = storesDetails.storeCnts
+  const themeType = data.general.themeType
   const thisPage = data.businessPage
   const services = _.sortBy(thisPage.section2.services, (o) => o.order)
   const [t] = useTranslation()
@@ -56,72 +52,77 @@ const Business = ({ handleStatus }: Props) => {
       </Head>
 
       <Shape />
-      <div className={classes.root}>
-        <h1 className={classes.mainTitle}>{t(thisPage.section1.title)}</h1>
-        <Typography className={classes.mainContent}>{t(thisPage.section1.subtitle)}</Typography>
+      <div className={`${classes.root} business-container`}>
+        <div className="decoration-line" />
+        <h1 className={`${classes.mainTitle} business-main-title`}>{t(thisPage.section1.title)}</h1>
+        <Typography className={`${classes.mainContent} business-main-content`}>{t(thisPage.section1.subtitle)}</Typography>
         <Button
           title={t(thisPage.section1.btnTitle)}
           bgcolor={data.general.colorPalle.repairButtonCol}
-          borderR="20px"
+          borderR={themeType === "marnics" ? "0" : "20px"}
           width="200px"
+          height="60px"
           margin="auto"
           onClick={() => setOpenModal(true)}
         />
-        <div className={classes.cardContainer}>
-          <Card className={classes.card}>
-            <Typography className={classes.subTitle}>{t(thisPage.section2.title)}</Typography>
+        <div className={`${classes.cardContainer} business-card-container`}>
+          <Card className={`${classes.card} business-card`} backgroundImage={`url("${thisPage.section2.bgImg}")`}>
+            <div className="business-card-bg" />
+            <Typography className={`${classes.subTitle} business-card-subtitle`}>{t(thisPage.section2.title)}</Typography>
             <Grid container spacing={5}>
               {services.map((item: any, index: number) => {
                 return (
                   <React.Fragment key={index}>
                     {item.visible ? (
-                      <Grid item xs={12} md={6} className={classes.item}>
-                        <div className={classes.SVGContainer}>
-                          {item.type === "freeShipping" ? (
-                            <div style={{ padding: "0 20px" }}>
-                              <FreeShipping color={data.general.colorPalle.repairButtonCol} />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {item.type === "pay" ? (
-                            <div style={{ padding: "0 24px" }}>
-                              <Pay color={data.general.colorPalle.repairButtonCol} />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {item.type === "shippingLabel" ? (
-                            <div style={{ padding: "0 25px" }}>
-                              <ShippingLabel color={data.general.colorPalle.repairButtonCol} />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {item.type === "soldering" ? (
-                            <div style={{ padding: "0 22px" }}>
-                              <Soldering color={data.general.colorPalle.repairButtonCol} />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {item.type === "customerService" ? (
-                            <div style={{ padding: "0 22px" }}>
-                              <CustomerService color={data.general.colorPalle.repairButtonCol} />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                          {item.type === "quickTurnaround" ? (
-                            <div style={{ padding: "0 20px" }}>
-                              <QuickTurnaround color={data.general.colorPalle.repairButtonCol} />
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                        <div className={classes.textContainer}>
-                          <Typography className={classes.itemText}>{t(item.content)}</Typography>
+                      <Grid item xs={12} md={6}>
+                        <div className={`${classes.item} business-item-card`}>
+                          <div className={`${classes.SVGContainer} business-svgcontainer`}>
+                            {item.type === "freeShipping" ? (
+                              <div style={{ padding: "0 20px" }}>
+                                {themeType === "marnics" ? <FreeShippingMarnics /> : <FreeShipping color={data.general.colorPalle.repairButtonCol} />}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {item.type === "pay" ? (
+                              <div style={{ padding: "0 24px" }}>
+                                {themeType === "marnics" ? <PayMarnics /> : <Pay color={data.general.colorPalle.repairButtonCol} />}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {item.type === "shippingLabel" ? (
+                              <div style={{ padding: "0 25px" }}>
+                                {themeType === "marnics" ? <ShippingLabelMarnics /> : <ShippingLabel color={data.general.colorPalle.repairButtonCol} />}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {item.type === "soldering" ? (
+                              <div style={{ padding: "0 22px" }}>
+                                {themeType === "marnics" ? <SolderingMarnics /> : <Soldering color={data.general.colorPalle.repairButtonCol} />}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {item.type === "customerService" ? (
+                              <div style={{ padding: "0 22px" }}>
+                                {themeType === "marnics" ? <CustomerServiceMarnics /> : <CustomerService color={data.general.colorPalle.repairButtonCol} />}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {item.type === "quickTurnaround" ? (
+                              <div style={{ padding: "0 20px" }}>
+                                {themeType === "marnics" ? <QuickTurnaroundMarnics /> : <QuickTurnaround color={data.general.colorPalle.repairButtonCol} />}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                          <div className={`${classes.textContainer} business-card-text`}>
+                            <Typography className={`${classes.itemText} business-card-item-text`}>{t(item.content)}</Typography>
+                          </div>
                         </div>
                       </Grid>
                     ) : (
@@ -145,18 +146,18 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       maxWidth: "1440px",
-      padding: "250px 30px 140px !important",
+      padding: "250px 30px 140px",
       margin: "auto !important",
       display: "block",
       textAlign: "center",
       ["@media (max-width:1200px)"]: {
-        paddingTop: "210px !important",
+        paddingTop: "210px",
       },
       ["@media (max-width:500px)"]: {
-        padding: "180px 30px 50px !important",
+        padding: "180px 30px 50px",
       },
       ["@media (max-width:425px)"]: {
-        padding: "200px 30px 100px !important",
+        padding: "200px 30px 100px",
       },
     },
     cardContainer: {
@@ -171,71 +172,69 @@ const useStyles = makeStyles(() =>
     card: {
       padding: "50px 30px",
       height: "auto",
-      maxWidth: "1200px !important",
+      maxWidth: "1200px",
       ["@media (max-width:600px)"]: {
         padding: "40px 20px",
       },
     },
     mainTitle: {
       color: "black",
-      fontSize: "60px !important",
-      marginBottom: "40px !important",
-      // textShadow: "1px 0 black",
+      fontSize: "60px",
+      marginBottom: "40px",
       fontFamily: "Poppins Bold",
       fontWeight: "bold",
       justifyContent: "center",
       letterSpacing: "2px",
       ["@media (max-width:1400px)"]: {
-        fontSize: "4vw !important",
-        marginBottom: "3vw !important",
+        fontSize: "4vw",
+        marginBottom: "3vw",
       },
       ["@media (max-width:768px)"]: {
-        fontSize: "5vw !important",
+        fontSize: "5vw",
       },
       ["@media (max-width:500px)"]: {
-        fontSize: "5.5vw !important",
+        fontSize: "5.5vw",
         width: "100%",
       },
     },
     mainContent: {
       color: "black",
-      fontSize: "40px !important",
-      marginBottom: "40px !important",
+      fontSize: "40px",
+      marginBottom: "40px",
       justifyContent: "center",
       width: "80%",
       margin: "auto",
       ["@media (max-width:1400px)"]: {
-        fontSize: "2.5vw !important",
+        fontSize: "2.5vw",
       },
       ["@media (max-width:768px)"]: {
-        fontSize: "3vw !important",
+        fontSize: "3vw",
       },
       ["@media (max-width:500px)"]: {
-        fontSize: "3.5vw !important",
+        fontSize: "3.5vw",
         width: "100%",
       },
     },
     subTitle: {
-      fontSize: "40px !important",
+      fontSize: "40px",
       textAlign: "center",
       color: "black",
-      // textShadow: "1px 0 black",
       fontFamily: "Poppins Bold !important",
       fontWeight: "bold",
       letterSpacing: "1px",
       marginBottom: "50px",
       ["@media (max-width:1400px)"]: {
-        fontSize: "3vw !important",
-        marginBottom: "3vw !important",
+        fontSize: "3vw",
+        marginBottom: "3vw",
       },
       ["@media (max-width:960px)"]: {
-        marginBottom: "50px !important",
+        marginBottom: "50px",
       },
       ["@media (max-width:768px)"]: {
-        fontSize: "3.5vw !important",
+        fontSize: "3.5vw",
       },
       ["@media (max-width:500px)"]: {
-        fontSize: "4vw !important",
+        fontSize: "4vw",
         width: "100%",
       },
     },
@@ -268,13 +267,13 @@ const useStyles = makeStyles(() =>
       },
     },
     itemText: {
-      fontSize: "18px !important",
+      fontSize: "18px",
       padding: "0 20px",
       ["@media (max-width:1400px)"]: {
-        fontSize: "16px !important",
+        fontSize: "16px",
       },
       ["@media (max-width:500px)"]: {
-        fontSize: "3vw !important",
+        fontSize: "3vw",
         width: "100%",
         padding: "0 10px",
       },
