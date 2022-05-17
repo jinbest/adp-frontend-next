@@ -8,7 +8,6 @@ type Props = {
 }
 
 const Card = ({ children, className, height, backgroundImage }: Props) => {
-  console.log(backgroundImage, "-----<")
   return (
     <div className={`service-widget-card ${className}`} style={{ height: height, backgroundImage }}>
       {children}

@@ -831,6 +831,73 @@
         ]
       }
     },
+    "tradePage": {
+      "headData": {
+        "title": "Trade | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ]
+      },
+      "section1": {
+        "title": "Can I Sell My Phone for Cash or Get Trade-In Value for my Phone Today?",
+        "subtitle": "Yes! And it only takes 15 seconds to find out what your used phone is worth!",
+        "themeCol": "#fff",
+        "decorationImg": "/img/decoration.svg",
+        "sectionImg": "/img/store-trade-phone.png",
+        "buttons": [
+          {
+            "type": "quote",
+            "title": "Get Quote",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          }
+        ]
+      },
+      "section2": {
+        "title": "How do I sell my phone?",
+        "contents": [
+          {
+            "title": "Take our online quiz",
+            "content": "Take our fast online quiz, value your phone, opt-in and sign up for an account.",
+            "order": 1,
+            "type": "onlineQuiz"
+          },
+          {
+            "title": "Ship us your phone",
+            "content": "Print out pre-paid shipping label and ship your used phone to Mobile Tech Lab.",
+            "order": 2,
+            "type": "shipPhone"
+          },
+          {
+            "title": "We verify your phone",
+            "content": "Marnics Mobile verifies the phone matches the description you provided, and you get paid!",
+            "order": 3,
+            "type": "verifyPhone"
+          }
+        ]
+      },
+      "section3": {
+        "title": "Get Paid the way you want when you sell your phone to Marnics Mobile",
+        "children": [
+          {
+            "subtitle": "Phone Trade-In Credit",
+            "subcontent": "Use the trade-in code we provide at checkout on any Mobile Tech Lab purchase. This code doesn't expire and is good unless cash has been dispersed against the trade-in.",
+            "img": "/img/trade-in.png",
+            "order": 1
+          },
+          {
+            "subtitle": "Cash for Phones",
+            "subcontent": "Get paid cash. Sign up to get paid through PayPal or have the cash sent straight to your bank account.",
+            "img": "/img/cash.png",
+            "order": 2
+          }
+        ]
+      }
+    },
     "logoData": {
       "logoHeaderImg": "/img/store-logo-header.png",
       "logoFooterImg": "/img/store-logo-footer.png"
@@ -871,7 +938,8 @@
         "locationsPage": "/locations",
         "contactPage": "/contact",
         "covidPage": "/coronavirus",
-        "privacyPolicy": "/privacy_policy"
+        "privacyPolicy": "/privacy_policy",
+        "tradePage": "/trade"
       },
       "themes": {
         "normal": "https://storage.googleapis.com/adp_assets/themes/0/theme.css",

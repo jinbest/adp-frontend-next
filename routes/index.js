@@ -7,6 +7,7 @@ import Repair from "../views/repair/Repair"
 import RepairWidget from "../views/repair/RepairWidget"
 import GeneralPage from "../views/general-page/GeneralPage"
 import SpecificLocation from "../views/specific-location/SpecificLocation"
+import Trade from "../views/trade/Trade"
 
 import { Redirect } from "react-router-dom"
 
@@ -21,6 +22,7 @@ const pageRoutes = (data, specLoc) => {
     { path: routes.contactPage, component: Contact, special: {} },
     { path: routes.businessPage, component: Business, special: {} },
     { path: routes.covidPage, component: Covid, special: {} },
+    { path: routes.tradePage, component: Trade, special: {} }
   ]
 
   if (data.hasOwnProperty("pages") && data.pages.length) {
