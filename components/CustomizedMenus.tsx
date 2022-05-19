@@ -15,29 +15,7 @@ import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { makeLocations, getAddress, AddFormat12, getConvertHourType } from "../services/helper"
 import { featureToggleKeys } from "../const/_variables"
 
-const StyledMenu = withStyles({
-  paper: {
-    borderRadius: "15px",
-    boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
-    overflow: "inherit !important",
-    marginTop: "5px",
-    border: "1px solid #C4C4C4",
-  },
-})((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    {...props}
-  />
-))
+
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -71,7 +49,29 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const [myStore, setMyStore] = useState("My Store")
 
   const classes = useStyles()
-
+  const StyledMenu = withStyles({
+    paper: {
+      borderRadius: `${themeType === "marnics" ? "0" : "15px"}`,
+      boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
+      overflow: "inherit !important",
+      marginTop: "5px",
+      border: `${themeType === "marnics" ? "none" : "1px solid #C4C4C4"}`,
+    },
+  })((props: MenuProps) => (
+    <Menu
+      elevation={0}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      {...props}
+    />
+  ))
   const handleLocSelect = (index: number) => {
     const cntLocation: any = storesDetails.cntUserLocation[index]
     setLocations([cntLocation])
@@ -404,7 +404,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                           <Button
                             title={t("Book Appointment")}
                             bgcolor={themeColor}
-                            borderR="20px"
+                            borderR={themeType === "marnics" ? "0" : "20px"}
                             width="175px"
                             height="30px"
                             margin="0"

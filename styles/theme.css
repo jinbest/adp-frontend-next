@@ -341,6 +341,28 @@ footer {
   height: 100%;
 }
 
+/* Find Store */
+.block-title {
+  font-size: 18px;
+  font-family: "Helvetica Neue Bold" !important;
+  text-transform: uppercase;
+}
+.block-content {
+  font-family: "Helvetica Neue Regular" !important;
+  font-size: 16px;
+}
+
+/* Contact Page */
+.contact-banner {
+  font-family: "Helvetica Neue Medium" !important;
+}
+.accordion-container .contact-summary-title {
+  font-family: "Helvetica Neue Bold" !important;
+}
+.contact-summary-content {
+  font-family: "Helvetica Neue Regular" !important;
+}
+
 /* Covid page style */
 .covid-section1-container {
   padding-top: 190px !important;

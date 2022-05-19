@@ -116,7 +116,7 @@ const LocationsAccordion = ({
   return (
     <div className={classes.container}>
       <div
-        className={classes.banner}
+        className={`${classes.banner} contact-banner`}
         style={{ background: storesDetails.storeCnts.homepage.header.brandData.brandThemeCol }}
       >
         {`${storesDetails.findAddLocation.length} Stores near you`}
@@ -136,12 +136,12 @@ const LocationsAccordion = ({
                 id="panel1a-header"
                 className={classes.accordionSummary}
               >
-                <h2 className={classes.summaryTitle}>
+                <h2 className={`${classes.summaryTitle} contact-summary-title`}>
                   {element.distance
                     ? `${element.location_name} (${(element.distance / 1000).toFixed(1)}km)`
                     : element.location_name}
                 </h2>
-                <h2 className={classes.summaryContent}>{getAddress(element)}</h2>
+                <h2 className={`${classes.summaryContent} contact-summary-content`}>{getAddress(element)}</h2>
                 <div className={classes.directions}>
                   <a
                     href={`${
@@ -174,7 +174,7 @@ const LocationsAccordion = ({
                           color: data.general.colorPalle.repairButtonCol,
                         }}
                       >
-                        {phoneFormatString(element.phone)}
+                        {phoneFormatString(element.phone, 2)}
                       </span>
                     </a>
                   </div>
