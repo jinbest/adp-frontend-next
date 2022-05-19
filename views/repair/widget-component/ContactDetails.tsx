@@ -45,6 +45,7 @@ const ContactDetails = ({
 }: Props) => {
   const mainData = storesDetails.storeCnts
   const themeCol = mainData.general.colorPalle.themeColor
+  const themeType = mainData.general.themeType
   const codeArray = [
     deliveryMethodCode.mailin,
     deliveryMethodCode.onsite,
@@ -373,6 +374,7 @@ const ContactDetails = ({
                   <InputComponent
                     value={firstName}
                     placeholder={t(data.placeholder.firstName)}
+                    className="contact-detail-input"
                     handleChange={(e) => {
                       handleChangeFirstName(e.target.value)
                     }}
@@ -384,6 +386,7 @@ const ContactDetails = ({
                   <InputComponent
                     value={lastName}
                     placeholder={t(data.placeholder.lastName)}
+                    className="contact-detail-input"
                     handleChange={(e) => {
                       handleChangeLastName(e.target.value)
                     }}
@@ -395,6 +398,7 @@ const ContactDetails = ({
                   <InputComponent
                     value={email}
                     placeholder={t(data.placeholder.emailAdd)}
+                    className="contact-detail-input"
                     handleChange={(e) => {
                       handleChangeEmail(e.target.value)
                     }}
@@ -405,6 +409,7 @@ const ContactDetails = ({
                 <Grid item xs={storesDetails.location_id < 0 && !codeArray.includes(code) ? 6 : 12}>
                   <PhoneInput
                     handleSetPhone={setPhone}
+                    className="contact-detail-input"
                     val={phone}
                     placeholder={t(data.placeholder.phoneNum)}
                     errorText={phErrTxt}
@@ -415,6 +420,7 @@ const ContactDetails = ({
                     <InputComponent
                       value={postalCode}
                       placeholder={t(data.placeholder.postalCode)}
+                      className="contact-detail-input"
                       handleChange={(e) => {
                         handleChangePostalCode(e.target.value)
                       }}
@@ -431,6 +437,7 @@ const ContactDetails = ({
                   <Grid item xs={12}>
                     <InputComponent
                       value={address1}
+                      className="contact-detail-input"
                       placeholder={t(data.placeholder.address1)}
                       handleChange={(e) => {
                         handleChangeAddress1(e.target.value)
@@ -442,6 +449,7 @@ const ContactDetails = ({
                   <Grid item xs={12}>
                     <InputComponent
                       value={address2}
+                      className="contact-detail-input"
                       placeholder={t(data.placeholder.address2)}
                       handleChange={(e) => {
                         handleChangeAddress2(e.target.value)
@@ -458,6 +466,7 @@ const ContactDetails = ({
                   <Grid item xs={12} sm={4}>
                     <InputComponent
                       value={city}
+                      className="contact-detail-input"
                       placeholder={t(data.placeholder.city)}
                       handleChange={(e) => {
                         handleChangeCity(e.target.value)
@@ -469,6 +478,7 @@ const ContactDetails = ({
                   <Grid item xs={12} sm={4}>
                     <InputComponent
                       value={postalCode}
+                      className="contact-detail-input"
                       placeholder={t(data.placeholder.postalCode)}
                       handleChange={(e) => {
                         handleChangePostalCode(e.target.value)
@@ -490,7 +500,7 @@ const ContactDetails = ({
                       <Button
                         title={t("Book Appointment")}
                         bgcolor={mainData.general.colorPalle.nextButtonCol}
-                        borderR="20px"
+                        borderR={themeType === "marnics" ? "0" : "20px"}
                         maxWidth="300px"
                         height="30px"
                         fontSize="17px"
@@ -511,7 +521,7 @@ const ContactDetails = ({
                       <Button
                         title={t("Request a Quote")}
                         bgcolor={mainData.general.colorPalle.nextButtonCol}
-                        borderR="20px"
+                        borderR={themeType === "marnics" ? "0" : "20px"}
                         maxWidth="300px"
                         height="30px"
                         fontSize="17px"

@@ -493,7 +493,7 @@ footer {
   max-width: 660px;
 }
 .business-card-container {
-  margin: 170px auto !important;
+  margin: 220px auto !important;
   margin-bottom: 0 !important;
 }
 .business-card {
@@ -620,6 +620,231 @@ footer {
   position: absolute;
   right: 0;
   top: 210px;
+}
+
+/* Repair Widget */
+.service-widget-title {
+  font-size: 26px !important;
+  font-family: "Helvetica Neue Bold" !important;
+  line-height: 32px !important;
+  padding-left: 24px;
+}
+.service-widget-card {
+  border-radius: 0;
+  box-shadow: -10px -10px 30px #fff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+}
+.service-choose-device-container {
+  padding: 16px;
+  padding-top: 24px;
+}
+.device-item-container {
+  margin: 8px;
+  border-radius: 0;
+  border-color: #BDBFC3;
+  width: 161px;
+  height: 161px;
+  max-width: none;
+  background-color: #fff;
+  position: relative;
+}
+.widget-main-container {
+  margin-top: 0;
+}
+.brand-search-container {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  padding: 0 8px 8px 8px;
+}
+.search-icon {
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+.brand-search {
+  border: 1px solid #BDBFC3;
+  height: 45px;
+  width: 100%;
+  padding: 0 24px;
+  font-size: 16px;
+  font-family: "Helvetica Neue Regular" !important;
+  box-sizing: border-box;
+}
+.repair-widget-brand-name {
+  display: none;
+}
+.lazyimg-container {
+  display: flex;
+  font-size: 40px;
+}
+.lazyimg-container img {
+  margin: auto;
+  width: 100% !important;
+}
+.service-description {
+  padding: 4px 8px 8px 8px;
+}
+.topic-title {
+  font-family: "Helvetica Neue Bold" !important;
+  margin-bottom: 40px !important;
+}
+.topic-content {
+  font-size: 16px !important;
+  font-family: "Helvetica Neue Regular" !important;
+}
+.marnics-topic-title {
+  margin-bottom: 19px !important;
+}
+.device-item-container:hover .title-container {
+  display: block;
+}
+.title-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #153863;
+  height: 30px;
+  font-size: 16px;
+  font-family: "Helvetica Neue Bold" !important;
+  color: white;
+  line-height: 30px;
+  text-align: center;
+}
+.back-to-top {
+  display: none;
+}
+.service-widget-message {
+  position: fixed;
+  left: 32px;
+  bottom: 124px;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  display: flex;
+  background: linear-gradient(253.86deg, rgba(51, 51, 51, 0.2) 4.74%, rgba(255, 255, 255, 0) 81.66%), linear-gradient(180deg, rgba(51, 51, 51, 0.7) 0%, rgba(255, 255, 255, 0) 92.71%), #333333;;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 999;
+}
+.sevice-widget-back {
+  position: fixed;
+  cursor: pointer;
+  top: 150px;
+  left: 25px;
+  background-color: #DC7700;
+  font-size: 16px;
+  color: white;
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  font-family: "Helvetica Neue Medium" !important;
+  display: block;
+  width: 96px;
+  z-index: 999;
+}
+.search-bar-container {
+  margin-bottom: 8px;
+}
+.device-brand-subtitle {
+  font-size: 16px;
+  font-family: "Helvetica Neue Bold" !important;
+  margin-top: 20px;
+}
+.step1-topic-title {
+  margin-bottom: 19px !important;
+}
+.info-text-for-services {
+  display: none;
+}
+.device-service-item p {
+  font-size: 16px;
+  font-family: "Helvetica Neue Bold" !important;
+}
+.service-card-button p {
+  font-size: 14px;
+  font-family: "Helvetica Neue Bold" !important;
+  color: #BDBFC3;
+}
+.estimate-title {
+  font-family: "Helvetica Neue Bold" !important;
+  font-size: 16px;
+}
+.estimate-content {
+  font-family: "Helvetica Neue Regular" !important;
+  font-size: 16px;
+}
+.service-summary-div {
+  border-radius: 0;
+}
+.service-summary-title {
+  font-size: 20px !important;
+  font-family: "Helvetica Neue Bold" !important;
+  margin-bottom: 8px !important;
+}
+.service-summary-service-child {
+  font-size: 16px !important;
+  font-family: "Helvetica Neue Regular" !important;
+}
+.service-summary-img img {
+  width: 70px;
+  height: 100%;
+}
+.contact-detail-input {
+  border-radius: 0;
+  font-family: "Helvetica Neue Regular" !important;
+}
+.contact-detail-input .form-control, .contact-detail-input .flag-dropdown {
+  border-radius: 0 !important;
+}
+.custom-select {
+  border-radius: 0 !important;
+}
+.custom-select .MuiOutlinedInput-input {
+  font-family: "Helvetica Neue Regular" !important;
+}
+.booking-card * {
+  font-family: "Helvetica Neue Regular" !important;
+}
+.custom-book-time {
+  border-radius: 0;
+}
+.selected-time-text {
+  border-radius: 0;
+}
+.useful-textarea-div {
+  border-radius: 0;
+}
+.useful-textarea {
+  margin: 10px 24px;
+  font-size: 16px;
+  font-family: "Helvetica Neue Regular" !important;
+  resize: none;
+}
+.repair-service-summary-title {
+  font-size: 20px !important;
+  font-family: "Helvetica Neue Bold" !important;
+}
+.quote-component-content {
+  font-size: 16px !important;
+  font-family: "Helvetica Neue Regular" !important;
+}
+.summary-topic {
+  font-family: "Helvetica Neue Bold" !important;
+  font-size: 16px !important;
+}
+.summary-details {
+  font-size: 16px !important;
+  font-family: "Helvetica Neue Regular" !important;
+}
+.repair-service-summary-detail-container .every-container .topic {
+  font-size: 16px !important;
+  font-family: "Helvetica Neue Bold" !important;
+}
+.repair-service-summary-detail-container .every-container .details {
+  font-size: 16px !important;
+  font-family: "Helvetica Neue Regular" !important;
 }
 
 @media (max-width: 1280px) {

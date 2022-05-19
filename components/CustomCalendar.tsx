@@ -6,12 +6,6 @@ import { useTranslation } from "react-i18next"
 import { storesDetails } from "../store"
 import { MONTHS } from "../const/_variables"
 
-const Frame = styled.div`
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  height: 300px;
-`
 
 const InputDate = styled.div`
   width: 100%;
@@ -52,50 +46,6 @@ interface DayProps {
   margin?: string
 }
 
-const Day = styled.div<DayProps>`
-  width: 14.1%;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 14px;
-  ${(props) =>
-    props.margin &&
-    css`
-      margin: ${props.margin};
-    `}
-  ${(props) =>
-    props.color &&
-    css`
-      color: ${props.color};
-    `}
-  ${(props) =>
-    props.bg &&
-    css`
-      background-color: ${props.bg};
-    `}
-  ${(props) =>
-    props.isToday &&
-    css`
-      border: 1px solid ${props.repairBooktimeCol};
-      border-radius: 7px;
-      opacity: 0.8;
-    `}
-  ${(props) =>
-    props.isPastDay &&
-    css`
-      color: #ddd;
-    `}
-  ${(props) =>
-    props.isSelected &&
-    css`
-      background-color: ${props.repairBooktimeCol};
-      border-radius: 7px;
-      color: white;
-      opacity: 0.8;
-    `}
-`
 
 type CanlendarProps = {
   handleParentDate: (date: Date) => void
@@ -105,6 +55,58 @@ type CanlendarProps = {
 const CustomCalendar = ({ handleParentDate, timezone }: CanlendarProps) => {
   const mainData = storesDetails.storeCnts
   const repairBooktimeCol = mainData.general.colorPalle.repairBooktimeCol
+
+  const themeType = storesDetails.storeCnts.general.themeType
+  const Frame = styled.div`
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: ${themeType === "marnics" ? "0" : "15px"};
+    height: 300px;
+  `
+  const Day = styled.div<DayProps>`
+    width: 14.1%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    ${(props) =>
+      props.margin &&
+      css`
+        margin: ${props.margin};
+      `}
+    ${(props) =>
+      props.color &&
+      css`
+        color: ${props.color};
+      `}
+    ${(props) =>
+      props.bg &&
+      css`
+        background-color: ${props.bg};
+      `}
+    ${(props) =>
+      props.isToday &&
+      css`
+        border: 1px solid ${props.repairBooktimeCol};
+        border-radius: ${themeType === "marnics" ? "0" : "7px"};
+        opacity: 0.8;
+      `}
+    ${(props) =>
+      props.isPastDay &&
+      css`
+        color: #ddd;
+      `}
+    ${(props) =>
+      props.isSelected &&
+      css`
+        background-color: ${props.repairBooktimeCol};
+        border-radius: ${themeType === "marnics" ? "0" : "7px"};
+        color: white;
+        opacity: 0.8;
+      `}
+  `
 
   const [t] = useTranslation()
 

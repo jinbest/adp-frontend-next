@@ -206,6 +206,16 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
             activeComponent={() => (
               <div className="service-widget Container">
                 {repairWidgetStore.deviceCounter > 0 && step < 10 && (
+                  <div className="sevice-widget-back" onClick={handleDeviceCounterBack}>
+                    Go Back
+                  </div>
+                )}
+                {step > 0 && step < 10 && (
+                  <div className="sevice-widget-back" onClick={handleBackStep}>
+                    Go Back
+                  </div>
+                )}
+                {repairWidgetStore.deviceCounter > 0 && step < 10 && (
                   <div className="back-to-top" onClick={handleDeviceCounterBack}>
                     <BackSVG color="#BDBFC3" />
                   </div>

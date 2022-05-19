@@ -24,6 +24,7 @@ const UsefulInfo = ({
 }: Props) => {
   const mainData = storesDetails.storeCnts
   const themeCol = mainData.general.colorPalle.themeColor
+  const themeType = mainData.general.themeType
 
   const [message, setMessage] = useState("")
   const [error, setError] = useState(false)
@@ -106,7 +107,7 @@ const UsefulInfo = ({
               <Button
                 title={t("Next")}
                 bgcolor={mainData.general.colorPalle.nextButtonCol}
-                borderR="20px"
+                borderR={themeType === "marnics" ? "0" : "20px"}
                 width="120px"
                 height="30px"
                 fontSize="17px"

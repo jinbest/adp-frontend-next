@@ -5,6 +5,7 @@ import { Grid, Typography } from "@material-ui/core"
 import Search from "../../../components/Search"
 import Button from "../../../components/Button"
 import RepairSummary from "./RepairSummary"
+import MessageSVG from "./MessageSVG"
 import { useTranslation } from "react-i18next"
 import { repairWidData, repairWidgetStore, storesDetails } from "../../../store/"
 import {
@@ -25,6 +26,7 @@ import { GetBrandsParam } from "../../../model/get-brands-params"
 import { repairWidgetStepName } from "../../../const/_variables"
 import { repairWidgetAPI } from "../../../services"
 import ReactTooltip from "react-tooltip"
+import { SearchOutlined } from "@material-ui/icons"
 
 type Props = {
   data: any
@@ -54,6 +56,7 @@ const ChooseDevice = ({
   categoryID,
 }: Props) => {
   const mainData = storesDetails.storeCnts
+  const themeType = mainData.general.themeType
   const themeCol = mainData.general.colorPalle.themeColor
   const repairChooseItemCol = mainData.general.colorPalle.repairChooseItemCol
 
@@ -64,7 +67,9 @@ const ChooseDevice = ({
   const [selected, setSelected] = useState(999)
   const [disableStatus, setDisableStatus] = useState(true)
   const [imageData, setImageData] = useState<any[]>([])
+  const [showImageData, setShowImageData] = useState<any[]>([])
   const [searchText, setSearchText] = useState("")
+  const [searchBrand, setSearchBrand] = useState("")
   const [page, setPage] = useState(1)
   const [perPage, setPerPage] = useState(20)
   const [openContactModal, setOpenContactModal] = useState(false)
@@ -251,10 +256,10 @@ const ChooseDevice = ({
     }
     setSelected(i)
     setSearchText("")
-    handleChangeChooseData(step, imageData[i])
+    handleChangeChooseData(step, step ? imageData[i] : showImageData[i])
     switch (stepName) {
       case repairWidgetStepName.deviceBrand:
-        repairWidData.changeCntBrandID(imageData[i].id)
+        repairWidData.changeCntBrandID(showImageData[i].id)
         handleStep(step + 1)
         break
       case repairWidgetStepName.deviceModel:
@@ -268,6 +273,7 @@ const ChooseDevice = ({
 
   const onKeyPress = async (event: any) => {
     if (event.key === "Enter" && (step === 0 || step === 1 || step === 2)) {
+      if (themeType === "marnics" && step === 0) return
       await loadFilterData(event.target.value, 1, page * perPage, category_id)
     }
     if (event.key === "Enter" && !disableStatus && (step === 2 || step === 4 || step === 5)) {
@@ -465,6 +471,10 @@ const ChooseDevice = ({
     }
   }, [step, disableStatus, page, perPage, filter])
 
+  useEffect(() => {
+    setShowImageData(imageData.filter((i: any) => i.name.toLowerCase().includes(searchBrand.toLowerCase())))
+  }, [searchBrand])
+
   const GotoNextStep = async () => {
     await ChooseNextStep(999)
   }
@@ -641,7 +651,9 @@ const ChooseDevice = ({
       </p>
     )
   }
-
+  useEffect(() => {
+    if (imageData.length) setShowImageData(imageData)
+  }, [imageData])
   return (
     <div>
       <Grid container spacing={3}>
@@ -649,6 +661,12 @@ const ChooseDevice = ({
           <Typography className="service-widget-title">{t(data.title)}</Typography>
         </Grid>
       </Grid>
+
+      {step > 0 &&
+        <div className="service-widget-message" onClick={() => setOpenContactModal(true)}>
+          <MessageSVG />
+        </div>
+      }
       <Grid container spacing={3}>
         <Grid item xs={12} md={7}>
           <Card>
@@ -690,11 +708,25 @@ const ChooseDevice = ({
                   )}
                 </div>
               )}
+              {step === 0 &&
+                <div className="brand-search-container">
+                  <input 
+                    className="brand-search" 
+                    placeholder="Search for your Device Brand or enter IMEI" 
+                    value={searchBrand} 
+                    onChange={(e) => {
+                      e.preventDefault()
+                      setSearchBrand(e.target.value)
+                    }} 
+                  />
+                  <SearchOutlined className="search-icon" />
+                </div>
+              }
               <div className="widget-main-container" onScroll={handleScroll}>
                 {stepName === repairWidgetStepName.deviceBrand && (
                   <>
-                    {imageData &&
-                      imageData.slice(0, sliceNum).map((item: any, index: number) => {
+                    {showImageData &&
+                      showImageData.slice(0, sliceNum).map((item: any, index: number) => {
                         return (
                           <div
                             className="device-item-container"
@@ -704,12 +736,20 @@ const ChooseDevice = ({
                             key={index}
                             onClick={() => ChooseNextStep(index)}
                           >
-                            {/* <LazyImg src={item.img} style={{ width: "80%" }} alt={item.alt} /> */}
+                            <div className="lazyimg-container">
+                              <LazyImg src={item.img} style={{ width: "80%" }} alt={item.alt} />
+                            </div>
                             <p className="repair-widget-brand-name">{capitalize(item.name)}</p>
+                            <div className="title-container">
+                              {capitalize(item.name)}
+                            </div>
                           </div>
                         )
                       })}
-                    {!imageData.length && !loading && <NoDataComponent />}
+                    <div className="device-item-container lazyimg-container" onClick={() => handlePlus()}>
+                      &#x2B;
+                    </div>
+                    {!showImageData.length && !loading && <NoDataComponent />}
                   </>
                 )}
 
@@ -742,7 +782,7 @@ const ChooseDevice = ({
                     <Button
                       title={t("Yes")}
                       bgcolor="white"
-                      borderR="20px"
+                      borderR={themeType === "marnics" ? "0" : "20px"}
                       width="120px"
                       height="30px"
                       fontSize="17px"
@@ -752,7 +792,7 @@ const ChooseDevice = ({
                     <Button
                       title={t("No")}
                       bgcolor="white"
-                      borderR="20px"
+                      borderR={themeType === "marnics" ? "0" : "20px"}
                       width="120px"
                       height="30px"
                       fontSize="17px"
@@ -802,24 +842,24 @@ const ChooseDevice = ({
 
                 {(stepName === repairWidgetStepName.dropOffDevicce ||
                   stepName === repairWidgetStepName.receiveQuote) && (
-                  <>
-                    {itemTypes &&
-                      itemTypes.slice(0, sliceNum).map((item: any, index: number) => {
-                        return (
-                          <div
-                            className="device-item-container"
-                            key={index}
-                            style={{ backgroundColor: item.bg }}
-                            onClick={() => toggleItemTypes(index, stepName)}
-                          >
-                            <div className="device-service-item">
-                              <p style={{ color: item.col }}>{t(item.name)}</p>
+                    <>
+                      {itemTypes &&
+                        itemTypes.slice(0, sliceNum).map((item: any, index: number) => {
+                          return (
+                            <div
+                              className="device-item-container"
+                              key={index}
+                              style={{ backgroundColor: item.bg }}
+                              onClick={() => toggleItemTypes(index, stepName)}
+                            >
+                              <div className="device-service-item">
+                                <p style={{ color: item.col }}>{t(item.name)}</p>
+                              </div>
                             </div>
-                          </div>
-                        )
-                      })}
-                  </>
-                )}
+                          )
+                        })}
+                    </>
+                  )}
               </div>
             </div>
 
@@ -828,7 +868,7 @@ const ChooseDevice = ({
                 <Button
                   title={t("Next")}
                   bgcolor={mainData.general.colorPalle.nextButtonCol}
-                  borderR="20px"
+                  borderR={themeType === "marnics" ? "0" : "20px"}
                   width="120px"
                   height="30px"
                   fontSize="17px"
@@ -844,31 +884,33 @@ const ChooseDevice = ({
           <Card className="customized-card-height">
             {step < 2 && (
               <div className="service-choose-device-container">
-                <Typography className="topic-title">{t(data.mainTopic.title)}</Typography>
-                {data.mainTopic.content &&
-                  data.mainTopic.content.map((item: string, index: number) => {
-                    return (
-                      <Typography className="topic-content" key={index}>
-                        {t(item)}
-                      </Typography>
-                    )
-                  })}
-                {data.disableTopic.title && (
-                  <Typography className="topic-title" style={{ color: "rgba(0,0,0,0.3)" }}>
-                    {t(data.disableTopic.title)}
-                  </Typography>
-                )}
-                {data.disableTopic.content && (
-                  <Typography className="topic-content" style={{ color: "rgba(0,0,0,0.3)" }}>
-                    {t(data.disableTopic.content)}
-                  </Typography>
-                )}
+                <div className="service-description">
+                  <Typography className="topic-title step1-topic-title">{t(data.mainTopic.title)}</Typography>
+                  {data.mainTopic.content &&
+                    data.mainTopic.content.map((item: string, index: number) => {
+                      return (
+                        <Typography className="topic-content" key={index}>
+                          {t(item)}
+                        </Typography>
+                      )
+                    })}
+                  {data.disableTopic.title && (
+                    <Typography className="topic-title marnics-topic-title" style={{ color: "rgba(0,0,0,0.3)" }}>
+                      {t(data.disableTopic.title)}
+                    </Typography>
+                  )}
+                  {data.disableTopic.content && (
+                    <Typography className="topic-content" style={{ color: "rgba(0,0,0,0.3)" }}>
+                      {t(data.disableTopic.content)}
+                    </Typography>
+                  )}
+                </div>
               </div>
             )}
 
             {step === 2 && (
               <div className="service-choose-device-container">
-                <Typography className="topic-title">{t(data.mainTopic.title)}</Typography>
+                <Typography className="topic-title step1-topic-title">{t(data.mainTopic.title)}</Typography>
                 <div className="service-summary-content-div" style={{ display: "block" }}>
                   {estimatedTimes &&
                     estimatedTimes.map((item: any, index: number) => {
@@ -907,15 +949,15 @@ const ChooseDevice = ({
 
             {step === 3 && (
               <div className="service-choose-device-container">
-                <Typography className="topic-title">{t(data.mainTopic.title)}</Typography>
+                <Typography className="topic-title step1-topic-title">{t(data.mainTopic.title)}</Typography>
                 <Typography className="topic-content">{t(data.mainTopic.content)}</Typography>
               </div>
             )}
 
             {(stepName === repairWidgetStepName.dropOffDevicce ||
               stepName === repairWidgetStepName.receiveQuote) && (
-              <RepairSummary themeCol={themeCol} />
-            )}
+                <RepairSummary themeCol={themeCol} />
+              )}
           </Card>
         </Grid>
       </Grid>

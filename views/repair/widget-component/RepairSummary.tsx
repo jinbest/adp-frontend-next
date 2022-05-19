@@ -55,7 +55,7 @@ const RepairSummary = ({ themeCol, showInfo }: Props) => {
 
   return (
     <div className="service-choose-device-container">
-      <Typography className="topic-title">{t("Service Summary")}</Typography>
+      <Typography className="topic-title step1-topic-title">{t("Service Summary")}</Typography>
       <div className="service-summary-content-div">
         {brand &&
           brand.map((item: any, index: number) => {

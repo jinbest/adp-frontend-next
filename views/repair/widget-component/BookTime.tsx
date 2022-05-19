@@ -35,6 +35,7 @@ type SelectHoursProps = {
 
 const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Props) => {
   const mainData = storesDetails.storeCnts
+  const themeType = mainData.general.themeType
   const themeCol = mainData.general.colorPalle.themeColor
   const repairBooktimeCol = mainData.general.colorPalle.repairBooktimeCol
   const brandThemeCol = mainData.homepage.header.brandData.brandThemeCol
@@ -363,15 +364,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
                   </Grid>
                   <Grid item xs={12}>
                     <div
-                      style={{
-                        border: "1px solid rgba(0,0,0,0.1)",
-                        borderRadius: "20px",
-                        width: "100%",
-                        height: "30px",
-                        fontSize: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
+                      className="selected-time-text"
                     >
                       {time ? (
                         <p style={{ textAlign: "center", margin: "0 10px" }}>
@@ -392,7 +385,7 @@ const BookTime = ({ data, step, code, handleStep, handleChangeChooseData }: Prop
               <Button
                 title={t("Next")}
                 bgcolor={mainData.general.colorPalle.nextButtonCol}
-                borderR="20px"
+                borderR={themeType === "marnics" ? "0" : "20px"}
                 width="120px"
                 height="30px"
                 fontSize="17px"

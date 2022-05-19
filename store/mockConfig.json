@@ -831,6 +831,103 @@
         ]
       }
     },
+    "buyPage": {
+      "headData": {
+        "title": "Buy | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ]
+      },
+      "section1": {
+        "title": "Fix Your Device Fast!",
+        "subtitle": "Answer a few questions about your damaged device and we’ll help repair it.",
+        "themeCol": "#fff",
+        "hasBackground": true,
+        "buttons": [
+          {
+            "type": "quote",
+            "title": "Repair Quote",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          }
+        ]
+      },
+      "section2": {
+        "title": "How does repair work?",
+        "contents": [
+          {
+            "title": "Take our online quiz",
+            "content": "Take our fast online quiz, value your phone, opt-in and sign up for an account.",
+            "order": 1,
+            "type": "onlineQuiz"
+          },
+          {
+            "title": "Ship us your phone",
+            "content": "Print out pre-paid shipping label and ship your used phone to Mobile Tech Lab.",
+            "order": 2,
+            "type": "shipPhone"
+          },
+          {
+            "title": "We verify your phone",
+            "content": "Marnics Mobile verifies the phone matches the description you provided, and you get paid!",
+            "order": 3,
+            "type": "verifyPhone"
+          }
+        ],
+        "hasBackground": false,
+        "bgImg": "https://storage.googleapis.com/adp_assets/images/21/store-section2-bg.png"
+      },
+      "section3": {
+        "title": "From New to Reconditioned",
+        "content": "Choose your new phone among our 4 grades, with Marnics Mobile it's easy to choose for any budget!",
+        "children": [
+          {
+            "subtitle": "NEW",
+            "subcontent": "A brand new device with no signs of wear",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-new.png",
+            "order": 1
+          },
+          {
+            "subtitle": "MINT",
+            "subcontent": "No scratches or dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-mint.png",
+            "order": 2
+          },
+          {
+            "subtitle": "GOOD",
+            "subcontent": "Minor scratches or dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-good.png",
+            "order": 3
+          },
+          {
+            "subtitle": "FAIR",
+            "subcontent": "Visible scratchs and dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-fair.png",
+            "order": 4
+          }
+        ]
+      },
+      "section4": {
+        "title": "Get the Latest",
+        "subtitle": "Shop our selection of new and pre-owned devices!",
+        "btnTitle": "Shop Now",
+        "themeCol": "#000",
+        "link": "#"
+      },
+      "widget": {
+        "metaTitle": "Repair Widget | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ]
+      }
+    },
     "tradePage": {
       "headData": {
         "title": "Trade | Marnics Mobile",
@@ -910,9 +1007,9 @@
         "underLineCol": "#153863",
         "priceCol": "#153863",
         "repairButtonCol": "#DC7700",
-        "nextButtonCol": "#153863",
-        "repairChooseItemCol": "#153863",
-        "repairBooktimeCol": "#153863",
+        "nextButtonCol": "#DC7700",
+        "repairChooseItemCol": "#DC7700",
+        "repairBooktimeCol": "#DC7700",
         "textThemeCol": "#153863",
         "heartCol": "#153863",
         "chatBgCol": "#153863",
@@ -2057,6 +2154,133 @@
     "locationsData": {
       "skitterMobile": ""
     },
-    "repairPhoneImg": "/img/repair-phone.png"
+    "repairPhoneImg": "/img/repair-phone.png",
+    "repairWidget": {
+      "deviceBrand": {
+        "title": "Choose Your Device Brand",
+        "placeholder": "Search for your Device Brand",
+        "mainTopic": {
+          "title": "Find your device’s brand",
+          "content": [
+            "Your device brand can usually be found on the back of the handset itself, but if for whatever reason you aren’t sure don’t panic!",
+            "It is indicated on back of the device, on the front, or in the Settings/System/About phone section if you are on Android or Settings/ IDs if you are on IOS. It may also be shown on the original box and/or manual that came with your device."
+          ]
+        },
+        "disableTopic": {
+          "title": "How to find the model of your device",
+          "content": "The device model is indicated in the Settings / System / About phone section or in Settings / General / Storage. It may also be shown on the original box and/or manual that came with your device."
+        }
+      },
+      "deviceModel": {
+        "title": "Choose Your Device Model",
+        "placeholder": "Search for your Model",
+        "mainTopic": {
+          "title": "How to find the model of your device",
+          "content": [
+            "The device model is indicated in the Settings / System / About phone section or in Settings / General / Storage. It may also be shown on the original box and/or manual that came with your device."
+          ]
+        },
+        "disableTopic": {
+          "title": "",
+          "content": ""
+        }
+      },
+      "deviceRepairs": {
+        "title": "Choose Your Repair(s)",
+        "placeholder": "What’s broken?",
+        "mainTopic": {
+          "title": "Estimated repair time"
+        }
+      },
+      "repairAnotherDevice": {
+        "title": "Repair Another Device?",
+        "mainTopic": {
+          "title": "Repair Another Device?",
+          "content": "Repair all your devices at once with us!"
+        }
+      },
+      "dropOffDevicce": {
+        "title": "How Would You Like to Drop-Off Your Device(s)?"
+      },
+      "receiveQuote": {
+        "title": "How Would You Like to Receive Your Quote?"
+      },
+      "contactDetails": {
+        "title": "Please Enter Your Contact Details",
+        "placeholder": {
+          "firstName": "First Name*",
+          "lastName": "Last Name*",
+          "emailAdd": "E-mail Address*",
+          "phoneNum": "Phone Number",
+          "address1": "Street Address*",
+          "address2": "Address 2",
+          "country": "Country",
+          "city": "City*",
+          "province": "Province*",
+          "postalCode": "Postal Code*"
+        }
+      },
+      "bookTime": {
+        "title": {
+          "MAIL_IN": "Select Mail-In Address",
+          "PICK_UP": "Schedule a Pick-Up",
+          "CURBSIDE": "Book Your Time",
+          "WALK_IN": "Book Your Time",
+          "ONSITE": "Book Your Time"
+        },
+        "select": {
+          "location": {
+            "title": {
+              "MAIL_IN": "Please Select Preferred Service Location",
+              "PICK_UP": "Please Enter Your Address",
+              "CURBSIDE": "Select Preferred Location",
+              "WALK_IN": "Select Preferred Location",
+              "ONSITE": "Enter Your Residential Address"
+            }
+          },
+          "time": {
+            "title": {
+              "MAIL_IN": "Please Enter Your Address for Return Shipment",
+              "PICK_UP": "Select a Pick-Up Time",
+              "CURBSIDE": "Select a day and time",
+              "WALK_IN": "Select a day and time",
+              "ONSITE": "Select Visit Time"
+            }
+          }
+        }
+      },
+      "usefulInfo": {
+        "title": "Enter a Message or Any Useful Information About This Repair",
+        "placeholder": "Type your message here (optional)"
+      },
+      "quoteData": [
+        {
+          "img": "https://storage.googleapis.com/adp_assets/images/common/requestQuote.png",
+          "title": "Thank you for choosing",
+          "text": "with a detailed service quote."
+        },
+        {
+          "img": "https://storage.googleapis.com/adp_assets/images/common/thankQuote.png",
+          "title": "Thank you for choosing",
+          "text": "with a detailed service quote and appointment information."
+        }
+      ],
+      "repairServiceSummary": {
+        "title": "Repair Summary",
+        "yourInfo": "Your Information",
+        "prefer": "Preferred Contact Method",
+        "deliveryMethod": "Delivery Method",
+        "pickUpFrom": "Pick Up From",
+        "sendTo": "Send To",
+        "returnTo": "Return To",
+        "message": "Message",
+        "device": "Device",
+        "service": "Service",
+        "button": {
+          "schedule": "Schedule Appointment",
+          "quote": "Get Shipping Label"
+        }
+      }
+    }
   }
 }

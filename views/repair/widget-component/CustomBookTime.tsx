@@ -35,6 +35,8 @@ const CustomBookTime = ({
   const [bookArray, setBookArray] = useState<ArrayProps[]>([])
   const [t] = useTranslation()
 
+  const themeType = storesDetails.storeCnts.general.themeType
+
   const [timezoneIDs, setTimezoneIDs] = useState<any[]>([])
   const [valTimezone, setValTimezone] = useState<any>({
     value: repairWidgetStore.timezone,
@@ -95,9 +97,9 @@ const CustomBookTime = ({
         booklist.push({
           book: markHour + ":" + markMin + " " + mark,
           isPast: past ? true : false,
-          color: past ? "rgba(0,0,0,0.2)" : repairBooktimeCol,
+          color: past ? "rgba(0,0,0,0.2)" : (themeType === "marnics" ? "#333" : repairBooktimeCol),
           bgColor: "white",
-          borderCol: past ? "rgba(0,0,0,0.2)" : repairBooktimeCol,
+          borderCol: past ? "rgba(0,0,0,0.2)" : (themeType === "marnics" ? "#333" : repairBooktimeCol),
         })
       }
     } else {
@@ -121,8 +123,8 @@ const CustomBookTime = ({
         item.bgColor = repairBooktimeCol
         item.borderCol = repairBooktimeCol
       } else {
-        item.color = item.isPast ? "rgba(0,0,0,0.2)" : repairBooktimeCol
-        item.borderCol = item.isPast ? "rgba(0,0,0,0.2)" : repairBooktimeCol
+        item.color = item.isPast ? "rgba(0,0,0,0.2)" : (themeType === "marnics" ? "#333" : repairBooktimeCol)
+        item.borderCol = item.isPast ? "rgba(0,0,0,0.2)" : (themeType === "marnics" ? "#333" : repairBooktimeCol)
         item.bgColor = "white"
       }
     })

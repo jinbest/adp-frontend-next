@@ -10,6 +10,7 @@ type Props = {
   value?: string
   handleChange: (event: React.ChangeEvent<{ value: string }>) => void
   errorText?: string
+  className?: string
 }
 
 const InputComponent = ({
@@ -21,11 +22,12 @@ const InputComponent = ({
   value,
   handleChange,
   errorText,
+  className
 }: Props) => {
   return (
     <React.Fragment>
       <InputBase
-        className="input-component"
+        className={`input-component ${className}`}
         style={{
           color: color,
           background: bgcolor,

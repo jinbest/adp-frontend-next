@@ -7,9 +7,10 @@ type Props = {
   handleSetPhone: (val: string) => void
   val: string
   errorText?: string
+  className?: string
 }
 
-const PhoneInput = ({ placeholder, handleSetPhone, errorText }: Props) => {
+const PhoneInput = ({ placeholder, handleSetPhone, errorText, className }: Props) => {
   const [phone, setPhone] = useState("1")
 
   const handleOnChange = (value: string) => {
@@ -40,6 +41,7 @@ const PhoneInput = ({ placeholder, handleSetPhone, errorText }: Props) => {
         onChange={handleOnChange}
         inputClass={errorText ? "error-phone-input" : ""}
         buttonClass={errorText ? "error-phone-input" : ""}
+        containerClass={className}
       />
       {errorText && (
         <span style={{ color: "red", fontSize: "13px", marginLeft: "20px" }}>{errorText}</span>
