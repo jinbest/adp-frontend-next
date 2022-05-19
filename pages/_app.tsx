@@ -22,7 +22,7 @@ import { GeneralData } from "../model/general-data"
 import { enableStaticRendering } from "mobx-react"
 import { GetDomain } from "../services/helper"
 
-import "../styles/theme.css"
+// import "../styles/theme.css"
 
 enableStaticRendering(typeof window === "undefined")
 
@@ -89,7 +89,8 @@ DataProps) => {
     setPageTitle(homepage.headData.title)
     setMetaList(homepage.headData.metaList)
     setFavIcon(homepage.headData.fav.img)
-    setTheme(mainData.general.themes.minified)
+    // setTheme(mainData.general.themes.minified)
+    setTheme("https://prod.pcmtx.com/api/store-service/dc/store/21/theme/theme.min.css/asset")
 
     homepage.bodyData.tags.forEach((item: TagParams) => {
       loadBodyTag(item.content)

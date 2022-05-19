@@ -1,26 +1,26 @@
 .header-brand, a, .brand-list select, .brand-nav-item {
   font-family: "Helvetica Neue Bold" !important;
-  font-size: 14px !important;
+  font-size: 14px;
 }
 .container-header {
-  box-shadow: 0 10px 12px rgba(35, 91, 137, 0.25) !important;
-  background-color: #F3F5F6 !important;
+  box-shadow: 0 10px 12px rgba(35, 91, 137, 0.25);
+  background-color: #F3F5F6;
 }
 .container-header .search-div {
-  margin-left: 64px !important;
+  margin-left: 64px;
 }
 .container-header > a > img {
   height: 52px !important;
 }
 .search-container {
-  height: 48px !important;
-  border-radius: 4px !important;
-  max-width: 1011px !important;
+  height: 48px;
+  border-radius: 4px;
+  max-width: 1011px;
   box-shadow: 0px 10px 15px rgba(35, 91, 137, 0.1), 0px 4px 6px rgba(35, 91, 137, 0.05);
   border: none !important;
 }
 .nav-link {
-  font-size: 20px !important;
+  font-size: 20px;
   font-family: "Helvetica Neue Regular" !important;
 }
 .section1-top {
@@ -32,9 +32,9 @@
   font-size: 64px !important;
   font-family: "Helvetica Neue Bold" !important;
   line-height: 120% !important;
-  color: #072040 !important;
-  max-width: 726px !important;
-  width: 100% !important;
+  color: #072040;
+  max-width: 726px;
+  width: 100%;
   text-align: left !important;
   margin-left: 0 !important;
 }
@@ -45,10 +45,10 @@
   text-align: left !important;
   line-height: 150% !important;
   font-family: "Helvetica Neue Regular" !important;
-  color: #072040 !important;
+  color: #072040;
 }
 .d-flex .service-section-button {
-  max-width: fit-content !important;
+  max-width: fit-content;
   margin-right: 25px !important;
 }
 .corner-shape {
@@ -134,8 +134,8 @@
   margin-right: 22px;
 }
 .sec3-container-parent {
-  display: block !important;
-  padding-top: 67px !important;
+  display: block;
+  padding-top: 67px;
 }
 .section3-title {
   color: black;
@@ -149,9 +149,15 @@
 .card-popular img {
   max-width: 213px;
 }
+.card-popular .title {
+  font-family: "Helvetica Neue Bold" !important;
+}
+.card-popular .subtitle {
+  font-family: "Helvetica Neue Regular" !important;
+}
 .card-popular .price {
   color: #DC7700 !important;
-  font-size: 16.6px !important;
+  font-size: 16.6px;
 }
 .section3-subtitle {
   text-align: left;
@@ -159,7 +165,8 @@
 .section3-content {
   font-size: 24px !important;
   max-width: 455px;
-  margin-top: 20px !important;
+  font-family: "Helvetica Neue Regular" !important;
+  margin-top: 20px;
 }
 .section3-device-card {
   max-width: 1200px;
@@ -168,13 +175,13 @@
 }
 .section-wave-container {
   background-color: #072040;
-  max-width: 100% !important;
-  padding-bottom: 70px !important;
-  padding-right: 0 !important;
-  padding-left: 0 !important;
+  max-width: 100%;
+  padding-bottom: 70px;
+  padding-right: 0;
+  padding-left: 0;
   position: relative;
   margin-top: 200px;
-  height: auto !important;
+  height: auto;
 }
 .section-wave-container:after {
   content: '';
@@ -188,28 +195,29 @@
   transform: skewY(-10deg);
 }
 .section-wave-container img {
-  min-height: auto !important;
-  top: -110px !important;
+  min-height: auto;
+  top: -110px;
 }
 .section-wave-main-title {
-  font-size: 48px !important;
-  line-height: 120% !important;
+  font-size: 48px;
+  line-height: 120%;
   color: #fff;
   font-family: "Helvetica Neue Medium" !important;
   max-width: 530px;
+  margin: auto;
 }
 .section-wave-subtitle {
-  font-size: 24px !important;
+  font-size: 24px;
   line-height: 150% !important;
   color: #fff;
-  text-align: left !important;
+  text-align: left;
   font-family: "Helvetica Neue Bold" !important;
 }
 .section-wave-img {
   width: auto !important;
 }
 .section-wave-item {
-  align-items: flex-start !important;
+  align-items: flex-start;
   border-left: 5px solid #235B89;
   padding-left: 23px;
   margin-bottom: 70px;
@@ -217,10 +225,9 @@
 .section-wave-subContent {
   color: #fff;
   font-family: "Helvetica Neue Regular" !important;
-  text-align: left !important;
 }
 .section-wave-wrapper {
-  padding-top: 0 !important;
+  padding-top: 0;
 }
 .service-section-button {
   margin-left: 0 !important;
@@ -274,10 +281,10 @@
 .reviewer {
   font-family: "Helvetica Neue Bold" !important;
 }
-footer .footer-box {
-  background-color: #072040 !important;
+.footer-box {
+  background-color: #072040;
   position: relative;
-  padding-top: 50px !important;
+  padding-top: 50px;
 }
 .footer-box:after {
   content: '';
@@ -291,10 +298,10 @@ footer .footer-box {
   transform: skewY(-4deg);
 }
 .footer-bgCol {
-  background-color: #072040 !important;
+  background-color: #072040;
 }
 footer {
-  margin-top: 135px !important;
+  margin-top: 135px;
 }
 .footer-links {
   display: flex;
@@ -310,32 +317,34 @@ footer {
   white-space: nowrap;
 }
 .footer-links-name {
+  font-family: "Helvetica Neue Medium" !important;
   font-weight: 600;
 }
 .footer-link-text {
   font-size: 14px;
+  font-family: "Helvetica Neue Regular" !important;
   line-height: 25px;
 }
 .footer-loc-name a, .footer-email a, .footer-address {
   color: white !important;
-  text-decoration: none !important;
+  text-decoration: none;
 }
-.footer-logo-container .logo-footer {
-  height: auto !important;
+.logo-footer {
+  height: auto;
   margin-right: 50px;
 }
 .copyright {
   color: #949FAC !important;
-  font-size: 14px !important;
+  font-size: 14px;
   font-family: "Helvetica Neue Bold" !important;
 }
 .badge-container {
-  left: unset !important;
+  left: unset;
   right: 20px;
 }
 .footer-other-images {
-  margin: 0 !important;
-  margin-right: 6px !important;
+  margin: 0;
+  margin-right: 6px;
 }
 .footer-other-images img {
   height: 100%;
@@ -365,7 +374,7 @@ footer {
 
 /* Covid page style */
 .covid-section1-container {
-  padding-top: 190px !important;
+  padding-top: 190px;
 }
 .decoration-line {
   width: 86px;
@@ -376,8 +385,8 @@ footer {
 }
 .covid-main-title {
   font-size: 64px !important;
-  margin-top: 19px !important;
-  color: #143663 !important;
+  margin-top: 19px;
+  color: #143663;
   line-height: 120%;
   margin-bottom: 0 !important;
   font-family: "Helvetica Neue Bold" !important;
@@ -389,11 +398,11 @@ footer {
 }
 .d-flex .covid-section-button {
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0;
   max-width: none !important;
 }
 .covid-section2-container {
-  margin-top: 230px !important;
+  margin-top: 230px;
 }
 .covid-widget-card-content {
   position: relative;
@@ -401,7 +410,7 @@ footer {
 .covid-widget-card {
   background-color: #15386380;
   border-radius: 0;
-  max-width: 1500px !important;
+  max-width: 1500px;
   box-sizing: border-box;
 }
 .covid-widget-card-bg {
@@ -415,33 +424,31 @@ footer {
 }
 .covid-widget-card-main-title {
   font-size: 48px !important;
-  color: white !important;
+  color: white;
   font-family: "Helvetica Neue Medium" !important;
-  line-height: 120% !important;
   margin-bottom: 36px !important;
 }
 .covid-section2 {
   max-width: 1000px;
-  margin: auto !important;
-  margin-bottom: 40px !important;
+  margin: auto;
+  margin-bottom: 40px;
 }
 .covid-vertical {
   margin-right: 0;
   background-color: #235B89;
 }
 .covid-sub-title {
-  font-size: 24px !important;
+  font-size: 24px;
   line-height: 150% !important;
-  color: #fff !important;
+  color: #fff;
   font-family: "Helvetica Neue Bold" !important;
 }
 .covid-item-text {
-  color: #fff !important;
-  font-size: 18px !important;
-  line-height: 120% !important;
+  color: #fff;
+  font-size: 18px;
   font-family: "Helvetica Neue Regular" !important;
   max-width: 987px;
-  margin: auto !important;
+  margin: auto;
 }
 .covid-contact-us {
   margin-top: 30px !important;
@@ -449,32 +456,32 @@ footer {
 
 /* Location page style */
 .marnics-location-main-title {
-  font-size: 64px !important;
+  font-size: 64px;
   font-family: "Helvetica Neue Bold" !important;
-  color: #fff !important;
-  line-height: 120% !important;
-  max-width: 700px !important;
+  color: #fff;
+  line-height: 120%;
+  max-width: 700px;
   margin: 10px 0;
 }
 .marnics-location-main-content {
-  font-size: 36px !important;
+  font-size: 36px;
   font-family: "Helvetica Neue Regular" !important;
   line-height: 150% !important;
-  color: #fff !important;
-  max-width: 800px !important;
-  margin-bottom: 50px !important;
-  margin-top: 30px !important;
+  color: #fff;
+  max-width: 800px;
+  margin-bottom: 50px;
+  margin-top: 30px;
 }
 .location-waveBg img {
   margin-top: 130px;
 }
 .marnics-location-container {
-  padding-top: 150px !important;
+  padding-top: 150px;
 }
 .marnics-location-item {
-  box-shadow: 0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04) !important; 
+  box-shadow: 0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04); 
   background-color: #F3F5F6;
-  border-radius: 4px !important;
+  border-radius: 4px;
 }
 .location-button-container {
   flex-direction: column;
@@ -486,7 +493,7 @@ footer {
   font-size: 24px !important;
   font-family: "Helvetica Neue Medium" !important;
   line-height: 150% !important;
-  padding: 8px 16px !important;
+  padding: 8px 16px;
 }
 .hourview-title {
   font-family: "Helvetica Neue Bold" !important;
@@ -497,57 +504,53 @@ footer {
 
 /* Business page */
 .business-container {
-  padding-top: 220px !important;
-  padding-bottom: 0 !important;
+  padding-top: 220px;
+  padding-bottom: 0;
 }
 .business-main-title {
-  font-size: 64px !important;
+  font-size: 64px;
   line-height: 120%;
   font-family: "Helvetica Neue Bold" !important;
-  font-weight: 700 !important;
-  margin: 20px 0 0 !important;
-  color: #143663 !important;
+  margin: 20px 0 0;
+  color: #143663;
 }
 .business-main-content {
   font-family: "Helvetica Neue Regular" !important;
-  font-size: 30px !important;
-  line-height: 150%;
+  font-size: 30px;
+  line-height: 150% !important;
   max-width: 660px;
 }
 .business-card-container {
-  margin: 220px auto !important;
-  margin-bottom: 0 !important;
+  margin: 220px auto;
+  margin-bottom: 0;
 }
-.business-card {
-  max-width: 1540px !important;
-  padding: 24px 168px !important;
-  border-radius: 0 !important;
-  box-shadow: -10px -10px 30px #E2E9ED, 10px 10px 30px rgba(226, 233, 237, 0.4);
-}
-.business-card .business-card-subtitle {
-  font-size: 45px !important;
+.business-card-subtitle {
+  font-size: 45px;
   font-family: "Helvetica Neue Bold" !important;
   line-height: 55px !important;
   position: relative;
   z-index: 1;
-  color: #235B89 !important;
-  margin-bottom: 60px !important;
+  color: #235B89;
+  margin-bottom: 60px;
 }
 .business-svgcontainer {
-  box-shadow: none !important;
-  width: auto !important;
-  height: auto !important;
+  box-shadow: none;
+  width: auto;
+  height: auto;
 }
 .business-card-text {
-  border: none !important;
+  border: none;
 }
 .business-card {
+  max-width: 1540px;
+  padding: 24px 168px;
+  box-shadow: -10px -10px 30px #E2E9ED, 10px 10px 30px rgba(226, 233, 237, 0.4) !important;
   background-color: white;
   position: relative;
   background-position: right;
 }
 .business-card-bg {
-  display: flex !important;
+  display: flex;
   position: absolute;
   top: 0;
   left: 0;
@@ -562,10 +565,10 @@ footer {
   padding: 24px 18px;
 }
 .business-card-item-text {
-  font-size: 22px !important;
+  font-size: 22px;
   line-height: 27px !important;
   font-family: "Helvetica Neue Medium" !important;
-  padding: 0 !important;
+  padding: 0;
 }
 
 /* Repair page */
@@ -574,28 +577,30 @@ footer {
   background-size: contain;
   background-position: center 120px;
 }
-.Container .service-section1 {
-  padding-top: 90px !important;
+.service-section1 {
+  padding-top: 90px;
   flex-wrap: nowrap;
   z-index: 1;
   position: relative;
 }
+.service-section2 {
+  margin-top: 340px;
+}
 .service-section1 .service-section-title-1 {
-  font-size: 64px !important;
-  line-height: 120% !important;
+  font-size: 64px;
   font-family: "Helvetica Neue Bold" !important;
   margin-top: 19px;
 }
-.service-section1 .service-section-content {
-  font-size: 36px !important;
+.service-section-content {
+  font-size: 36px;
   line-height: 150% !important;
   font-family: "Helvetica Neue Regular" !important;
-  margin: 0 !important;
-  margin-bottom: 60px !important;
+  margin: 0;
+  margin-bottom: 60px;
   max-width: 700px;
 }
 .service-section2-text-field .service-section-title-1 {
-  font-size: 64px !important;
+  font-size: 64px;
   font-family: "Helvetica Neue Bold" !important;
   text-align: center;
 }
@@ -607,13 +612,14 @@ footer {
 .repair-card p {
   font-family: "Helvetica Neue Regular" !important;
   font-size: 24px !important;
+  text-align: left;
 }
 .repair-card p:nth-child(1) {
   font-family: "Helvetica Neue Bold" !important;
 }
 .repair-section1-container {
   padding: 0 !important;
-  max-width: 100% !important;
+  max-width: 100%;
   background-color: #143663;
 }
 .repair-section1-container:after {
@@ -683,6 +689,9 @@ footer {
   right: 0;
   top: 10px;
 }
+.search-input {
+  font-family: "Helvetica Neue Regular" !important;
+}
 .brand-search {
   border: 1px solid #BDBFC3;
   height: 45px;
@@ -708,7 +717,7 @@ footer {
 }
 .topic-title {
   font-family: "Helvetica Neue Bold" !important;
-  margin-bottom: 40px !important;
+  margin-bottom: 40px;
 }
 .topic-content {
   font-size: 16px !important;
@@ -868,10 +877,14 @@ footer {
   font-size: 16px !important;
   font-family: "Helvetica Neue Regular" !important;
 }
-
+@media (max-width: 1536px) {
+  .repair-section1-decoration {
+    right: 32px;
+  }
+}
 @media (max-width: 1280px) {
   .logo-footer {
-    height: 52px !important;
+    height: 52px;
   }
   .footer-links-item {
     margin-left: 30px;
@@ -888,48 +901,46 @@ footer {
   }
   .section1-title {
     font-size: 48px !important;
-    max-width: 600px !important;
+    max-width: 600px;
   }
   .section1-subtitle {
     font-size: 24px !important;
   }
   .marnics-location-container {
-    padding-top: 300px !important;
+    padding-top: 300px;
   }
   .business-card {
-    padding-left: 50px !important;
-    padding-right: 50px !important;
+    padding-left: 50px;
+    padding-right: 50px;
   }
   .service-section1 .service-section-title-1 {
-    font-size: 36px !important;
+    font-size: 36px;
   }
-  .service-section1 .service-section-content {
+  .service-section-content {
     font-size: 24px !important;
   }
-  .repair-page .service-section2 {
-    padding-top: 450px !important;
-    height: fit-content !important;
-    margin-bottom: 0 !important;
+  .service-section2 {
+    margin-top: 0;
+    padding-top: 450px;
+    height: fit-content;
+    margin-bottom: 0;
   }
   .service-section2-text-field .service-section-title-1 {
-    font-size: 36px !important;
+    font-size: 36px;
   }
   .repair-section1-container:after {
-    bottom: 280px;
+    bottom: 240px;
   }
   .service-section2-text-field {
     margin-top: -130px !important;
   }
-  .repair-section1-decoration {
-    right: 32px;
-  }
 }
 @media (max-width: 1200px) {
   .section-wave-container {
-    margin-top: 200px !important;
+    margin-top: 200px;
   }
-  .footer-logo-container .logo-footer {
-    height: 52px !important;
+  .logo-footer {
+    height: 52px;
     margin-right: 30px;
   }
   .location-button-container button {
@@ -937,6 +948,9 @@ footer {
   }
 }
 @media (max-width: 1024px) {
+  .service-section2 {
+    margin-top: 0;
+  }
   .footer-links {
     display: block;
   }
@@ -970,31 +984,25 @@ footer {
   }
   .section3-content {
     font-size: 18px !important;
-    margin-top: 0 !important;
-  }
-  footer .footer-box {
-    padding-top: 50px !important;
+    margin-top: 0;
   }
   .footer-other-images a {
     height: 100%;
   }
   .business-main-title {
-    font-size: 48px !important;
+    font-size: 48px;
   }
   .business-main-content {
-    font-size: 24px !important;
+    font-size: 24px;
   }
-  .service-section1 .service-section-content {
-    margin-bottom: 20px !important;
+  .service-section-content {
+    margin-bottom: 20px;
   }
   .repair-section1-img {
     margin-top: 0 !important;
   }
   .repair-section1-container:after {
     bottom: 270px;
-  }
-  .repair-card {
-    flex-direction: row;
   }
 }
 @media (max-width: 960px) {
@@ -1008,14 +1016,20 @@ footer {
   .repair-content {
     margin-left: 36px;
   }
-  .repair-page .service-section2 {
-    padding-top: 500px !important;
+  .service-section2 {
+    padding-top: 300px;
+  }
+  .repair-card {
+    flex-direction: row;
   }
 }
 @media (max-width: 768px) {
   .section-wave-container {
-    margin-top: 100px !important;
-    min-height: 450px !important;
+    margin-top: 100px;
+    min-height: 450px;
+  }
+  .repair-section1-img {
+    display: none;
   }
   .header-brand {
     display: none;
@@ -1033,7 +1047,7 @@ footer {
     padding-top: 133px !important;
   }
   .section1-title {
-    color: #143663 !important;
+    color: #143663;
     margin-bottom: 20px !important;
   }
   .d-flex .service-section-button {
@@ -1085,9 +1099,6 @@ footer {
   .card-popular img {
     width: 60%;
   }
-  .section-wave-main-container {
-    margin-left: 0;
-  }
   .sec5-title {
     font-size: 28px !important;
   }
@@ -1116,8 +1127,8 @@ footer {
     margin: 0 20px !important;
   }
   .search-container {
-    height: 36px !important;
-    box-shadow: 0 10px 15px rgba(35, 91, 137, 0.1), 0 4px 6px rgba(35, 91, 137, 0.05) !important;
+    height: 36px;
+    box-shadow: 0 10px 15px rgba(35, 91, 137, 0.1), 0 4px 6px rgba(35, 91, 137, 0.05);
   }
   .marnics-header-icon {
     display: block;
@@ -1127,12 +1138,8 @@ footer {
   .section-wave-container:after {
     transform: skewY(-15deg);
   }
-  .section-wave-container {
-    margin-top: 150px !important;
-  }
-  
   .covid-section1-container {
-    padding-top: 150px !important;
+    padding-top: 150px;
   }
   .d-flex .covid-section-button {
     margin: 0 !important;
@@ -1141,27 +1148,27 @@ footer {
     margin-top: 60px;
   }
   .location-container {
-    padding-top: 145px !important;
+    padding-top: 145px;
   }
   .marnics-location-container {
-    padding-top: 200px !important;
-    padding-bottom: 0 !important;
+    padding-top: 200px;
+    padding-bottom: 0;
   }
-  .business-card .business-card-subtitle {
-    font-size: 36px !important;
+  .business-card-subtitle {
+    font-size: 36px;
   }
   .service-section1-special-bg {
     background-position: center 70px;
   }
-  .Container .service-section1 {
-    height: auto !important;
-    padding-top: 0 !important;
+  .service-section1 {
+    height: auto;
+    padding-top: 0;
     flex-wrap: wrap;
   }
   .service-section1 .service-section-title-1 {
     text-align: left;
   }
-  .service-section1 .service-section-content {
+  .service-section-content {
     text-align: left;
     max-width: 400px;
   }
@@ -1178,15 +1185,15 @@ footer {
     top: 170px;
     position: absolute;
   }
-  .repair-page .service-section2 {
-    padding-top: 600px !important;
-    padding-bottom: 0 !important;
+  .service-section2 {
+    padding-top: 400px;
+    padding-bottom: 0;
   }
   .repair-section1-container:after {
     bottom: 460px;
   }
   .service-section2-text-field .service-section-title-1 {
-    font-size: 24px !important;
+    font-size: 24px;
   }
   .service-section2-text-field .repair-sec-content-div {
     margin-top: 33px !important;
@@ -1263,7 +1270,7 @@ footer {
     margin: auto !important;
     margin-bottom: 16px !important;
   }
-  .footer-logo-container .logo-footer {
+  .logo-footer {
     margin: auto;
     margin-bottom: 24px;
   }
@@ -1287,34 +1294,31 @@ footer {
     font-size: 24px !important;
   }
   .covid-card-item .covid-item-text {
-    font-size: 16px !important;
+    font-size: 16px;
   }
   .covid-card-item .covid-sub-title {
-    font-size: 20px !important;
+    font-size: 20px;
   }
-  .covid-section1-container .covid-main-title {
+  .covid-main-title {
     font-size: 36px !important;
   }
-  .covid-section1-container .covid-main-content {
+  .covid-main-content {
     font-size: 18px !important;
   }
-  .covid-widget-card .covid-item-text {
-    font-size: 16px !important;
-  }
   .location-container {
-    padding-left: 17px !important;
-    padding-right: 17px !important;
+    padding-left: 17px;
+    padding-right: 17px;
   }
   .marnics-location-container {
-    padding: 0 !important;
-    padding-top: 150px !important;
+    padding: 0;
+    padding-top: 150px;
   }
-  .location-container .marnics-location-main-title {
-    text-align: left !important;
+  .marnics-location-main-title {
+    text-align: left;
     font-size: 36px !important;
   }
-  .location-container .marnics-location-main-content {
-    text-align: left !important;
+  .marnics-location-main-content {
+    text-align: left;
     font-size: 18px !important;
   }
   .quote-button {
@@ -1328,39 +1332,37 @@ footer {
     margin-top: 110px;
   }
   .business-card {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-image: none !important;
+    box-shadow: none;
   }
-  .business-card .business-card-subtitle {
-    font-size: 24px !important;
-    margin-bottom: 40px !important;
+  .business-card-subtitle {
+    font-size: 24px;
+    margin-bottom: 40px;
   }
   .business-card-item-text {
-    font-size: 18px !important;
+    font-size: 18px;
     line-height: 22px !important;
-  }
-  .business-card {
-    background-image: none !important;
-    box-shadow: none !important;
   }
   .business-item-card {
     background: #fff;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   }
   .business-container {
-    padding-top: 160px !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    padding-top: 160px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .business-card-text {
-    height: auto !important;
+    height: auto;
   }
   .business-main-title {
-    font-size: 36px !important;
+    font-size: 36px;
   }
   .business-main-content {
-    font-size: 18px !important;
-    margin: 18px auto !important;
+    font-size: 18px;
+    margin: 18px auto;
   }
   .repair-section1-decoration {
     top: unset;
@@ -1377,8 +1379,8 @@ footer {
   .repair-section1-container:after {
     bottom: -75px;
   }
-  .repair-page .service-section2 {
-    padding-top: 540px !important;
+  .service-section2 {
+    padding-top: 300px;
   }
 }
 @media (max-width: 425px) {
@@ -1386,18 +1388,19 @@ footer {
     margin-top: 0;
   }
   .footer-mobile-logo .badge-container {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
-    position: inherit !important;
+    position: inherit;
     align-items: center;
   }
   .badge-container .badge-image {
     animation: none;
     max-width: 55px;
     display: block;
+    margin: 0;
     margin-top: 26px;
   }
   .business-card-container {
-    margin-top: 230px !important;
+    margin-top: 230px;
   }
 }

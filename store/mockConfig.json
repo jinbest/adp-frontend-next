@@ -1040,7 +1040,7 @@
       },
       "themes": {
         "normal": "https://storage.googleapis.com/adp_assets/themes/0/theme.css",
-        "minified": "https://storage.googleapis.com/adp_assets/themes/0/theme.min.css"
+        "minified": "https://prod.pcmtx.com/api/store-service/dc/store/21/theme/theme.min.css/asset"
       }
     }
   },

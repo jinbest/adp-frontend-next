@@ -54,7 +54,7 @@ const SectionWave = ({ handleStatus }: Props) => {
                                 title={t(item.title)}
                                 bgcolor={data.general.colorPalle.repairButtonCol}
                                 borderR="20px"
-                                width="95%"
+                                width={themeType === "marnics" ? "140px" : "95%"}
                               />
                             </a>
                           ) : (
@@ -68,7 +68,7 @@ const SectionWave = ({ handleStatus }: Props) => {
                                 bgcolor={themeType === "marnics" ? "white" : data.general.colorPalle.repairButtonCol}
                                 borderR={themeType === "marnics" ? "0px" : "20px"}
                                 txcolor={themeType === "marnics" ? "#DC7700" : "white"}
-                                width="95%"
+                                width={themeType === "marnics" ? "140px" : "95%"}
                               />
                             </Link>
                           )}
