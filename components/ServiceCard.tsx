@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from "react"
-import Link from "next/link"
 import Button from "./Button"
 import { storesDetails } from "../store"
+import { useRouter } from "next/router"
 
 type ServiceCardType = {
   icon?: string
@@ -15,12 +15,12 @@ const ServiceCard: React.FC<ServiceCardType> = (props) => {
   const { icon, title, btnTitle, link } = props
   const data = storesDetails.storeCnts
   const themeType = data.general.themeType
+  const router = useRouter()
   return (
     <div className="service-card">
       <img src={icon} alt="icon" />
       <div className="service-content">
         <div className="service-title">{title}</div>
-        <Link href={link!}>
           <Button
             margin="33px auto 0"
             borderR="0"
@@ -29,8 +29,8 @@ const ServiceCard: React.FC<ServiceCardType> = (props) => {
             border="none"
             title={btnTitle}
             fontFamily={themeType === "marnics" ? "Helvetica Neue Bold" : "Poppins Regular"}
+            onClick={() => router.push(link!)}
           />
-        </Link>
       </div>
     </div>
   )
