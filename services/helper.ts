@@ -254,7 +254,7 @@ export function convertStrToStamp(val: string, open: boolean) {
   }
 }
 
-export function phoneFormatString(phnumber: string, format: number) {
+export function phoneFormatString(phnumber: string, format?: number) {
   let formatPhnumber: string = phnumber,
     countrycode = "",
     Areacode = "",

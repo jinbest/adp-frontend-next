@@ -155,7 +155,7 @@ const SectionMap = ({
                                 color: data.general.colorPalle.repairButtonCol,
                               }}
                             >
-                              {phoneFormatString(element.phone)}
+                              {phoneFormatString(element.phone, element.phoneFormat)}
                             </span>
                           </a>
                         </p>

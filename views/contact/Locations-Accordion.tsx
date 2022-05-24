@@ -174,7 +174,7 @@ const LocationsAccordion = ({
                           color: data.general.colorPalle.repairButtonCol,
                         }}
                       >
-                        {phoneFormatString(element.phone, 2)}
+                        {phoneFormatString(element.phone, element.phoneFormat)}
                       </span>
                     </a>
                   </div>

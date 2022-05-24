@@ -22,6 +22,7 @@ export interface StoreLocation extends Base {
   timezone?: string
   business_page_link?: string | null
   location_hours?: LocationHour[]
+  phoneFormat?: number
 }
 
 export interface LocationHour extends Base {

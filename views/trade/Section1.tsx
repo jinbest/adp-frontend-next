@@ -26,7 +26,7 @@ const Section1 = ({ handleStatus }: Props) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.content}>
+      <div className={classes.container}>
         <div className="decoration-bar" style={{ backgroundColor: thisPage.themeCol }} />
         <div className={classes.mainTitle} style={{ color: thisPage.themeCol }}>{t(thisPage.title)}</div>
         <div className={classes.subtitle} style={{ color: thisPage.themeCol }}>{t(thisPage.subtitle)}</div>
@@ -104,7 +104,7 @@ const useStyles = makeStyles({
       boxShadow: "0 12px 12px rgba(35, 91, 137, 0.25)"
     }
   },
-  content: {
+  container: {
     maxWidth: 1440,
     width: "100%",
     margin: "auto",
@@ -158,9 +158,9 @@ const useStyles = makeStyles({
     width: "100%"
   },
   "@media (max-width: 1440px)": {
-    content: {
-      paddingLeft: 48,
-      paddingRight: 48
+    container: {
+      paddingLeft: "48px",
+      paddingRight: "48px"
     },
     decoration: {
       right: 48,
@@ -192,7 +192,7 @@ const useStyles = makeStyles({
     }
   },
   "@media (max-width: 600px)": {
-    content: {
+    container: {
       padding: "26px 20px 0"
     },
     decoration: {

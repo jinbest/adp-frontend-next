@@ -88,7 +88,7 @@ const QuoteComponent = ({ data, quoteKey, repairWidgetData, code }: Props) => {
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <Typography className="details">
-                  {phoneFormatString(repairWidgetData.contactDetails.phone)}
+                  {phoneFormatString(repairWidgetData.contactDetails.phone, repairWidgetData.contactDetails.phoneFormat)}
                 </Typography>
               </a>
             </Grid>

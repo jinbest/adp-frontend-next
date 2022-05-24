@@ -26,7 +26,7 @@ const AddressViewer = ({ location }: Props) => {
         }`}
       </Typography>
       <a href={`tel:${location.phone}`} className={classes.link}>
-        <Typography className={classes.cardText}>{phoneFormatString(location.phone, 1)}</Typography>
+        <Typography className={classes.cardText}>{phoneFormatString(location.phone, location.phoneFormat)}</Typography>
       </a>
     </>
   )

@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { storesDetails } from "../../store"
 import Head from "next/head"
 import { MetaParams } from "../../model/meta-params"
-
-const useStyles = makeStyles({
-  root: {
-
-  }
-})
 
 const BuyPage = () => {
   const data = storesDetails.storeCnts
   const thisPage = data.buyPage
   const [pageTitle, setPageTitle] = useState("Quotes | ")
   const [metaList, setMetaList] = useState<MetaParams[]>([])
-  const classes = useStyles()
 
   useEffect(() => {
     setPageTitle(thisPage.headData.title)

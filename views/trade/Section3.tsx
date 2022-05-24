@@ -14,7 +14,7 @@ const Section3 = () => {
 
   return (
     <section className={classes.root}>
-      <div className={classes.content}>
+      <div className={classes.container}>
         <div className={classes.title}>{t(trade.title)}</div>
         <Grid container spacing={3}>
           {children.map((i: any) => (
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
       transform: "skewY(-4deg)",
     }
   },
-  content: {
+  container: {
     maxWidth: 1440,
     width: "100%",
     margin: "auto",
@@ -89,7 +89,7 @@ const useStyles = makeStyles({
     root: {
       marginBottom: -80
     },
-    content: {
+    container: {
       paddingLeft: 48,
       paddingRight: 48
     }
