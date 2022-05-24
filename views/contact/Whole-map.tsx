@@ -207,7 +207,7 @@ const WholeMap = ({
   }
 
   return (
-    <div>
+    <div style={{minHeight: "100vh"}}>
       <div className={classes.customContainer}>
         <Grid container spacing={3} className={classes.customComponent}>
           <Grid item xs={12} md={4} className={classes.item1}>

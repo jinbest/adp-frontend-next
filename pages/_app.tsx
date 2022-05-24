@@ -22,8 +22,6 @@ import { GeneralData } from "../model/general-data"
 import { enableStaticRendering } from "mobx-react"
 import { GetDomain } from "../services/helper"
 
-// import "../styles/theme.css"
-
 enableStaticRendering(typeof window === "undefined")
 
 const apiClient = ApiClient.getInstance()
