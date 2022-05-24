@@ -87,8 +87,7 @@ DataProps) => {
     setPageTitle(homepage.headData.title)
     setMetaList(homepage.headData.metaList)
     setFavIcon(homepage.headData.fav.img)
-    // setTheme(mainData.general.themes.minified)
-    setTheme("https://prod.pcmtx.com/api/store-service/dc/store/21/theme/theme.min.css/asset")
+    setTheme(mainData.general.themes.minified)
 
     homepage.bodyData.tags.forEach((item: TagParams) => {
       loadBodyTag(item.content)

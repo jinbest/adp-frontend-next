@@ -8,15 +8,24 @@ const Badge = () => {
 
   return (
     <div className={`${classes.root} badge-container`}>
-      {storesDetails.commonCnts.badgeImg.map((i: any, index: number) => (
-        <a href="https://www.devicelist.ca/" target="_blank" rel="noreferrer" key={index}>
+      {typeof storesDetails.commonCnts.badgeImg === "string" ?
+        <a href="https://www.devicelist.ca/" target="_blank" rel="noreferrer">
           <img
-            src={i}
+            src={storesDetails.commonCnts.badgeImg}
             alt="badge-img"
             className={`${classes.badgeImg} badge-image`}
           />
-        </a>
-      ))}
+        </a> :
+        storesDetails.commonCnts.badgeImg.map((i: any, index: number) => (
+          <a href="https://www.devicelist.ca/" target="_blank" rel="noreferrer" key={index}>
+            <img
+              src={i}
+              alt="badge-img"
+              className={`${classes.badgeImg} badge-image`}
+            />
+          </a>
+        ))
+      }
     </div>
   )
 }
