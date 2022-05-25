@@ -15,7 +15,7 @@ const Section3 = ({ features }: Props) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section3
   const commonData = storesDetails.commonCnts
-  const deviceCard = thisPage.deviceCard
+  // const deviceCard = thisPage.deviceCard
   const [t] = useTranslation()
 
   const [feats, setFeatures] = useState<any[]>([])
@@ -68,7 +68,7 @@ const Section3 = ({ features }: Props) => {
                   })}
                 </Grid>
                 <Box className="pd-t-5 section3-device-card">
-                  <Grid container item xs={12} spacing={2}>
+                  {/* <Grid container item xs={12} spacing={2}>
                     <Grid item sm={6} md={7}>
                       <Typography className="section-title white section3-subtitle" style={{ color: thisPage.color }}>
                         {thisPage.subtitle.map((item: string, index: number) => {
@@ -92,7 +92,7 @@ const Section3 = ({ features }: Props) => {
                         height="auto"
                       />
                     </Grid>
-                  </Grid>
+                  </Grid> */}
                 </Box>
               </div>
             </div>

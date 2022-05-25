@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next"
 import { storesDetails } from "../../store"
 import _ from "lodash"
 import { makeStyles } from "@material-ui/core/styles"
-import { OnlineQuiz, ShipPhone, VerifyPhone } from "../repair/Sec2-SVG"
 
 const Section2 = () => {
   const data = storesDetails.storeCnts
@@ -20,9 +19,7 @@ const Section2 = () => {
         {contents.map((item: any) => (
           <Grid item xs={12} md={4} key={item.title}>
             <div className={classes.card}>
-              {item.type === "onlineQuiz" && <OnlineQuiz />}
-              {item.type === "shipPhone" && <ShipPhone />}
-              {item.type === "verifyPhone" && <VerifyPhone />}
+              {item.img && <img src={item.img} />}
               <div className={classes.cardcontent}>
                 <div className={classes.cardtitle}>{item.title}</div>
                 <div className={classes.carddesc}>{item.content}</div>
