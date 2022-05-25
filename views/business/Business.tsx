@@ -8,7 +8,7 @@ import { Grid, Typography } from "@material-ui/core"
 import Button from "../../components/Button"
 import { useTranslation } from "react-i18next"
 import Card from "../repair/widget-component/Card"
-import { ShippingLabelMarnics, PayMarnics, FreeShippingMarnics, SolderingMarnics, QuickTurnaroundMarnics, ShippingLabel, FreeShipping, CustomerService, Pay, QuickTurnaround, Soldering, CustomerServiceMarnics } from "./SVGs"
+import { ShippingLabel, FreeShipping, CustomerService, Pay, QuickTurnaround, Soldering } from "./SVGs"
 import { MetaParams } from "../../model/meta-params"
 import _ from "lodash"
 
@@ -79,42 +79,42 @@ const Business = ({ handleStatus }: Props) => {
                           <div className={`${classes.SVGContainer} business-svgcontainer`}>
                             {item.type === "freeShipping" ? (
                               <div style={{ padding: "0 20px" }}>
-                                {themeType === "marnics" ? <FreeShippingMarnics /> : <FreeShipping color={data.general.colorPalle.repairButtonCol} />}
+                                {themeType === "marnics" ? <img src={item.img} /> : <FreeShipping color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "pay" ? (
                               <div style={{ padding: "0 24px" }}>
-                                {themeType === "marnics" ? <PayMarnics /> : <Pay color={data.general.colorPalle.repairButtonCol} />}
+                                {themeType === "marnics" ? <img src={item.img} /> : <Pay color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "shippingLabel" ? (
                               <div style={{ padding: "0 25px" }}>
-                                {themeType === "marnics" ? <ShippingLabelMarnics /> : <ShippingLabel color={data.general.colorPalle.repairButtonCol} />}
+                                {themeType === "marnics" ? <img src={item.img} /> : <ShippingLabel color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "soldering" ? (
                               <div style={{ padding: "0 22px" }}>
-                                {themeType === "marnics" ? <SolderingMarnics /> : <Soldering color={data.general.colorPalle.repairButtonCol} />}
+                                {themeType === "marnics" ? <img src={item.img} /> : <Soldering color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "customerService" ? (
                               <div style={{ padding: "0 22px" }}>
-                                {themeType === "marnics" ? <CustomerServiceMarnics /> : <CustomerService color={data.general.colorPalle.repairButtonCol} />}
+                                {themeType === "marnics" ? <img src={item.img} /> : <CustomerService color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "quickTurnaround" ? (
                               <div style={{ padding: "0 20px" }}>
-                                {themeType === "marnics" ? <QuickTurnaroundMarnics /> : <QuickTurnaround color={data.general.colorPalle.repairButtonCol} />}
+                                {themeType === "marnics" ? <img src={item.img} /> : <QuickTurnaround color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
