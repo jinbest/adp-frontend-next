@@ -20,16 +20,16 @@
 
 @font-face {
   font-family: "Helvetica Neue Bold";
-  src: url("/fonts/Helvetica Neu Bold.ttf") format("truetype");
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Helvetica%20Neu%20Bold.ttf") format("truetype");
   font-display: fallback;
 }
 @font-face {
   font-family: "Helvetica Neue Regular";
-  src: url("/fonts/HelveticaNeue Light.ttf") format("truetype");
+  src: url("https://storage.googleapis.com/adp_assets/fonts/HelveticaNeue%20Light.ttf") format("truetype");
   font-display: fallback;
 }
 @font-face {
   font-family: "Helvetica Neue Medium";
-  src: url("/fonts/HelveticaNeue Medium.ttf") format("truetype");
+  src: url("https://storage.googleapis.com/adp_assets/fonts/HelveticaNeue%20Medium.ttf") format("truetype");
   font-display: fallback;
 }
