@@ -24,7 +24,7 @@ const Section2 = () => {
           {contents.map((item: any, index: number) => {
             return (
               <Grid item xs={12} md={4} key={index}>
-                <CardRepairSec2 type={item.type} subtitle={t(item.title)}>
+                <CardRepairSec2 type={item.type} subtitle={t(item.title)} img={item.img}>
                   {item.type === "ReceiveDevice"
                     ? `${storesDetails.storesDetails.name} ${t(item.content)}`
                     : t(item.content)}

@@ -1,5 +1,5 @@
 import React from "react"
-import { GetDeviceUs, SelectRepair, ReceiveDevice, OnlineQuiz, ShipPhone, VerifyPhone } from "../views/repair/Sec2-SVG"
+import { GetDeviceUs, SelectRepair, ReceiveDevice } from "../views/repair/Sec2-SVG"
 import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 
@@ -8,9 +8,10 @@ type Props = {
   content?: string
   type?: string
   children?: any
+  img?: string
 }
 
-const CardRepairSec2 = ({ subtitle, content, type, children }: Props) => {
+const CardRepairSec2 = ({ subtitle, content, type, img, children }: Props) => {
   const classes = useStyles()
 
   const data = storesDetails.storeCnts
@@ -22,9 +23,9 @@ const CardRepairSec2 = ({ subtitle, content, type, children }: Props) => {
         {type === "SelectRepair" && <SelectRepair color={sec2SvgCol} />}
         {type === "GetDeviceUs" && <GetDeviceUs color={sec2SvgCol} />}
         {type === "ReceiveDevice" && <ReceiveDevice color={sec2SvgCol} />}
-        {type === "onlineQuiz" && <OnlineQuiz />}
-        {type === "shipPhone" && <ShipPhone />}
-        {type === "verifyPhone" && <VerifyPhone />}
+        {type === "onlineQuiz" && <img src={img} />}
+        {type === "shipPhone" && <img src={img} />}
+        {type === "verifyPhone" && <img src={img} />}
       </div>
       <div className={`${classes.contentContainer} repair-content`}>
         <p className={classes.subTitle}>{subtitle}</p>

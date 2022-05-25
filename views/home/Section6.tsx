@@ -89,6 +89,7 @@ const Section6 = () => {
                   days={item.day}
                   content={item.content}
                   reviewer={item.reviewer}
+                  icon={item.icon}
                 />
               </Box>
             </Grid>

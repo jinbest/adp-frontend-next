@@ -8,13 +8,14 @@ type Props = {
   days: string
   content: string
   reviewer: string
+  icon?: string
 }
 
 type RatingStyleProps = {
   color: string
 }
 
-const CardWhyCustomer = ({ score, content, days, reviewer }: Props) => {
+const CardWhyCustomer = ({ score, content, days, reviewer, icon }: Props) => {
   const data = storesDetails.storeCnts
   const styleProps = { color: data.general.colorPalle.ratingCol } as RatingStyleProps
   const classes = useStyles(styleProps)
@@ -36,9 +37,12 @@ const CardWhyCustomer = ({ score, content, days, reviewer }: Props) => {
       <p className="content">{content}</p>
       <div className="space-between">
         <p className="reviewer">{reviewer}</p>
-        <div>
-          <img src="img/google.svg" alt="google" />
-        </div>
+        {
+          icon &&
+          <div>
+            <img src={icon} alt="google" />
+          </div>
+        }
       </div>
     </div>
   )

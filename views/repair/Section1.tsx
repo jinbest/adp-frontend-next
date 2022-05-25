@@ -33,7 +33,7 @@ const Section1 = ({ handleStatus }: Props) => {
     >
       <section className="Container repair-section1-container">
         <div className="repair-section1-content">
-          <img src="/img/decoration.svg" alt="decoration" className="repair-section1-decoration"/>
+          <img src={repair.decorationImg} alt="decoration" className="repair-section1-decoration"/>
           <Grid container className="service-section1">
             <Grid item xs={12} sm={7}>
               <div className="decoration-bar" style={{ backgroundColor: repair.themeCol }} />
