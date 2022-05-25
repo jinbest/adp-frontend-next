@@ -269,7 +269,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         aria-haspopup="true"
         onClick={handleOpen}
         icon={true}
-        fontSize={themeType === "marnics" ? "18px" : "20px"}
+        fontSize="18px"
         width={!locSelStatus ? width : "auto"}
         hover={!locSelStatus ? true : false}
         fontFamily={themeType === "marnics" ? "Helvetica Neue Medium" : "Poppins Regular"}

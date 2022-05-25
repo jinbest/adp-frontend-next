@@ -6,6 +6,7 @@ import { ServiceCard } from "../../components"
 const SectionService: React.FC = () => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.services
+  if (!thisPage) return null
   return (
     <section className="Container service-section-wrapper">
       <div className="service-section-container">

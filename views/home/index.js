@@ -7,7 +7,7 @@ import Section5 from "./Section5";
 import Section6 from "./Section6";
 import SectionWave from "./SectionWave";
 import SectionDecoration from "./SectionDecoration";
-import SectionService from "./SectionSerice";
+import SectionService from "./SectionService";
 
 export { 
   Shape,

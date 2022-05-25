@@ -22,7 +22,6 @@ const pageRoutes = (data, specLoc) => {
     { path: routes.contactPage, component: Contact, special: {} },
     { path: routes.businessPage, component: Business, special: {} },
     { path: routes.covidPage, component: Covid, special: {} },
-    { path: routes.tradePage, component: Trade, special: {} }
   ]
 
   if (data.hasOwnProperty("pages") && data.pages.length) {
@@ -40,7 +39,9 @@ const pageRoutes = (data, specLoc) => {
       })
     })
   }
-
+  if (routes.tradePage) {
+    availableRoutes.push({path: routes.tradePage, component: Trade, special: {}})
+  }
   if (specLoc) {
     data.locations.forEach((item) => {
       availableRoutes.push({

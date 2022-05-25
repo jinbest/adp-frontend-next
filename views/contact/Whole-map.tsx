@@ -37,6 +37,7 @@ const WholeMap = ({
   const [t] = useTranslation()
   const locations = storesDetails.findAddLocation
   const buttonCol = storesDetails.storeCnts.general.colorPalle.themeColor
+  const themeType = storesDetails.storeCnts.general.themeType
 
   const store_id = storesDetails.store_id
 
@@ -207,7 +208,7 @@ const WholeMap = ({
   }
 
   return (
-    <div style={{minHeight: "100vh"}}>
+    <div style={{minHeight: themeType === "marnics" ? "100vh" : "unset"}}>
       <div className={classes.customContainer}>
         <Grid container spacing={3} className={classes.customComponent}>
           <Grid item xs={12} md={4} className={classes.item1}>

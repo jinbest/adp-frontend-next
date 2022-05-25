@@ -24,6 +24,8 @@ const Trade = ({ handleStatus, features }: Props) => {
   const [pageTitle, setPageTitle] = useState("Quotes | ")
   const [metaList, setMetaList] = useState<MetaParams[]>([])
 
+  if (!thisPage) return null
+
   useEffect(() => {
     const cntFeatures: any[] = []
     if (!isEmpty(features) && features.length) {
