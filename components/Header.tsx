@@ -686,8 +686,12 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
           </FeatureToggles> */}
         </div>
         <div className="avatar-div">
-          <div className="marnics-header-icon"><AccountCircleOutlined /></div>
-          <div className="marnics-header-icon"><ShoppingCartOutlined /></div>
+          {themeType !== "marnics" &&
+            <>
+              <div className="marnics-header-icon"><AccountCircleOutlined /></div>
+              <div className="marnics-header-icon"><ShoppingCartOutlined /></div>
+            </>
+          }
           <HeaderDrawer
             toggleMenuStatus={toggleMenuStatus}
             handleStatus={handleStatus}
