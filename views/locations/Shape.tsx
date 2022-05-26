@@ -13,15 +13,17 @@ const Shape = () => {
       <div className={`${classes.waveBg} location-waveBg`}>
         <img src={themeType === "marnics" ? thisPage.locationBG : "/img/location-wave-bg.png"} alt="location wave bg" />
       </div>
-      <div className={classes.skitImg}>
-        {storesDetails.commonCnts.locationsData.skitterMobile ?
-          <img
-            src={storesDetails.commonCnts.locationsData.skitterMobile}
-            width="1"
-            height="auto"
-            alt="skitter-mobile"
-          /> : null}
-      </div>
+      {themeType === "marnics" ? null :
+        <div className={classes.skitImg}>
+          {storesDetails.commonCnts.locationsData.skitterMobile ?
+            <img
+              src={storesDetails.commonCnts.locationsData.skitterMobile}
+              width="1"
+              height="auto"
+              alt="skitter-mobile"
+            /> : null}
+        </div>
+      }
     </div>
   )
 }

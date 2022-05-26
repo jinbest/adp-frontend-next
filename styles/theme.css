@@ -180,7 +180,7 @@
   padding-right: 0;
   padding-left: 0;
   position: relative;
-  margin-top: 200px;
+  margin-top: 260px;
   height: auto;
 }
 .section-wave-container:after {
@@ -455,6 +455,9 @@ footer {
 }
 
 /* Location page style */
+.location-decoration-bar {
+  display: block;
+}
 .marnics-location-main-title {
   font-size: 64px;
   font-family: "Helvetica Neue Bold" !important;
@@ -584,7 +587,7 @@ footer {
   position: relative;
 }
 .service-section2 {
-  margin-top: 340px;
+  margin-top: 200px;
 }
 .service-section1 .service-section-title-1 {
   font-size: 64px;
@@ -603,6 +606,7 @@ footer {
   font-size: 64px;
   font-family: "Helvetica Neue Bold" !important;
   text-align: center;
+  margin-bottom: 50px;
 }
 .repair-card {
   flex-direction: column;
@@ -617,6 +621,9 @@ footer {
 .repair-card p:nth-child(1) {
   font-family: "Helvetica Neue Bold" !important;
 }
+.repair-card-img img {
+  width: 100%;
+}
 .repair-section1-container {
   padding: 0 !important;
   max-width: 100%;
@@ -629,7 +636,7 @@ footer {
   position: absolute;
   background-color: inherit;
   z-index: -1;
-  bottom: 175px;
+  bottom: 80px;
   transform-origin: left bottom;
   transform: skewY(5deg);
   box-shadow: 0 12px 2px rgba(35, 91, 137, 0.25);
@@ -921,7 +928,7 @@ footer {
   }
   .service-section2 {
     margin-top: 0;
-    padding-top: 450px;
+    padding-top: 300px;
     height: fit-content;
     margin-bottom: 0;
   }
@@ -929,7 +936,7 @@ footer {
     font-size: 36px;
   }
   .repair-section1-container:after {
-    bottom: 240px;
+    bottom: 180px;
   }
   .service-section2-text-field {
     margin-top: -130px !important;
@@ -945,6 +952,9 @@ footer {
   }
   .location-button-container button {
     font-size: 20px !important;
+  }
+  .section-wave-container img {
+    top: -90px;
   }
 }
 @media (max-width: 1024px) {
@@ -1002,7 +1012,14 @@ footer {
     margin-top: 0 !important;
   }
   .repair-section1-container:after {
-    bottom: 270px;
+    bottom: 200px;
+  }
+  .corner-shape > img {
+    display: flex;
+    margin: auto;
+  }
+  .section-wave-container {
+    padding-bottom: 0;
   }
 }
 @media (max-width: 960px) {
@@ -1022,11 +1039,22 @@ footer {
   .repair-card {
     flex-direction: row;
   }
+  .section-wave-container img {
+    top: -60px;
+  }
+  .marnics-location-container {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
 }
 @media (max-width: 768px) {
   .section-wave-container {
-    margin-top: 100px;
+    margin-top: 120px;
     min-height: 450px;
+  }
+  .section-wave-container img {
+    top: -50px;
   }
   .repair-section1-img {
     display: none;
@@ -1057,7 +1085,7 @@ footer {
     height: fit-content;
   }
   .service-section-container {
-    padding-top: 270px;
+    padding-top: 150px;
     padding-bottom: 10px;
   }
   .service-section-wrapper {
@@ -1135,9 +1163,6 @@ footer {
     color: #143663;
     margin: 0 10px;
   }
-  .section-wave-container:after {
-    transform: skewY(-15deg);
-  }
   .covid-section1-container {
     padding-top: 150px;
   }
@@ -1194,6 +1219,7 @@ footer {
   }
   .service-section2-text-field .service-section-title-1 {
     font-size: 24px;
+    margin-top: 50px;
   }
   .service-section2-text-field .repair-sec-content-div {
     margin-top: 33px !important;
@@ -1246,11 +1272,11 @@ footer {
     width: 50%;
     margin: 12px;
   }
-  .section-wave-container:after {
-    transform: skewY(-19deg);
-  }
   .section-wave-container {
-    margin-top: 200px !important;
+    margin-top: 120px;
+  }
+  .section-wave-container img {
+    top: -40px;
   }
   .section-review-title {
     font-size: 24px !important;
@@ -1316,6 +1342,7 @@ footer {
   .marnics-location-main-title {
     text-align: left;
     font-size: 36px !important;
+    line-height: 120% !important;
   }
   .marnics-location-main-content {
     text-align: left;
@@ -1335,7 +1362,7 @@ footer {
     padding-left: 0px;
     padding-right: 0px;
     background-image: none !important;
-    box-shadow: none;
+    box-shadow: none !important;
   }
   .business-card-subtitle {
     font-size: 24px;
@@ -1402,5 +1429,11 @@ footer {
   }
   .business-card-container {
     margin-top: 230px;
+  }
+  .section-wave-container img {
+    top: -30px;
+  }
+  .marnics-location-container {
+    padding-top: 100px;
   }
 }

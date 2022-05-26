@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Typography, Grid, Box } from "@material-ui/core"
+import { Typography, Grid } from "@material-ui/core"
 import { CardPopular } from "../../components"
 import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
@@ -67,8 +67,8 @@ const Section3 = ({ features }: Props) => {
                     )
                   })}
                 </Grid>
-                <Box className="pd-t-5 section3-device-card">
-                  {/* <Grid container item xs={12} spacing={2}>
+                {/* <Box className="pd-t-5 section3-device-card">
+                  <Grid container item xs={12} spacing={2}>
                     <Grid item sm={6} md={7}>
                       <Typography className="section-title white section3-subtitle" style={{ color: thisPage.color }}>
                         {thisPage.subtitle.map((item: string, index: number) => {
@@ -92,8 +92,8 @@ const Section3 = ({ features }: Props) => {
                         height="auto"
                       />
                     </Grid>
-                  </Grid> */}
-                </Box>
+                  </Grid>
+                </Box> */}
               </div>
             </div>
           </section>

@@ -65,7 +65,7 @@ const Locations = ({ handleStatus }: Props) => {
 
       <Shape />
       <div className={`${classes.root} location-container`}>
-        {themeType === "marnics" && <div className="decoration-bar" style={{ background: "white" }} />}
+        {themeType === "marnics" && <div className="decoration-bar location-decoration-bar" style={{ background: "white" }} />}
         <h1 className={`${classes.mainTitle} marnics-location-main-title`}>{t(thisPage.section1.title)}</h1>
         <Typography className={`${classes.mainContent} marnics-location-main-content`}>{t(thisPage.section1.subtitle)}</Typography>
         {thisPage.section1.button.visible ? (
@@ -89,7 +89,7 @@ const Locations = ({ handleStatus }: Props) => {
           <></>
         )}
         <div className={`${classes.locationsContainer} marnics-location-container`}>
-          {storesDetails.storesDetails.name &&
+          {themeType !== "marnics" && storesDetails.storesDetails.name &&
             <Typography className={classes.subTitle}>
               {`${t("All")} ${storesDetails.storesDetails.name} ${t("Locations")}`}
             </Typography>

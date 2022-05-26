@@ -210,11 +210,11 @@ footer {
   z-index: 1;
 }
 .decoration-container {
-  max-width: 1526px;
+  max-width: 1440px;
   margin: 88px auto;
   display: flex;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 32px;
 }
 .mb-48 {
   margin-bottom: 48px;
@@ -226,13 +226,13 @@ footer {
 .decoration-background {
   width: 100%;
   position: absolute;
-  top: 120px;
+  top: -70px;
   left: 0;
   display: flex;
 }
 .decoration-left {
   background-color: #F3F5F6;
-  width: 70%;
+  width: 75%;
   position: relative;
   z-index: 0;
   padding: 400px 0;
@@ -246,7 +246,7 @@ footer {
   z-index: -1;
   bottom: 0;
   transform-origin: left bottom;
-  transform: skewY(7deg);
+  transform: skewY(12deg);
   box-shadow: 0 25px 25px rgba(35, 91, 137, 0.25);
 }
 .repair-section1-decoration, .mobile-repair-section1-img {
@@ -254,7 +254,7 @@ footer {
 }
 .decoration-right {
   background-color: #F3F5F6;
-  width: 30%;
+  width: 25%;
   position: relative;
   z-index: 0;
   padding: 400px 0;
@@ -268,8 +268,8 @@ footer {
   z-index: -1;
   top: 0;
   transform-origin: right top;
-  transform: skewY(-16deg);
-  box-shadow: 20px 25px 25px rgba(35, 91, 137, 0.25);
+  transform: skewY(-32.5deg);
+  box-shadow: 20px 25px 20px rgba(35, 91, 137, 0.25);
 }
 .space-between {
   display: flex;
@@ -387,6 +387,9 @@ footer {
   .marnics-banner1 {
     padding-top: 260px;
   }
+  .decoration-background {
+    top: -120px;
+  }
 }
 @media (max-width: 1024px) {
   .decoration-right, .decoration-circle-left, .decoration-circle-right {
@@ -394,7 +397,7 @@ footer {
   }
   .decoration-left {
     width: 100%;
-    padding-top: 600px;
+    padding-top: 640px;
   }
   .mobile-decoration {
     display: flex;
@@ -405,6 +408,7 @@ footer {
     display: block;
     z-index: 1;
     padding: 0 30px;
+    margin-top: 130px;
   }
   .decoration-container {
     justify-content: flex-end;
@@ -419,6 +423,9 @@ footer {
   }
   .marnics-banner2-left::after {
     transform: skewY(15deg);
+  }
+  .decoration-background {
+    top: 10px;
   }
 }
 @media (max-width: 768px) {
@@ -454,13 +461,19 @@ footer {
   .marnics-banner2 {
     padding: 230px 0;
   }
+  .mobile-decoration .decoration-circle-right {
+    margin-top: 110px;
+  }
+  .decoration-left {
+    padding-top: 550px;
+  }
 }
 @media (max-width: 600px) {
   .decoration-bar {
     margin-bottom: 9px;
   }
   .decoration-left {
-    padding-top: 300px;
+    padding-top: 200px;
   }
   .decoration-circle {
     width: 13px;
@@ -482,15 +495,23 @@ footer {
   .marnics-banner2 {
     padding: 205px 0;
   }
+  .mobile-decoration .decoration-circle-right {
+    margin-top: 70px;
+  }
 }
 @media (max-width: 425px) {
   .decoration-left {
-    padding-top: 350px;
+    padding-top: 250px;
   }
   .marnics-banner2 {
     padding: 230px 0;
   }
   .marnics-banner1 {
     padding: 245px 0;
+  }
+}
+@media (max-width: 425px) {
+  .mobile-decoration .decoration-circle-right {
+    margin-top: 40px;
   }
 }
