@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next"
 import { FeatureToggles, Feature } from "@paralleldrive/react-feature-toggles"
 import { storesDetails, repairWidgetStore, repairWidData } from "../store"
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
-import { AccountCircleOutlined, ShoppingCartOutlined } from "@material-ui/icons"
 import {
   phoneFormatString,
   isExternal,
@@ -686,12 +685,6 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
           </FeatureToggles> */}
         </div>
         <div className="avatar-div">
-          {themeType !== "marnics" &&
-            <>
-              <div className="marnics-header-icon"><AccountCircleOutlined /></div>
-              <div className="marnics-header-icon"><ShoppingCartOutlined /></div>
-            </>
-          }
           <HeaderDrawer
             toggleMenuStatus={toggleMenuStatus}
             handleStatus={handleStatus}
