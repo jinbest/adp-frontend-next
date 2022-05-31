@@ -12,13 +12,15 @@ const CardPopular = ({ title, img, price, subtitle, priceCol }: Props) => {
   return (
     <div className="card-popular">
       <img src={img} width="1" height="auto" alt={`${title}-card-popular-img`} />
-      <p className="title">{title}</p>
-      <div className="price-div">
-        <p className="subtitle">{subtitle + " / "}<span className="price" style={{color: priceCol}}>{price}</span></p>
-        {/* <p className="subtitle">{subtitle + " /"}</p>
+      <div>
+        <p className="title">{title}</p>
+        <div className="price-div">
+          <p className="subtitle">{subtitle + " / "}<span className="price" style={{ color: priceCol }}>{price}</span></p>
+          {/* <p className="subtitle">{subtitle + " /"}</p>
         <p className="price" style={{ color: priceCol }}>
           {price}
         </p> */}
+        </div>
       </div>
     </div>
   )

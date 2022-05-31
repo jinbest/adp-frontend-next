@@ -21,6 +21,7 @@ const ServiceCard: React.FC<ServiceCardType> = (props) => {
       <img src={icon} alt="icon" />
       <div className="service-content">
         <div className="service-title">{title}</div>
+        {btnTitle &&
           <Button
             margin="33px auto 0"
             borderR="0"
@@ -31,6 +32,7 @@ const ServiceCard: React.FC<ServiceCardType> = (props) => {
             fontFamily={themeType === "marnics" ? "Helvetica Neue Bold" : "Poppins Regular"}
             onClick={() => router.push(link!)}
           />
+        }
       </div>
     </div>
   )

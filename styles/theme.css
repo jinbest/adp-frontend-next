@@ -1,0 +1,420 @@
+body, p, div, a {
+  font-family: Inter Regular !important;
+}
+.brand-nav-item {
+  font-family: Inter Bold !important;
+  font-size: 15px;
+}
+.container-header {
+  background-color: #121212;
+  border-radius: 0 0 38px 38px;
+  box-shadow: 0 10px 12px rgba(172, 197, 27, 0.25);
+  box-sizing: border-box;
+  padding: 0 32px;
+}
+.container-header > a > img {
+  height: 60px !important;
+}
+.search-container {
+  height: 48px;
+}
+.container-header .search-div {
+  margin-left: 80px;
+}
+.nav-link {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+}
+.nav-div {
+  padding-right: 0;
+}
+.button {
+  height: 44px;
+}
+.button svg {
+  margin-right: 9px;
+}
+.section1-title {
+  font-size: 64px !important;
+  color: #121212;
+  font-family: Inter Bold !important;
+  line-height: 120% !important;
+  text-align: left !important;
+  margin: 0 !important;
+}
+.section1-subtitle {
+  font-size: 30px !important;
+  padding: 0 !important;
+  text-align: left !important;
+  color: #121212;
+  margin-bottom: 30px !important;
+}
+.decoration-bar {
+  display: block;
+  margin-bottom: 25px;
+  background-color: #BED630;
+  width: 96px;
+  height: 4px;
+  border-radius: 4px;
+}
+.section1-top-hero {
+  padding-top: 184px;
+}
+.hero {
+  max-width: 1000px;
+  margin-left: -210px;
+}
+.service-section-button > a > button {
+  white-space: nowrap;
+  height: 60px;
+  border-radius: 40px !important;
+  font-size: 30px !important;
+  padding: 0 10px !important;
+  width: fit-content !important;
+  margin-right: 24px;
+  font-family: Inter Medium !important;
+  border: none;
+}
+.Container {
+  max-width: 1540px;
+}
+.service-section-container {
+  padding: 0;
+  box-shadow: none;
+
+}
+.service-card {
+  background-color: #2E83C5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 12px 12px 12px rgba(172, 197, 27, 0.1);
+  border-radius: 12px;
+  padding: 32px;
+  align-items: center;
+}
+.service-title {
+  font-size: 19px;
+  color: #fff;
+  font-family: Inter SemiBold !important;
+}
+.service-section-wrapper {
+  margin-top: 80px !important;
+  margin-bottom: 123px !important;
+}
+.section-title {
+  font-size: 48px !important;
+  font-family: "Inter Bold" !important;
+  padding: 0 !important;
+  text-align: left !important;
+  margin-bottom: 80px !important;
+}
+.card-customized-item {
+  margin: 0;
+  width: 100%;
+}
+.card-fix {
+  max-width: none;
+  border: 2px solid black;
+  border-radius: 12px;
+  height: 260px;
+  padding: 32px;
+  padding-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.card-customized-container-desktop {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+.card-fix img {
+  width: auto;
+  max-height: 98px;
+  margin-top: 0;
+}
+.card-fix-title {
+  font-size: 19px;
+  color: #33333A;
+  font-family: Inter SemiBold !important;
+}
+.cart-contentfix-container {
+  margin-top: 80px;
+  max-width: none !important;
+}
+.horzon-line, .vertical-line {
+  display: none;
+}
+.content-fix .title {
+  font-family: Inter SemiBold !important;
+  font-size: 20px;
+  letter-spacing: 0.3em;
+  line-height: 30px !important;
+  color: #33333A;
+  max-width: 300px;
+  margin-bottom: 16px;
+}
+.content-fix .content {
+  color: #121212;
+  font-size: 16px;
+  max-width: 320px;
+}
+.section2-container {
+  background-color: #FAFAFA;
+  margin-top: -260px;
+  padding-top: 242px;
+  padding-bottom: 164px;
+}
+.sec3-container-parent {
+  display: block;
+  padding-top: 92px;
+}
+.section3-container .section3-title {
+  text-align: center !important;
+  margin-bottom: 65px !important;
+}
+.card-popular {
+  box-shadow: none;
+  border-radius: 10.37px;
+  border: 2px solid black;
+  padding: 25px;
+  padding-top: 20px;
+  height: 415px;
+  justify-content: space-between;
+}
+.card-popular img {
+  max-width: 210px;
+  margin-top: 0;
+}
+.card-popular .title {
+  text-align: center;
+  font-size: 16px;
+  margin: 0;
+}
+.card-popular .subtitle {
+  margin: 0px auto;
+  font-size: 16px;
+}
+.section-wave-wrapper {
+  padding-top: 210px !important;
+  max-width: 1540px !important;
+}
+.section-wave-main-title {
+  padding-top: 0 !important;
+  padding-bottom: 22px !important;
+  font-size: 48px !important;
+  font-family: Inter Bold !important;
+  line-height: 58px !important;
+  color: #33333A;
+}
+.wave-children {
+  background-color: #FAFAFA;
+  box-shadow: 12px 12px 12px rgba(43, 131, 197, 0.25);
+  border-radius: 48px;
+  padding: 48px !important;
+  position: relative;
+}
+.section-wave-img {
+  width: 140px !important;
+  height: 140px;
+}
+.section-wave-subtitle {
+  font-size: 19px !important;
+  font-family: "Inter SemiBold" !important;
+  color: #121212;
+  line-height: 30px !important;
+}
+.section-wave-item {
+  justify-content: space-between !important;
+  height: 230px;
+}
+.section-wave-subContent {
+  max-width: 250px;
+}
+.waveDecorationImg-up, .waveDecorationImg-down {
+  position: absolute;
+  z-index: -1;
+}
+.waveDecorationImg-up {
+  top: -70px;
+  right: 0;
+}
+.waveDecorationImg-down {
+  bottom: -70px;
+  left: 0;
+}
+.sec5-Back {
+  display: block;
+  background-color: #BED630;
+  margin-top: -3px;
+}
+.decorationUpImg {
+  margin-top: 300px;
+  width: 100%;
+}
+.decorationDownImg {
+  width: 100%;
+}
+.sec5-title {
+  font-size: 48px !important;
+  font-family: "Inter Bold" !important;
+}
+.sec5-content {
+  font-size: 24px !important;
+  max-width: 740px;
+  margin: auto !important;
+}
+.section5-img {
+  margin-bottom: 48px !important;
+}
+.sec5-container .col_center > ul {
+  font-size: 24px;
+  margin-top: 24px;
+  margin-bottom: 48px;
+  font-family: Inter Medium !important;
+}
+.protect-content {
+  font-size: 24px !important;
+  font-family: Inter Medium !important;
+}
+.sec5-button .button {
+  background-color: #fff !important;
+  color: #BED630 !important;
+  font-size: 24px !important;
+  font-family: "Inter Medium" !important;
+  height: 52px !important;
+  border-radius: 52px !important;
+  line-height: 150% !important;
+}
+.section-review-title {
+  font-family: "Inter Bold" !important;
+  font-size: 48px !important;
+  padding: 20px 0 12px !important;
+}
+.sec5-decoration {
+  margin: auto;
+}
+.section-review-content {
+  font-size: 24px;
+  color: black;
+}
+.section6-rating {
+  color: #BED630 !important;
+  margin-top: 80px;
+  margin-bottom: 16px;
+}
+.sec6-subtitle {
+  font-size: 16px !important;
+  font-family: Inter Medium !important;
+  color: #121212;
+  line-height: 30px !important;
+}
+.sec6-subContent {
+  font-size: 14px !important;
+  color: #121212;
+  line-height: 20px !important;
+}
+.sec6-card {
+  padding-top: 16px;
+  box-sizing: border-box; 
+}
+.card-why-customer {
+  border: 2px solid #2E83C5;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+.why-card-rating {
+  color: #BED630 !important;
+}
+.card-why-customer .rating {
+  margin: 0;
+}
+.card-why-customer .score-div {
+  align-items: center;
+}
+.card-why-customer p {
+  font-size: 14px;
+  margin: 0 !important;
+}
+.review-content {
+  flex-direction: column;
+  display: flex;
+}
+.review-content .content {
+  order: 1;
+  font-size: 16px;
+}
+.review-content .reviewer {
+  font-size: 16px;
+  font-family: Inter Medium !important;
+}
+footer {
+  margin-top: 200px;
+}
+.footer-box {
+  background-color: #121212;
+  border-radius: 38px 38px 0 0;
+  padding-top: 118px;
+  color: #fff;
+}
+.logo-footer {
+  height: 100px;
+}
+.location-container {
+  display: none;
+}
+.footer-nav-items {
+  display: flex;
+}
+.footer-loc-item {
+  margin-top: 0 !important;
+  font-family: Inter SemiBold !important;
+  font-size: 14px;
+}
+.footer-loc-address > a{
+  color: #fff !important;
+  font-size: 14px;
+}
+.footerlinksContainer {
+  margin-left: 200px !important;
+}
+.badge-container {
+  right: 20px;
+  left: unset !important;
+}
+.info-container {
+  display: flex;
+  margin-top: 50px;
+}
+.info-container > div {
+  margin-right: 48px;
+}
+.info-value {
+  font-family: Inter Bold !important;
+  color: #F3F5F6;
+  font-size: 14px;
+  line-height: 23px;
+}
+.footer-other-images {
+  height: fit-content !important;
+  background-color: #fff;
+  border: 1.4px solid #00000010;
+  border-radius: 7px;
+  width: 82px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0px 7px;
+  box-sizing: border-box;
+}
+.copyright {
+  font-size: 14px;
+  color: #949FAC !important;
+  font-family: "Inter Bold" !important;
+}

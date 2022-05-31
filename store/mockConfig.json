@@ -1,0 +1,781 @@
+{
+  "storesCnts": {
+    "homepage": {
+      "headData": {
+        "title": "Cell Phone, iPhone & iPad Repair Thunder bay | Snap Mobile",
+        "fav": {
+          "img": "/images/favicon.ico"
+        },
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Snap Mobile or book your repair online today!"
+          }
+        ],
+        "scripts": []
+      },
+      "bodyData": {
+        "tags": []
+      },
+      "header": {
+        "brandData": {
+          "brandCol": "white",
+          "brandThemeCol": "#ACC51B"
+        },
+        "megaMenu": {
+          "mainList": [],
+          "otherList": []
+        },
+        "navItems": [
+          {
+            "href": "/quote",
+            "text": "Repair",
+            "flag": "FRONTEND_REPAIR",
+            "order": 1,
+            "visible": true
+          },
+          {
+            "href": "/shop",
+            "text": "Shop",
+            "flag": "ALWAYS_TRUE",
+            "order": 2,
+            "visible": true
+          },
+          {
+            "href": "/protect",
+            "text": "Protect",
+            "flag": "ALWAYS_TRUE",
+            "order": 3,
+            "visible": true
+          },
+          {
+            "href": "/contact",
+            "text": "Contact",
+            "flag": "ALWAYS_TRUE",
+            "order": 4,
+            "visible": true
+          }
+        ],
+        "brandItems": [
+          {
+            "text": "Business",
+            "href": "/business",
+            "order": 1,
+            "visible": true
+          },
+          {
+            "text": "Locations",
+            "href": "/locations",
+            "order": 2,
+            "visible": true
+          }
+        ],
+        "visibility": {
+          "lang": true,
+          "phone": true,
+          "covidPage": false,
+          "loginPage": false
+        },
+        "button": {
+          "title": "Find a Store",
+          "width": "170px"
+        },
+        "mobileNavData": {
+          "avatarData": {
+            "userActive": "https://storage.googleapis.com/adp_assets/images/21/store-user-active.png",
+            "userDeactive": "https://storage.googleapis.com/adp_assets/images/21/store-user-deactive.png",
+            "cancel": "https://storage.googleapis.com/adp_assets/images/21/store-cancel.png",
+            "store": {
+              "img": "https://storage.googleapis.com/adp_assets/images/21/store-store.png",
+              "link": "#"
+            },
+            "storeBlue": "https://storage.googleapis.com/adp_assets/images/21/store-store-blue.png",
+            "menu": "https://storage.googleapis.com/adp_assets/images/21/store-menu.png"
+          },
+          "userNavItems": [
+            {
+              "text": "My Account",
+              "href": "#",
+              "flag": "FRONTEND_USER_ACCOUNT"
+            },
+            {
+              "text": "Track Repair",
+              "href": "/quote",
+              "flag": "FRONTEND_REPAIR"
+            },
+            {
+              "text": "File a Claim",
+              "href": "#",
+              "flag": "ALWAYS_TRUE"
+            },
+            {
+              "text": "Orders",
+              "href": "#",
+              "flag": "ALWAYS_TRUE"
+            },
+            {
+              "text": "Trade-In",
+              "href": "#",
+              "flag": "FRONTEND_TRADE"
+            }
+          ]
+        }
+      },
+      "sectionDecoration": false,
+      "section1": {
+        "decorationBar": true,
+        "searchPlaceholder": "Search",
+        "title": "Repair, Buy, Trade-In & Protect your essential mobile devices",
+        "subtitle": "Thunder Bay & area's certified device specialists.",
+        "buttons": [
+          {
+            "type": "quote",
+            "title": "Repair Quote",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "type": "appointment",
+            "title": "Shop Devicies",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 2
+          }
+        ],
+        "heroImg": "/images/hero.svg"
+      },
+      "services": [
+        {
+          "img": "/images/trade.png",
+          "title": "TRADE",
+          "btnTitle": "",
+          "href": "#"
+        },
+        {
+          "img": "/images/repair.png",
+          "title": "REPAIR",
+          "btnTitle": "",
+          "href": "#"
+        },
+        {
+          "img": "/images/shop.png",
+          "title": "SHOP",
+          "btnTitle": "",
+          "href": "#"
+        },
+        {
+          "img": "/images/insure.png",
+          "title": "INSURE",
+          "btnTitle": "",
+          "href": "#"
+        }
+      ],
+      "section2": {
+        "title": "What can we fix for you today?",
+        "cards": [
+          {
+            "img": "/images/store-mobile.png",
+            "title": "Cellphone",
+            "order": 1
+          },
+          {
+            "img": "/images/store-tablet.png",
+            "title": "Tablet",
+            "order": 2
+          },
+          {
+            "img": "/images/store-computer.png",
+            "title": "Computer",
+            "order": 3
+          },
+          {
+            "img": "/images/store-game.png",
+            "title": "Console",
+            "order": 4
+          },
+          {
+            "img": "/images/store-other.png",
+            "title": "Other",
+            "order": 5
+          }
+        ],
+        "contents": [
+          {
+            "title": "QUICK DIAGNOSTICS",
+            "content": "Not sure what’s wrong with your device? We quickly diagnose your device to find out what the issue is. The diagnostic is free when you do the repair with us!",
+            "order": 1
+          },
+          {
+            "title": "Low Price Guarantee",
+            "content": "We want you to be confident that you’re getting the best price. We’ll match any local competitor’s published price for the same repair and beat it by $5.",
+            "order": 2
+          },
+          {
+            "title": "LIFETIME SERVICE WARRANTY",
+            "content": "We know you don’t have all day so we’ll return your device as quickly as possible. Most of our repairs can be performed in under two hours.",
+            "order": 3
+          },
+          {
+            "title": "LIFETIME SERVICE WARRANTY",
+            "content": "All of our repairs are backed with our lifetime, hassle-free warranty. This warranty is valid at all of our locations worldwide.",
+            "order": 4
+          }
+        ]
+      },
+      "section3": {
+        "title": "Popular Devices",
+        "subtitle": [
+          "Buy now. Pay later.",
+          "Whatever works for you."
+        ],
+        "content": "We’ve partnered with Flexiti to offer 0% financing on repairs, devices, and accessories.",
+        "color": "#072040",
+        "deviceCard": {
+          "img": "https://storage.googleapis.com/adp_assets/images/21/store-device-card.png"
+        },
+        "visible": true
+      },
+      "sectionWave": {
+        "title": "Ontario's trusted mobile device services provider.",
+        "buttons": [
+          {
+            "link": "/",
+            "visible": true,
+            "title": "Shop Devices"
+          }
+        ],
+        "waveDecorationImg": "/images/three-arrow.svg",
+        "data": [
+          {
+            "title": "Buy Online, Pickup In-store",
+            "content": "In store or curb side pickup available at all locations.",
+            "order": 1,
+            "img": "/images/pickup.png",
+            "visible": true
+          },
+          {
+            "title": "1 Year Warranty",
+            "content": "All of our inventory is DeviceList inspected, tested, and certified.",
+            "order": 2,
+            "img": "/images/warranty.png",
+            "visible": true
+          },
+          {
+            "title": "Largest Inventory",
+            "content": "We carry the largest inventory of devices and replacement parts.",
+            "order": 3,
+            "img": "/images/inventory.png",
+            "visible": true
+          },
+          {
+            "title": "Free Shipping",
+            "content": "Speedy express shipping available for all Canadians coast to coast.",
+            "order": 4,
+            "img": "/images/shipping.png",
+            "visible": true
+          }
+        ]
+      },
+      "section4": {
+        "title": "Thunder bay's trusted mobile device shop",
+        "contentVisible": true,
+        "btnTitle": "Our quality charter",
+        "data": [
+          {
+            "order": 1,
+            "type": "competitive",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/best.png",
+            "title": "Competitive Pricing",
+            "content": "We’re proud to offer the largest selection of fully tested and graded pre-owned devices in Thunder bay. All backed by a one year warranty and lifetime IMEI guarantee"
+          },
+          {
+            "order": 2,
+            "type": "warranty",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/warranty.png",
+            "title": "1 Year Warranty",
+            "content": "We stand behind all our devices with an iron-clad one year warranty that covers everything except physical or liquid damage."
+          },
+          {
+            "order": 3,
+            "type": "amazing",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/amazing.png",
+            "title": "Amazing Service",
+            "content": "Secure shopping experience."
+          },
+          {
+            "order": 4,
+            "type": "trade-in",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/positive.png",
+            "title": "Trade-In Your Device",
+            "content": "Trade in your existing device - broken or not - for credit towards a repair, product or a newer phone. We buy almost every device, no matter the condition."
+          },
+          {
+            "order": 5,
+            "type": "proudly",
+            "img": "https://storage.googleapis.com/adp_assets/images/common/proudly.png",
+            "title": "Proudly Canadian",
+            "content": "Canadian owned and Canadian based."
+          }
+        ]
+      },
+      "section5": {
+        "title": "Protect Your Device with Bounce",
+        "content": "We've partnered with Bounce to offer you a low cost high value protection plan for your new and used devices.",
+        "subtitle": "As low as $39/year!",
+        "subcontent": "24 Hour Refunds",
+        "decorationUpImg": "/images/section5-up.png",
+        "decorationDownImg": "/images/section5-down.png",
+        "subcontentData": [
+          "No Deductible",
+          "Covers New and Used Phones"
+        ],
+        "btnTitle": "Insure My Device",
+        "visible": true
+      },
+      "section6": {
+        "title": "Protect Your Device with Bounce",
+        "content": "We’ve partnered with Bounce to offer you a low cost high value protection plan for your new and used devices.",
+        "overAllRating": {
+          "averScore": 4.9,
+          "score": 5,
+          "totalReviews": 250,
+          "visible": true
+        },
+        "reviews": [
+          {
+            "score": 5,
+            "day": "October 22, 2020",
+            "reviewer": "Pepo",
+            "content": "I needed a new battery for my iphone 6. After contacting several places who all told me the next available appointment was more than a week away, I called Mobile Tech on Corydon. Within 2 hours, my new battery was installed and ready for pickup. Great service and friendly staff."
+          },
+          {
+            "score": 4,
+            "day": "November 9, 2020",
+            "reviewer": "Elena Kurakin",
+            "content": "Very glad I found this place! I send a request through FB to couple places asking for an estimate of the screen replacement and Mobile Tech Lab not only has automated estimation but they gave me a call almost right away to confirm that they have a part and it would be done in"
+          },
+          {
+            "score": 5,
+            "day": "November 2, 2020",
+            "reviewer": "Jessica Johnson",
+            "content": "My experience was excepion really amazing people working there with reasonable prices for fixing electronics, they fix your electronics with a super reasonable time frame,.would highly recommend this company!"
+          }
+        ]
+      },
+      "footer": {
+        "footerLinks": [
+          {
+            "name": "Resources",
+            "lists": [
+              {
+                "href": "/contact",
+                "text": "Contact Us",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/warranty-returns",
+                "text": "Warranty & Returns",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/shipping",
+                "text": "Shipping",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/faqs",
+                "text": "FAQs",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "visible": true,
+            "order": 1
+          },
+          {
+            "name": "About",
+            "lists": [
+              {
+                "href": "/who-we-are",
+                "text": "Who We Are?",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/financing",
+                "text": "Financing",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/blog",
+                "text": "Blog",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/terms",
+                "text": "Terms of Service",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "order": 2,
+            "visible": true
+          },
+          {
+            "name": "Business",
+            "lists": [
+              {
+                "href": "/authorized-dealer",
+                "text": "Authorized Dealer Program",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/sell-with-us",
+                "text": "Sell With Us",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/find-location",
+                "text": "Find a Location",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/business-solutions",
+                "text": "Business Solutions",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "order": 3,
+            "visible": true
+          },
+          {
+            "name": "Quality",
+            "lists": [
+              {
+                "href": "/device-grading",
+                "text": "Device Grading",
+                "order": 1,
+                "visible": true
+              },
+              {
+                "href": "/quality-control",
+                "text": "Quality Control",
+                "order": 2,
+                "visible": true
+              },
+              {
+                "href": "/quality-check",
+                "text": "60 Point Quality Check",
+                "order": 3,
+                "visible": true
+              },
+              {
+                "href": "/phonecheck",
+                "text": "What is PhoneCheck?",
+                "order": 4,
+                "visible": true
+              }
+            ],
+            "order": 4,
+            "visible": true
+          }
+        ],
+        "info": {
+          "phone": "(450) 681-0060",
+          "mail": "info@mobilesnap.ca",
+          "office": "Head office",
+          "address": "4616 Louis-B.-Mayer Street, Laval, QC H7P 0G1"
+        },
+        "imageData": {
+          "visible": true,
+          "logoBeside": [
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/images/flexiti.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/images/Buy Now Pay Later.png"
+            }
+          ],
+          "others": [
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/images/VISA.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/images/mc.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/images/Amex.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/images/Interac.png"
+            },
+            {
+              "visible": true,
+              "link": "#",
+              "img_src": "/images/paypal.png"
+            }
+          ]
+        },
+        "title": {
+          "color": ""
+        },
+        "copyRight": "© 2022 Marnics Mobile. All Rights Reserved."
+      }
+    },
+    "logoData": {
+      "logoHeaderImg": "/images/store-logo-header.svg",
+      "logoFooterImg": "/images/store-logo-footer.png"
+    },
+    "general": {
+      "themeType": "snap",
+      "colorPalle": {
+        "orange": "#235B89",
+        "themeColor": "#BED630",
+        "findBtnColor": "#121212",
+        "underLineCol": "#153863",
+        "priceCol": "#BED630",
+        "repairButtonCol": "#BED630",
+        "nextButtonCol": "#153863",
+        "repairChooseItemCol": "#153863",
+        "repairBooktimeCol": "#153863",
+        "textThemeCol": "#153863",
+        "heartCol": "#153863",
+        "chatBgCol": "#153863",
+        "sec2SvgCol": "#153863",
+        "ratingCol": "#DC7700"
+      },
+      "condition": {
+        "hasShopLink": true,
+        "googleVerification": {
+          "status": false,
+          "metaData": {
+            "name": "google-site-verification",
+            "content": ""
+          }
+        },
+        "defaultLang": "en"
+      },
+      "routes": {
+        "homePage": "/",
+        "repairPage": "/quote",
+        "repairWidgetPage": "/get-quote",
+        "businessPage": "/business",
+        "locationsPage": "/locations",
+        "contactPage": "/contact",
+        "covidPage": "/coronavirus",
+        "privacyPolicy": "/privacy_policy"
+      },
+      "themes": {
+        "normal": "https://storage.googleapis.com/adp_assets/themes/0/theme.css",
+        "minified": "https://storage.googleapis.com/adp_assets/themes/0/theme.min.css"
+      }
+    },
+    "socials": []
+  },
+  "commonCnts": {
+    "repairWidget": {
+      "deviceBrand": {
+        "title": "Choose Your Device Brand",
+        "placeholder": "Search for your Device Brand",
+        "mainTopic": {
+          "title": "Find your device’s brand",
+          "content": [
+            "Your device brand can usually be found on the back of the handset itself, but if for whatever reason you aren’t sure don’t panic!",
+            "It is indicated on back of the device, on the front, or in the Settings/System/About phone section if you are on Android or Settings/ IDs if you are on IOS. It may also be shown on the original box and/or manual that came with your device."
+          ]
+        },
+        "disableTopic": {
+          "title": "How to find the model of your device",
+          "content": "The device model is indicated in the Settings / System / About phone section or in Settings / General / Storage. It may also be shown on the original box and/or manual that came with your device."
+        }
+      },
+      "deviceModel": {
+        "title": "Choose Your Device Model",
+        "placeholder": "Search for your Model",
+        "mainTopic": {
+          "title": "How to find the model of your device",
+          "content": [
+            "The device model is indicated in the Settings / System / About phone section or in Settings / General / Storage. It may also be shown on the original box and/or manual that came with your device."
+          ]
+        },
+        "disableTopic": {
+          "title": "",
+          "content": ""
+        }
+      },
+      "deviceRepairs": {
+        "title": "Choose Your Issue",
+        "placeholder": "What’s broken?",
+        "mainTopic": {
+          "title": "Service Summary"
+        }
+      },
+      "repairAnotherDevice": {
+        "title": "Add Another Device?",
+        "mainTopic": {
+          "title": "Add Another Device?",
+          "content": "Get all your devices done at once with us!"
+        }
+      },
+      "dropOffDevicce": {
+        "title": "How Would You Like to Get Service?"
+      },
+      "receiveQuote": {
+        "title": "How Would You Like to Receive Your Quote?"
+      },
+      "contactDetails": {
+        "title": "Please Enter Your Contact Details",
+        "placeholder": {
+          "firstName": "First Name*",
+          "lastName": "Last Name*",
+          "emailAdd": "E-mail Address*",
+          "phoneNum": "Phone Number",
+          "address1": "Street Address*",
+          "address2": "Address 2",
+          "country": "Country",
+          "city": "City*",
+          "province": "Province*",
+          "postalCode": "Postal Code*"
+        }
+      },
+      "bookTime": {
+        "title": {
+          "MAIL_IN": "Select Mail-In Address",
+          "PICK_UP": "Schedule a Pick-Up",
+          "CURBSIDE": "Book Your Time",
+          "WALK_IN": "Book Your Time",
+          "ONSITE": "Book Your Time"
+        },
+        "select": {
+          "location": {
+            "title": {
+              "MAIL_IN": "Please Select Preferred Service Location",
+              "PICK_UP": "Please Enter Your Address",
+              "CURBSIDE": "Select Preferred Location",
+              "WALK_IN": "Select Preferred Location",
+              "ONSITE": "Enter Your Residential Address"
+            }
+          },
+          "time": {
+            "title": {
+              "MAIL_IN": "Please Enter Your Address for Return Shipment",
+              "PICK_UP": "Select a Pick-Up Time",
+              "CURBSIDE": "Select a day and time",
+              "WALK_IN": "Select a day and time",
+              "ONSITE": "Select Visit Time"
+            }
+          }
+        }
+      },
+      "usefulInfo": {
+        "title": "Let us know if there's anything we should know about your device",
+        "placeholder": "Type your message here (optional)"
+      },
+      "quoteData": [
+        {
+          "img": "https://storage.googleapis.com/adp_assets/images/common/requestQuote.png",
+          "title": "Thank you for choosing",
+          "text": "with a detailed service quote."
+        },
+        {
+          "img": "https://storage.googleapis.com/adp_assets/images/common/thankQuote.png",
+          "title": "Thank you for choosing",
+          "text": "with a detailed service quote and appointment information."
+        }
+      ],
+      "repairServiceSummary": {
+        "title": "Service Summary",
+        "yourInfo": "Your Information",
+        "prefer": "Preferred Contact Method",
+        "deliveryMethod": "Delivery Method",
+        "pickUpFrom": "Pick Up From",
+        "sendTo": "Send To",
+        "returnTo": "Return To",
+        "message": "Message",
+        "device": "Device",
+        "service": "Service",
+        "button": {
+          "schedule": "Schedule Appointment",
+          "quote": "Get Shipping Label"
+        }
+      }
+    },
+    "popularCardData": [
+      {
+        "img": "https://storage.googleapis.com/adp_assets/images/common/camera.png",
+        "title": "iPhone 11 Pro",
+        "subtitle": "As low as",
+        "price": "$897"
+      },
+      {
+        "img": "https://storage.googleapis.com/adp_assets/images/common/camera.png",
+        "title": "iPhone 11 Pro",
+        "subtitle": "As low as",
+        "price": "$897"
+      },
+      {
+        "img": "https://storage.googleapis.com/adp_assets/images/common/camera.png",
+        "title": "iPhone 11 Pro",
+        "subtitle": "As low as",
+        "price": "$897"
+      },
+      {
+        "img": "https://storage.googleapis.com/adp_assets/images/common/camera.png",
+        "title": "iPhone 11 Pro",
+        "subtitle": "As low as",
+        "price": "$897"
+      }
+    ],
+    "arrowData": {
+      "arrowLeft": "https://storage.googleapis.com/adp_assets/images/common/arrow-left.png",
+      "arrowRight": "https://storage.googleapis.com/adp_assets/images/common/arrow-right.png"
+    },
+    "footerImageData": {
+      "buyNow": "https://storage.googleapis.com/adp_assets/images/common/buy-now.png",
+      "deviceList": "https://storage.googleapis.com/adp_assets/images/common/device-list.png",
+      "bell": "https://storage.googleapis.com/adp_assets/images/common/bell.png",
+      "others": [
+        "https://storage.googleapis.com/adp_assets/images/common/visa.png",
+        "https://storage.googleapis.com/adp_assets/images/common/round.png",
+        "https://storage.googleapis.com/adp_assets/images/common/amex.png",
+        "https://storage.googleapis.com/adp_assets/images/common/interactive.png",
+        "https://storage.googleapis.com/adp_assets/images/common/paypal.png",
+        "https://storage.googleapis.com/adp_assets/images/common/fly.png"
+      ]
+    },
+    "locationsData": {
+      "skitterMobile": "https://storage.googleapis.com/adp_assets/images/common/skitter-mobile.png"
+    },
+    "badgeImg": "https://storage.googleapis.com/adp_assets/images/common/Badge.svg",
+    "bounceImg": "https://storage.googleapis.com/adp_assets/images/common/bounce.png",
+    "headerTriangle": "https://storage.googleapis.com/adp_assets/images/common/header-triangle.png",
+    "heartImg": "https://storage.googleapis.com/adp_assets/images/common/heart.png",
+    "chatImg": "https://storage.googleapis.com/adp_assets/images/common/chat.png",
+    "repairPhoneImg": "https://storage.googleapis.com/adp_assets/images/common/repair-phone.png",
+    "repairSec4Img": "https://storage.googleapis.com/adp_assets/images/common/repair-sec4.png",
+    "loaderGif": "https://storage.googleapis.com/adp_assets/images/common/loading.gif",
+    "covidBannerImg": "http://storage.googleapis.com/adp_assets/images/common/covid-banner.png"
+  }
+}

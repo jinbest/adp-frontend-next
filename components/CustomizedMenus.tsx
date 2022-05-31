@@ -35,6 +35,7 @@ interface Props {
 const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const data = storesDetails.storeCnts
   const themeColor = data.general.colorPalle.themeColor
+  const findBtnColor = data.general.colorPalle.findBtnColor
   const themeType = data.general.themeType
   const underLineCol = data.general.colorPalle.underLineCol
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -261,7 +262,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
             : storesDetails.cntUserLocation[0] && AddFormat12(storesDetails.cntUserLocation[0])
         }
         bgcolor={!locSelStatus ? themeColor : "transparent"}
-        txcolor={!locSelStatus ? (themeType === "marnics" ? "#F3F5F6" : "white") : "black"}
+        txcolor={!locSelStatus ? (themeType === "marnics" ? "#F3F5F6" : (findBtnColor ?? "white")) : "black"}
         border={!(locSelStatus && themeType === "marnics") ? "1px solid rgba(0,0,0,0.1)" : "none"}
         textDecorator={!locSelStatus ? "none" : "underline"}
         borderR={themeType === "marnics" ? "0" : "20px"}
@@ -272,7 +273,9 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         fontSize="18px"
         width={!locSelStatus ? width : "auto"}
         hover={!locSelStatus ? true : false}
-        fontFamily={themeType === "marnics" ? "Helvetica Neue Medium" : "Poppins Regular"}
+        fontFamily={
+          themeType === "marnics" ? "Helvetica Neue Medium" : 
+            themeType === "snap" ? "Inter Medium" : "Poppins Regular"}
       />
       <StyledMenu
         id="customized-menu"

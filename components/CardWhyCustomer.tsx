@@ -28,21 +28,23 @@ const CardWhyCustomer = ({ score, content, days, reviewer, icon }: Props) => {
             name="read-only"
             value={Math.round(score)}
             max={5}
-            className={classes.rating}
+            className={`${classes.rating} why-card-rating`}
             readOnly
           />
         </div>
         <p>{days}</p>
       </div>
-      <p className="content">{content}</p>
-      <div className="space-between">
-        <p className="reviewer">{reviewer}</p>
-        {
-          icon &&
-          <div>
-            <img src={icon} alt="google" />
-          </div>
-        }
+      <div className="review-content">
+        <p className="content">{content}</p>
+        <div className="space-between">
+          <p className="reviewer">{reviewer}</p>
+          {
+            icon &&
+            <div>
+              <img src={icon} alt="google" />
+            </div>
+          }
+        </div>
       </div>
     </div>
   )
@@ -61,7 +63,7 @@ export default CardWhyCustomer
 const useStyles = makeStyles(() =>
   createStyles({
     rating: (props: RatingStyleProps) => ({
-      color: `${props.color} !important`,
+      color: `${props.color}`,
     }),
   })
 )
