@@ -25,19 +25,12 @@ const Section5 = () => {
             alt="bounce-img"
           />
           <Typography className="f24 bold sec5-title">{t(thisPage.subtitle)}</Typography>
-          <Box className="col_center">
-            <ul>
-              <Typography className="protect-content">{t(thisPage.subcontent)}</Typography>
-              {thisPage.subcontentData.map((item: string, index: number) => {
-                return (
-                  <li key={index} className="protect-content">
-                    <span className="dot">&nbsp;&bull;&nbsp;</span>
-                    {t(item)}
-                  </li>
-                )
-              })}
-            </ul>
-          </Box>
+          <span className="protect-content">
+            {t(thisPage.subcontent)}
+            {thisPage.subcontentData.map((item: string, index: number) => (
+              <span key={index}>&nbsp;&bull;&nbsp;{t(item)}</span>
+            ))}
+          </span>
           <Box className="sec5-button">
             <Button
               title={t(thisPage.btnTitle)}

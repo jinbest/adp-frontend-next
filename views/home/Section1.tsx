@@ -56,7 +56,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
 
   return (
     <section className="Container">
-      <Grid container>
+      <Grid container className="section1-container">
         <Grid item xs={12} md={6} className="section1-top">
           {thisPage.decorationBar && <div className="decoration-bar" />}
           <h1 className="section1-title align-center">{t(thisPage.title)}</h1>

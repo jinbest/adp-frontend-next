@@ -89,8 +89,8 @@
               "img": "https://storage.googleapis.com/adp_assets/images/21/store-store.png",
               "link": "#"
             },
-            "storeBlue": "https://storage.googleapis.com/adp_assets/images/21/store-store-blue.png",
-            "menu": "https://storage.googleapis.com/adp_assets/images/21/store-menu.png"
+            "storeBlue": "/images/shopping-cart.png",
+            "menu": "/images/view-list.png"
           },
           "userNavItems": [
             {
@@ -237,7 +237,7 @@
         "visible": true
       },
       "sectionWave": {
-        "title": "Ontario's trusted mobile device services provider.",
+        "title": "Winnipeg's trusted mobile device services provider",
         "buttons": [
           {
             "link": "/",
@@ -546,6 +546,7 @@
     },
     "logoData": {
       "logoHeaderImg": "/images/store-logo-header.svg",
+      "logoHeaderMobile": "/images/store-logo-header-mobile.png",
       "logoFooterImg": "/images/store-logo-footer.png"
     },
     "general": {

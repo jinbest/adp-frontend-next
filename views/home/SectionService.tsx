@@ -10,9 +10,9 @@ const SectionService: React.FC = () => {
   return (
     <section className="Container service-section-wrapper">
       <div className="service-section-container">
-        <Grid container spacing={2} item xs={12} sm={6}>
+        <Grid container spacing={2}>
           {[thisPage[1], thisPage[2]].map((item: any, index: number) => (
-            <Grid key={index} item xs={6}>
+            <Grid key={index} item xs={12} sm={6}>
               <ServiceCard
                 icon={item.img}
                 title={item.title}

@@ -36,11 +36,11 @@ const SectionWave = ({ handleStatus }: Props) => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} style={{ display: "flex" }}>
             <div className="section-wave-main-container">
-              <div className="decoration-bar" />
+              <div className="decoration-bar wave-decoration" />
               <h2 className={`${classes.mainTitle} section-wave-main-title`} style={{ marginTop: "0px !important" }}>
                 {t(thisPage.title)}
               </h2>
-              <div className={classes.buttonContainer}>
+              <div className={`${classes.buttonContainer} section-wave-button`}>
                 {buttons.map((item: any, index: number) => {
                   return (
                     <React.Fragment key={index}>

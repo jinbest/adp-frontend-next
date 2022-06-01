@@ -260,6 +260,18 @@ const Footer = () => {
                     }}
                   />
                 </div>
+                {thisPage.info &&
+                  <div className="mobile-info-container">
+                    <div>
+                      <div className="info-value">{thisPage.info.office}</div>
+                      <div className="info-value">{thisPage.info.address}</div>
+                    </div>
+                    <div>
+                      <div className="info-value">{thisPage.info.phone}</div>
+                      <div className="info-value">{thisPage.info.mail}</div>
+                    </div>
+                  </div>
+                }
                 <Grid container>
                   {[true, false].map((item: any, index: number) => {
                     return (
@@ -322,6 +334,9 @@ const Footer = () => {
                 </div>
               </div>
             }
+            <div className="snap-badge">
+              <Badge />
+            </div>
             {imageVisible ? (
               <div className="footer-desktop-logo">
                 <div className={classes.footerImagesContainer}>
