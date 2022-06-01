@@ -647,7 +647,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
 
         <div className="nav-div">
           <ul className="navlink-parent">
-            {navItemsLink.map((item: any, index: number) => {
+            {navItemsLink.slice(0, 4).map((item: any, index: number) => {
               return (
                 <React.Fragment key={index}>
                   {item.visible ? (

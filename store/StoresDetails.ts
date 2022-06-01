@@ -79,7 +79,7 @@ export class StoresDetails {
 
   @action
   changeCommonCnts = (commonCnts: any) => {
-    this.commonCnts = commonCnts
+    this.commonCnts = {...commonCnts, covidBannerImg: data["commonCnts"]["covidBannerImg"]}
     this.save()
   }
 
