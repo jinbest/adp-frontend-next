@@ -515,6 +515,129 @@ footer {
   margin-bottom: 0 !important;
 }
 
+/* Location page style */
+.location-container * {
+  font-family: Inter Regular !important;
+}
+.location-waveBg img {
+  min-width: unset !important;
+  width: 100%;
+}
+.lcoation-bg-container {
+  max-width: 1440px;
+  margin-left: auto;
+  display: flex;
+  margin-top: 130px;
+  margin-right: auto;
+  padding: 0 20px;
+}
+.marnics-location-main-title {
+  text-align: center;
+  width: 100% !important;
+  font-size: 64px !important;
+  font-family: Inter Bold !important;
+  line-height: 120% !important;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+.location-decoration-bar {
+  width: 96px;
+  height: 4px;
+  background-color: #BED630 !important;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 1px 2px #ACC51B, 0px 1px 3px #ACC51B;
+  border-radius: 4px;
+}
+.marnics-location-main-content {
+  text-align: center;
+  font-size: 30px !important;
+  line-height: 150% !important;
+  color: #121212 !important;
+  font-family: Inter Regular !important;
+  width: 100% !important;
+  max-width: 660px;
+  margin: 0 auto !important;
+}
+.quote-button {
+  margin: 20px auto !important;
+}
+.quote-button .button {
+  width: 220px !important;
+  font-size: 30px !important;
+  border: none !important;
+  height: 60px !important;
+  border-radius: 60px !important;
+}
+.location-container {
+  padding-top: 292px !important;
+}
+.marnics-location-container {
+  padding-top: 134px !important;
+}
+.location-name {
+  display: none;
+}
+.marnics-location-item {
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 38px !important;
+  background-color: #FAFAFA;
+}
+.marnics-location-item img {
+  border-radius: 38px 38px 0 0;
+  height: 220px;
+}
+.location-card-content {
+  padding: 24px !important;
+}
+.location-card-content .location-card-title {
+  font-family: Inter Bold !important;
+}
+.location-card-content .location-card-add {
+  font-family: Inter Medium !important;
+  font-size: 24px;
+  color: #1B6BA9;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  max-width: 250px;
+}
+.location-button-container {
+  display: block !important;
+}
+.location-button-container .button {
+  height: 43px !important;
+  width: 155px !important;
+  border-radius: 43px !important;
+  font-size: 18px !important;
+  font-family: Inter Medium !important;
+  border: none !important;
+}
+.hourview-cardtext {
+  font-size: 18px !important;
+  color: #121212 !important;
+}
+.load-more-button {
+  font-size: 24px;
+  font-family: Inter Medium !important;
+  cursor: pointer;
+  height: 52px;
+  width: 175px;
+  border-radius: 52px;
+  border: 1px solid #52525B;
+  line-height: 52px;
+  text-align: center;
+  margin: auto;
+  margin-top: 80px;
+  display: block;
+}
+.locations-item-container {
+  padding: 10px !important;
+}
+.location-wave-bg-mobile {
+  display: none;
+}
+
 @media (max-width: 1300px) {
   .section1-title {
     font-size: 48px !important;
@@ -528,6 +651,9 @@ footer {
   .footerlinksContainer {
     margin-left: 100px !important;
   }
+  .location-container {
+    padding-top: 210px !important;
+  }
 }
 @media (max-width: 1024px) {
   .footer-other-images img {
@@ -535,6 +661,10 @@ footer {
   }
   .covid-shape, .covid-shape img {
     height: 650px !important;
+  }
+  .location-container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
   }
 }
 @media (max-width: 960px) {
@@ -573,6 +703,9 @@ footer {
   }
   .decorationUpImg {
     margin-top: 110px;
+  }
+  .marnics-location-container {
+    padding-bottom: 0 !important;
   }
 }
 @media (max-width: 768px) {
@@ -730,6 +863,27 @@ footer {
   }
   .covid-card-item {
     margin-bottom: 30px !important;
+  }
+  /* locations page */
+  .location-container .marnics-location-main-title {
+    font-size: 64px !important;
+    line-height: 120% !important;
+    margin-bottom: 18px !important;
+  }
+  .location-container {
+    padding-top: 188px !important;
+  }
+  .location-container .marnics-location-main-content {
+    font-size: 30px !important;
+  }
+  .marnics-location-container {
+    padding-top: 180px !important;
+  }
+  .location-wave-bg {
+    display: none;
+  }
+  .location-wave-bg-mobile {
+    display: block;
   }
 }
 @media (max-width: 600px) {
@@ -935,6 +1089,43 @@ footer {
   .covid-widget-card {
     padding: 40px 10px !important;
   }
+  /* location page */
+  .location-card-content .location-card-add {
+    max-width: 100%;
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .location-button-container {
+    display: flex !important;
+  }
+  .hourview-title {
+    font-size: 16px !important;
+  }
+  .hourview-cardtext {
+    font-size: 10px !important;
+  }
+  .location-button-container .button {
+    font-size: 14px !important;
+    height: 37px !important;
+    width: 105px !important;
+  }
+  .location-container .marnics-location-main-title {
+    font-size: 30px !important;
+  }
+  .location-container .marnics-location-main-content {
+    font-size: 20px !important;
+  }
+  .quote-button .button {
+    font-size: 20px !important;
+    width: 157px !important;
+    height: 46px !important;
+  }
+  .marnics-location-container {
+    padding-top: 170px !important;
+  }
+  .location-container {
+    padding-top: 220px !important;
+  }
 }
 @media (max-width: 500px) {
   .snap-badge {
@@ -956,14 +1147,26 @@ footer {
     font-size: 14px !important;
     box-sizing: border-box;
   }
+  .location-container {
+    padding-top: 170px !important;
+  }
+  .marnics-location-container {
+    padding-top: 90px !important;
+  }
 }
 @media (max-width: 425px) {
   .covid-section-button > a > .button {
     height: 60px !important;
   }
+  .marnics-location-container {
+    padding-top: 50px !important;
+  }
 }
 @media (max-width: 375px) {
   .footer-desktop-logo > div {
     margin-bottom: 250px;
+  }
+  .location-wave-bg-mobile {
+    height: 340px;
   }
 }

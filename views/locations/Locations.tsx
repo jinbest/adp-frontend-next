@@ -35,6 +35,7 @@ const Locations = ({ handleStatus }: Props) => {
   const groupNames = _.uniqBy(cityNames, (item) => item)
   const groupBy = thisPage.section1.group
   const groupByLocations: any = groupBy ? groupLocations(storesDetails.allLocations) : ({} as any)
+  const [showMore, setShowMore] = useState<number>(1)
 
   useEffect(() => {
     setPageTitle(thisPage.headData.title)
@@ -65,7 +66,7 @@ const Locations = ({ handleStatus }: Props) => {
 
       <Shape />
       <div className={`${classes.root} location-container`}>
-        {themeType === "marnics" && <div className="decoration-bar location-decoration-bar" style={{ background: "white" }} />}
+        <div className="decoration-bar location-decoration-bar" style={{ background: "white" }} />
         <h1 className={`${classes.mainTitle} marnics-location-main-title`}>{t(thisPage.section1.title)}</h1>
         <Typography className={`${classes.mainContent} marnics-location-main-content`}>{t(thisPage.section1.subtitle)}</Typography>
         {thisPage.section1.button.visible ? (
@@ -90,7 +91,7 @@ const Locations = ({ handleStatus }: Props) => {
         )}
         <div className={`${classes.locationsContainer} marnics-location-container`}>
           {themeType !== "marnics" && storesDetails.storesDetails.name &&
-            <Typography className={classes.subTitle}>
+            <Typography className={`${classes.subTitle} location-name`}>
               {`${t("All")} ${storesDetails.storesDetails.name} ${t("Locations")}`}
             </Typography>
           }
@@ -102,12 +103,12 @@ const Locations = ({ handleStatus }: Props) => {
                     <p className={classes.groupName}>{`${capitalize(it)}, ${groupByLocations[it][0].state
                       }`}</p>
                     <Grid container spacing={5}>
-                      {groupByLocations[it].map((item: any, index: number) => {
+                      {groupByLocations[it].slice.map((item: any, index: number) => {
                         return (
                           <Grid item xs={12} md={6} key={index}>
                             <div className={`${classes.item} marnics-location-item`}>
                               {
-                                themeType === "marnics" ?
+                                (themeType === "marnics" || themeType === "snap") ?
                                   <section>
                                     {item.image_url ? (
                                       <img
@@ -118,11 +119,11 @@ const Locations = ({ handleStatus }: Props) => {
                                     ) : (
                                       <></>
                                     )}
-                                    <div className={classes.locationCardContent}>
-                                      <div className={classes.locationCardTitle}>{item.location_name}</div>
+                                    <div className={`${classes.locationCardContent} location-card-content`}>
+                                      <div className={`${classes.locationCardTitle} location-card-title`}>{item.location_name}</div>
                                       <Grid container>
                                         <Grid item xs={12} sm={6}>
-                                          <div className={classes.locationCardAdd}>{item.address_1 + (item.address_2 ? ` , ${item.address_2} ` : "") + (item.address_3 ? ` , ${item.address_3}` : "") + (item.city ? ` | ${item.city}` : "") + (item.state ? ` | ${item.state}` : "")}</div>
+                                          <div className={`${classes.locationCardAdd} location-card-add`}>{item.address_1 + (item.address_2 ? ` , ${item.address_2} ` : "") + (item.address_3 ? ` , ${item.address_3}` : "") + (item.city ? ` | ${item.city}` : "") + (item.state ? ` | ${item.state}` : "")}</div>
                                           <CustomButtons
                                             location={item}
                                             color={data.general.colorPalle.repairButtonCol}
@@ -180,12 +181,12 @@ const Locations = ({ handleStatus }: Props) => {
             </>
           ) : (
             <Grid container spacing={5}>
-              {_.sortBy(storesDetails.allLocations, (o) => o.display_order).map(
+              {(themeType === "snap" ? _.sortBy(storesDetails.allLocations, (o) => o.display_order).slice(0, 4 * showMore) : _.sortBy(storesDetails.allLocations, (o) => o.display_order)).map(
                 (item: any, index: number) => {
                   return (
-                    <Grid item xs={12} md={6} key={index}>
+                    <Grid item xs={12} md={6} key={index} className="locations-item-container">
                       <div className={`${classes.item} marnics-location-item`}>
-                        {themeType === "marnics" ?
+                        {(themeType === "marnics" || themeType === "snap") ?
                           <section>
                             {item.image_url ? (
                               <img
@@ -196,11 +197,11 @@ const Locations = ({ handleStatus }: Props) => {
                             ) : (
                               <></>
                             )}
-                            <div className={classes.locationCardContent}>
-                              <div className={classes.locationCardTitle}>{item.location_name}</div>
+                            <div className={`${classes.locationCardContent} location-card-content`}>
+                              <div className={`${classes.locationCardTitle} location-card-title`}>{item.location_name}</div>
                               <Grid container>
                                 <Grid item xs={12} sm={6}>
-                                  <div className={classes.locationCardAdd}>{item.address_1 + (item.address_2 ? ` , ${item.address_2} ` : "") + (item.address_3 ? ` , ${item.address_3}` : "") + (item.city ? ` | ${item.city}` : "") + (item.state ? ` | ${item.state}` : "")}</div>
+                                  <div className={`${classes.locationCardAdd} location-card-add`}>{item.address_1 + (item.address_2 ? ` , ${item.address_2} ` : "") + (item.address_3 ? ` , ${item.address_3}` : "") + (item.city ? ` | ${item.city}` : "") + (item.state ? ` | ${item.state}` : "")}</div>
                                   <CustomButtons
                                     location={item}
                                     color={data.general.colorPalle.repairButtonCol}
@@ -254,6 +255,7 @@ const Locations = ({ handleStatus }: Props) => {
               )}
             </Grid>
           )}
+          <div className="load-more-button" onClick={() => setShowMore(showMore + 1)}>Load More...</div>
         </div>
       </div>
     </div>

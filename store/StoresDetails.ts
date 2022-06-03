@@ -79,7 +79,7 @@ export class StoresDetails {
 
   @action
   changeCommonCnts = (commonCnts: any) => {
-    this.commonCnts = {...commonCnts, covidBannerImg: data["commonCnts"]["covidBannerImg"]}
+    this.commonCnts = {...commonCnts, covidBannerImg: data["commonCnts"]["covidBannerImg"], locationsData: data["commonCnts"]["locationsData"]}
     this.save()
   }
 
@@ -91,18 +91,19 @@ export class StoresDetails {
 
   @action
   changeAddLocations = (allLocations: any[]) => {
-    const data = []
+    allLocations = data["allLocations"]
+    const d = []
     for (let i = 0; i < allLocations.length; i++) {
       if (allLocations[i].is_main) {
-        data.push(allLocations[i])
+        d.push(allLocations[i])
       }
     }
     for (let i = 0; i < allLocations.length; i++) {
       if (!allLocations[i].is_main) {
-        data.push(allLocations[i])
+        d.push(allLocations[i])
       }
     }
-    this.allLocations = data
+    this.allLocations = d
     this.save()
   }
 
