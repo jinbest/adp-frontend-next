@@ -637,6 +637,97 @@ footer {
 .location-wave-bg-mobile {
   display: none;
 }
+/* Business page style */
+.business-container {
+  padding: 90px 0 0 !important;
+  max-width: 100% !important;
+}
+.business-top-section {
+  position: relative;
+  padding-bottom: 85px;
+  padding-top: 126px;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0px 10px 10px rgba(0, 0, 0, 0.04);
+  border-radius: 0px 0px 38px 38px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.business-backdrop {
+  position: absolute;
+  top: 0;
+  background-color: #2E83C590;
+  width: 100%;
+  display: block;
+  height: 100%;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0px 10px 10px rgba(0, 0, 0, 0.04);
+  border-radius: 0px 0px 38px 38px;
+}
+.business-main-title {
+  font-family: Inter Bold !important;
+  font-size: 64px !important;
+  color: white !important;
+  margin: 25px 0 10px !important;
+  line-height: 120% !important;
+}
+.business-top-content {
+  position: relative;
+}
+.business-main-content {
+  color: white !important;
+  font-size: 30px !important;
+  line-height: 150% !important;
+  width: 100% !important;
+  max-width: 660px;
+}
+.business-top-content .button {
+  font-size: 30px !important;
+  height: 60px !important;
+  font-family: Inter Medium !important;
+  width: 300px !important;
+  border-radius: 45px !important;
+  border: none !important;
+}
+.business-card-container {
+  margin-top: 70px !important;
+}
+.business-card {
+  background-color: #FAFAFA;
+  box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.25);
+  border-radius: 38px;
+}
+.business-card-title {
+  font-size: 20px;
+  font-family: Inter SemiBold !important;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  line-height: 30px;
+}
+.business-card .business-card-subtitle {
+  font-size: 48px !important;
+  font-family: Inter Bold !important;
+  line-height: 117.5% !important;
+  color: #121212 !important;
+}
+.business-card-text {
+  border: none !important;
+  color: #121212;
+  font-size: 22px;
+  font-family: Inter Medium !important;
+  margin-left: 0 !important;
+}
+.business-svgcontainer {
+  height: 106px !important;
+  width: 106px !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.business-item-card {
+  align-items: center;
+}
+.business-card-item-text {
+  font-size: 22px !important;
+  color: #121212;
+  font-family: Inter Medium !important;
+}
 
 @media (max-width: 1300px) {
   .section1-title {
@@ -653,6 +744,10 @@ footer {
   }
   .location-container {
     padding-top: 210px !important;
+  }
+  .business-card-container {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 @media (max-width: 1024px) {
@@ -714,6 +809,7 @@ footer {
   }
   .container-header {
     margin-top: 0 !important;
+    border-radius: 0 0 24px 24px;
   }
   .logo-header {
     display: none !important;
@@ -884,6 +980,20 @@ footer {
   }
   .location-wave-bg-mobile {
     display: block;
+  }
+  /* Business page style */
+  .business-container {
+    padding-top: 45px !important;
+  }
+  .business-main-title {
+    font-size: 48px !important;
+  }
+  .business-main-content {
+    font-size: 24px !important;
+    margin-bottom: 30px !important;
+  }
+  .business-top-content .button {
+    font-size: 24px !important;
   }
 }
 @media (max-width: 600px) {
@@ -1126,6 +1236,26 @@ footer {
   .location-container {
     padding-top: 220px !important;
   }
+
+  /* Business page style */
+  .business-main-title {
+    font-size: 30px !important;
+  }
+  .business-main-content {
+    font-size: 24px !important;
+  }
+  .business-top-content .button {
+    font-size: 20px !important;
+  }
+  .business-card-title {
+    font-size: 12px;
+  }
+  .business-card .business-card-subtitle {
+    font-size: 24px !important;
+  }
+  .business-card-item-text {
+    font-size: 18px !important;
+  }
 }
 @media (max-width: 500px) {
   .snap-badge {
@@ -1152,6 +1282,15 @@ footer {
   }
   .marnics-location-container {
     padding-top: 90px !important;
+  }
+  .business-card-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .business-card {
+    box-shadow: none;
+    border-radius: 0;
+    background-color: #fff;
   }
 }
 @media (max-width: 425px) {

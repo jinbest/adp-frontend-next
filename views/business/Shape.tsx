@@ -7,7 +7,7 @@ const Shape = () => {
   const shapeData = data.businessPage.shapeData
   const classes = useStyles()
   const themeType = storesDetails.storeCnts.general?.themeType
-
+  if (!shapeData) return null
   return (
     <div>
       {themeType === "marnics" ?
