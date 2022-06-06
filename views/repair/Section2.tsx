@@ -19,6 +19,7 @@ const Section2 = () => {
       }}
     >
       <div className="Container service-section2-text-field">
+        <Typography className="service-section-subtitle">{t(repair.subtitle)}</Typography>
         <Typography className="service-section-title-1">{t(repair.title)}</Typography>
         <Grid container item xs={12} spacing={2} className="repair-sec-content-div">
           {contents.map((item: any, index: number) => {

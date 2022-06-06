@@ -1843,6 +1843,101 @@
         ]
       }
     },
+    "repairPage": {
+      "headData": {
+        "title": "Repair | Snap Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Snap Mobile or book your repair online today!"
+          }
+        ]
+      },
+      "section1": {
+        "decorationImg": "/images/repair-decoration.svg",
+        "title": "Fix Your Device Fast!",
+        "subtitle": "Answer a few questions about your damaged device and we’ll help repair it.",
+        "themeCol": "#121212",
+        "hasBackground": true,
+        "buttons": [
+          {
+            "type": "quote",
+            "title": "Repair Quote",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          }
+        ]
+      },
+      "section2": {
+        "subtitle": "We 'll fix your device",
+        "title": "How does repair work?",
+        "contents": [
+          {
+            "title": "Take our online quiz",
+            "content": "Take our fast online quiz, value your phone, opt-in and sign up for an account.",
+            "order": 1,
+            "type": "onlineQuiz",
+            "img": "/images/online.png"
+          },
+          {
+            "title": "Ship us your phone",
+            "content": "Print out pre-paid shipping label and ship your used phone to Mobile Tech Lab.",
+            "order": 2,
+            "type": "shipPhone",
+            "img": "/images/ship.png"
+          },
+          {
+            "title": "We verify your phone",
+            "content": "Marnics Mobile verifies the phone matches the description you provided, and you get paid!",
+            "order": 3,
+            "type": "verifyPhone",
+            "img": "/images/verify.png"
+          }
+        ],
+        "hasBackground": false,
+        "bgImg": "https://storage.googleapis.com/adp_assets/images/21/store-section2-bg.png"
+      },
+      "section3": {
+        "title": "From New to Reconditioned",
+        "content": "Choose your new phone among our 4 grades, with Marnics Mobile it's easy to choose for any budget!",
+        "children": [
+          {
+            "subtitle": "NEW",
+            "subcontent": "A brand new device with no signs of wear",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-new.png",
+            "order": 1
+          },
+          {
+            "subtitle": "MINT",
+            "subcontent": "No scratches or dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-mint.png",
+            "order": 2
+          },
+          {
+            "subtitle": "GOOD",
+            "subcontent": "Minor scratches or dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-good.png",
+            "order": 3
+          },
+          {
+            "subtitle": "FAIR",
+            "subcontent": "Visible scratchs and dents",
+            "img": "https://storage.googleapis.com/adp_assets/images/21/store-fair.png",
+            "order": 4
+          }
+        ]
+      },
+      "widget": {
+        "metaTitle": "Repair Widget | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ]
+      }
+    },
     "logoData": {
       "logoHeaderImg": "/images/store-logo-header.svg",
       "logoHeaderMobile": "/images/store-logo-header-mobile.png",
@@ -2071,7 +2166,7 @@
     "headerTriangle": "https://storage.googleapis.com/adp_assets/images/common/header-triangle.png",
     "heartImg": "https://storage.googleapis.com/adp_assets/images/common/heart.png",
     "chatImg": "https://storage.googleapis.com/adp_assets/images/common/chat.png",
-    "repairPhoneImg": "https://storage.googleapis.com/adp_assets/images/common/repair-phone.png",
+    "repairPhoneImg": "/images/repair-phone.png",
     "repairSec4Img": "https://storage.googleapis.com/adp_assets/images/common/repair-sec4.png",
     "loaderGif": "https://storage.googleapis.com/adp_assets/images/common/loading.gif",
     "covidBannerImg": "/images/mask.png"
