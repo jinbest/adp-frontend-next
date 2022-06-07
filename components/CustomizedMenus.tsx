@@ -52,7 +52,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const classes = useStyles()
   const StyledMenu = withStyles({
     paper: {
-      borderRadius: `${themeType === "marnics" ? "0" : "15px"}`,
+      borderRadius: `${(themeType === "marnics" || themeType === "snap") ? "0" : "15px"}`,
       boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
       overflow: "inherit !important",
       marginTop: "5px",
@@ -262,7 +262,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
             : storesDetails.cntUserLocation[0] && AddFormat12(storesDetails.cntUserLocation[0])
         }
         bgcolor={!locSelStatus ? themeColor : "transparent"}
-        txcolor={!locSelStatus ? (themeType === "marnics" ? "#F3F5F6" : (findBtnColor ?? "white")) : "black"}
+        txcolor={!locSelStatus ? (themeType === "marnics" ? "#F3F5F6" : (findBtnColor ?? "white")) : (themeType === "snap" ? "white" : "black")}
         border={!(locSelStatus && themeType === "marnics") ? "1px solid rgba(0,0,0,0.1)" : "none"}
         textDecorator={!locSelStatus ? "none" : "underline"}
         borderR={themeType === "marnics" ? "0" : "20px"}
@@ -403,7 +403,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                         to={data.general.routes.repairWidgetPage}
                         style={{ textDecoration: "none" }}
                       >
-                        <div onClick={handleBookRepair}>
+                        <div onClick={handleBookRepair} className="book-find-store">
                           <Button
                             title={t("Book Appointment")}
                             bgcolor={themeColor}
