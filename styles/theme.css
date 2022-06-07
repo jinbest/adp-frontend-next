@@ -1164,6 +1164,7 @@ footer {
     margin-bottom: 17px;
   }
   .whole-map-item1 {
+    width: 100%;
     max-width: none !important;
   }
   .accordion-detail-tools-content {
