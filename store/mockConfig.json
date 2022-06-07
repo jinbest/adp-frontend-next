@@ -1952,9 +1952,9 @@
         "underLineCol": "#153863",
         "priceCol": "#BED630",
         "repairButtonCol": "#BED630",
-        "nextButtonCol": "#153863",
-        "repairChooseItemCol": "#153863",
-        "repairBooktimeCol": "#153863",
+        "nextButtonCol": "#BED630",
+        "repairChooseItemCol": "#333333",
+        "repairBooktimeCol": "#BED630",
         "textThemeCol": "#153863",
         "heartCol": "#153863",
         "chatBgCol": "#153863",
@@ -2085,7 +2085,7 @@
         }
       },
       "usefulInfo": {
-        "title": "Let us know if there's anything we should know about your device",
+        "title": "Enter a Message or Any Useful Information About This Repair",
         "placeholder": "Type your message here (optional)"
       },
       "quoteData": [
@@ -2101,7 +2101,8 @@
         }
       ],
       "repairServiceSummary": {
-        "title": "Service Summary",
+        "title": "Thank you for choosing Mobile Tech Lab for your repair!",
+        "subtitle": "You will receive an email at devicelist@outlook.com shortly, with a detailed service quote.",
         "yourInfo": "Your Information",
         "prefer": "Preferred Contact Method",
         "deliveryMethod": "Delivery Method",

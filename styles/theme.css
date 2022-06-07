@@ -818,6 +818,150 @@ footer {
   padding: 0 30px;
   margin-top: 86px;
 }
+/* Repair Widget */
+.service-widget-title {
+  font-size: 26px !important;
+  font-family: Inter Bold !important;
+  color: #000;
+  margin-left: 24px !important;
+}
+.service-widget .service-widget-card {
+  background-color: #fff;
+  box-shadow: -10px -10px 30px #fff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+  border-radius: 20px;
+}
+.repair-widget-brand-name {
+  display: none;
+}
+.lazyimg-container {
+  display: flex;
+  font-size: 75px;
+}
+.lazyimg-container img {
+  width: 100% !important;
+}
+.brand-search-container {
+  display: block;
+  position: relative;
+}
+.brand-search {
+  border: 1px solid #BDBFC3;
+  width: 100%;
+  height: 45px;
+  border-radius: 45px;
+  font-size: 16px;
+  padding: 0 20px;
+  font-family: Inter Regular !important;
+  box-sizing: border-box;
+}
+.topic-title {
+  font-family: 'Inter Bold' !important;
+}
+.brand-search-container .search-icon {
+  display: none;
+}
+.step1-topic-title {
+  margin-bottom: 30px !important;
+}
+.topic-content {
+  font-size: 16px !important;
+}
+.title-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #BDBFC3;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 16px;
+  font-family: Inter SemiBold !important;
+  color: #fff;
+}
+.device-item-container:hover .title-container {
+  display: block;
+}
+.search-bar-container .search-container {
+  height: 45px;
+  box-sizing: border-box;
+}
+.device-item-container {
+  border: 1px solid #BDBFC3;
+}
+.device-brand-subtitle {
+  font-size: 16px;
+}
+.service-card-button p{
+  color: #BDBFC3;
+  font-size: 14px;
+  font-family: Inter SemiBold !important;
+}
+.service-widget-message {
+  display: flex;
+  position: fixed;
+  left: 32px;
+  bottom: 124px;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background: linear-gradient(253.86deg, rgba(51, 51, 51, 0.2) 4.74%, rgba(255, 255, 255, 0) 81.66%), linear-gradient(180deg, rgba(51, 51, 51, 0.7) 0%, rgba(255, 255, 255, 0) 92.71%), #333333;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 999;
+}
+.service-choose-device-container .step1-topic-title {
+  margin-bottom: 14px !important;
+}
+.estimate-title, .estimate-content {
+  font-size: 16px;
+}
+.estimate-times-div {
+  margin-bottom: 13px;
+}
+.device-service-item > p {
+  font-size: 16px;
+}
+.repair-another-device {
+  width: 420px;
+}
+.repair-another-device .button {
+  width: 200px !important;
+  height: 40px !important;
+  font-size: 16px !important;
+  font-weight: 700;
+}
+.service-summary-title {
+  font-size: 20px !important; 
+  margin-bottom: 8px !important;
+}
+.service-summary-service-child {
+  font-size: 16px !important;
+}
+.input-component {
+  height: 45px !important;
+  border: 1px solid #BDBFC3 !important;
+}
+.react-tel-input {
+  height: 45px !important;
+}
+.react-tel-input .form-control {
+  height: 45px !important;
+  border: 1px solid #BDBFC3 !important;
+}
+.useful-textarea {
+  font-family: Inter Regular;
+  font-size: 16px;
+}
+.repair-service-summary-title {
+  font-family: Inter Bold !important;
+  font-size: 20px !important;
+}
+.repair-service-summary-subtitle {
+  font-size: 16px !important;
+  text-align: center;
+}
 
 @media (max-width: 1300px) {
   .section1-title {
