@@ -8,7 +8,6 @@ import { storesDetails } from "../store"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { GridMDInterface } from "../model/grid-params"
 import _ from "lodash"
-import Link from "next/link"
 import Badge from "./Badge"
 
 type FooterLinksComponentProps = {
@@ -20,8 +19,6 @@ type FooterLinksComponentProps = {
 const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponentProps) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
-  const storeData = storesDetails.storeCnts
-  const themeType = storeData.general.themeType
   const open = Boolean(anchorEl)
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -37,7 +34,7 @@ const FooterLinksComponent = ({ data, isMain, initGridMD }: FooterLinksComponent
         return (
           <React.Fragment key={index}>
             {item.is_main === isMain && (
-              <Grid item xs={12} sm={6} md={themeType === "marnics" ? 6 : initGridMD}>
+              <Grid item xs={12} sm={6} md={initGridMD}>
                 <Typography
                   aria-owns={open ? "mouse-over-popover" : undefined}
                   aria-haspopup="true"
@@ -188,18 +185,6 @@ const Footer = () => {
                   }}
                 />
               </div>
-              <Grid className="d-flex" container spacing={1}>
-                {themeType === "marnics" &&
-                  thisPage.footerLinks.map((i: any) => (
-                    <Grid item sm={3} key={i.order} className="footer-links-item">
-                      <div className="footer-links-name">{i.name}</div>
-                      {i.lists?.map((item: any) => (
-                        <Link href={item.href ?? "/"} key={item.text}><div className="footer-link-text">{item.text}</div></Link>
-                      ))}
-                    </Grid>
-                  ))
-                }
-              </Grid>
               <div className="footer-mobile-logo">
                 <Badge />
               </div>
@@ -266,48 +251,46 @@ const Footer = () => {
                       key={index}
                       data={storesDetails.allLocations}
                       isMain={item}
-                      initGridMD={themeType === "marnics" ? 3 : 4}
+                      initGridMD={4}
                     />
                   )
                 })}
               </Grid>
             </div>
-            {themeType !== "marnics" &&
-              <Grid container className={classes.footerlinks}>
-                {footerCols.map((item: any, index: number) => {
-                  return (
-                    <React.Fragment key={index}>
-                      {item.visible ? (
-                        <Grid item xs={12} sm={colSM}>
-                          <ul>
-                            <li className={classes.footerLocName}>{t(item.name)}</li>
-                            {_.sortBy(item.lists, (o) => o.order).map((it: any, idx: number) => (
-                              <React.Fragment key={idx}>
-                                {it.visible ? (
-                                  <li className={classes.footerLocAddress}>
-                                    {isOriginSameAsLocation(it.href) ? (
-                                      <a href={it.href}>{t(it.text)}</a>
-                                    ) : (
-                                      <a href={it.href} target="_blank" rel="noreferrer">
-                                        {t(it.text)}
-                                      </a>
-                                    )}
-                                  </li>
-                                ) : (
-                                  <></>
-                                )}
-                              </React.Fragment>
-                            ))}
-                          </ul>
-                        </Grid>
-                      ) : (
-                        <></>
-                      )}
-                    </React.Fragment>
-                  )
-                })}
-              </Grid>
-            }
+            <Grid container className={`${classes.footerlinks} footer-links-container`}>
+              {footerCols.map((item: any, index: number) => {
+                return (
+                  <React.Fragment key={index}>
+                    {item.visible ? (
+                      <Grid item xs={12} sm={colSM}>
+                        <ul>
+                          <li className={classes.footerLocName}>{t(item.name)}</li>
+                          {_.sortBy(item.lists, (o) => o.order).map((it: any, idx: number) => (
+                            <React.Fragment key={idx}>
+                              {it.visible ? (
+                                <li className={classes.footerLocAddress}>
+                                  {isOriginSameAsLocation(it.href) ? (
+                                    <a href={it.href} className="footer-link-items">{t(it.text)}</a>
+                                  ) : (
+                                    <a href={it.href} className="footer-link-items" target="_blank" rel="noreferrer">
+                                      {t(it.text)}
+                                    </a>
+                                  )}
+                                </li>
+                              ) : (
+                                <></>
+                              )}
+                            </React.Fragment>
+                          ))}
+                        </ul>
+                      </Grid>
+                    ) : (
+                      <></>
+                    )}
+                  </React.Fragment>
+                )
+              })}
+            </Grid>
             {imageVisible ? (
               <div className="footer-desktop-logo">
                 <div className={classes.footerImagesContainer}>
