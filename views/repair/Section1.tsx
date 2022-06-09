@@ -53,7 +53,7 @@ const Section1 = ({ handleStatus }: Props) => {
                   return (
                     <React.Fragment key={index}>
                       {item.visible ? (
-                        <Box className="service-section-button">
+                        <Box className="service-section-button repair-section-button">
                           {isExternal(item.link) ? (
                             <a
                               href={item.link}
