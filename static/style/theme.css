@@ -784,6 +784,7 @@
   justify-content: center;
   margin: auto;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .card-customized-container-desktop > a {
