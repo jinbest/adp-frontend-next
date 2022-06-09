@@ -189,42 +189,44 @@ const Footer = () => {
                 <Badge />
               </div>
               <div className="footer-mobile-logo">
-                <div className={classes.footerImagesContainer}>
-                  <div className={classes.footerBesideImages}>
-                    {footerImageData.logoBeside.map((i: any, ind: number) => (
-                      <div key={ind}>
-                        <a
-                          href={i.link}
-                          style={{ cursor: i.link ? "pointer" : "inherit" }}
-                        >
-                          <img src={i.img_src} alt={`footer-logos-${ind + 1}`} />
-                        </a>
-                      </div>
-                    ))}
+                {themeType === "marnics" &&
+                  <div className={classes.footerImagesContainer}>
+                    <div className={classes.footerBesideImages}>
+                      {footerImageData.logoBeside.map((i: any, ind: number) => (
+                        <div key={ind}>
+                          <a
+                            href={i.link}
+                            style={{ cursor: i.link ? "pointer" : "inherit" }}
+                          >
+                            <img src={i.img_src} alt={`footer-logos-${ind + 1}`} />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                    <div className={classes.footerImages}>
+                      {_.sortBy(footerImageData.others, (o) => o.order).map(
+                        (item: any, index: number) => {
+                          return (
+                            <React.Fragment key={index}>
+                              {item.visible ? (
+                                <div className="footer-other-images" key={index}>
+                                  <a
+                                    href={item.link}
+                                    style={{ cursor: item.link ? "pointer" : "inherit" }}
+                                  >
+                                    <img src={item.img_src} alt={`footer-logos-${index + 1}`} />
+                                  </a>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                            </React.Fragment>
+                          )
+                        }
+                      )}
+                    </div>
                   </div>
-                  <div className={classes.footerImages}>
-                    {_.sortBy(footerImageData.others, (o) => o.order).map(
-                      (item: any, index: number) => {
-                        return (
-                          <React.Fragment key={index}>
-                            {item.visible ? (
-                              <div className="footer-other-images" key={index}>
-                                <a
-                                  href={item.link}
-                                  style={{ cursor: item.link ? "pointer" : "inherit" }}
-                                >
-                                  <img src={item.img_src} alt={`footer-logos-${index + 1}`} />
-                                </a>
-                              </div>
-                            ) : (
-                              <></>
-                            )}
-                          </React.Fragment>
-                        )
-                      }
-                    )}
-                  </div>
-                </div>
+                }
                 <div>
                   <p
                     className="device-list-grid copyright desktop-copyright"
