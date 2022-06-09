@@ -184,7 +184,7 @@ footer {
     height: 40px;
   }
 }
-.footer-mobile-logo {
+.footer-mobile-logo, .marnics-footer-badge {
   display: none;
 }
 .decoration-bar {
@@ -471,6 +471,9 @@ footer {
 @media (max-width: 600px) {
   .decoration-bar {
     margin-bottom: 9px;
+  }
+  .footer-desktop-logo {
+    display: none !important;
   }
   .decoration-left {
     padding-top: 240px;
