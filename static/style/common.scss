@@ -510,6 +510,12 @@ footer {
   .service-content .button {
     margin-top: 10px !important;
   }
+  .marnics-banner2-left::after {
+    box-shadow: -25px 12px 12px rgba(35, 91, 137, 0.25);
+  }
+  .marnics-banner2-left::before {
+    box-shadow: 25px 12px 12px rgba(35, 91, 137, 0.25);
+  }
 }
 @media (max-width: 425px) {
   .decoration-left {
