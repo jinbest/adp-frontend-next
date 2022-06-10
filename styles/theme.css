@@ -455,6 +455,7 @@ footer {
 }
 .covid-section-button > a > .button {
   margin-right: 0;
+  width: 300px !important;
 }
 .covid-shape {
   box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
@@ -1172,11 +1173,7 @@ footer {
   }
 }
 @media (max-width: 768px) {
-  .header-brand {
-    display: none;
-  }
   .container-header {
-    margin-top: 0 !important;
     border-radius: 0 0 24px 24px;
   }
   .logo-header {
@@ -1387,7 +1384,6 @@ footer {
     padding: 0 15px;
   }
   .mobile-search-div {
-    top: 60px;
     background-color: #121212;
     padding-top: 5px;
     padding-left: 15px;
@@ -1409,7 +1405,10 @@ footer {
     padding: 0 20px;
   }
   .section1-top {
-    padding-top: 140px !important;
+    padding-top: 200px !important;
+  }
+  .business-top-section {
+    padding-top: 186px;
   }
   .section1-title {
     font-size: 30px !important;
@@ -1606,7 +1605,10 @@ footer {
     padding-top: 170px !important;
   }
   .location-container {
-    padding-top: 220px !important;
+    padding-top: 290px !important;
+  }
+  .lcoation-bg-container {
+    margin-top: 180px;
   }
 
   /* Business page style */
@@ -1701,7 +1703,7 @@ footer {
     box-sizing: border-box;
   }
   .location-container {
-    padding-top: 170px !important;
+    padding-top: 230px !important;
   }
   .marnics-location-container {
     padding-top: 90px !important;
@@ -1763,6 +1765,12 @@ footer {
   }
   .marnics-location-container {
     padding-top: 50px !important;
+  }
+  .location-container {
+    padding-top: 240px !important;
+  }
+  .lcoation-bg-container {
+    margin-top: 200px;
   }
 }
 @media (max-width: 375px) {
