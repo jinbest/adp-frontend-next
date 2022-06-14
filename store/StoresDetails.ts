@@ -1,7 +1,6 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { GetCurrentLocParams } from "../model/get-current-location"
 import { appointmentQuoteType } from "../const/_variables"
-import data from "./mockConfig.json"
 
 configure({ enforceActions: "always" })
 
@@ -73,13 +72,13 @@ export class StoresDetails {
 
   @action
   changeStoreCnts = (storeCnts: any) => {
-    this.storeCnts = {...storeCnts, ...data["storesCnts"]}
+    this.storeCnts = storeCnts
     this.save()
   }
 
   @action
   changeCommonCnts = (commonCnts: any) => {
-    this.commonCnts = {...commonCnts, covidBannerImg: data["commonCnts"]["covidBannerImg"], locationsData: data["commonCnts"]["locationsData"], repairPhoneImg: data["commonCnts"]["repairPhoneImg"], repairWidget: data["commonCnts"]["repairWidget"]}
+    this.commonCnts = commonCnts
     this.save()
   }
 
@@ -91,19 +90,18 @@ export class StoresDetails {
 
   @action
   changeAddLocations = (allLocations: any[]) => {
-    allLocations = data["allLocations"]
-    const d = []
+    const data = []
     for (let i = 0; i < allLocations.length; i++) {
       if (allLocations[i].is_main) {
-        d.push(allLocations[i])
+        data.push(allLocations[i])
       }
     }
     for (let i = 0; i < allLocations.length; i++) {
       if (!allLocations[i].is_main) {
-        d.push(allLocations[i])
+        data.push(allLocations[i])
       }
     }
-    this.allLocations = d
+    this.allLocations = data
     this.save()
   }
 

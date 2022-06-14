@@ -35,7 +35,7 @@
 }
 @font-face {
   font-family: "Inter Bold";
-  src: url("/fonts/Inter-Bold.ttf") format("truetype");
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-Bold.ttf") format("truetype");
   ascent-override: 100%;
   descent-override: 20%;
   line-gap-override: normal;
@@ -44,7 +44,7 @@
 }
 @font-face {
   font-family: "Inter Regular";
-  src: url("/fonts/Inter-Regular.ttf") format("truetype");
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-Regular.ttf") format("truetype");
   ascent-override: 100%;
   descent-override: 20%;
   line-gap-override: normal;
@@ -54,7 +54,7 @@
 
 @font-face {
   font-family: "Inter Medium";
-  src: url("/fonts/Inter-Medium.ttf") format("truetype");
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-Medium.ttf") format("truetype");
   ascent-override: 100%;
   descent-override: 20%;
   line-gap-override: normal;
@@ -64,7 +64,7 @@
 
 @font-face {
   font-family: "Inter SemiBold";
-  src: url("/fonts/Inter-SemiBold.ttf") format("truetype");
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-SemiBold.ttf") format("truetype");
   ascent-override: 100%;
   descent-override: 20%;
   line-gap-override: normal;
