@@ -306,7 +306,7 @@ body, p, div, a {
   font-size: 24px !important;
   color: black;
 }
-.section6-rating {
+.sec6-rating {
   color: #BED630 !important;
   margin-top: 80px;
   margin-bottom: 16px;
@@ -1244,7 +1244,7 @@ footer {
   .section-wave-main-container {
     margin-left: 0;
   }
-  .section-wave-main-container .section-wave-button {
+  .section-wave-main-container .sectionwave-button-container {
     justify-content: flex-start !important;
   }
   .wave-children {
@@ -1265,7 +1265,7 @@ footer {
     max-width: 512px;
     margin: auto !important;
   }
-  .section6-rating {
+  .sec6-rating {
     margin-top: 46px;
   }
   .card-why-customer .score-div {
@@ -1488,7 +1488,7 @@ footer {
   .section-review-content {
     font-size: 14px !important;
   }
-  .section6-rating {
+  .sec6-rating {
     margin-top: 24px;
   }
   .card-why-customer {

@@ -47,7 +47,7 @@ const Section6 = () => {
                   max={5}
                   readOnly
                   style={{ transform: "scale(1.2)" }}
-                  className={`${classes.rating} section6-rating`}
+                  className={`${classes.rating} sec6-rating`}
                 />
                 <Typography className={`${classes.subTitle} sec6-subtitle`}>{`${overAllRating.averScore} ${t("of")} ${overAllRating.score
                   } ${t("stars")}`}</Typography>
@@ -62,7 +62,7 @@ const Section6 = () => {
                   max={5}
                   readOnly
                   style={{ transform: "scale(1.2)" }}
-                  className={`${classes.rating} section6-rating`}
+                  className={`${classes.rating} sec6-rating`}
                 />
                 <Typography className={`${classes.subTitle} sec6-subtitle`}>{`${overAllRating.averScore} ${t("of")} ${overAllRating.score
                   } ${t("stars")}`}</Typography>

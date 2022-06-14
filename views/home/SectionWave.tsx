@@ -40,7 +40,7 @@ const SectionWave = ({ handleStatus }: Props) => {
               <h2 className={`${classes.mainTitle} section-wave-main-title`} style={{ marginTop: "0px !important" }}>
                 {t(thisPage.title)}
               </h2>
-              <div className={`${classes.buttonContainer} section-wave-button`}>
+              <div className={`${classes.buttonContainer} sectionwave-button-container`}>
                 {buttons.map((item: any, index: number) => {
                   return (
                     <React.Fragment key={index}>

@@ -32,6 +32,30 @@ interface Props {
   features: any[]
 }
 
+const StyledMenu = withStyles({
+  paper: {
+    borderRadius: "15px",
+    boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
+    overflow: "inherit !important",
+    marginTop: "5px",
+    border: "1px solid #C4C4C4",
+  },
+})((props: MenuProps) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    {...props}
+  />
+))
+
 const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const data = storesDetails.storeCnts
   const themeColor = data.general.colorPalle.themeColor
@@ -48,31 +72,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const [postCode, setPostCode] = useState("")
   const [isRequest, setIsRequest] = useState(false)
   const [myStore, setMyStore] = useState("My Store")
-
   const classes = useStyles()
-  const StyledMenu = withStyles({
-    paper: {
-      borderRadius: `${(themeType === "marnics" || themeType === "snap") ? "0" : "15px"}`,
-      boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
-      overflow: "inherit !important",
-      marginTop: "5px",
-      border: `${themeType === "marnics" ? "none" : "1px solid #C4C4C4"}`,
-    },
-  })((props: MenuProps) => (
-    <Menu
-      elevation={0}
-      getContentAnchorEl={null}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      {...props}
-    />
-  ))
   const handleLocSelect = (index: number) => {
     const cntLocation: any = storesDetails.cntUserLocation[index]
     setLocations([cntLocation])
@@ -372,13 +372,13 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                   className="link"
                   style={{ color: underLineCol }}
                   href={`${storesDetails.cntUserLocation[0] &&
-                      storesDetails.cntUserLocation[0].business_page_link != null
-                      ? storesDetails.cntUserLocation[0].business_page_link
-                      : `https://www.google.com/maps/search/?api=1&query=${getAddress(
-                        storesDetails.cntUserLocation[0]
-                      )
-                        .split(" ")
-                        .join("+")}`
+                    storesDetails.cntUserLocation[0].business_page_link != null
+                    ? storesDetails.cntUserLocation[0].business_page_link
+                    : `https://www.google.com/maps/search/?api=1&query=${getAddress(
+                      storesDetails.cntUserLocation[0]
+                    )
+                      .split(" ")
+                      .join("+")}`
                     }`}
                   target="_blank"
                   rel="noreferrer"

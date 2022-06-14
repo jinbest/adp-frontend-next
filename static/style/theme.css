@@ -244,6 +244,7 @@
   margin-top: 20px;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .card-why-customer .rating {
@@ -783,6 +784,7 @@
   justify-content: center;
   margin: auto;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .card-customized-container-desktop > a {

@@ -71,7 +71,7 @@ const Button = ({
       >
         {icon && <RoomOutlinedIcon />}
         {title && title.length > 17 ? (
-          <EllipsisText text={title} length={10} />
+          <EllipsisText text={title} length={7} />
         ) : children ? (
           children
         ) : (

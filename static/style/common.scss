@@ -184,7 +184,7 @@ footer {
     height: 40px;
   }
 }
-.footer-mobile-logo, .load-more-button, .business-backdrop, .repair-section1-decoration-mobile {
+.footer-mobile-logo, .load-more-button, .business-backdrop, .repair-section1-decoration-mobile, .marnics-footer-badge {
   display: none;
 }
 .decoration-bar {
@@ -472,8 +472,11 @@ footer {
   .decoration-bar {
     margin-bottom: 9px;
   }
+  .footer-desktop-logo {
+    display: none !important;
+  }
   .decoration-left {
-    padding-top: 200px;
+    padding-top: 240px;
   }
   .decoration-circle {
     width: 13px;
@@ -498,10 +501,28 @@ footer {
   .mobile-decoration .decoration-circle-right {
     margin-top: 70px;
   }
+  .service-title {
+    font-size: 12px;
+  }
+  .service-card img {
+    width: 75px;
+  }
+  .service-card {
+    height: 150px;
+  }
+  .service-content .button {
+    margin-top: 10px !important;
+  }
+  .marnics-banner2-left::after {
+    box-shadow: -25px 12px 12px rgba(35, 91, 137, 0.25);
+  }
+  .marnics-banner2-left::before {
+    box-shadow: 25px 12px 12px rgba(35, 91, 137, 0.25);
+  }
 }
 @media (max-width: 425px) {
   .decoration-left {
-    padding-top: 250px;
+    padding-top: 280px;
   }
   .marnics-banner2 {
     padding: 230px 0;
