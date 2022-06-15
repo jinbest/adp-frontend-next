@@ -1,6 +1,7 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { GetCurrentLocParams } from "../model/get-current-location"
 import { appointmentQuoteType } from "../const/_variables"
+import mockData from "./mockConfig.json"
 
 configure({ enforceActions: "always" })
 
@@ -72,7 +73,7 @@ export class StoresDetails {
 
   @action
   changeStoreCnts = (storeCnts: any) => {
-    this.storeCnts = storeCnts
+    this.storeCnts = {...storeCnts, ...mockData["storesCnts"]}
     this.save()
   }
 

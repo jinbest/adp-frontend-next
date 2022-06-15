@@ -21,16 +21,17 @@ const ServiceCard: React.FC<ServiceCardType> = (props) => {
       <img src={icon} alt="icon" />
       <div className="service-content">
         <div className="service-title">{title}</div>
-          <Button
-            margin="33px auto 0"
-            borderR="0"
-            fontSize="20px"
-            height="48px"
-            border="none"
-            title={btnTitle}
-            fontFamily={themeType === "marnics" ? "Helvetica Neue Bold" : "Poppins Regular"}
-            onClick={() => router.push(link!)}
-          />
+        <Button
+          margin="33px auto 0"
+          borderR="0"
+          fontSize="20px"
+          height="48px"
+          border="none"
+          title={btnTitle}
+          fontFamily={themeType === "marnics" ? "Helvetica Neue Bold" : "Poppins Regular"}
+          onClick={() => router.push(link!)}
+          bgcolor={data.general.colorPalle.cardBtnColor}
+        />
       </div>
     </div>
   )

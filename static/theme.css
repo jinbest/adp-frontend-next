@@ -1,0 +1,43 @@
+.brand-nav-item {
+  font-size: 14px;
+}
+.container-header > a > img {
+  height: 40px !important;
+}
+#header-search .search-container {
+  height: 48px;
+}
+#header-search input {
+  font-size: 18px;
+}
+.section1-title {
+  text-align: left !important;
+  margin-left: 0 !important;
+}
+.section1-top {
+  padding-top: 310px !important;
+}
+.section1-subtitle {
+  text-align: left !important;
+  padding: 0 !important;
+}
+.service-section-container {
+  box-shadow: none;
+  background-color: transparent;
+  padding-top: 270px;
+}
+.service-card {
+  height: 100%;
+  border-radius: 10.29px;
+  padding: 32px 24px;
+  box-sizing: border-box;
+  box-shadow: 0 10.29px 10.29px #AEAEC040;
+}
+.service-title {
+  font-size: 33px;
+  font-family: Poppins Bold !important;
+}
+.service-card .button {
+  border-radius: 10.29px !important;
+  font-weight: 700;
+}
