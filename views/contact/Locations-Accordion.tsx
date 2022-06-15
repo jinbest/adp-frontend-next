@@ -114,11 +114,15 @@ const LocationsAccordion = ({
     }
   }, [storesDetails.cntUserLocation])
 
+  const getBGStyle = () => {
+    if (themeType === "snap") return "#2E83C5"
+    else return storesDetails.storeCnts.homepage.header.brandData.brandThemeCol
+  }
   return (
     <div className={`${classes.container} accordion-wrapper`}>
       <div
         className={`${classes.banner} contact-banner`}
-        style={{ background: themeType === "snap" ? "#2E83C5" : storesDetails.storeCnts.homepage.header.brandData.brandThemeCol }}
+        style={{ background: getBGStyle() }}
       >
         {`${storesDetails.findAddLocation.length} Stores near you`}
       </div>

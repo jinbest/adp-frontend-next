@@ -252,7 +252,19 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         setPostCode("")
       })
   }
-
+  const getTxColor = () => {
+    if (!locSelStatus) {
+      if (themeType === "marnics") return "#F3F5F6"
+      else return findBtnColor ?? "white"
+    } else {
+      if (themeType === "snap") return "white"
+      else return "black"
+    }
+  }
+  const getBorderStyle = () => {
+    if (!locSelStatus && themeType === "marnics") return "1px solid rgba(0, 0, 0, 0.1)"
+    else return "none"
+  }
   return (
     <div>
       <Button
@@ -262,8 +274,8 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
             : storesDetails.cntUserLocation[0] && AddFormat12(storesDetails.cntUserLocation[0])
         }
         bgcolor={!locSelStatus ? themeColor : "transparent"}
-        txcolor={!locSelStatus ? (themeType === "marnics" ? "#F3F5F6" : (findBtnColor ?? "white")) : (themeType === "snap" ? "white" : "black")}
-        border={!(locSelStatus && themeType === "marnics") ? "1px solid rgba(0,0,0,0.1)" : "none"}
+        txcolor={getTxColor()}
+        border={getBorderStyle()}
         textDecorator={!locSelStatus ? "none" : "underline"}
         borderR={themeType === "marnics" ? "0" : "20px"}
         aria-controls="customized-menu"
