@@ -295,6 +295,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        classes={{paper: "custom-menu"}}
       >
         <div className="triangle" style={{ right: "65px" }}></div>
         <div className="menu-content-div">
