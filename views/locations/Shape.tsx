@@ -22,7 +22,7 @@ const Shape = () => {
           }
         </div>
       </div>
-      {themeType === "marnics" ? null :
+      {(themeType === "marnics" || themeType === "snap") ? null :
         <div className={classes.skitImg}>
           {storesDetails.commonCnts.locationsData.skitterMobile ?
             <img
