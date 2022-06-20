@@ -1136,24 +1136,66 @@
         },
         "navItems": [
           {
-            "href": "/trade",
-            "text": "Trade",
+            "href": "/quote",
+            "text": "Repair",
             "flag": "ALWAYS_TRUE",
             "order": 1,
             "visible": true
           },
           {
-            "href": "/quote",
-            "text": "Repair",
+            "href": "/protect",
+            "text": "Protect",
             "flag": "ALWAYS_TRUE",
             "order": 2,
             "visible": true
           },
           {
-            "href": "/buy",
-            "text": "Buy",
+            "href": "/shop",
+            "text": "Shop",
             "flag": "ALWAYS_TRUE",
             "order": 3,
+            "visible": true
+          },
+          {
+            "href": "/trade",
+            "text": "Trade",
+            "flag": "ALWAYS_TRUE",
+            "order": 4,
+            "visible": true
+          },
+          {
+            "href": "/insure",
+            "text": "Insure",
+            "flag": "ALWAYS_TRUE",
+            "order": 5,
+            "visible": true
+          },
+          {
+            "href": "/business",
+            "text": "Business",
+            "flag": "ALWAYS_TRUE",
+            "order": 6,
+            "visible": true
+          },
+          {
+            "href": "/financing",
+            "text": "Financing",
+            "flag": "ALWAYS_TRUE",
+            "order": 7,
+            "visible": true
+          },
+          {
+            "href": "/locations",
+            "text": "Locations",
+            "flag": "ALWAYS_TRUE",
+            "order": 8,
+            "visible": true
+          },
+          {
+            "href": "/contact",
+            "text": "Contact Us",
+            "flag": "ALWAYS_TRUE",
+            "order": 9,
             "visible": true
           }
         ],
@@ -1185,13 +1227,13 @@
           "avatarData": {
             "userActive": "https://storage.googleapis.com/adp_assets/images/21/store-user-active.png",
             "userDeactive": "https://storage.googleapis.com/adp_assets/images/21/store-user-deactive.png",
-            "cancel": "/images/close.png",
+            "cancel": "/images/store-close.png",
             "store": {
               "img": "https://storage.googleapis.com/adp_assets/images/21/store-store.png",
               "link": "#"
             },
             "storeBlue": "/images/shopping-cart.png",
-            "menu": "/images/view-list.png"
+            "menu": "/images/store-menu-list.png"
           },
           "userNavItems": [
             {
@@ -1228,7 +1270,22 @@
         "searchPlaceholder": "Find your device",
         "title": "Trade, repair, buy or sell your mobile device",
         "subtitle": "Okotok's mobile device specialists",
-        "buttons": [],
+        "buttons": [
+          {
+            "type": "quote",
+            "link": "/get-quote",
+            "title": "Get Quote",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "type": "appointment",
+            "link": "/get-quote",
+            "title": "Book Appointment",
+            "visible": true,
+            "order": 2
+          }
+        ],
         "bannerImg": "/images/store-hero.png"
       },
       "services": [
@@ -1323,6 +1380,7 @@
         "visible": true
       },
       "sectionWave": {
+        "bgImg": "/images/store-wave-bg.png",
         "title": "Welcome to PhonePhix, Okotoks mobile device marketplace",
         "buttons": [
           {
@@ -1422,7 +1480,7 @@
           "averScore": 4.9,
           "score": 5,
           "totalReviews": 250,
-          "visible": false
+          "visible": true
         },
         "reviews": [
           {
@@ -1585,14 +1643,14 @@
               "visible": true,
               "link": "#",
               "img_src": "/images/store-flexiti.png"
-            },
+            }
+          ],
+          "others": [
             {
               "visible": true,
               "link": "#",
               "img_src": "/images/store-visa.png"
-            }
-          ],
-          "others": [
+            },
             {
               "visible": true,
               "link": "#",
@@ -1618,7 +1676,12 @@
         "title": {
           "color": ""
         },
-        "copyRight": "© 2022 Phonephix 1.0.2. All Rights Reserved."
+        "images": {
+          "desktop": "/images/store-footer-bg.png",
+          "mobile": "/images/store-footer-bg.png"
+        },
+        "copyRight": "© 2022 Phonephix 1.0.2. All Rights Reserved.",
+        "copyRightContent": "All trademarks are properties of their respective holders. 11253913 Canada Inc. o/a 'Phonephix' does not own or make claim to those trademarks used on this website in which it is not the holder."
       }
     },
     "covidPage": {
@@ -1883,10 +1946,10 @@
         "orange": "#235B89",
         "themeColor": "#009EEC",
         "findBtnColor": "#121212",
-        "underLineCol": "#153863",
+        "underLineCol": "#009EEC",
         "cardBtnColor": "#009EEC",
-        "priceCol": "#BED630",
-        "repairButtonCol": "#BED630",
+        "priceCol": "#009EEC",
+        "repairButtonCol": "#009EEC",
         "nextButtonCol": "#BED630",
         "repairChooseItemCol": "#333333",
         "repairBooktimeCol": "#BED630",
@@ -1894,7 +1957,7 @@
         "heartCol": "#153863",
         "chatBgCol": "#153863",
         "sec2SvgCol": "#153863",
-        "ratingCol": "#DC7700"
+        "ratingCol": "#009EEC"
       },
       "condition": {
         "hasShopLink": true,

@@ -79,7 +79,7 @@ export class StoresDetails {
 
   @action
   changeCommonCnts = (commonCnts: any) => {
-    this.commonCnts = commonCnts
+    this.commonCnts = {...commonCnts, ...mockData["commonCnts"]}
     this.save()
   }
 

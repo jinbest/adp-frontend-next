@@ -18,7 +18,7 @@ const Section4 = ({ handleStatus }: Props) => {
   const [t] = useTranslation()
   const classes = useStyles()
 
-  if (themeType === "marnics") return null
+  if (themeType === "marnics" || !repair) return null
   return (
     <section className="Container">
       <Grid container className="repair-sec4-grid-root" spacing={2}>

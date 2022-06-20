@@ -52,6 +52,7 @@ const HeaderDrawer = (props: Props) => {
   const navItemLinks: NavItemProps[] = _.sortBy(data.homepage.header.navItems, (o) => o.order)
   const brandItemLinks = _.sortBy(data.homepage.header.brandItems, (o) => o.order)
   const [t] = useTranslation()
+  const themeType = storesDetails.storeCnts.general.themeType
 
   const classes = useStyles()
   const [state, setState] = useState({
@@ -263,7 +264,7 @@ const HeaderDrawer = (props: Props) => {
   return (
     <React.Fragment>
       <div onClick={toggleDrawer("left", true)}>{children}</div>
-      <Drawer anchor="left" open={state["left"]} onClose={toggleDrawer("left", false)}>
+      <Drawer anchor={themeType === "phonephix" ? "right" : "left"} open={state["left"]} onClose={toggleDrawer("left", false)}>
         <div className={classes.root}>
           <div className={classes.drawerLogo}>
             <img src={data.logoData.logoHeaderImg} alt="drawer-logo" width="1" height="auto" />
@@ -275,7 +276,7 @@ const HeaderDrawer = (props: Props) => {
                   <React.Fragment>
                     {item.href && item.href !== "#" && (
                       <div
-                        className={classes.itemDiv}
+                        className={`${classes.itemDiv} header-menu-item`}
                         onClick={() => {
                           setState({ ...state, ["left"]: false })
                           toggleMenuStatus(false)
