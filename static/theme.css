@@ -283,7 +283,61 @@ footer {
   box-shadow: none;
   box-sizing: border-box;
 }
-
+/* Repair page style */
+.repair-page {
+  padding-top: 293px;
+}
+.service-section-title-1 {
+  font-size: 85px !important;
+  font-family: Poppins Bold !important;
+  color: #000 !important;
+  line-height: 117.5% !important; 
+}
+.service-section-content {
+  font-size: 45px !important;
+  margin: 24px 0 !important;
+  line-height: 117.5% !important; 
+}
+.service-section2 {
+  background-repeat: no-repeat;
+  background-size: 100% 1000px;
+  background-position: center;
+  padding: 300px 0;
+}
+.repair-sec-content-div {
+  margin-top: 45px !important;
+}
+.repair-subtitle {
+  font-size: 32px !important;
+  margin-bottom: 25px !important;
+}
+.repair-content {
+  font-size: 26px !important;
+}
+.service-section-title-2 {
+  font-size: 60px !important;
+  line-height: 117.5% !important;
+  font-family: Poppins Bold !important;
+}
+.repair-section3-content {
+  font-size: 45px !important;
+  line-height: 117.5% !important;
+  margin: 42px 0 !important;
+}
+.card-repair-sec3-container .subtitle{
+  font-size: 42px;
+}
+.card-repair-sec3-container .content {
+  font-size: 26px;
+  height: fit-content;
+}
+.card-repair-sec3-container {
+  height: 100%;
+  box-sizing: border-box;
+}
+.repair-card {
+  align-items: center;
+}
 
 @media (max-width: 1440px) {
   .section1-title {
@@ -306,6 +360,25 @@ footer {
   }
   .card-fix-title {
     font-size: 30px;
+  }
+  .service-section-title-1 {
+    font-size: 64px !important;
+  }
+  .service-section-content {
+    font-size: 32px !important;
+  }
+  .service-section2 {
+    padding: 200px 0;
+    background-size: 100% 800px;
+  }
+  .repair-subtitle {
+    font-size: 24px !important;
+  }
+  .repair-content {
+    font-size: 22px !important;
+  }
+  .card-repair-sec3-container .subtitle {
+    font-size: 36px;
   }
 }
 @media (max-width: 1200px) {
@@ -355,6 +428,37 @@ footer {
   .covid-card-item {
     margin-bottom: 40px !important;
   }
+  /* Repair page style */
+  .repair-subtitle {
+    font-size: 20px !important;
+  }
+  .repair-content {
+    font-size: 18px !important;
+  }
+  .service-section-title-1 {
+    font-size: 48px !important;
+  }
+  .service-section-content {
+    font-size: 28px !important;
+  }
+  .service-section-title-2 {
+    font-size: 48px !important;
+  }
+  .service-section-content {
+    font-size: 24px !important;
+  }
+  .card-repair-sec3-container .subtitle {
+    font-size: 28px;
+  }
+  .card-repair-sec3-container .content {
+    font-size: 22px;
+  }
+  .card-repair-sec3-container {
+    padding-bottom: 0;
+  }
+  .repair-section3-content {
+    margin: 16px 0 !important;
+  }
 }
 @media (max-width: 1024px) {
   .service-card {
@@ -380,6 +484,31 @@ footer {
   }
   .section-review-title {
     font-size: 32px !important;
+  }
+}
+@media (max-width: 960px) {
+  .service-section2 {
+    background-size: 1200px 1200px;
+    background-position: left;
+  }
+  .repair-content {
+    width: fit-content !important;
+  }
+  .service-section2-text-field {
+    padding: 100px 32px !important;
+    box-sizing: border-box !important;
+  }
+  .repair-subtitle {
+    margin-bottom: 16px !important;
+  }
+  .repair-card-img img {
+    height: 120px;
+  }
+  .card-repair-sec3-container .content {
+    font-size: 18px;
+  }
+  .card-repair-sec3-container .subtitle {
+    font-size: 22px;
   }
 }
 @media (max-width: 768px) {
@@ -490,6 +619,50 @@ footer {
   .footer-other-images img {
     height: 100%;
   }
+  .repair-page {
+    padding-top: 203px;
+  }
+  .service-section-title-1 {
+    font-size: 34px !important;
+    text-align: center;
+  }
+  .service-section-content {
+    font-size: 18px !important;
+  }
+  .repair-section1-img-container img {
+    margin-top: -20px !important;
+  }
+  .repair-sec-content-div {
+    margin-top: 35px !important;
+  }
+  .repair-card-img {
+    margin-right: 20px;
+  }
+  .repair-subtitle {
+    font-size: 16px !important;
+  }
+  .repair-content {
+    font-size: 16px !important;
+  }
+  .service-section2 {
+    background-size: 1200px 1000px;
+    padding: 100px 0;
+  }
+  .service-section-title-2 {
+    font-size: 34px !important;
+  }
+  .repair-section3-content {
+    font-size: 18px !important;
+  }
+  .card-repair-sec3-container .subtitle {
+    font-size: 18px;
+  }
+  .card-repair-sec3-container .content {
+    font-size: 14px;
+  }
+  .service-section2-text-field {
+    padding: 0 16px !important;
+  }
 }
 @media (max-width: 600px) {
   .card-customized-item {
@@ -531,6 +704,18 @@ footer {
   }
   .covid-card-item img {
     width: 50px !important;
+  }
+  .repair-section1-img-container {
+    display: none;
+  }
+  .service-section-content {
+    text-align: center;
+  }
+  .service-section2 {
+    padding: 200px 0;
+  }
+  .service-section-title-2 {
+    font-size: 24px !important;
   }
 }
 @media (max-width: 425px) {
@@ -612,5 +797,26 @@ footer {
   .container-header {
     padding: 0 20px;
     box-sizing: border-box;
+  }
+  .service-section-title-1 {
+    font-size: 20px !important;
+  }
+  .service-section-content {
+    font-size: 12px !important;
+  }
+  .repair-section-button {
+    margin: auto;
+  }
+  .service-section-title-2 {
+    font-size: 16px !important;
+  }
+  .repair-section3-content {
+    text-align: left;
+  }
+  .card-repair-sec3-container .subtitle {
+    font-size: 16px;
+  }
+  .card-repair-sec3-container .content {
+    font-size: 10px !important;
   }
 }
