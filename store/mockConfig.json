@@ -1739,23 +1739,26 @@
       }
     },
     "businessPage": {
-      "businessBG": "/images/business-bg.png",
+      "shapeData": {
+        "businessCornerShape": "/images/store-business-corner.png",
+        "shapeLeftDesktop": "/images/store-business-left-shape.png",
+        "shapeLeftMobile": "/images/store-business-left-mobile.png"
+      },
       "headData": {
-        "title": "Business Solutions | Marnics Mobile",
+        "title": "Business Solutions | PhonePhix Mobile",
         "metaList": [
           {
             "name": "description",
-            "content": "We provide reliable device management and repair services so you can focus on running your business. Contact Marnics Mobile today for bulk or ongoing repair services."
+            "content": "We provide reliable device management and repair services so you can focus on running your business. Contact PhonePhix Mobile today for bulk or ongoing repair services."
           }
         ]
       },
       "section1": {
         "title": "Business Solutions",
-        "subtitle": "Our goal is to provide everyone with the best quality repairs at an affordable price with the fastest possible turnaround times.",
-        "btnTitle": "Book Appointment"
+        "subtitle": "We provide reliable device management and repair services so  you can focus on running your business.",
+        "btnTitle": "Get Started"
       },
       "section2": {
-        "subtitle": "We are a good fit",
         "title": "Why Businesses Choose Us?",
         "services": [
           {
@@ -1763,42 +1766,42 @@
             "content": "Free shipping and bulk discounts for 5+ devices",
             "visible": true,
             "order": 1,
-            "img": "/images/free-shipping.png"
+            "img": "/images/store-shipping.png"
           },
           {
             "type": "pay",
             "content": "Flexible payement options. You choose how and when you pay",
             "visible": true,
             "order": 2,
-            "img": "/images/payment.png"
+            "img": "/images/store-flex-payment.png"
           },
           {
             "type": "shippingLabel",
             "content": "Instant shipping label upon request",
             "visible": true,
             "order": 3,
-            "img": "/images/instant-shipping.png"
+            "img": "/images/store-instant.png"
           },
           {
             "type": "soldering",
             "content": "Dedicated B2B microsoldering Techs",
             "visible": true,
             "order": 4,
-            "img": "/images/b2b.png"
+            "img": "/images/store-b2b.png"
           },
           {
             "type": "customerService",
             "content": "Responsive customer support",
             "visible": true,
             "order": 5,
-            "img": "/images/customer.png"
+            "img": "/images/store-customer.png"
           },
           {
             "type": "quickTurnaround",
             "content": "Quick turnaround",
             "visible": true,
             "order": 6,
-            "img": "/images/turnaround.png"
+            "img": "/images/store-turnaround.png"
           }
         ]
       }
