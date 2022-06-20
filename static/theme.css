@@ -243,6 +243,48 @@ footer {
 .header-menu-item {
   border-bottom: none !important;
 }
+
+/* Covid Page Style */
+.covid-main-title {
+  font-size: 48px !important;
+}
+.covid-main-content {
+  font-size: 32px !important;
+}
+.covid-section-button .button {
+  margin-right: 0;
+}
+.covid-widget-card-main-title {
+  font-size: 48px !important;
+  margin-bottom: 56px !important;
+}
+.covid-sub-title {
+  font-size: 28px !important;
+  margin-bottom: 16px !important;
+}
+.covid-item-text {
+  font-size: 24px !important;
+}
+.covid-card-item img {
+  width: 94px !important;
+  object-fit: contain;
+}
+.covid-card-item {
+  margin-bottom: 60px !important;
+}
+.covid-item-text {
+  font-size: 23px !important;
+  margin-top: 0 !important;
+}
+.covid-contact-us {
+  margin-top: 30px !important;
+}
+.service-widget-card {
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+
 @media (max-width: 1440px) {
   .section1-title {
     font-size: 60px !important;
@@ -297,6 +339,21 @@ footer {
   }
   .service-card .button {
     width: 100%;
+  }
+
+  /* Covid Page Style */
+  .covid-sub-title {
+    font-size: 22px !important;
+    margin-bottom: 0 !important;
+  }
+  .covid-item-text {
+    font-size: 18px !important;
+  }
+  .covid-card-item img {
+    width: 80px !important;
+  }
+  .covid-card-item {
+    margin-bottom: 40px !important;
   }
 }
 @media (max-width: 1024px) {
@@ -430,6 +487,9 @@ footer {
   .card-why-customer .content {
     font-size: 14px;
   }
+  .footer-other-images img {
+    height: 100%;
+  }
 }
 @media (max-width: 600px) {
   .card-customized-item {
@@ -465,6 +525,12 @@ footer {
   .card-customized-container-desktop {
     grid-gap: 24px;
     gap: 24px;
+  }
+  .footer-bg-container img {
+    object-fit: cover;
+  }
+  .covid-card-item img {
+    width: 50px !important;
   }
 }
 @media (max-width: 425px) {

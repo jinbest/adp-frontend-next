@@ -1110,7 +1110,7 @@
   "storesCnts": {
     "homepage": {
       "headData": {
-        "title": "Cell Phone, iPhone & iPad Repair Thunder bay | Snap Mobile",
+        "title": "Cell Phone, iPhone & iPad Repair Okotoks | PhonePhix Mobile",
         "fav": {
           "img": "/images/favicon.ico"
         },
@@ -1136,66 +1136,24 @@
         },
         "navItems": [
           {
-            "href": "/quote",
-            "text": "Repair",
+            "href": "/trade",
+            "text": "Trade",
             "flag": "ALWAYS_TRUE",
             "order": 1,
             "visible": true
           },
           {
-            "href": "/protect",
-            "text": "Protect",
+            "href": "/quote",
+            "text": "Repair",
             "flag": "ALWAYS_TRUE",
             "order": 2,
             "visible": true
           },
           {
-            "href": "/shop",
-            "text": "Shop",
+            "href": "/buy",
+            "text": "Buy",
             "flag": "ALWAYS_TRUE",
             "order": 3,
-            "visible": true
-          },
-          {
-            "href": "/trade",
-            "text": "Trade",
-            "flag": "ALWAYS_TRUE",
-            "order": 4,
-            "visible": true
-          },
-          {
-            "href": "/insure",
-            "text": "Insure",
-            "flag": "ALWAYS_TRUE",
-            "order": 5,
-            "visible": true
-          },
-          {
-            "href": "/business",
-            "text": "Business",
-            "flag": "ALWAYS_TRUE",
-            "order": 6,
-            "visible": true
-          },
-          {
-            "href": "/financing",
-            "text": "Financing",
-            "flag": "ALWAYS_TRUE",
-            "order": 7,
-            "visible": true
-          },
-          {
-            "href": "/locations",
-            "text": "Locations",
-            "flag": "ALWAYS_TRUE",
-            "order": 8,
-            "visible": true
-          },
-          {
-            "href": "/contact",
-            "text": "Contact Us",
-            "flag": "ALWAYS_TRUE",
-            "order": 9,
             "visible": true
           }
         ],
@@ -1227,7 +1185,7 @@
           "avatarData": {
             "userActive": "https://storage.googleapis.com/adp_assets/images/21/store-user-active.png",
             "userDeactive": "https://storage.googleapis.com/adp_assets/images/21/store-user-deactive.png",
-            "cancel": "/images/store-close.png",
+            "cancel": "/images/close.png",
             "store": {
               "img": "https://storage.googleapis.com/adp_assets/images/21/store-store.png",
               "link": "#"
@@ -1686,7 +1644,7 @@
     },
     "covidPage": {
       "headData": {
-        "title": "COVID-19 Safety Precautions | Snap Mobile Repair",
+        "title": "COVID-19 Safety Precautions | PhonePhix Mobile Repair",
         "metaList": [
           {
             "name": "description",
@@ -1695,8 +1653,8 @@
         ]
       },
       "section1": {
-        "title": "COVID PROTOCOL",
-        "content": "Our goal is to provide everyone with the best quality repairs at an affordale price with the fastest possible turnaround times.",
+        "title": "Phonephix is essential and open.",
+        "content": "We are committed to providing Winnipeg a safe place to repair, buy, and sell essential mobile devices such as phones, tablets, and wearables that connect us. Our store is essential and we remain open to help our customers. We have implemented various safety protocols to keep our customers and staff safe.",
         "buttons": [
           {
             "type": "appointment",
@@ -1708,45 +1666,50 @@
         ]
       },
       "section2": {
-        "title": "Take a look at our COVID19 protocols:",
-        "content": "Additionally, we are instructing our employees to remain home if they have any symptoms of illness and ask that our customers utilize the same level of caution. As the situation evolves, we will continue to take the actions necessary to protect our community. Our thoughts are with those that have been affected.",
+        "title": "What we’re doing to keep our customers and staff safe:",
         "bottomText": "For more information or if you have any questions,",
-        "bgImg": "https://storage.googleapis.com/adp_assets/images/21/covid-widget-card-bg.png",
+        "content": "Additionally, we are instructing our employees to remain home if they have any symptoms of illness and ask that our customers utilize the same level of caution. As the situation evolves, we will continue to take the actions necessary to protect our community. Our thoughts are with those that have been affected.",
         "data": [
           {
             "title": "Masks",
             "order": 1,
-            "content": "The quick brown fox jumps over the lazy dog. The quick brown fox jupms over the lazy dog.",
-            "visible": true
+            "content": "All staff have been provided mandatory masks to wear at work. We require face coverings for any individuals entering our store.",
+            "visible": true,
+            "img": "/images/store-mask.png"
           },
           {
             "title": "Plexi Glass",
             "order": 2,
             "content": "Our store has added plexi glass to keep our customers and staff safe.",
+            "img": "/images/store-plexi.png",
             "visible": true
           },
           {
             "title": "Contactless Payment",
             "order": 3,
             "content": "We support contactless payments such as Interac e-transfer and Apple Pay.",
-            "visible": true
-          },
-          {
-            "title": "Clean Repairs",
-            "order": 4,
-            "content": "We sanitize your device before and after repair and all technicians wear gloves and masks throughout the entire process.",
-            "visible": true
-          },
-          {
-            "title": "Thorough Cleaning",
-            "order": 5,
-            "content": "Our tools, work stations and counters are sanitized frequently.",
+            "img": "/images/store-payment.png",
             "visible": true
           },
           {
             "title": "Contactless Services",
+            "order": 4,
+            "content": "We also offer curb side pickup and drop off, and mail in options to customers in Okotoks and throughout Alberta.",
+            "img": "/images/store-contactless.png",
+            "visible": true
+          },
+          {
+            "title": "Clean Repairs",
+            "order": 5,
+            "content": "We sanitize your device before and after repair and all technicians wear gloves and masks throughout the entire process.",
+            "img": "/images/store-clean.png",
+            "visible": true
+          },
+          {
+            "title": "Thorough Cleaning",
             "order": 6,
-            "content": "We also offer curb side pickup and drop off, and mail in options to customers in Thunder bay.",
+            "content": "Our tools, work stations and counters are sanitized frequently.",
+            "img": "/images/store-cleaning.png",
             "visible": true
           }
         ]
@@ -2168,6 +2131,6 @@
     "repairPhoneImg": "/images/repair-phone.png",
     "repairSec4Img": "https://storage.googleapis.com/adp_assets/images/common/repair-sec4.png",
     "loaderGif": "https://storage.googleapis.com/adp_assets/images/common/loading.gif",
-    "covidBannerImg": "/images/mask.png"
+    "covidBannerImg": "/images/store-covid-banner.png"
   }
 }
