@@ -1900,6 +1900,113 @@
         ]
       }
     },
+    "tradePage": {
+      "headData": {
+        "title": "Repair | PhonePhix Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Okotoks. Call Phonephix Mobile or book your repair online today!"
+          }
+        ]
+      },
+      "section1": {
+        "title": "Can I Sell My Phone for Cash or Get Trade-In Value for my Phone Today?",
+        "subtitle": "Yes! And it only takes 15 seconds to find out what your used phone is worth.",
+        "themeCol": "#000",
+        "hasBackground": true,
+        "sectionImg": "/images/store-trade-phone.png",
+        "buttons": [
+          {
+            "type": "quote",
+            "title": "Get Quote",
+            "link": "/get-quote",
+            "visible": true,
+            "order": 1
+          }
+        ]
+      },
+      "section2": {
+        "title": "How do I sell my phone?",
+        "contents": [
+          {
+            "title": "Take our  online quiz",
+            "content": "Take our fast online quiz, value your phone, opt-in and sign up for an account.",
+            "order": 1,
+            "type": "onlineQuiz",
+            "img": "/images/store-quiz.png"
+          },
+          {
+            "title": "Ship us your phone",
+            "content": "Print out pre-paid shipping label and ship your used phone to PhonePhix.",
+            "order": 2,
+            "type": "shipPhone",
+            "img": "/images/store-ship-trade.png"
+          },
+          {
+            "title": "We verify your phone",
+            "content": "Phonephix verifies the phone matches the description you provided, and you get paid!",
+            "order": 3,
+            "type": "verifyPhone",
+            "img": "/images/store-verify.png"
+          }
+        ],
+        "subtitle": "Get paid the way you want when you sell your phone to Device List",
+        "subcontents": [
+          {
+            "title": "Phone Trade-In Credit",
+            "content": "Use the trade-in code we provide at checkout on any Phonephix purchase. This code doesn't expire and is good unless cash has been dispersed against the trade-in.",
+            "img": "/images/store-credit.png"
+          },
+          {
+            "title": "Cash for Phones",
+            "content": "Get paid cash. Sign up to get paid through PayPal or have the cash sent straight to your bank account.",
+            "img": "/images/store-cash.png"
+          }
+        ],
+        "hasBackground": true,
+        "bgImg": "/images/store-section2-bg.png"
+      },
+      "section3": {
+        "title": "From New to Reconditioned",
+        "content": "Choose your new phone among our 4 grades, with Phonephix it's easy to choose for any budget!",
+        "children": [
+          {
+            "subtitle": "NEW",
+            "subcontent": "A brand new device with no signs of wear",
+            "img": "/images/store-new-recond.png",
+            "order": 1
+          },
+          {
+            "subtitle": "MINT",
+            "subcontent": "No scratches or dents",
+            "img": "/images/store-mint.png",
+            "order": 2
+          },
+          {
+            "subtitle": "GOOD",
+            "subcontent": "Minor scratches or dents",
+            "img": "/images/store-good.png",
+            "order": 3
+          },
+          {
+            "subtitle": "FAIR",
+            "subcontent": "Visible scratchs and dents",
+            "img": "/images/store-fair.png",
+            "order": 4
+          }
+        ]
+      },
+      "widget": {
+        "metaTitle": "Repair Widget | Marnics Mobile",
+        "metaList": [
+          {
+            "name": "description",
+            "content": "Same day repair of your broken, cracked, smashed or water damaged iPhone, iPad or cell phone in Thunder bay. Call Marnics Mobile or book your repair online today!"
+          }
+        ]
+      }
+    },
     "logoData": {
       "logoHeaderImg": "/images/store-header-logo.png",
       "logoHeaderMobile": "/images/store-logo-header-mobile.png",
@@ -1915,9 +2022,9 @@
         "cardBtnColor": "#009EEC",
         "priceCol": "#009EEC",
         "repairButtonCol": "#009EEC",
-        "nextButtonCol": "#BED630",
-        "repairChooseItemCol": "#333333",
-        "repairBooktimeCol": "#BED630",
+        "nextButtonCol": "#009EEC",
+        "repairChooseItemCol": "#009EEC",
+        "repairBooktimeCol": "#009EEC",
         "textThemeCol": "#153863",
         "heartCol": "#153863",
         "chatBgCol": "#153863",
@@ -1943,7 +2050,8 @@
         "locationsPage": "/locations",
         "contactPage": "/contact",
         "covidPage": "/coronavirus",
-        "privacyPolicy": "/privacy_policy"
+        "privacyPolicy": "/privacy_policy",
+        "tradePage": "/trade"
       },
       "themes": {
         "normal": "https://storage.googleapis.com/adp_assets/themes/0/theme.css",
@@ -1960,7 +2068,7 @@
         "mainTopic": {
           "title": "Find your device’s brand",
           "content": [
-            "Your device brand can usually be found on the back of the handset itself, but if for whatever reason you aren’t sure don’t panic!",
+            "Apple, Samsung, Huawei, Sony, etc. are examples of device brands (manufacturers). If you don't know the brand of your device, don't panic!",
             "It is indicated on back of the device, on the front, or in the Settings/System/About phone section if you are on Android or Settings/ IDs if you are on IOS. It may also be shown on the original box and/or manual that came with your device."
           ]
         },
@@ -1984,17 +2092,17 @@
         }
       },
       "deviceRepairs": {
-        "title": "Choose Your Issue",
+        "title": "Choose Your Repair(s)",
         "placeholder": "What’s broken?",
         "mainTopic": {
-          "title": "Service Summary"
+          "title": "Estimated repair time"
         }
       },
       "repairAnotherDevice": {
-        "title": "Add Another Device?",
+        "title": "Repair Another Device?",
         "mainTopic": {
-          "title": "Add Another Device?",
-          "content": "Get all your devices done at once with us!"
+          "title": "Repair another Device?",
+          "content": "Repair all your devices at once with us!"
         }
       },
       "dropOffDevicce": {
@@ -2060,7 +2168,7 @@
         {
           "img": "https://storage.googleapis.com/adp_assets/images/common/thankQuote.png",
           "title": "Thank you for choosing",
-          "text": "with a detailed service quote and appointment information."
+          "text": "with a detailed service quote."
         }
       ],
       "repairServiceSummary": {

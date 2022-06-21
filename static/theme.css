@@ -367,6 +367,225 @@ footer {
 .business-card-item-text {
   font-size: 22px !important;
 }
+/* Repair widget style */
+.lazyimg-container {
+  display: flex;
+  justify-content: center;
+  font-size: 64px;
+  color: #BDBFC3;
+}
+.repair-widget-brand-name, .search-icon {
+  display: none !important;
+}
+.brand-search-container {
+  display: flex;
+}
+.brand-search {
+  width: 100%;
+  border-radius: 40px;
+  border: 1px solid #BDBFC3;
+  height: 45px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: Poppins Regular;
+}
+.device-item-container:hover .repair-widget-brand-name {
+  display: flex !important;
+  position: absolute;
+  bottom: 0;
+  background-color: #BDBFC3;
+  height: 30px;
+  line-height: 30px !important;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  justify-content: center;
+}
+.search-bar-container > div, .info-text-for-services {
+  display: none;
+}
+.search-container {
+  display: flex !important;
+}
+.service-widget-message {
+  display: flex;
+  background: linear-gradient(253.86deg, #009EEC 4.74%, rgba(255, 255, 255, 0) 81.66%), linear-gradient(180deg, #009EEC 0%, rgba(255, 255, 255, 0) 92.71%), #009EEC;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+  position: fixed;
+  left: 32px;
+  bottom: 140px;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+}
+.device-service-item > p {
+  font-size: 16px;
+}
+.service-card-button p {
+  font-size: 14px;
+  font-weight: 600;
+}
+.customized-card-height {
+  box-shadow: -10px -10px 30px #FFFFFF, 10px 10px 30px rgba(174, 174, 192, 0.4);
+  border-radius: 20px;
+}
+.choose-repairs-card {
+  border-radius: 20px;
+  box-shadow: -10px -10px 30px #FFFFFF, 10px 10px 30px rgba(174, 174, 192, 0.4);
+}
+.estimate-title, .estimate-content {
+  font-size: 16px;
+}
+.service-widget-title {
+  font-size: 26px !important;
+}
+.service-choose-device-container {
+  padding: 30px 0;
+}
+.input-component {
+  font-size: 16px !important;
+  height: 45px;
+}
+.trade-container {
+  background-color: white !important;
+  display: flex;
+  max-width: 1440px;
+  margin: auto;
+  padding: 0 32px;
+  overflow-x: hidden !important;
+}
+.trade-container::after {
+  display: none;
+}
+.trade-text-container {
+  margin-top: 135px !important;
+  padding-top: 0 !important;
+}
+.trade-phone {
+  position: unset !important;
+  max-height: 998px;
+  margin-top: 100px;
+  max-width: 700px !important;
+}
+.trade-text-container .trade-main-title {
+  line-height: 117.5%;
+  font-family: Poppins Bold !important;
+}
+.trade-text-container .trade-main-subtitle {
+  font-size: 34px;
+  line-height: 117.5%;
+  font-family: Poppins Regular !important;
+}
+.trade-quote-button .button {
+  background-color: #009EEC !important;
+  color: white !important;
+  font-size: 32px !important;
+  border-radius: 60px !important;
+  height: 60px !important;
+  width: 300px !important;
+  font-family: Poppins Bold !important;
+}
+.trade-section-2-container {
+  margin-top: 0 !important;
+  padding: 200px 32px 300px !important;
+}
+.trade-section-2-wrapper {
+  background-repeat: no-repeat;
+  background-size: 1920px 1500px;
+  background-position: center;
+  margin-top: -110px;
+}
+.trade-section-2-container .trade-section-2-title {
+  font-family: Poppins Bold !important;
+  text-align: left !important;
+  margin-top: 140px;
+  margin-bottom: 40px !important;
+}
+.trade-card {
+  display: flex;
+  align-items: center;
+}
+.trade-card-content {
+  margin-top: 0 !important;
+}
+.trade-card .trade-card-title {
+  font-family: Poppins Bold !important;
+  font-size: 24px;
+  text-align: left;
+}
+.trade-card .trade-card-desc {
+  text-align: left;
+  font-size: 20px;
+  font-family: Poppins Regular !important;
+}
+.trade-section-2-subtitle {
+  font-size: 42px;
+  font-family: Poppins Bold !important;
+  margin-bottom: 24px;
+  margin-top: 100px;
+}
+.trade-subcard-content {
+  margin-left: 40px;
+  max-width: 400px;
+}
+.trade-subcard-title {
+  font-family: Poppins Bold !important;
+  font-size: 24px;
+}
+.trade-subcard-desc {
+  font-size: 20px;
+}
+.trade-sub-card {
+  display: flex;
+  align-items: flex-start;
+}
+.trade-section3-container {
+  background-color: white !important;
+}
+.trade-section3-container .trade-section3-title {
+  font-size: 52px !important;
+  color: #000 !important;
+  margin-bottom: 40px;
+  font-family: Poppins Bold !important;
+  text-align: left;
+}
+.trade-section3-content {
+  font-size: 40px;
+  color: black;
+  margin-bottom: 40px;
+}
+.trade-section3-card-subtitle {
+  display: none;
+}
+.trade-section3-card {
+  box-shadow: -13.3204px -13.3204px 39.9611px #FFFFFF, 13.3204px 13.3204px 39.9611px rgba(174, 174, 192, 0.4);
+  border-radius: 13px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+}
+.trade-section3-card-subcontent {
+  color: #000;
+}
+.phonephix-trade-section3-card-subtitle {
+  display: block;
+  color: #000;
+  font-family: Poppins Bold !important;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.trade-section3-card .trade-section3-card-subcontent {
+  font-size: 22px;
+  font-family: Poppins Regular !important;
+  margin-top: 20px;
+}
+
+
 @media (max-width: 1440px) {
   .section1-title {
     font-size: 60px !important;
@@ -407,6 +626,24 @@ footer {
   }
   .card-repair-sec3-container .subtitle {
     font-size: 36px;
+  }
+  /* Trade page style */
+  .trade-phone {
+    max-width: 500px !important;
+  }
+  .trade-section-2-container .trade-section-2-title {
+    font-size: 48px;
+    margin-top: 250px;
+  }
+  .trade-card img {
+    max-width: 120px;
+  }
+  .trade-section3-container .trade-section3-title{
+    font-size: 42px !important;
+    margin-bottom: 20px;
+  }
+  .trade-section3-content {
+    font-size: 32px;
   }
 }
 @media (max-width: 1200px) {
@@ -507,6 +744,61 @@ footer {
   .business-card-container {
     margin-bottom: 0 !important;
   }
+  /* Trade page style */
+  .trade-text-container .trade-main-title {
+    font-size: 42px;
+  }
+  .trade-text-container .trade-main-subtitle {
+    font-size: 28px;
+  }
+  .trade-quote-button .button {
+    font-size: 24px !important;
+    height: 45px !important;
+    width: 180px !important;
+  }
+  .trade-section-2-wrapper {
+    margin-top: -150px;
+    background-size: 1920px 1300px;
+    background-position: left;
+  }
+  .trade-card .trade-card-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .trade-card .trade-card-desc {
+    font-size: 18px;
+  }
+  .trade-section-2-subtitle {
+    font-size: 36px;
+    margin-top: 50px;
+  }
+  .trade-subcard-title {
+    font-size: 20px;
+  }
+  .trade-subcard-desc {
+    font-size: 18px;
+  }
+  .trade-sub-card img {
+    max-width: 100px;
+  }
+  .trade-subcard-content {
+    margin-left: 20px;
+  }
+  .trade-section-2-container .trade-section-2-title {
+    margin-top: 80px;
+  }
+  .trade-section3-container .trade-section3-title{
+    font-size: 32px !important;
+  }
+  .trade-section3-content {
+    font-size: 28px;
+  }
+  .phonephix-trade-section3-card-subtitle {
+    font-size: 28px;
+  }
+  .trade-section3-card .trade-section3-card-subcontent {
+    font-size: 18px;
+  }
 }
 @media (max-width: 1024px) {
   .service-card {
@@ -533,6 +825,13 @@ footer {
   .section-review-title {
     font-size: 32px !important;
   }
+  .trade-text-container {
+    padding: 0 !important;
+    margin-top: 56px !important;
+  }
+  .trade-phone {
+    margin-top: 40px;
+  }
 }
 @media (max-width: 960px) {
   .service-section2 {
@@ -557,6 +856,30 @@ footer {
   }
   .card-repair-sec3-container .subtitle {
     font-size: 22px;
+  }
+  .trade-phone {
+    max-width: 340px !important;
+    margin-right: -100px;
+  }
+  .trade-section-2-wrapper {
+    background-size: 1920px 1700px;
+    background-position: center;
+    margin-top: -130px;
+  }
+  .trade-section-2-container .trade-section-2-title {
+    margin-bottom: 20px !important;
+  }
+  .trade-card img {
+    max-height: 100px;
+  }
+  .trade-card-content {
+    margin: 0 !important;
+  }
+  .trade-section-2-subtitle {
+    margin-top: 0;
+  }
+  .trade-subcard-content {
+    max-width: fit-content;
   }
 }
 @media (max-width: 768px) {
@@ -746,6 +1069,73 @@ footer {
     width: 78px !important;
     height: 78px !important;
   }
+  .trade-container {
+    margin-top: 140px !important;
+  }
+  .trade-text-container .trade-main-title {
+    font-size: 34px;
+  }
+  .trade-text-container .trade-main-subtitle {
+    font-size: 18px;
+  }
+  .trade-quote-button .button {
+    font-size: 14px !important;
+    height: 30px !important;
+    width: 170px !important;
+  }
+  .trade-section-2-container .trade-section-2-title {
+    font-size: 34px;
+    text-align: center !important;
+  }
+  .trade-card img {
+    max-width: 80px;
+  }
+  .trade-card-content {
+    font-size: 16px;
+  }
+  .trade-card .trade-card-desc {
+    font-size: 16px !important;
+  }
+  .trade-section-2-subtitle {
+    margin-top: 80px;
+    font-size: 28px;
+    text-align: center;
+  }
+  .trade-subcard-title, .trade-subcard-desc {
+    font-size: 16px;
+  }
+  .trade-section3-container > div {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  .trade-section3-content {
+    font-size: 18px;
+  }
+  .trade-section3-container .trade-section3-title {
+    margin-bottom: 10px;
+  }
+  .trade-section3-card {
+    flex-direction: column;
+    padding: 24px 19px;
+  }
+  .trade-section3-content {
+    margin-bottom: 20px;
+  }
+  .phonephix-trade-section3-card-subtitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .trade-section3-card img {
+    width: 65px !important;
+    height: fit-content !important;
+  }
+  .trade-section3-card .trade-section3-card-subcontent {
+    font-size: 14px;
+    text-align: center;
+  }
+  .trade-section3-card > div {
+    margin-left: 0;
+  }
 }
 @media (max-width: 600px) {
   .card-customized-item {
@@ -799,6 +1189,23 @@ footer {
   }
   .service-section-title-2 {
     font-size: 24px !important;
+  }
+  .trade-section1-mobile {
+    display: none !important;
+  }
+  .trade-section-2-container {
+    padding: 240px 16px !important;
+  }
+  .trade-section-2-wrapper {
+    margin-top: -100px;
+  }
+  .trade-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .trade-section3-container .trade-section3-title {
+    font-size: 22px !important;
+    line-height: 117.5%;
   }
 }
 @media (max-width: 425px) {
@@ -934,5 +1341,75 @@ footer {
   .business-container {
     padding-left: 16px !important;
     padding-right: 16px !important;
+  }
+  .header-brand {
+    background-color: #121212 !important;
+  }
+  .trade-text-container .trade-main-title {
+    font-size: 20px;
+    text-align: center;
+  }
+  .trade-text-container .trade-main-subtitle {
+    font-size: 12px;
+    text-align: center;
+  }
+  .trade-quote-button .button {
+    font-size: 12px !important;
+    height: 22px !important;
+    width: 112px !important;
+  }
+  .trade-quote-button {
+    display: flex;
+    justify-content: center;
+  }
+  .trade-section-2-container .trade-section-2-title {
+    font-size: 20px;
+  }
+  .trade-card .trade-card-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .trade-section-2-subtitle {
+    margin-top: 60px;
+    font-size: 16px;
+  }
+  .trade-sub-card img {
+    max-width: 50px;
+  }
+  .trade-subcard-title {
+    font-size: 12px;
+  }
+  .trade-subcard-desc {
+    font-size: 12px;
+  }
+  .trade-section-2-wrapper {
+    background-size: 1920px 1300px;
+    margin-top: -200px;
+  }
+  .trade-section3-wrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .trade-section3-container {
+    margin-top: -110px;
+  }
+  .trade-section3-container .trade-section3-title {
+    font-size: 16px !important;
+  }
+  .trade-section3-content {
+    font-size: 12px;
+  }
+  .phonephix-trade-section3-card-subtitle {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  .trade-section3-card img {
+    width: 58px !important;
+  }
+  .trade-section3-card .trade-section3-card-subcontent {
+    font-size: 10px;
+  }
+  .trade-section3-card {
+    padding: 19px 14px;
   }
 }

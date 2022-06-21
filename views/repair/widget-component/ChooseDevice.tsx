@@ -669,7 +669,7 @@ const ChooseDevice = ({
       }
       <Grid container spacing={3}>
         <Grid item xs={12} md={7}>
-          <Card>
+          <Card className="choose-repairs-card">
             <div className="service-choose-device-container">
               {stepName === repairWidgetStepName.deviceRepairs && (
                 <p className="info-text-for-services">{t("You can select multiple services")}</p>

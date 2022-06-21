@@ -25,12 +25,12 @@ const Section1 = ({ handleStatus }: Props) => {
   }
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
+    <div className={`${classes.root} trade-container`}>
+      <div className={`${classes.container} trade-text-container`}>
         <div className="decoration-bar" style={{ backgroundColor: thisPage.themeCol }} />
-        <div className={classes.mainTitle} style={{ color: thisPage.themeCol }}>{t(thisPage.title)}</div>
-        <div className={classes.subtitle} style={{ color: thisPage.themeCol }}>{t(thisPage.subtitle)}</div>
-        <div className={classes.buttons}>
+        <div className={`${classes.mainTitle} trade-main-title`} style={{ color: thisPage.themeCol }}>{t(thisPage.title)}</div>
+        <div className={`${classes.subtitle} trade-main-subtitle`} style={{ color: thisPage.themeCol }}>{t(thisPage.subtitle)}</div>
+        <div className={`${classes.buttons} trade-quote-button`}>
           {buttons.map((i: any) => (
             i.visible ? (
               isExternal(i.link) ? (
@@ -71,13 +71,18 @@ const Section1 = ({ handleStatus }: Props) => {
             ) : null
           ))}
         </div>
-        <img src={thisPage.decorationImg} className={classes.decoration} alt="decoration" />
-        <div className={classes.mobileDecoration}>
-          <img src={thisPage.decorationImg} alt="decoration" />
-        </div>
+        {thisPage.decorationImg ? 
+          <>
+            <img src={thisPage.decorationImg} className={classes.decoration} alt="decoration" />
+            <div className={classes.mobileDecoration}>
+              <img src={thisPage.decorationImg} alt="decoration" />
+            </div>
+          </> : 
+          null
+        }
       </div>
-      <img src={thisPage.sectionImg} className={classes.phone} alt="phone" />
-      <div className={classes.mobilePhone} style={{backgroundImage: `url("${thisPage.sectionImg}")`}}>
+      {thisPage.sectionImg ? <img src={thisPage.sectionImg} className={`${classes.phone} trade-phone`} alt="phone" /> : null}
+      <div className={`${classes.mobilePhone} trade-section1-mobile`} style={{backgroundImage: `url("${thisPage.sectionImg}")`}}>
         {/* <img src={thisPage.sectionImg} alt="phone" /> */}
       </div>
     </div>

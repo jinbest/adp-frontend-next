@@ -208,7 +208,7 @@ const WholeMap = ({
   }
 
   return (
-    <div style={{minHeight: themeType === "marnics" ? "100vh" : "unset"}}>
+    <div style={{minHeight: themeType === "marnics" || themeType === "phonephix" ? "100vh" : "unset"}}>
       <div className={classes.customContainer}>
         <Grid container spacing={3} className={classes.customComponent}>
           <Grid item xs={12} md={4} className={classes.item1}>
