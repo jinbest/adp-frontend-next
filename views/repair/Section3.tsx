@@ -12,7 +12,7 @@ const Section3 = () => {
   const children = _.sortBy(repair.children, (o) => o.order)
   const [t] = useTranslation()
 
-  if (themeType !== "phonephix") return null
+  if (themeType !== "cellular") return null
   return (
     <section className="service-section-3">
       <div className="Container">

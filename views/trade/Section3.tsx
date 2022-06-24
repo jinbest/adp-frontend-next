@@ -20,7 +20,7 @@ const Section3 = () => {
         {trade.content ? <div className="trade-section3-content">{t(trade.content)}</div> : null}
         <Grid container spacing={3}>
           {children.map((i: any) => (
-            <Grid key={i.subtitle} item xs={themeType === "phonephix" ? 6 : 12} sm={themeType === "phonephix" ? 3 : 12} md={themeType === "phonephix" ? 3 : 6}>
+            <Grid key={i.subtitle} item xs={themeType === "cellular" ? 6 : 12} sm={themeType === "cellular" ? 3 : 12} md={themeType === "cellular" ? 3 : 6}>
               <div className={`${classes.card} trade-section3-card`}>
                 <div className="phonephix-trade-section3-card-subtitle">{i.subtitle}</div>
                 <img src={i.img} alt={i.subtitle} />

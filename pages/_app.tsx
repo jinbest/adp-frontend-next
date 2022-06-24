@@ -22,8 +22,6 @@ import { GeneralData } from "../model/general-data"
 import { enableStaticRendering } from "mobx-react"
 import { GetDomain } from "../services/helper"
 
-import "../static/theme.css"
-
 enableStaticRendering(typeof window === "undefined")
 
 const apiClient = ApiClient.getInstance()
@@ -89,7 +87,7 @@ DataProps) => {
     setPageTitle(homepage.headData.title)
     setMetaList(homepage.headData.metaList)
     setFavIcon(homepage.headData.fav.img)
-    // setTheme(mainData.general.themes.minified)
+    setTheme(mainData.general.themes.minified)
 
     homepage.bodyData.tags.forEach((item: TagParams) => {
       loadBodyTag(item.content)
@@ -244,5 +242,3 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
     apexDomain: apexDomain,
   }
 }
-
-export default App

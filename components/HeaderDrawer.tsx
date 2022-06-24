@@ -264,7 +264,7 @@ const HeaderDrawer = (props: Props) => {
   return (
     <React.Fragment>
       <div onClick={toggleDrawer("left", true)}>{children}</div>
-      <Drawer anchor={themeType === "phonephix" ? "right" : "left"} open={state["left"]} onClose={toggleDrawer("left", false)}>
+      <Drawer anchor={themeType === "cellular" ? "right" : "left"} open={state["left"]} onClose={toggleDrawer("left", false)}>
         <div className={classes.root}>
           <div className={classes.drawerLogo}>
             <img src={data.logoData.logoHeaderImg} alt="drawer-logo" width="1" height="auto" />
