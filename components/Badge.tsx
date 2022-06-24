@@ -54,6 +54,9 @@ const useStyles = makeStyles(() =>
       bottom: "20px",
       display: "flex",
       zIndex: 15,
+      "& img": {
+        width: "67px"
+      },
       ["@media (max-width:500px)"]: {
         display: "none",
       },

@@ -20,7 +20,7 @@ const Shape = () => {
             <div className="marnics-banner2 marnics-banner2-right" />
           </div>
         </div> :
-        <div className={classes.shape}>
+        <div className={`${classes.shape} covid-shape`}>
           <img
             className={classes.shapeImg}
             src={data.covidBannerImg}
@@ -28,6 +28,7 @@ const Shape = () => {
             height="auto"
             alt="covid-banner"
           />
+          <div className="covid-back" />
         </div>
       }
     </div>

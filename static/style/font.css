@@ -33,3 +33,41 @@
   src: url("https://storage.googleapis.com/adp_assets/fonts/HelveticaNeue%20Medium.ttf") format("truetype");
   font-display: fallback;
 }
+@font-face {
+  font-family: "Inter Bold";
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-Bold.ttf") format("truetype");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  advance-override: 10;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Inter Regular";
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-Regular.ttf") format("truetype");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  advance-override: 10;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Inter Medium";
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-Medium.ttf") format("truetype");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  advance-override: 10;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Inter SemiBold";
+  src: url("https://storage.googleapis.com/adp_assets/fonts/Inter-SemiBold.ttf") format("truetype");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  advance-override: 10;
+  font-display: fallback;
+}

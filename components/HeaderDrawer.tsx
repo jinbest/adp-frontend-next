@@ -264,9 +264,9 @@ const HeaderDrawer = (props: Props) => {
   return (
     <React.Fragment>
       <div onClick={toggleDrawer("left", true)}>{children}</div>
-      <Drawer anchor={themeType === "cellular" ? "right" : "left"} open={state["left"]} onClose={toggleDrawer("left", false)}>
+      <Drawer anchor={themeType === "cellular" ? "right" : "left"} open={state["left"]} onClose={toggleDrawer("left", false)} classes={{paper: "drawer-container"}}>
         <div className={classes.root}>
-          <div className={classes.drawerLogo}>
+          <div className={`${classes.drawerLogo} snap-drawer-logo`}>
             <img src={data.logoData.logoHeaderImg} alt="drawer-logo" width="1" height="auto" />
           </div>
           {navItemLinks.map((item: NavItemProps, index: number) => {
@@ -276,7 +276,7 @@ const HeaderDrawer = (props: Props) => {
                   <React.Fragment>
                     {item.href && item.href !== "#" && (
                       <div
-                        className={`${classes.itemDiv} header-menu-item`}
+                        className={`${classes.itemDiv} snap-item-div`}
                         onClick={() => {
                           setState({ ...state, ["left"]: false })
                           toggleMenuStatus(false)

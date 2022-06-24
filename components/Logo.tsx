@@ -19,9 +19,14 @@ const Logo = ({ type, handleStatus }: Props) => {
   }
 
   return type === "header" ? (
-    <Link to="/" onClick={handleLogoClick} className="logo-header">
-      <img className="logo-header" src={logoData.logoHeaderImg} alt="header-logo" />
-    </Link>
+    <>
+      <Link to="/" onClick={handleLogoClick} className="logo-header">
+        <img className="logo-header" src={logoData.logoHeaderImg} alt="header-logo" />
+      </Link>
+      <Link to="/" onClick={handleLogoClick} className="logo-header-mobile">
+        <img className="logo-header-mobile" src={logoData.logoHeaderMobile} alt="header-logo" />
+      </Link>
+    </>
   ) : (
     <Link to="/" onClick={handleLogoClick} className={`${classes.logoFooterContainer} footer-logo-container`}>
       <img className="logo-footer" src={logoData.logoFooterImg} alt="footer-logo" />

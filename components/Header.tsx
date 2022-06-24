@@ -684,6 +684,22 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
             />
           </FeatureToggles> */}
         </div>
+        <div className="snap-search">
+          <Search
+            placeholder={searchPlaceholder}
+            color="#143663"
+            bgcolor="white"
+            border="rgba(0,0,0,0.2)"
+            iconPosition={"left"}
+            value={searchKey}
+            handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              handleChangeSearch(e)
+            }}
+            handleIconClick={() => {
+              // EMPTY
+            }}
+          />
+        </div>
         <div className="avatar-div">
           <HeaderDrawer
             toggleMenuStatus={toggleMenuStatus}

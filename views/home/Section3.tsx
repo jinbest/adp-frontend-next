@@ -54,7 +54,7 @@ const Section3 = ({ features }: Props) => {
                 <Grid container item xs={12} spacing={2}>
                   {commonData.popularCardData.map((item: any, index: number) => {
                     return (
-                      <Grid item xs={6} sm={3} style={{ paddingTop: "0px" }} key={index}>
+                      <Grid item xs={12} sm={6} md={3} style={{ paddingTop: "0px" }} key={index}>
                         <CardPopular
                           title={item.title}
                           subtitle={t(item.subtitle)}

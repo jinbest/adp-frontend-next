@@ -34,6 +34,7 @@ const SectionWave = ({ handleStatus }: Props) => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} style={{ display: "flex" }}>
             <div className="section-wave-main-container">
+              <div className="decoration-bar wave-decoration" />
               <h2 className={`${classes.mainTitle} section-wave-main-title`} style={{ marginTop: "0px !important" }}>
                 {t(thisPage.title)}
               </h2>
@@ -82,7 +83,8 @@ const SectionWave = ({ handleStatus }: Props) => {
               </div>
             </div>
           </Grid>
-          <Grid item xs={12} md={6} container spacing={2}>
+          <Grid item xs={12} md={6} container spacing={2} className="wave-children">
+            {thisPage.waveDecorationImg && <img src={thisPage.waveDecorationImg} alt="waveDecorationImg" className="waveDecorationImg-up"/>}
             {childData.map((item: any, index: number) => {
               return (
                 <Grid item xs={12} sm={6} key={index}>
@@ -95,13 +97,16 @@ const SectionWave = ({ handleStatus }: Props) => {
                         height="auto"
                         className="section-wave-img"
                       />
-                      <Typography className={`${classes.subTitle} section-wave-subtitle`}>{t(item.title)}</Typography>
-                      <Typography className={`${classes.subContent} section-wave-subContent`}>{t(item.content)}</Typography>
+                      <div>
+                        <Typography className={`${classes.subTitle} section-wave-subtitle`}>{t(item.title)}</Typography>
+                        <Typography className={`${classes.subContent} section-wave-subContent`}>{t(item.content)}</Typography>
+                      </div>
                     </div>
                   )}
                 </Grid>
               )
             })}
+            {thisPage.waveDecorationImg && <img src={thisPage.waveDecorationImg} alt="waveDecorationImg" className="waveDecorationImg-down"/>}
           </Grid>
         </Grid>
       </div>

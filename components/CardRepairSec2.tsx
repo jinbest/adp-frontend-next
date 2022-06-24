@@ -28,8 +28,8 @@ const CardRepairSec2 = ({ subtitle, content, type, img, children }: Props) => {
         {type === "verifyPhone" && <img src={img} />}
       </div>
       <div className={`${classes.contentContainer} repair-content`}>
-        <p className={`${classes.subTitle} repair-subtitle`}>{subtitle}</p>
-        <p className={`${classes.content} repair-content`}>{children ? children : content}</p>
+        <p className={`${classes.subTitle} repair-card-subtitle`}>{subtitle}</p>
+        <p className={`${classes.content} repair-card-content`}>{children ? children : content}</p>
       </div>
     </div>
   )

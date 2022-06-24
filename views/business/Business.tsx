@@ -53,21 +53,27 @@ const Business = ({ handleStatus }: Props) => {
 
       <Shape />
       <div className={`${classes.root} business-container`}>
-        <div className="decoration-line" />
-        <h1 className={`${classes.mainTitle} business-main-title`}>{t(thisPage.section1.title)}</h1>
-        <Typography className={`${classes.mainContent} business-main-content`}>{t(thisPage.section1.subtitle)}</Typography>
-        <Button
-          title={t(thisPage.section1.btnTitle)}
-          bgcolor={data.general.colorPalle.repairButtonCol}
-          borderR={themeType === "marnics" ? "0" : "20px"}
-          width="200px"
-          height="60px"
-          margin="auto"
-          onClick={() => setOpenModal(true)}
-        />
+        <div style={{ backgroundImage: `url("${thisPage.businessBG}")` }} className="business-top-section">
+          <div className="business-backdrop" />
+          <div className="business-top-content">
+            <div className="decoration-line" />
+            <h1 className={`${classes.mainTitle} business-main-title`}>{t(thisPage.section1.title)}</h1>
+            <Typography className={`${classes.mainContent} business-main-content`}>{t(thisPage.section1.subtitle)}</Typography>
+            <Button
+              title={t(thisPage.section1.btnTitle)}
+              bgcolor={data.general.colorPalle.repairButtonCol}
+              borderR={themeType === "marnics" ? "0" : "20px"}
+              width="200px"
+              height="60px"
+              margin="auto"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+        </div>
         <div className={`${classes.cardContainer} business-card-container`}>
           <Card className={`${classes.card} business-card`} backgroundImage={`url("${thisPage.section2.bgImg}")`}>
             <div className="business-card-bg" />
+            <div className="business-card-title">{t(thisPage.section2.subtitle)}</div>
             <Typography className={`${classes.subTitle} business-card-subtitle`}>{t(thisPage.section2.title)}</Typography>
             <Grid container spacing={5}>
               {services.map((item: any, index: number) => {
@@ -79,42 +85,42 @@ const Business = ({ handleStatus }: Props) => {
                           <div className={`${classes.SVGContainer} business-svgcontainer`}>
                             {item.type === "freeShipping" ? (
                               <div style={{ padding: "0 20px" }}>
-                                {themeType === "marnics" ? <img src={item.img} /> : <FreeShipping color={data.general.colorPalle.repairButtonCol} />}
+                                {item.img ? <img src={item.img} /> : <FreeShipping color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "pay" ? (
                               <div style={{ padding: "0 24px" }}>
-                                {themeType === "marnics" ? <img src={item.img} /> : <Pay color={data.general.colorPalle.repairButtonCol} />}
+                                {item.img ? <img src={item.img} /> : <Pay color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "shippingLabel" ? (
                               <div style={{ padding: "0 25px" }}>
-                                {themeType === "marnics" ? <img src={item.img} /> : <ShippingLabel color={data.general.colorPalle.repairButtonCol} />}
+                                {item.img ? <img src={item.img} /> : <ShippingLabel color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "soldering" ? (
                               <div style={{ padding: "0 22px" }}>
-                                {themeType === "marnics" ? <img src={item.img} /> : <Soldering color={data.general.colorPalle.repairButtonCol} />}
+                                {item.img ? <img src={item.img} /> : <Soldering color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "customerService" ? (
                               <div style={{ padding: "0 22px" }}>
-                                {themeType === "marnics" ? <img src={item.img} /> : <CustomerService color={data.general.colorPalle.repairButtonCol} />}
+                                {item.img ? <img src={item.img} /> : <CustomerService color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>
                             )}
                             {item.type === "quickTurnaround" ? (
                               <div style={{ padding: "0 20px" }}>
-                                {themeType === "marnics" ? <img src={item.img} /> : <QuickTurnaround color={data.general.colorPalle.repairButtonCol} />}
+                                {item.img ? <img src={item.img} /> : <QuickTurnaround color={data.general.colorPalle.repairButtonCol} />}
                               </div>
                             ) : (
                               <></>

@@ -11,9 +11,18 @@ const Shape = () => {
   return (
     <div>
       <div className={`${classes.waveBg} location-waveBg`}>
-        <img src={themeType === "marnics" ? thisPage.locationBG : "/img/location-wave-bg.png"} alt="location wave bg" />
+        <div className="lcoation-bg-container">
+          {themeType === "snap" ?
+            <div>
+              <img src={thisPage.locationBG ?? "/img/location-wave-bg.png"} alt="location wave bg" className="location-wave-bg" />
+              <img src={thisPage.locationBGMobile ?? "/img/location-wave-bg.png"} alt="location wave bg" className="location-wave-bg-mobile" />
+            </div>
+            :
+            <img src={thisPage.locationBG ?? "/img/location-wave-bg.png"} alt="location wave bg" />
+          }
+        </div>
       </div>
-      {themeType === "marnics" ? null :
+      {(themeType === "marnics" || themeType === "snap") ? null :
         <div className={classes.skitImg}>
           {storesDetails.commonCnts.locationsData.skitterMobile ?
             <img

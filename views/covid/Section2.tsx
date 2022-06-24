@@ -1,7 +1,7 @@
 import React from "react"
 import { createStyles, makeStyles } from "@material-ui/core/styles"
 import { storesDetails } from "../../store"
-import { Typography, Grid } from "@material-ui/core"
+import { Typography, Grid, GridSize } from "@material-ui/core"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import Card from "../repair/widget-component/Card"
@@ -15,6 +15,10 @@ const Section2 = () => {
   const logoData = _.sortBy(thisPage.data, (o) => o.order)
   const [t] = useTranslation()
 
+  const getGrid = (): {sm: GridSize, md: GridSize} => {
+    if (themeType === "marnics" || themeType === "snap") return {sm: 6, md: 4}
+    else return {sm: 12, md: 6}
+  }
   return (
     <div className={`${classes.root} covid-section2-wrapper`}>
       <div className={`${classes.cardContainer} covid-section2-container`}>
@@ -25,7 +29,7 @@ const Section2 = () => {
             <Grid container spacing={3} className="covid-section2">
               {logoData.map((item: any, index: number) => {
                 return (
-                  <Grid item xs={12} sm={themeType === "marnics" ? 6 : 12} md={themeType === "marnics" ? 4 : 6} key={index} className={`${classes.item} covid-card-item`}>
+                  <Grid item xs={12} sm={getGrid().sm} md={getGrid().md} key={index} className={`${classes.item} covid-card-item`}>
                     {item.visible && (
                       <>
                         <section className="vertical-line covid-vertical" />

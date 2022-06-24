@@ -60,6 +60,13 @@ const CustomBookTime = ({
     })
   }
 
+  const getColor = (past: boolean): string => {
+    if (past) return "rgba(0,0,0,0.2)"
+    else {
+      if (themeType === "marnics") return "#333"
+      else return repairBooktimeCol ?? ""
+    }
+  }
   useEffect(() => {
     setSelOffset(moment().tz(valTimezone.value).utcOffset() / 60)
     repairWidgetStore.changeTimezone(valTimezone.value)
@@ -97,9 +104,9 @@ const CustomBookTime = ({
         booklist.push({
           book: markHour + ":" + markMin + " " + mark,
           isPast: past ? true : false,
-          color: past ? "rgba(0,0,0,0.2)" : (themeType === "marnics" ? "#333" : repairBooktimeCol),
+          color: getColor(past),
           bgColor: "white",
-          borderCol: past ? "rgba(0,0,0,0.2)" : (themeType === "marnics" ? "#333" : repairBooktimeCol),
+          borderCol: getColor(past),
         })
       }
     } else {

@@ -42,7 +42,7 @@ const Section2 = ({ features }: Props) => {
   }
 
   const Container: React.FC = ({ children }) => (
-    themeType === "marnics" ? <div className="section2-container" style={{ backgroundImage: `url(${thisPage.bgImg})` }}>{children}</div> : <>{children}</>
+    (themeType === "marnics" || themeType === "snap") ? <div className="section2-container" style={{ backgroundImage: `url(${thisPage.bgImg})` }}>{children}</div> : <>{children}</>
   )
 
   return (

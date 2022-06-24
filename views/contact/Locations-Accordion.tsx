@@ -36,6 +36,7 @@ const LocationsAccordion = ({
     o.distance ? o.distance : o.display_order
   )
   const data = storesDetails.storeCnts
+  const themeType = storesDetails.storeCnts.general.themeType
   const [t] = useTranslation()
   const classes = useStyles()
   const [expanded, setExpanded] = useState<number | false>(false)
@@ -113,11 +114,15 @@ const LocationsAccordion = ({
     }
   }, [storesDetails.cntUserLocation])
 
+  const getBGStyle = () => {
+    if (themeType === "snap") return "#2E83C5"
+    else return storesDetails.storeCnts.homepage.header.brandData.brandThemeCol
+  }
   return (
-    <div className={classes.container}>
+    <div className={`${classes.container} accordion-wrapper`}>
       <div
         className={`${classes.banner} contact-banner`}
-        style={{ background: storesDetails.storeCnts.homepage.header.brandData.brandThemeCol }}
+        style={{ background: getBGStyle() }}
       >
         {`${storesDetails.findAddLocation.length} Stores near you`}
       </div>
@@ -128,83 +133,160 @@ const LocationsAccordion = ({
               key={index}
               expanded={expanded === index}
               onChange={handleChange(index)}
-              className={classes.accordion}
+              className={`${classes.accordion} accordion ${expanded === index ? "active-accordion" : ""}`}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon className="expandmore" />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
-                className={classes.accordionSummary}
+                className={`${classes.accordionSummary} accordion-summary`}
               >
-                <h2 className={`${classes.summaryTitle} contact-summary-title`}>
-                  {element.distance
-                    ? `${element.location_name} (${(element.distance / 1000).toFixed(1)}km)`
-                    : element.location_name}
-                </h2>
-                <h2 className={`${classes.summaryContent} contact-summary-content`}>{getAddress(element)}</h2>
-                <div className={classes.directions}>
-                  <a
-                    href={`${
-                      element.business_page_link != null
-                        ? element.business_page_link
-                        : `https://www.google.com/maps/search/?api=1&query=${getAddress(element)
+                {themeType === "snap" ?
+                  <>
+                    <h2 className={`${classes.summaryContent} contact-summary-content ${expanded === index ? "active-summary-content" : ""}`}>{getAddress(element)}</h2>
+                  </> :
+                  <>
+                    <h2 className={`${classes.summaryTitle} contact-summary-title`}>
+                      {element.distance
+                        ? `${element.location_name} (${(element.distance / 1000).toFixed(1)}km)`
+                        : element.location_name}
+                    </h2>
+                    <h2 className={`${classes.summaryContent} contact-summary-content`}>{getAddress(element)}</h2>
+                    <div className={classes.directions}>
+                      <a
+                        href={`${element.business_page_link != null
+                          ? element.business_page_link
+                          : `https://www.google.com/maps/search/?api=1&query=${getAddress(element)
                             .split(" ")
                             .join("+")}`
-                    }`}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                    }}
-                  >
-                    <CallSplitIcon />
-                    <span>{t("Directions")}</span>
-                  </a>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <PhoneIcon />
-                    <a href={`tel:${element.phone}`} className={classes.phoneText}>
-                      <span
+                          }`}
+                        target="_blank"
+                        rel="noreferrer"
                         style={{
-                          color: data.general.colorPalle.repairButtonCol,
+                          textDecoration: "none",
+                          color: "black",
                         }}
                       >
-                        {phoneFormatString(element.phone, element.phoneFormat)}
-                      </span>
-                    </a>
-                  </div>
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap" }}>
-                  <Link
-                    to={data.general.routes.repairWidgetPage}
-                    style={{
-                      textDecoration: "none",
-                      display: "flex",
-                    }}
-                    onClick={handleGetQuote}
-                  >
-                    <button
-                      className={classes.getAppoint}
-                      style={{
-                        backgroundColor: data.general.colorPalle.repairButtonCol,
-                      }}
-                      onClick={() => {
-                        handleLocSelect(element)
-                      }}
-                    >
-                      {t("Get Quote")}
-                    </button>
-                  </Link>
-                  <FeatureToggles features={feats}>
-                    <Feature
-                      name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
-                      inactiveComponent={() => <></>}
-                      activeComponent={() => (
+                        <CallSplitIcon />
+                        <span>{t("Directions")}</span>
+                      </a>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <PhoneIcon />
+                        <a href={`tel:${element.phone}`} className={classes.phoneText}>
+                          <span
+                            style={{
+                              color: data.general.colorPalle.repairButtonCol,
+                            }}
+                          >
+                            {phoneFormatString(element.phone, element.phoneFormat)}
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                      <Link
+                        to={data.general.routes.repairWidgetPage}
+                        style={{
+                          textDecoration: "none",
+                          display: "flex",
+                        }}
+                        onClick={handleGetQuote}
+                      >
+                        <button
+                          className={classes.getAppoint}
+                          style={{
+                            backgroundColor: data.general.colorPalle.repairButtonCol,
+                          }}
+                          onClick={() => {
+                            handleLocSelect(element)
+                          }}
+                        >
+                          {t("Get Quote")}
+                        </button>
+                      </Link>
+                      <FeatureToggles features={feats}>
+                        <Feature
+                          name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
+                          inactiveComponent={() => <></>}
+                          activeComponent={() => (
+                            <Link
+                              to={data.general.routes.repairWidgetPage}
+                              style={{
+                                textDecoration: "none",
+                                display: "flex",
+                              }}
+                              onClick={handleGetQuote}
+                            >
+                              <button
+                                className={classes.getAppoint}
+                                style={{
+                                  backgroundColor: data.general.colorPalle.repairButtonCol,
+                                }}
+                                onClick={() => {
+                                  handleLocSelect(element)
+                                }}
+                              >
+                                {t("Book Appointment")}
+                              </button>
+                            </Link>
+                          )}
+                        />
+                      </FeatureToggles>
+                      <button
+                        className={classes.getAppoint}
+                        style={{
+                          backgroundColor: data.general.colorPalle.repairButtonCol,
+                        }}
+                        onClick={() => {
+                          handleContactModal(element)
+                        }}
+                      >
+                        {t("Contact Us")}
+                      </button>
+                    </div>
+                  </>
+                }
+              </AccordionSummary>
+              <AccordionDetails className={`${classes.accordionDetails} accordion-details`}>
+                {themeType === "snap" ?
+                  <div className="accordion-detail-tools">
+                    <div className="accordion-detail-tools-content">
+                      <div className="detail-icons">
+                        <div className="accordion-detail-phone">
+                          <PhoneIcon />
+                          <a href={`tel:${element.phone}`} className={classes.phoneText}>
+                            <span
+                              style={{
+                                color: data.general.colorPalle.repairButtonCol,
+                              }}
+                            >
+                              {phoneFormatString(element.phone, element.phoneFormat)}
+                            </span>
+                          </a>
+                        </div>
+                        <a
+                          href={`${element.business_page_link != null
+                            ? element.business_page_link
+                            : `https://www.google.com/maps/search/?api=1&query=${getAddress(element)
+                              .split(" ")
+                              .join("+")}`
+                            }`}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                          }}
+                        >
+                          <div className="accordion-detail-phone"><CallSplitIcon /><span>{t("Directions")}</span></div>
+                        </a>
+                      </div>
+                      <div className="accordion-btns">
                         <Link
                           to={data.general.routes.repairWidgetPage}
                           style={{
@@ -214,7 +296,7 @@ const LocationsAccordion = ({
                           onClick={handleGetQuote}
                         >
                           <button
-                            className={classes.getAppoint}
+                            className={`${classes.getAppoint} accordion-get-btn`}
                             style={{
                               backgroundColor: data.general.colorPalle.repairButtonCol,
                             }}
@@ -222,27 +304,46 @@ const LocationsAccordion = ({
                               handleLocSelect(element)
                             }}
                           >
-                            {t("Book Appointment")}
+                            {t("Get Quote")}
                           </button>
                         </Link>
-                      )}
-                    />
-                  </FeatureToggles>
-                  <button
-                    className={classes.getAppoint}
-                    style={{
-                      backgroundColor: data.general.colorPalle.repairButtonCol,
-                    }}
-                    onClick={() => {
-                      handleContactModal(element)
-                    }}
-                  >
-                    {t("Contact Us")}
-                  </button>
-                </div>
-              </AccordionSummary>
-              <AccordionDetails className={classes.accordionDetails}>
-                <HoursViewer location={element} />
+                        <FeatureToggles features={feats}>
+                          <Feature
+                            name={featureToggleKeys.FRONTEND_REPAIR_APPOINTMENT}
+                            inactiveComponent={() => <></>}
+                            activeComponent={() => (
+                              <Link
+                                to={data.general.routes.repairWidgetPage}
+                                style={{
+                                  textDecoration: "none",
+                                  display: "flex",
+                                }}
+                                onClick={handleGetQuote}
+                              >
+                                <button
+                                  className={`${classes.getAppoint} accordion-get-btn`}
+                                  style={{
+                                    backgroundColor: data.general.colorPalle.repairButtonCol,
+                                  }}
+                                  onClick={() => {
+                                    handleLocSelect(element)
+                                  }}
+                                >
+                                  {t("Book Appointment")}
+                                </button>
+                              </Link>
+                            )}
+                          />
+                        </FeatureToggles>
+                      </div>
+                    </div>
+                    <div>
+                      <HoursViewer location={element} />
+                    </div>
+                  </div>
+                  :
+                  <HoursViewer location={element} />
+                }
               </AccordionDetails>
             </Accordion>
           )

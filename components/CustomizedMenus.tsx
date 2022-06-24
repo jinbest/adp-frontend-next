@@ -59,6 +59,7 @@ const StyledMenu = withStyles({
 const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const data = storesDetails.storeCnts
   const themeColor = data.general.colorPalle.themeColor
+  const findBtnColor = data.general.colorPalle.findBtnColor
   const themeType = data.general.themeType
   const underLineCol = data.general.colorPalle.underLineCol
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -72,7 +73,6 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
   const [isRequest, setIsRequest] = useState(false)
   const [myStore, setMyStore] = useState("My Store")
   const classes = useStyles()
-
   const handleLocSelect = (index: number) => {
     const cntLocation: any = storesDetails.cntUserLocation[index]
     setLocations([cntLocation])
@@ -252,7 +252,19 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         setPostCode("")
       })
   }
-
+  const getTxColor = () => {
+    if (!locSelStatus) {
+      if (themeType === "marnics") return "#F3F5F6"
+      else return findBtnColor ?? "white"
+    } else {
+      if (themeType === "snap") return "white"
+      else return "black"
+    }
+  }
+  const getBorderStyle = () => {
+    if (!locSelStatus && themeType === "marnics") return "1px solid rgba(0, 0, 0, 0.1)"
+    else return "none"
+  }
   return (
     <div>
       <Button
@@ -262,8 +274,8 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
             : storesDetails.cntUserLocation[0] && AddFormat12(storesDetails.cntUserLocation[0])
         }
         bgcolor={!locSelStatus ? themeColor : "transparent"}
-        txcolor={!locSelStatus ? (themeType === "marnics" ? "#F3F5F6" : "white") : "black"}
-        border={!(locSelStatus && themeType === "marnics") ? "1px solid rgba(0,0,0,0.1)" : "none"}
+        txcolor={getTxColor()}
+        border={getBorderStyle()}
         textDecorator={!locSelStatus ? "none" : "underline"}
         borderR={themeType === "marnics" ? "0" : "20px"}
         aria-controls="customized-menu"
@@ -273,7 +285,9 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         fontSize="18px"
         width={!locSelStatus ? width : "auto"}
         hover={!locSelStatus ? true : false}
-        fontFamily={themeType === "marnics" ? "Helvetica Neue Medium" : "Poppins Regular"}
+        fontFamily={
+          themeType === "marnics" ? "Helvetica Neue Medium" : 
+            themeType === "snap" ? "Inter Medium" : "Poppins Regular"}
       />
       <StyledMenu
         id="customized-menu"
@@ -281,6 +295,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        classes={{paper: "custom-menu"}}
       >
         <div className="triangle" style={{ right: "65px" }}></div>
         <div className="menu-content-div">
@@ -401,7 +416,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
                         to={data.general.routes.repairWidgetPage}
                         style={{ textDecoration: "none" }}
                       >
-                        <div onClick={handleBookRepair}>
+                        <div onClick={handleBookRepair} className="book-find-store">
                           <Button
                             title={t("Book Appointment")}
                             bgcolor={themeColor}

@@ -25,7 +25,9 @@ const Section6 = () => {
   return (
     <section className="Container center sec6-container">
       <div className="sec6-left">
+        <div className="decoration-bar sec5-decoration" />
         <Typography className="section-review-title">{t(thisPage.title)}</Typography>
+        <Typography className="section-review-content">{t(thisPage.content)}</Typography>
         {overAllRating.visible && (
           <>
             {businessLink ? (

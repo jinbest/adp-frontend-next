@@ -30,7 +30,7 @@ const Covid = ({ handleStatus }: Props) => {
   }, [])
 
   return (
-    <div>
+    <div className="covid-page-container">
       <Head>
         <title>{pageTitle}</title>
         {metaList.map((item: MetaParams, index: number) => {

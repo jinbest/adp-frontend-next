@@ -9,7 +9,6 @@ const Shape = () => {
   const themeType = storesDetails.storeCnts.general?.themeType
 
   if (!shapeData) return null
-
   return (
     <div>
       {themeType === "marnics" ?
