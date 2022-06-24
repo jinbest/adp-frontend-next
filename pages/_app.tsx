@@ -242,3 +242,5 @@ App.getInitialProps = async ({ ctx }: Record<string, any>) => {
     apexDomain: apexDomain,
   }
 }
+
+export default App
