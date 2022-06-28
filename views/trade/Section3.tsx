@@ -22,7 +22,7 @@ const Section3 = () => {
           {children.map((i: any) => (
             <Grid key={i.subtitle} item xs={themeType === "cellular" ? 6 : 12} sm={themeType === "cellular" ? 3 : 12} md={themeType === "cellular" ? 3 : 6}>
               <div className={`${classes.card} trade-section3-card`}>
-                <div className="phonephix-trade-section3-card-subtitle">{i.subtitle}</div>
+                <div className="trade-section3-card-title">{i.subtitle}</div>
                 <img src={i.img} alt={i.subtitle} />
                 <div className={classes.cardContent}>
                   <div className={`${classes.subtitle} trade-section3-card-subtitle`}>{i.subtitle}</div>
