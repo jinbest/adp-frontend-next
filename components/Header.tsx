@@ -567,83 +567,85 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         className="container-header"
         style={{ marginTop: mobile && !getQuteStatus ? "65px" : "35px" }}
       >
-        <Logo type="header" handleStatus={handleStatus} />
+        <div style={{ display: 'flex' }}>
+          <Logo type="header" handleStatus={handleStatus} />
 
-        {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
-          <div
-            className="search-div"
-            id="header-search"
-            ref={customRef}
-            onFocus={() => {
-              setViewFilterList(true)
-            }}
-          >
-            <Search
-              placeholder={searchPlaceholder}
-              color={themeType === "marnics" ? "#235B89" : "rgba(0,0,0,0.8)"}
-              bgcolor="white"
-              border="rgba(0,0,0,0.2)"
-              value={searchKey}
-              iconPosition={themeType === "marnics" ? "left" : "right"}
-              handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                handleChangeSearch(e)
+          {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
+            <div
+              className="search-div"
+              id="header-search"
+              ref={customRef}
+              onFocus={() => {
+                setViewFilterList(true)
               }}
-              handleIconClick={() => {
-                // EMPTY
-              }}
-            />
-            {viewFilterList && searchData.length ? (
-              <div
-                className="search-data-viewer custom-scroll-bar"
-                onScroll={handleScroll}
-                onMouseOver={() => {
-                  setHover(true)
+            >
+              <Search
+                placeholder={searchPlaceholder}
+                color={themeType === "marnics" ? "#235B89" : "rgba(0,0,0,0.8)"}
+                bgcolor="white"
+                border="rgba(0,0,0,0.2)"
+                value={searchKey}
+                iconPosition={themeType === "marnics" ? "left" : "right"}
+                handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChangeSearch(e)
                 }}
-                onMouseLeave={() => {
-                  setHover(false)
+                handleIconClick={() => {
+                  // EMPTY
                 }}
-              >
+              />
+              {viewFilterList && searchData.length ? (
                 <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                  className="search-data-viewer custom-scroll-bar"
+                  onScroll={handleScroll}
+                  onMouseOver={() => {
+                    setHover(true)
+                  }}
+                  onMouseLeave={() => {
+                    setHover(false)
                   }}
                 >
-                  <p className="search-type">{t("Services")}</p>
-                  {searchData.map((item: any, index: number) => {
-                    return (
-                      <div
-                        className="search-item"
-                        key={index}
-                        onClick={() => {
-                          handleSearchItem(item)
-                          setSelectList(0)
-                          setHover(false)
-                        }}
-                        style={{
-                          background: selectList === index && !hover ? "#f5f5f5" : "",
-                        }}
-                      >
-                        {item._source.img_src && item._source.type !== "brand" && (
-                          <img src={item._source.img_src} alt={`search-item-${index}`} />
-                        )}
-                        <p>
-                          {item._source.name ||
-                            `${item._source.product ? item._source.product.name : ""} ${item._source.title
-                              }`.trim()}
-                        </p>
-                      </div>
-                    )
-                  })}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <p className="search-type">{t("Services")}</p>
+                    {searchData.map((item: any, index: number) => {
+                      return (
+                        <div
+                          className="search-item"
+                          key={index}
+                          onClick={() => {
+                            handleSearchItem(item)
+                            setSelectList(0)
+                            setHover(false)
+                          }}
+                          style={{
+                            background: selectList === index && !hover ? "#f5f5f5" : "",
+                          }}
+                        >
+                          {item._source.img_src && item._source.type !== "brand" && (
+                            <img src={item._source.img_src} alt={`search-item-${index}`} />
+                          )}
+                          <p>
+                            {item._source.name ||
+                              `${item._source.product ? item._source.product.name : ""} ${item._source.title
+                                }`.trim()}
+                          </p>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
-        )}
+              ) : (
+                <></>
+              )}
+            </div>
+          )}
+        </div>
 
         <div className="nav-div">
           <ul className="navlink-parent">

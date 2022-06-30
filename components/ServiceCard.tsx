@@ -17,7 +17,7 @@ const ServiceCard: React.FC<ServiceCardType> = (props) => {
   const themeType = data.general.themeType
   const router = useRouter()
   return (
-    <div className="service-card">
+    <div className="service-card" onClick={() => router.push(link!)}>
       <img src={icon} alt="icon" />
       <div className="service-content">
         <div className="service-title">{title}</div>

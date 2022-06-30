@@ -265,6 +265,7 @@ const CustomizedMenus = ({ btnTitle, width, features }: Props) => {
     if (!locSelStatus && themeType === "marnics") return "1px solid rgba(0, 0, 0, 0.1)"
     else return "none"
   }
+
   return (
     <div>
       <Button

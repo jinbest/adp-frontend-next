@@ -1,6 +1,6 @@
 import React from "react"
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined"
-import EllipsisText from "react-ellipsis-text"
+// import EllipsisText from "react-ellipsis-text"
 import ReactTooltip from "react-tooltip"
 
 type Props = {
@@ -70,13 +70,14 @@ const Button = ({
         disabled={disable}
       >
         {icon && <RoomOutlinedIcon />}
-        {title && title.length > 17 ? (
+        {/* {title && title.length > 17 ? (
           <EllipsisText text={title} length={7} />
         ) : children ? (
           children
         ) : (
           title
-        )}
+        )} */}
+        {children ? children : title}
       </button>
       {title && title.length > 20 && (
         <ReactTooltip id={title} place="top" effect="solid">

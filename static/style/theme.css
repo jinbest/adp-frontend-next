@@ -338,6 +338,7 @@
   height: 50px;
   display: flex;
   align-items: center;
+  margin: auto;
 }
 
 .logo-footer {
@@ -1196,8 +1197,9 @@ p {
 .container-header .search-div {
   display: flex;
   flex-grow: 1;
-  margin-left: 50px;
+  margin-left: 25px;
   position: relative;
+  max-width: 300px;
 }
 
 @media (max-width: 900px) {
@@ -1317,6 +1319,10 @@ p {
   padding-right: 60px;
   display: flex;
   align-items: center;
+}
+
+.nav-div button {
+  line-height: initial !important;
 }
 
 .nav-div > img {

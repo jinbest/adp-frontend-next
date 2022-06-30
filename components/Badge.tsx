@@ -63,7 +63,7 @@ const useStyles = makeStyles(() =>
       animationDuration: "20s",
       animationTimingFunction: "linear",
       animationIterationCount: "infinite",
-      minWidth: 67,
+      width: 67,
       marginRight: 13,
     },
   })
