@@ -39,9 +39,6 @@ const pageRoutes = (data, specLoc) => {
       })
     })
   }
-  if (routes.tradePage) {
-    availableRoutes.push({path: routes.tradePage, component: Trade, special: {}})
-  }
   if (specLoc) {
     data.locations.forEach((item) => {
       availableRoutes.push({

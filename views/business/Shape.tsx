@@ -7,6 +7,7 @@ const Shape = () => {
   const shapeData = data.businessPage.shapeData
   const classes = useStyles()
   const themeType = storesDetails.storeCnts.general?.themeType
+
   if (!shapeData) return null
   return (
     <div>
@@ -22,13 +23,15 @@ const Shape = () => {
           </div>
         </div> :
         <div>
-          <div className={classes.corner}>
+          <div className={`${classes.corner} business-corner`}>
+            {shapeData.businessCornerShape ?
             <img
               src={shapeData.businessCornerShape}
               width="1"
               height="auto"
               alt="business-corner-shape"
-            />
+            /> :
+            null}
           </div>
           <div className={classes.leftDesktop}>
             <img
@@ -38,7 +41,7 @@ const Shape = () => {
               alt="business-left-shape-desktop"
             />
           </div>
-          <div className={classes.leftMobile}>
+          <div className={`${classes.leftMobile} business-left-mobile`}>
             <img
               src={shapeData.shapeLeftMobile}
               width="1"

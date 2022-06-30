@@ -13,22 +13,41 @@ const Section2 = () => {
   const classes = useStyles()
 
   return (
-    <section className={classes.root}>
-      <div className={classes.title}>{t(trade.title)}</div>
-      <Grid container spacing={2}>
-        {contents.map((item: any) => (
-          <Grid item xs={12} md={4} key={item.title}>
-            <div className={classes.card}>
-              {item.img && <img src={item.img} />}
-              <div className={classes.cardcontent}>
-                <div className={classes.cardtitle}>{item.title}</div>
-                <div className={classes.carddesc}>{item.content}</div>
+    <div className="trade-section-2-wrapper" style={{backgroundImage: `url(${trade.bgImg})`}}>
+      <section className={`${classes.root} trade-section-2-container`}>
+        <div className={`${classes.title} trade-section-2-title`}>{t(trade.title)}</div>
+        <Grid container spacing={2}>
+          {contents.map((item: any) => (
+            <Grid item xs={12} md={4} key={item.title}>
+              <div className={`${classes.card} trade-card`}>
+                {item.img && <img src={item.img} />}
+                <div className={`${classes.cardcontent} trade-card-content`}>
+                  <div className={`${classes.cardtitle} trade-card-title`}>{item.title}</div>
+                  <div className={`${classes.carddesc} trade-card-desc`}>{item.content}</div>
+                </div>
               </div>
-            </div>
-          </Grid>
-        ))}
-      </Grid>
-    </section>
+            </Grid>
+          ))}
+        </Grid>
+        {trade.subtitle ? <div className="trade-section-2-subtitle">{t(trade.subtitle)}</div> : null}
+        {trade.subcontents ?
+          <Grid container spacing={2}>
+            {trade.subcontents.map((item: any) => (
+              <Grid item xs={12} md={6} key={item.title}>
+                <div className="trade-sub-card">
+                  {item.img && <img src={item.img} />}
+                  <div className="trade-subcard-content">
+                    <div className="trade-subcard-title">{item.title}</div>
+                    <div className="trade-subcard-desc">{item.content}</div>
+                  </div>
+                </div>
+              </Grid>
+            ))}
+          </Grid> :
+          null 
+        }
+      </section>
+    </div>
   )
 }
 

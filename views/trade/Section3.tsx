@@ -11,19 +11,22 @@ const Section3 = () => {
   const children = _.sortBy(trade.children, (o) => o.order)
   const [t] = useTranslation()
   const classes = useStyles()
+  const themeType = storesDetails.storeCnts.general.themeType
 
   return (
-    <section className={classes.root}>
-      <div className={classes.container}>
-        <div className={classes.title}>{t(trade.title)}</div>
+    <section className={`${classes.root} trade-section3-container`}>
+      <div className={`${classes.container} trade-section3-wrapper`}>
+        <div className={`${classes.title} trade-section3-title`}>{t(trade.title)}</div>
+        {trade.content ? <div className="trade-section3-content">{t(trade.content)}</div> : null}
         <Grid container spacing={3}>
           {children.map((i: any) => (
-            <Grid key={i.subtitle} item xs={12} md={6}>
-              <div className={classes.card}>
+            <Grid key={i.subtitle} item xs={themeType === "cellular" ? 6 : 12} sm={themeType === "cellular" ? 3 : 12} md={themeType === "cellular" ? 3 : 6}>
+              <div className={`${classes.card} trade-section3-card`}>
+                <div className="trade-section3-card-title">{i.subtitle}</div>
                 <img src={i.img} alt={i.subtitle} />
                 <div className={classes.cardContent}>
-                  <div className={classes.subtitle}>{i.subtitle}</div>
-                  <div className={classes.subcontent}>{i.subcontent}</div>
+                  <div className={`${classes.subtitle} trade-section3-card-subtitle`}>{i.subtitle}</div>
+                  <div className={`${classes.subcontent} trade-section3-card-subcontent`}>{i.subcontent}</div>
                 </div>
               </div>
             </Grid>

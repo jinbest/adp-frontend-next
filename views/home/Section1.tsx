@@ -16,6 +16,7 @@ type Props = {
   handleStatus: (status: boolean) => void
 }
 
+
 const Section1 = ({ features, handleStatus }: Props) => {
   const data = storesDetails.storeCnts
   const thisPage = data.homepage.section1
@@ -55,7 +56,7 @@ const Section1 = ({ features, handleStatus }: Props) => {
   }
 
   return (
-    <section className="Container">
+    <section className="Container section1-container">
       <Grid container className="section1-container">
         <Grid item xs={12} md={thisPage.heroImg ? 6 : 12} className="section1-top">
           {thisPage.decorationBar && <div className="decoration-bar" />}

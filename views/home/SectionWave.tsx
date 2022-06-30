@@ -29,9 +29,7 @@ const SectionWave = ({ handleStatus }: Props) => {
 
   return (
     <div className={`${classes.root} section-wave-container`}>
-      {thisPage.bgImg &&
-        <img src={thisPage.bgImg} alt="section-wave-bg" width="1" height="auto" />
-      }
+      {thisPage.bgImg ? <img src={thisPage.bgImg} alt="section-wave-bg" width="1" height="auto" /> : null}
       <div className={`${classes.container} section-wave-wrapper`}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} style={{ display: "flex" }}>

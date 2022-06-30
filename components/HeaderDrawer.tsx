@@ -52,6 +52,7 @@ const HeaderDrawer = (props: Props) => {
   const navItemLinks: NavItemProps[] = _.sortBy(data.homepage.header.navItems, (o) => o.order)
   const brandItemLinks = _.sortBy(data.homepage.header.brandItems, (o) => o.order)
   const [t] = useTranslation()
+  const themeType = storesDetails.storeCnts.general.themeType
 
   const classes = useStyles()
   const [state, setState] = useState({
@@ -263,7 +264,7 @@ const HeaderDrawer = (props: Props) => {
   return (
     <React.Fragment>
       <div onClick={toggleDrawer("left", true)}>{children}</div>
-      <Drawer anchor="left" open={state["left"]} onClose={toggleDrawer("left", false)} classes={{paper: "drawer-container"}}>
+      <Drawer anchor={themeType === "cellular" ? "right" : "left"} open={state["left"]} onClose={toggleDrawer("left", false)} classes={{paper: "drawer-container"}}>
         <div className={classes.root}>
           <div className={`${classes.drawerLogo} snap-drawer-logo`}>
             <img src={data.logoData.logoHeaderImg} alt="drawer-logo" width="1" height="auto" />

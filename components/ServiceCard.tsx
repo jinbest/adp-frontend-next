@@ -31,6 +31,7 @@ const ServiceCard: React.FC<ServiceCardType> = (props) => {
             title={btnTitle}
             fontFamily={themeType === "marnics" ? "Helvetica Neue Bold" : "Poppins Regular"}
             onClick={() => router.push(link!)}
+            bgcolor={data.general.colorPalle.cardBtnColor}
           />
         }
       </div>

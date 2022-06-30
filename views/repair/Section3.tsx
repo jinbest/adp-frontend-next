@@ -7,19 +7,21 @@ import _ from "lodash"
 
 const Section3 = () => {
   const data = storesDetails.storeCnts
+  const themeType = data.general.themeType
   const repair = data.repairPage.section3
   const children = _.sortBy(repair.children, (o) => o.order)
   const [t] = useTranslation()
 
+  if (themeType !== "cellular") return null
   return (
     <section className="service-section-3">
       <div className="Container">
         <Typography className="service-section-title-2">{t(repair.title)}</Typography>
-        <Typography className="service-section-content">{t(repair.content)}</Typography>
+        <Typography className="service-section-content repair-section3-content">{t(repair.content)}</Typography>
         <Grid container item xs={12} spacing={2}>
           {children.map((item: any, index: number) => {
             return (
-              <Grid item xs={6} sm={6} md={3} key={index}>
+              <Grid item xs={6} sm={3} key={index}>
                 <CardRepairSec3
                   img={item.img}
                   subtitle={t(item.subtitle)}

@@ -300,7 +300,7 @@ const Footer = () => {
             {imageVisible ? (
               <div className="footer-desktop-logo">
                 <div className={classes.footerImagesContainer}>
-                  <div className={classes.footerBesideImages}>
+                  <div className={`${classes.footerBesideImages} footer-beside-images`}>
                     {footerImageData.logoBeside.map((i: any, ind: number) => (
                       <div key={ind}>
                         <a
@@ -342,15 +342,19 @@ const Footer = () => {
                   >
                     {t(thisPage.copyRight)}
                   </p>
+                  {thisPage.copyRightContent ? <p className="copyright-sub">{thisPage.copyRightContent}</p> : null}
                 </div>
               </div>
             ) : (
-              <p
-                className="device-list-grid copyright"
-                style={{ color: "grey", marginTop: "25px" }}
-              >
-                {t(thisPage.copyRight)}
-              </p>
+              <>
+                <p
+                  className="device-list-grid copyright"
+                  style={{ color: "grey", marginTop: "25px" }}
+                >
+                  {t(thisPage.copyRight)}
+                </p>
+                {thisPage.copyRightContent ? <p className="copyright-sub">{thisPage.copyRightContent}</p> : null}
+              </>
             )}
 
             {themeType !== "marnics" &&
