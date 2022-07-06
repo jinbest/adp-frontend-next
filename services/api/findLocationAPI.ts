@@ -17,7 +17,6 @@ class FindLocationAPI {
   findAllLocation = async (store_id: number) => {
     const apiURL = `${Config.STORE_SERVICE_API_URL}dc/store/${store_id}/locations?page=1&per_page=10000&include_voided=false`
 
-    // console.log(store_id)
     // const prodLink = 'https://prod.pcmtx.com/api/store-service/'
     // const storeIDs = {
     //   mobiletechlab: 4,

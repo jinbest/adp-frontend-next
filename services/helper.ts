@@ -357,7 +357,6 @@ export async function setQuotesStore(data: GetQuotesParams) {
 }
 
 function setRepairWidgetStore(res: any[], data: GetQuotesParams) {
-  // console.log("Brands & Products\n", res, data)
   const deviceBrand = [],
     deviceModel = [],
     chooseRepair = []

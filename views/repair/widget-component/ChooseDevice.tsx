@@ -654,7 +654,7 @@ const ChooseDevice = ({
   useEffect(() => {
     if (imageData.length) setShowImageData(imageData)
   }, [imageData])
-  console.log(filter, "---------------->")
+
   return (
     <div>
       <Grid container spacing={3}>
