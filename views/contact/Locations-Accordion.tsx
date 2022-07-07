@@ -36,7 +36,6 @@ const LocationsAccordion = ({
     o.distance ? o.distance : o.display_order
   )
   const data = storesDetails.storeCnts
-  const themeType = storesDetails.storeCnts.general.themeType
   const [t] = useTranslation()
   const classes = useStyles()
   const [expanded, setExpanded] = useState<number | false>(false)
