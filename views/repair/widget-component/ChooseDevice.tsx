@@ -56,9 +56,9 @@ const ChooseDevice = ({
   categoryID,
 }: Props) => {
   const mainData = storesDetails.storeCnts
-  const themeType = mainData.general.themeType
-  const themeCol = mainData.general.colorPalle.themeColor
-  const repairChooseItemCol = mainData.general.colorPalle.repairChooseItemCol
+  const themeType = mainData?.general?.themeType
+  const themeCol = mainData?.general?.colorPalle?.themeColor
+  const repairChooseItemCol = mainData?.general?.colorPalle?.repairChooseItemCol
 
   const [sliceNum, setSliceNum] = useState(10)
   const [plusVisible, setPlusVisible] = useState(false)
@@ -358,7 +358,7 @@ const ChooseDevice = ({
             })
           })
         }
-        if (repairWidData.repairDeviceBrands.metadata.total <= pg * perpg) {
+        if (!repairWidData.repairDeviceBrands.metadata || repairWidData.repairDeviceBrands.metadata.total <= pg * perpg) {
           setPlusVisible(false)
         } else {
           setPlusVisible(true)
@@ -641,7 +641,7 @@ const ChooseDevice = ({
         {t("Didn't find what you are looking for? ")}
         <span
           style={{
-            color: mainData.general.colorPalle.textThemeCol,
+            color: mainData?.general?.colorPalle?.textThemeCol,
           }}
           onClick={() => setOpenContactModal(true)}
         >
@@ -868,7 +868,7 @@ const ChooseDevice = ({
               <div className="service-card-button">
                 <Button
                   title={t("Next")}
-                  bgcolor={mainData.general.colorPalle.nextButtonCol}
+                  bgcolor={mainData?.general.colorPalle?.nextButtonCol}
                   borderR={themeType === "marnics" ? "0" : "20px"}
                   width="120px"
                   height="30px"
