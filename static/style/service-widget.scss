@@ -259,6 +259,10 @@
     padding: 20px;
   }
 }
+.booking-card .service-choose-device-container {
+  max-height: 78%;
+  overflow: auto !important;
+}
 
 .topic-title {
   font-weight: bold !important;
