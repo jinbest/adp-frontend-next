@@ -193,6 +193,7 @@ const RepairWidget = ({ handleStatus, features }: Props) => {
     setStep(3)
   }
 
+  console.log(mainData.general, "------->196")
   return (
     <>
       <Head>

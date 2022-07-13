@@ -655,6 +655,7 @@ const ChooseDevice = ({
     if (imageData.length) setShowImageData(imageData)
   }, [imageData])
 
+  console.log(mainData.general, "---------->mainData.general")
   return (
     <div>
       <Grid container spacing={3}>
