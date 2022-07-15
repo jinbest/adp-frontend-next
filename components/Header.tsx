@@ -567,7 +567,7 @@ const Header = ({ handleStatus, features }: PropsHeader) => {
         className="container-header"
         style={{ marginTop: mobile && !getQuteStatus ? "65px" : "35px" }}
       >
-        <div style={{ display: 'flex' }}>
+        <div className="header-left">
           <Logo type="header" handleStatus={handleStatus} />
 
           {feats.includes(featureToggleKeys.FRONTEND_GLOBAL_SEARCH) && (
